@@ -1,0 +1,61 @@
+# 3dmodels — guia do agente
+
+Modelos paramétricos em OpenSCAD pra impressão 3D. Impressora alvo: **Bambu A1
+mini** (cama 180x180x180 — mirar footprint ≤170x170 pra sobrar margem de brim).
+O usuário abre os `.3mf` direto no Bambu Studio e imprime; o feedback dele é
+do TESTE FÍSICO da peça na mão.
+
+## Estrutura e contrato de pastas
+
+- `<categoria>/<modelo>/<modelo>.scad` — fonte paramétrico único do modelo
+- `<categoria>/<modelo>/3mf/` — SÓ os jobs de impressão (chapas "plate" já em
+  orientação de impressão; o que não couber na cama vira job separado)
+- `<categoria>/<modelo>/stl/` — peças individuais, referência secundária
+- `<categoria>/README.md` — tabela de modelos (adicionar linha a cada modelo)
+- O cabeçalho de cada `.scad` documenta os comandos de export canônicos
+
+## Regras de qualidade (aprendidas em iterações reais)
+
+1. **3MF sempre em dia**: qualquer mudança de geometria re-exporta os `.3mf`
+   na hora, sem o usuário pedir.
+2. **Medida real > catálogo**: parametrizar pelo objeto medido com régua pelo
+   usuário (ex.: deck com sleeve = 93x68x45, não "63x88 + estimativa de
+   sleeve"). Se faltar medida, PEDIR antes de modelar.
+3. **Mecanismo tem que funcionar na mão**: simular o curso COMPLETO do
+   movimento, alcance de dedo e se o conjunto montado ainda desliza/fecha.
+   (Lição: o elevador com aba do deckbox-01 tinha 10mm de vão pra um curso de
+   48mm e travava a capa — foi impresso e rejeitado.)
+4. **Sem lascas**: cortes booleanos perto de bordas criam fragmentos finos;
+   deixar faixa sólida (ex.: `skip_w` do `hex_panel` no deckbox-01).
+5. **Identidade visual**: colmeia hexagonal, hexágonos de ponta pra cima
+   (imprimem em parede vertical sem ponte reta).
+6. **Folgas padrão do repo**: deslize bandeja/capa 0.25/lado; peça solta em
+   cavidade 0.3/lado; press-fit de ímã 0.15; conteúdo ~1mm/lado.
+7. **Verificar de verdade**: renderizar PNG e OLHAR a imagem; ecoar dimensões
+   derivadas; conferir que os exports existem (mtime/tamanho).
+
+## OpenSCAD nesta máquina (armadilhas!)
+
+- Usar SEMPRE `flatpak run org.openscad.OpenSCAD ...` — o `openscad` do PATH
+  é um shim distrobox que NÃO sobe aqui.
+- PNG (render offscreen) exige `--env=DISPLAY=:0 --socket=x11`.
+- O flatpak NÃO enxerga `/tmp` nem o scratchpad — entrada e saída no home.
+- Caminhos SEMPRE absolutos: com relativo o erro é `Can't open input file`,
+  que NÃO contém "error"/"warning" — `grep -i error` deixa a falha passar.
+  Sempre conferir existência/mtime do arquivo de saída depois.
+- No sumário CGAL, `Volumes: N` = nº de sólidos + 1 (o exterior conta).
+- PNG de verificação: nome de arquivo NOVO a cada render (senão dá pra reler
+  imagem velha sem perceber) e sempre LER a imagem depois.
+
+## Skills e agente
+
+- `/preview` — PNGs (perspectiva + topo) pra inspeção visual
+- `/export` — STL+3MF com verificação anti-falha-silenciosa
+- `/bed-check` — bounding box dos STLs vs cama da A1 mini
+- `/new-model` — estrutura de modelo novo no padrão do repo
+- Agente `print-review` — revisão de imprimibilidade e função física; rodar
+  antes do export final de modelo novo ou mudança grande
+
+## Commits
+
+Só quando o usuário pedir. Convenção do log: `feat|fix|build(<modelo>): descrição` em pt-BR.
