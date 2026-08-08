@@ -7,7 +7,8 @@ OpenSCAD e impressas na Bambu Lab.
 
 | Modelo | Status | Descrição |
 |---|---|---|
-| [deckbox-01](./deckbox-01/) | 🚧 em andamento | estilo caixa de fósforo, fechamento por ímã |
+| [deckbox-01](./deckbox-01/) | 🚧 em andamento | estilo caixa de fósforo, fechamento por ímã, 2 decks + dados |
+| [deckbox-02](./deckbox-02/) | 🚧 em andamento | versão de 1 deck do deckbox-01 com compartimento de dados fundo (64mm, ~244cm³; conjunto cabe em 1 plate da A1 mini) |
 
 ## Parâmetros que costumam definir uma deckbox
 
