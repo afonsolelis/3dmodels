@@ -7,7 +7,7 @@ encaixam, cada uma cabendo na cama da Bambu A1 mini.
 
 | Modelo | Status | Descrição |
 |---|---|---|
-| [pokemon-game](./pokemon-game/) | 🚧 em andamento | campo de Pokémon TCG em 8 placas encaixáveis (589x206mm), zonas em relevo, cestinha de deck + cesta de descarte encaixadas nas molduras, e case com tampa magnética que vira bandeja de dados |
+| [pokemon-game](./pokemon-game/) | 🚧 em andamento | campo de Pokémon TCG em 12 placas de 7mm que se plugam por ímã (590x321mm, 4 colunas x 3 fileiras), zonas em relevo com o nome gravado no piso, prêmios em grade 2x3, cestinha de deck + cesta de descarte encaixadas em rebaixos, e case com tampa magnética que leva as placas em pé e vira bandeja de dados |
 
 ## Por que placas encaixáveis
 
