@@ -42,4 +42,9 @@ sua própria pasta, com subpastas por modelo específico.
 ## Requisitos
 
 - [OpenSCAD](https://openscad.org/downloads.html) instalado para editar/renderizar os `.scad`
+  (nesta máquina, instalado via Flatpak: `flatpak install flathub org.openscad.OpenSCAD`,
+  chamado como `flatpak run org.openscad.OpenSCAD ...`)
 - Bambu Studio para fatiar os `.stl`
+
+> Sistema Fedora Atomic (imutável): `dnf install` direto no sistema base não
+> funciona. Use Flatpak (apps) ou Distrobox (ferramentas de linha de comando).
