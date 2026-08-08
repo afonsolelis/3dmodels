@@ -71,7 +71,8 @@
         { "file": "3mf/pokemon-game-t4r3.3mf", "contents": "placa: dish da moeda", "footprint_mm": [152.0, 107.0, 7.0] },
         { "file": "3mf/pokemon-game-containers.3mf", "contents": "cestinha do deck + cesta do descarte", "footprint_mm": [150.8, 97.4, 50.0] },
         { "file": "3mf/pokemon-game-case.3mf", "contents": "case (boca pra cima, usar brim)", "footprint_mm": [159.2, 152.6, 116.4] },
-        { "file": "3mf/pokemon-game-lid.3mf", "contents": "tampa (imprime de cabeça pra baixo)", "footprint_mm": [159.2, 152.6, 9.0] }
+        { "file": "3mf/pokemon-game-lid.3mf", "contents": "tampa (imprime de cabeça pra baixo)", "footprint_mm": [159.2, 152.6, 9.0] },
+        { "file": "3mf/pokemon-game-todas-as-plates.3mf", "contents": "PROJETO do Bambu Studio com as 15 plates numa file só (12 placas, contêineres, case, tampa) — abre uma vez e imprime plate por plate; mesmo formato do diversos/Jabonera.3mf. Os 15 arquivos avulsos continuam valendo, este é conveniência", "footprint_mm": [180, 180, 116.4] }
       ],
       "assembled_field_mm": [590, 321, 7.0],
       "assembled_case_closed_mm": [159.2, 152.6, 120.4],

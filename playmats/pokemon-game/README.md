@@ -137,6 +137,20 @@ Pra regerar depois de mudar alguma peça, veja `.claude/skills/overview/`.
 Cada placa é um job (não cabem duas na cama da A1 mini). São **15 jobs** no
 total: 12 placas, os contêineres juntos, o case e a tampa. Tudo em `3mf/`.
 
+### O jeito fácil: `pokemon-game-todas-as-plates.3mf`
+
+Abrir 15 arquivos na mão é chato, então tem também
+**`3mf/pokemon-game-todas-as-plates.3mf`**: um **projeto do Bambu Studio com
+as 15 plates dentro**, nomeadas na ordem de impressão. Abre uma vez, as
+plates aparecem na barra de baixo e você imprime uma de cada vez. É o mesmo
+formato do `diversos/Jabonera.3mf`.
+
+Ele não traz perfil de impressora/filamento embutido de propósito — vale o
+perfil que você já tem selecionado no Bambu Studio. Os 15 arquivos avulsos
+continuam ali pra quando você quiser fatiar uma peça só.
+
+Pra regerar depois de mudar alguma peça, veja `.claude/skills/plates/`.
+
 | Job | Peça | Footprint |
 |---|---|---|
 | `pokemon-game-t1r1.3mf` | prêmios 1 e 2 | 146 x 107 x 7 |
