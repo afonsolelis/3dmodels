@@ -3,8 +3,13 @@
 // bandeja: dois lado a lado pra decks de 60 cartas (sleeved) DEITADAS
 // (empilhadas horizontalmente, não em pé), e um terceiro abaixo dos dois
 // (ocupando toda a largura) pra dados/moedas. Cada compartimento de deck
-// tem um elevador — uma plataforma solta com uma aba — pra levantar o
-// deck inteiro pra fora, até a última carta.
+// tem uma CESTINHA — uma cesta solta de paredes finas que segura o deck
+// inteiro. Um furo no chão da bandeja, embaixo de cada cestinha, deixa
+// empurrar a cestinha pra cima com o dedo (como o miolo de uma caixa de
+// fósforo) até dar pra pegar ela pela borda e tirar com o deck dentro.
+// A cestinha é vazada em hexágonos (colmeia), como uma cesta de verdade,
+// e os recortes em U nas laterais descem até o chão dela — dá pra pinçar
+// até a última carta da pilha com ela fora da bandeja.
 //
 // A bandeja desliza dentro de uma capa fechada em UMA ponta (a outra fica
 // aberta, por onde a bandeja entra). Fechamento por 4 ímãs (um em cada
@@ -13,36 +18,52 @@
 // atração. Um furo passante no fundo da capa deixa empurrar a bandeja de
 // volta pra fora com o dedo.
 //
-// Peças: "tray" (bandeja), "sleeve" (capa) e "lifter" (elevador — imprimir
-// 2, um por compartimento de deck; a mesma peça serve nos dois lados, é só
-// virar 180°). Exportar separado:
+// Peças: "tray" (bandeja), "sleeve" (capa) e "basket" (cestinha — imprimir
+// 2, uma por compartimento de deck). STLs individuais de cada peça:
 //   openscad -o stl/deckbox-01-tray.stl    -D 'part="tray"'    deckbox-01.scad
 //   openscad -o stl/deckbox-01-sleeve.stl  -D 'part="sleeve"'  deckbox-01.scad
-//   openscad -o stl/deckbox-01-lifter.stl  -D 'part="lifter"'  deckbox-01.scad
+//   openscad -o stl/deckbox-01-basket.stl  -D 'part="basket"'  deckbox-01.scad
+// A pasta 3mf/ tem SÓ os 2 arquivos de impressão (cama Bambu A1 mini,
+// 180x180): a chapa "plate" (capa em pé + 2 cestinhas, ~155x161mm) e a
+// bandeja à parte (136x151mm — não cabe junto). Conjunto completo = 2 jobs:
+//   openscad -o 3mf/deckbox-01-plate.3mf   -D 'part="plate"'   deckbox-01.scad
+//   openscad -o 3mf/deckbox-01-tray.3mf    -D 'part="tray"'    deckbox-01.scad
+//
+// Variante de UM deck só: deckboxes/deckbox-02/ — inclui este arquivo
+// definindo deck_lanes = 1 (o nº de compartimentos de deck é parametrizado)
+// e dice_depth = 64 (compartimento de dados mais fundo).
 
 /* [Peça a renderizar] */
-part = "both"; // "tray" | "sleeve" | "lifter" | "both" (preview lado a lado, não montado)
+part = "both"; // "tray" | "sleeve" | "basket" | "plate" (chapa de impressão com tudo) | "both" (preview lado a lado, não montado)
 
-/* [Cartas - deitadas, empilhadas na vertical] */
-card_width             = 63; // mm, largura da carta (standard TCG)
-card_height             = 88; // mm, altura da carta (standard TCG) — vira a profundidade do compartimento
-card_count              = 60; // cartas por deck (com sleeve) — um compartimento por deck
-sleeved_card_thickness  = 0.8; // mm por carta já com sleeve — confirmar com a sleeve real
+/* [Deck com sleeve - medidas do deck REAL, tiradas com régua] */
+// Medido em 2026-08-08: deck completo de 60 cartas COM sleeve = ~93 x 68 x 45 mm.
+// Se trocar de sleeve (ou de jogo), medir o deck de novo e atualizar aqui.
+deck_length = 93; // mm, comprimento da carta com sleeve (deitada — vira X, profundidade do compartimento)
+deck_width  = 68; // mm, largura da carta com sleeve (vira Y)
+deck_height = 45; // mm, altura da pilha completa deitada (as 60 cartas)
 
 /* [Compartimento de dados/moedas] */
-dice_length = 30; // mm, profundidade do compartimento (largura = a dos dois decks juntos)
+// Profundidade do compartimento (a largura é a dos dois decks juntos). A
+// variante deckbox-02 aprofunda definindo dice_depth antes do include —
+// mesmo padrão is_undef do deck_lanes, pro override não gerar warning.
+dice_length = is_undef(dice_depth) ? 30 : dice_depth; // mm
 
-/* [Elevador do deck - plataforma solta com aba] */
-lifter_thickness = 1.6; // mm, espessura da plataforma e da aba
-lifter_gap       = 0.3; // mm, folga ao redor da plataforma pra subir livre, sem travar
-tab_width        = 12;  // mm, largura da aba (por onde você puxa)
-tab_length       = 8;   // mm, quanto a aba sai pra fora da parede lateral
-notch_w          = tab_width + 2; // mm, largura do vão na parede por onde a aba passa
-notch_h          = 10;  // mm, altura do vão a partir do chão (espaço pro dedo pegar a aba)
+/* [Cestinha do deck - cesta solta, empurrada por baixo] */
+basket_wall  = 1.2; // mm, paredes da cestinha
+basket_floor = 1.6; // mm, chão da cestinha (é onde o dedo empurra por baixo)
+basket_clear = 0.3; // mm, folga por lado entre cestinha e compartimento, pra subir livre
+basket_lip   = 3;   // mm, quanto a parede da cestinha sobe acima da pilha de cartas
+cutout_w     = 40;  // mm, largura do recorte em U nas laterais compridas da cestinha
+push_hole_d  = 16;  // mm, furo passante no chão da bandeja pra empurrar a cestinha com o dedo
+
+/* [Vazado hexagonal da cestinha] */
+hex_d      = 8;   // mm, tamanho de cada furo hexagonal (medido entre faces)
+hex_web    = 2;   // mm, material que sobra entre furos vizinhos
+hex_margin = 2.5; // mm, borda sólida ao redor de cada painel vazado (junções e cantos)
 
 /* [Folgas] */
-card_gap      = 2;    // folga extra em largura/profundidade pra carta não ficar apertada
-deck_slack    = 6;    // espaço extra na altura da pilha (Z) pra facilitar tirar/guardar as cartas
+card_gap      = 2;    // folga extra em largura/profundidade pro deck não ficar apertado na cestinha
 fit_tolerance = 0.25; // folga por lado entre bandeja e caixa, pra deslizar sem travar
 
 /* [Paredes] */
@@ -66,15 +87,24 @@ $fn = 48;
 // ---------------------------------------------------------------------
 // Derivados
 // ---------------------------------------------------------------------
-deck_stack_height = card_count * sleeved_card_thickness; // altura da pilha de UM deck deitado (60 cartas)
+// nº de compartimentos de deck: 2 por padrão. A variante deckbox-02 inclui
+// este arquivo definindo deck_lanes = 1 (por isso o is_undef, em vez de
+// uma atribuição normal — assim o override não gera warning).
+lanes = is_undef(deck_lanes) ? 2 : deck_lanes;
 
-lane_inner_w = card_width + card_gap;   // Y: largura interna de cada compartimento de deck
-lane_inner_l = card_height + card_gap;  // X: profundidade de cada compartimento (altura da carta, deitada)
+// a cestinha envolve o deck, então o compartimento precisa caber:
+// deck medido + folga do deck + paredes da cestinha + folga da cestinha
+lane_inner_w = deck_width  + card_gap + 2 * (basket_wall + basket_clear); // Y: largura interna de cada compartimento de deck
+lane_inner_l = deck_length + card_gap + 2 * (basket_wall + basket_clear); // X: profundidade de cada compartimento (carta deitada)
 
-// largura interna total: os dois compartimentos de deck lado a lado + a divisória entre eles
-tray_inner_w = 2 * lane_inner_w + divider;
-// Z: elevador embaixo + altura da pilha de cartas deitadas + folga
-tray_inner_h = lifter_thickness + deck_stack_height + deck_slack;
+basket_outer_w = lane_inner_w - 2 * basket_clear;
+basket_outer_l = lane_inner_l - 2 * basket_clear;
+basket_h       = basket_floor + deck_height + basket_lip;
+
+// largura interna total: os compartimentos de deck lado a lado + as divisórias entre eles
+tray_inner_w = lanes * lane_inner_w + (lanes - 1) * divider;
+// Z: altura da cestinha + 1mm de folga pra borda dela não raspar na capa
+tray_inner_h = basket_h + 1;
 // comprimento interno total: compartimento de dados + divisória + zona dos decks
 tray_inner_l = dice_length + divider + lane_inner_l;
 
@@ -99,13 +129,13 @@ sleeve_outer_l = sleeve_cavity_l + end_wall; // + a ponta fechada (tampa)
 // canto. Nessa ponta fica o compartimento de dados/moedas (mais fundo, só
 // aparece quando a bandeja é puxada quase até o fim); os dois
 // compartimentos de deck ficam do lado da parede de trás — `back_wall` —
-// (aparecem primeiro ao puxar a bandeja). Cada compartimento de deck tem
-// um vão pequeno perto do chão, na parede externa, por onde passa a aba
-// do elevador (as cartas ficam deitadas, empilhadas em cima do elevador).
+// (aparecem primeiro ao puxar a bandeja). No centro do chão de cada
+// compartimento de deck há um furo passante: é por ele que o dedo empurra
+// a cestinha (com o deck dentro) pra cima, até dar pra pegar pela borda.
 // ---------------------------------------------------------------------
 module tray() {
     lanes_x = end_wall + dice_length + divider;
-    notch_x = lanes_x + lane_inner_l / 2; // centralizado no comprimento de cada compartimento de deck
+    lane_y0 = [for (i = [0 : lanes - 1]) wall + i * (lane_inner_w + divider)]; // y de cada compartimento de deck
 
     difference() {
         cube([tray_outer_l, tray_outer_w, tray_outer_h]);
@@ -114,15 +144,16 @@ module tray() {
         translate([end_wall, wall, wall])
             cube([dice_length, tray_inner_w, tray_outer_h]); // sobe além do topo -> topo aberto
 
-        // dois compartimentos de deck, lado a lado, separados por `divider`
-        translate([lanes_x, wall, wall])
-            cube([lane_inner_l, lane_inner_w, tray_outer_h]);
-        translate([lanes_x, wall + lane_inner_w + divider, wall])
-            cube([lane_inner_l, lane_inner_w, tray_outer_h]);
+        for (y0 = lane_y0) {
+            // compartimento de deck
+            translate([lanes_x, y0, wall])
+                cube([lane_inner_l, lane_inner_w, tray_outer_h]);
 
-        // vão pequeno em cada parede externa, por onde passa a aba do elevador
-        grab_notch(notch_x, 0, wall);                  // parede externa esquerda
-        grab_notch(notch_x, tray_outer_w - wall, wall); // parede externa direita
+            // furo passante no chão, centralizado no compartimento, pra
+            // empurrar a cestinha por baixo
+            translate([lanes_x + lane_inner_l / 2, y0 + lane_inner_w / 2, -0.1])
+                cylinder(h = wall + 0.2, d = push_hole_d);
+        }
 
         // 4 ímãs de canto na ponta (precisa estar dentro do difference() pra CAVAR, não somar)
         magnet_corners(x = 0, w = tray_outer_w, h = tray_outer_h, dir = 1);
@@ -142,8 +173,11 @@ module sleeve() {
             cube([sleeve_outer_l, sleeve_cavity_w, sleeve_cavity_h]); // sobe além da frente -> frente aberta
         finger_hole();
 
-        // 4 ímãs de canto na tampa (precisa estar dentro do difference() pra CAVAR, não somar)
-        magnet_corners(x = end_wall, w = sleeve_outer_w, h = sleeve_outer_h, dir = -1);
+        // 4 ímãs de canto na tampa (precisa estar dentro do difference() pra CAVAR, não somar).
+        // A capa é maior que a bandeja em (wall + fit_tolerance) por lado, então o margin
+        // compensa esse deslocamento — senão cada par de ímãs fecha ~2.6mm fora de centro.
+        magnet_corners(x = end_wall, w = sleeve_outer_w, h = sleeve_outer_h, dir = -1,
+                       margin = magnet_margin + wall + fit_tolerance);
     }
 }
 
@@ -156,11 +190,11 @@ module magnet_hole(x, y, z, dir) {
             cylinder(h = magnet_h + 0.01, d = magnet_d + magnet_fit);
 }
 
-// 4 ímãs, um em cada canto de uma parede de ponta (w x h), a `magnet_margin`
+// 4 ímãs, um em cada canto de uma parede de ponta (w x h), a `margin`
 // das bordas.
-module magnet_corners(x, w, h, dir) {
-    for (yy = [magnet_margin, w - magnet_margin])
-        for (zz = [magnet_margin, h - magnet_margin])
+module magnet_corners(x, w, h, dir, margin = magnet_margin) {
+    for (yy = [margin, w - margin])
+        for (zz = [margin, h - margin])
             magnet_hole(x, yy, zz, dir);
 }
 
@@ -172,33 +206,90 @@ module finger_hole() {
             cylinder(h = end_wall + 0.2, d = finger_hole_d);
 }
 
-// Vão pequeno numa parede (em x, começando em y0, ao longo de `thickness`),
-// rente ao chão da bandeja — só o suficiente pra aba do elevador passar e
-// pro dedo alcançar e puxar.
-module grab_notch(x, y0, thickness) {
-    translate([x - notch_w / 2, y0 - 0.1, wall])
-        cube([notch_w, thickness + 0.2, notch_h]);
+// ---------------------------------------------------------------------
+// Cestinha (basket): cesta aberta em cima que vive dentro de um
+// compartimento de deck, com o deck deitado dentro dela. O dedo empurra o
+// chão dela pra cima (pelo furo no chão da bandeja) até a borda aparecer;
+// daí é só pegar e tirar a cestinha inteira, com o deck junto. Os recortes
+// em U nas duas laterais compridas descem até o chão dela, pra pinçar a
+// pilha até a última carta com ela fora da bandeja. Chão e paredes são
+// vazados em hexágonos (colmeia). A mesma peça serve nos dois
+// compartimentos.
+// ---------------------------------------------------------------------
+module basket() {
+    difference() {
+        cube([basket_outer_l, basket_outer_w, basket_h]);
+
+        // cavidade interna (chão fica embaixo, topo aberto)
+        translate([basket_wall, basket_wall, basket_floor])
+            cube([basket_outer_l - 2 * basket_wall,
+                  basket_outer_w - 2 * basket_wall,
+                  basket_h]);
+
+        // recortes em U nas duas laterais compridas
+        u_cutout(basket_outer_l / 2, 0);
+        u_cutout(basket_outer_l / 2, basket_outer_w - basket_wall);
+
+        // vazado hexagonal: chão + 4 paredes
+        translate([basket_wall, basket_wall, 0])
+            hex_panel(basket_outer_l - 2 * basket_wall,
+                      basket_outer_w - 2 * basket_wall, basket_floor);
+        for (y = [basket_wall, basket_outer_w]) // laterais compridas (faixa central
+            translate([0, y, basket_floor])     // sem furos, por causa do recorte em U)
+                rotate([90, 0, 0])
+                    hex_panel(basket_outer_l, basket_h - basket_floor, basket_wall,
+                              skip_w = cutout_w);
+        for (x = [0, basket_outer_l - basket_wall]) // laterais curtas
+            translate([x, 0, basket_floor])
+                rotate([90, 0, 90])
+                    hex_panel(basket_outer_w, basket_h - basket_floor, basket_wall);
+    }
 }
 
-// ---------------------------------------------------------------------
-// Elevador (lifter): plataforma solta que fica no chão de um compartimento
-// de deck, embaixo das cartas, com uma aba que sai pela parede (pelo
-// grab_notch) pra você puxar e levantar o deck inteiro de uma vez, até a
-// última carta. A mesma peça serve nos dois compartimentos — só virar 180°.
-// Aba sai pelo lado y=0 (visto de cima).
-// ---------------------------------------------------------------------
-module lifter() {
-    platform_l = lane_inner_l - 2 * lifter_gap;
-    platform_w = lane_inner_w - 2 * lifter_gap;
+// Painel de furos hexagonais (colmeia) cobrindo o retângulo a x b no plano
+// XY, com os furos atravessando a espessura t em Z e `hex_margin` de borda
+// sólida em volta. Só entra hexágono que caiba INTEIRO na área útil.
+// `skip_w` reserva uma faixa central (ao longo de `a`) sem furos — usada
+// nas paredes com recorte em U, senão sobram lascas finas na borda do U.
+// Hexágonos de ponta pra cima: nas paredes verticais cada furo imprime sem
+// ponte reta (o topo fecha em bico, não em vão plano).
+module hex_panel(a, b, t, skip_w = 0) {
+    f  = hex_d;            // entre-faces
+    R  = f / sqrt(3);      // circunraio (centro -> ponta)
+    sx = f + hex_web;      // passo entre colunas
+    sy = sx * sqrt(3) / 2; // passo entre fileiras (ímpares deslocam sx/2)
 
-    // plataforma
-    translate([lifter_gap, lifter_gap, 0])
-        cube([platform_l, platform_w, lifter_thickness]);
+    for (j = [0 : ceil(b / sy)], i = [0 : ceil(a / sx)]) {
+        cx = hex_margin + f / 2 + i * sx + (j % 2) * sx / 2;
+        cy = hex_margin + R + j * sy;
+        in_skip = skip_w > 0
+            && cx + f / 2 > a / 2 - skip_w / 2 - hex_margin
+            && cx - f / 2 < a / 2 + skip_w / 2 + hex_margin;
+        if (cx + f / 2 <= a - hex_margin && cy + R <= b - hex_margin && !in_skip)
+            translate([cx, cy, -0.1])
+                rotate([0, 0, 30])
+                    cylinder(h = t + 0.2, r = R, $fn = 6);
+    }
+}
 
-    // aba, centralizada no comprimento, saindo pelo lado y=0 (sobrepõe um
-    // pouco a plataforma, em vez de só encostar, pra garantir união sólida)
-    translate([lane_inner_l / 2 - tab_width / 2, -tab_length, 0])
-        cube([tab_width, tab_length + lifter_gap + 0.2, lifter_thickness]);
+// Recorte em U de cantos redondos, aberto no topo, atravessando uma parede
+// comprida da cestinha (a parede começa em y0 e tem `basket_wall` de
+// espessura). `cx` é o centro do recorte ao longo de X.
+module u_cutout(cx, y0) {
+    r  = 6;            // raio dos cantos de baixo do U
+    zb = basket_floor; // o recorte desce até o CHÃO da cestinha, pra dar
+                       // pra pinçar a última carta da pilha pela lateral
+
+    translate([0, y0 - 0.1, 0]) {
+        hull()
+            for (xx = [cx - cutout_w / 2 + r, cx + cutout_w / 2 - r])
+                translate([xx, 0, zb + r])
+                    rotate([-90, 0, 0])
+                        cylinder(h = basket_wall + 0.2, r = r);
+        // abre o U até em cima da parede
+        translate([cx - cutout_w / 2, 0, zb + r])
+            cube([cutout_w, basket_wall + 0.2, basket_h]);
+    }
 }
 
 // ---------------------------------------------------------------------
@@ -208,13 +299,45 @@ if (part == "tray") {
     tray();
 } else if (part == "sleeve") {
     sleeve();
-} else if (part == "lifter") {
-    lifter();
+} else if (part == "basket") {
+    basket();
+} else if (part == "plate") {
+    // chapa pra cama 180x180 (A1 mini), já na orientação de impressão. A
+    // capa fica EM PÉ, apoiada na ponta fechada — o tubo imprime sem
+    // suporte. Com 1 deck (deckbox-02) o conjunto INTEIRO cabe numa chapa
+    // só (~161x162mm); com 2 decks a bandeja não cabe junto e imprime à
+    // parte (part="tray").
+    plate_gap = 6;
+
+    if (lanes == 1) {
+        // job único: bandeja + cestinha + capa em pé
+        tray();
+        translate([0, tray_outer_w + plate_gap, 0]) {
+            basket();
+            translate([basket_outer_l + plate_gap + sleeve_outer_h, 0, 0])
+                rotate([0, -90, 0])
+                    sleeve();
+        }
+    } else {
+        // capa em pé, deitada como uma faixa ao longo do fundo da chapa
+        translate([0, sleeve_outer_h, 0])
+            rotate([0, 0, -90])
+                translate([sleeve_outer_h, 0, 0])
+                    rotate([0, -90, 0])
+                        sleeve();
+
+        // cestinhas lado a lado, giradas pra caber na largura
+        for (i = [0 : lanes - 1])
+            translate([basket_outer_w + i * (basket_outer_w + plate_gap),
+                       sleeve_outer_h + plate_gap, 0])
+                rotate([0, 0, 90])
+                    basket();
+    }
 } else {
     // preview lado a lado (não montado), só pra visualizar as três peças
     tray();
     translate([0, tray_outer_w + 20, 0])
         sleeve();
     translate([0, tray_outer_w + sleeve_outer_w + 40, 0])
-        lifter();
+        basket();
 }
