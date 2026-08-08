@@ -7,50 +7,85 @@
 //
 // 1) "deck_basket" — cestinha do deck. Uma cesta de paredes finas vazadas em
 //    colmeia que segura o deck de 60 cartas COM sleeve (93x68x45 medido com
-//    régua). Durante a partida ela ENCAIXA na moldura em relevo da zona de
-//    deck do campo (a moldura foi feita pro footprint externo 72.4x97.4 com
-//    0.4mm de folga por lado) e fica ali segurando o deck em pé, à mão. No
-//    transporte a mesma peça é a deckbox: o deck viaja dentro dela. Os
-//    recortes em U nas duas laterais compridas descem até o chão da cesta —
-//    é por eles que o dedo pinça a pilha até a ÚLTIMA carta.
+//    régua). Durante a partida ela ENCAIXA no rebaixo da zona de deck do
+//    campo (o rebaixo foi feito pro footprint externo 72.4x97.4 com 0.4mm de
+//    folga por lado). No transporte a mesma peça é a deckbox. Os recortes em
+//    U nas duas laterais compridas descem até o chão da cesta — é por eles
+//    que o dedo pinça a pilha até a ÚLTIMA carta.
 //
 // 2) "discard_tray" — cesta do descarte. MESMO footprint externo 72.4x97.4
-//    (as duas molduras do campo são iguais e intercambiáveis), 30mm de
-//    altura. Não é uma cesta fechada: os quatro lados têm escalopes
-//    generosos que descem até 8mm do chão, então dá pra enfiar o dedo por
-//    qualquer lado e tirar a pilha de descarte inteira sem catar carta por
-//    carta. O chão é INTEIRO (só relevo hexagonal rebaixado, nada passante)
-//    porque no transporte esta cesta vira o porta-dados/contadores.
+//    (os dois rebaixos do campo são iguais e intercambiáveis), 30mm de
+//    altura. Os quatro lados têm escalopes generosos que descem até 8mm do
+//    chão: dá pra enfiar o dedo por qualquer lado e tirar a pilha de
+//    descarte inteira. Chão INTEIRO (só relevo, nada passante).
 //
-// 3) "game_case" — a maleta. Guarda a pilha inteira das 9 placas do campo no
-//    fundo e, EM CIMA delas, os dois contêineres lado a lado (72.4+72.4 =
-//    144.8mm). Vazia, é a bandeja de rolar dado: o chão interno tem colmeia
-//    em BAIXO relevo (não passante) que amortece e freia o dado. No topo do
-//    rebordo ficam 6 ímãs 4x2mm; como a parede tem só 2.4mm, cada ímã ganha
-//    um RESSALTO interno local (boss) que engrossa a parede pra 7.0mm
-//    naquele ponto. Os ressaltos começam bem acima da pilha de placas e
-//    entram com rampa a 45°, então não atrapalham as placas nem precisam de
-//    suporte.
+// 3) "game_case" — a maleta. As 8 placas do campo (todas de 7mm: 6 de
+//    146x107 e 2 de 152x107) viajam EM PÉ, lado a lado como livros numa
+//    estante: uma fatia de 152.0 x 56.0 x 107.0 encostada na parede da
+//    frente. Uma nervura baixa separa essa faixa da área dos dois
+//    contêineres, que viajam DEITADOS (72.4 x 50 x 97.4 cada; 144.8 x 50 os
+//    dois juntos) com as BOCAS viradas pra fatia de placas — é a parede de
+//    placas que tampa os contêineres, então o deck não escorrega pra fora da
+//    cestinha no transporte. Em pé eles não cabiam: o interior passaria de
+//    170 e estouraria a cama da A1 mini.
 //
-// 4) "case_lid" — a tampa. Painel plano do tamanho exato do exterior da
+//    ONDE VÃO OS DADOS: NÃO dentro da cesta do descarte — deitada, ela perde
+//    o dado pelos escalopes das paredes. A cesta tem só 30mm de fundo numa
+//    faixa de 50, e o que sobra atrás dela é um bolso de ~21 x 72 x 97
+//    fechado pelo chão SÓLIDO da própria cesta, pela parede de trás da
+//    maleta, pela lateral da cestinha do deck e pelo chão/tampa. É esse
+//    bolso que leva dados e contadores.
+//
+//    Vazia, a maleta é a bandeja de rolar dado: o chão tem colmeia em BAIXO
+//    relevo (não passante) que amortece e freia o dado.
+//
+//    COMO SE TIRA UMA PLACA (é o motivo do desenho ser assim):
+//      a) pelas duas JANELAS da parede da frente — dois rasgos de 40mm que
+//         descem 32mm a partir do rebordo, em cima da fatia de placas. As
+//         placas param 7mm abaixo da borda, então sem esses rasgos não dá
+//         pra pegar a borda de cima. São DUAS (e não uma central) por dois
+//         motivos: dá pra usar as duas mãos numa placa de 152mm, e o pilar
+//         de 25mm que sobra entre elas mantém o rebordo rígido.
+//      b) com os contêineres FORA (saem fácil: deitados, o topo deles fica
+//         ~16mm abaixo do rebordo, é só enfiar a mão e pegar), a nervura de
+//         4mm deixa a face de trás da fatia de placas exposta de cima a
+//         baixo — polegar na borda de cima, dedos na face de trás, e a placa
+//         sai. É por isso que não fiz janela desse lado: já é aberto por
+//         cima, e cada abertura a mais é uma chance a mais do dado escapar
+//         quando a maleta vira bandeja.
+//      As janelas ficam ALTAS (o ponto mais baixo a 84mm do piso), longe do
+//      chão da bandeja de dados.
+//
+//    ÍMÃS NUM FLANGE EXTERNO, SÓ NAS DUAS PAREDES COMPRIDAS: com as placas
+//    em pé ocupando 107 dos 114mm de interior, qualquer ressalto interno
+//    estrangularia o poço e a placa de 152 não entraria. Então o interior é
+//    um prisma LIMPO, sem nenhuma saliência, e os ímãs foram pra FORA: um
+//    flange de 4.4mm corre ao longo das duas paredes compridas, dando
+//    2.4+4.4 = 6.8mm de material pro furo de Ø4.15 (1.325mm de cada lado).
+//    Os 6 ímãs ficam 3 e 3 nessas duas paredes; as paredes curtas não têm
+//    flange, então o footprint NÃO cresce em X — é isso que segura o
+//    conjunto em 159.2 x 124.6, bem abaixo dos 170 da cama. O flange entra
+//    por rampa de 45°, imprime sem suporte, e enrijece a boca da caixa.
+//
+// 4) "case_lid" — a tampa. Painel plano do tamanho exato do contorno da
 //    maleta, com uma saia que entra no interior (0.3mm de folga por lado)
-//    pra centralizar e não deixar deslizar. 6 rebaixos de ímã espelhando
-//    EXATAMENTE os 6 da maleta — as duas peças são modeladas na MESMA
-//    origem (canto do retângulo externo) e leem a MESMA lista `magnets`,
-//    então os pares fecham centro com centro por construção. Pra abrir: os
-//    dois entalhes no topo das paredes compridas da maleta deixam um vão de
-//    5mm de altura sob a borda da tampa (a saia é interrompida ali) — enfia
-//    o dedo e levanta. O escalope na cara de cima da tampa marca o lugar.
+//    pra centralizar. 6 rebaixos de ímã espelhando EXATAMENTE os 6 da
+//    maleta — as duas peças são modeladas na MESMA origem (canto do
+//    retângulo externo) e leem a MESMA lista `magnets`, então os pares
+//    fecham centro com centro por construção. Pra abrir há quatro pegadores:
+//    na frente as próprias janelas das placas (a saia é interrompida ali) e
+//    atrás duas mordidas no flange que deixam a borda da tampa em balanço
+//    sobre um vão de 10.4mm — o dedo entra e levanta. Escalopes na cara de
+//    cima marcam os quatro lugares.
 //
 // ÍMÃS: 12 discos 4x2mm (6 na maleta + 6 na tampa), press-fit 0.15.
-//   - Na maleta o rebaixo é ABERTO POR CIMA (entra pelo topo do rebordo,
+//   - Na maleta o rebaixo é ABERTO POR CIMA (entra pelo topo do flange,
 //     imprime sem ponte nenhuma).
 //   - Na tampa o rebaixo é CEGO, aberto pra baixo, com 1.9mm de teto sólido
-//     (1.3mm depois do relevo hexagonal da cara de cima). Como a tampa
-//     imprime de cabeça pra baixo, esse rebaixo vira um furo cego virado pra
-//     CIMA na chapa — também sem ponte.
+//     (1.3mm depois do relevo hexagonal). Como a tampa imprime de cabeça pra
+//     baixo, esse rebaixo vira furo cego virado pra CIMA — também sem ponte.
 //   - Todos os 6 da maleta com o MESMO polo pra cima; todos os 6 da tampa
-//     com o polo oposto. Um pingo de cola CA em cada um se ficar frouxo.
+//     com o polo oposto. Um pingo de cola CA se ficar frouxo.
 //
 // STL de cada peça:
 //   openscad -o stl/pokemon-game-deck-basket.stl  -D 'part="deck_basket"'  pokemon-game-case.scad
@@ -64,24 +99,28 @@
 //   openscad -o 3mf/pokemon-game-containers.3mf -D 'part="plate_containers"' pokemon-game-case.scad
 //
 // Orientações de impressão das chapas:
-//   plate_case       — maleta de BOCA PRA CIMA (fundo na cama). Sem ponte.
-//   plate_lid        — tampa de CABEÇA PRA BAIXO: a cara de cima na cama
-//                      (ganha o acabamento da placa) e a saia apontando pra
+//   plate_case       — maleta de BOCA PRA CIMA (fundo na cama). O flange
+//                      abre por rampa de 45°: nada de suporte. O 1º layer é
+//                      só o corpo (159.2 x 115.8) — o flange só existe nos
+//                      10.4mm de cima, então brim/aderência não sofrem.
+//   plate_lid        — tampa de CABEÇA PRA BAIXO: cara de cima na cama
+//                      (ganha o acabamento da placa) e saia apontando pra
 //                      cima. É a única orientação sem suporte — com a saia
 //                      pra baixo o painel inteiro ficaria no ar. Custo: os
-//                      hexágonos rebaixados da cara de cima fecham com uma
-//                      ponte curta (0.6mm de altura, vão de 10mm), o que a
-//                      A1 mini faz limpo.
+//                      hexágonos rebaixados da cara de cima fecham com ponte
+//                      curta (0.6mm de altura, vão de 10mm), que a A1 mini
+//                      faz limpo.
 //   plate_containers — cestinha do deck + cesta do descarte lado a lado,
 //                      ambas de boca pra cima.
 //
 // Previews de conferência (não são peças):
-//   part="assembled" — maleta fechada com a tampa, e em fantasma (%) a pilha
-//                      das 9 placas + os dois contêineres em cima delas
+//   part="assembled" — maleta fechada, com a fatia das placas EM PÉ e os
+//                      dois contêineres DEITADOS em fantasma (%) na posição
+//                      real de transporte
 //   part="all"       — as 4 peças espalhadas, não montadas
 
 /* [Peça a renderizar] */
-part = "all"; // "deck_basket" | "discard_tray" | "game_case" | "case_lid" | "plate_case" | "plate_lid" | "plate_containers" | "assembled" (preview fechado + conteúdo em fantasma) | "all" (preview de tudo, não montado)
+part = "all"; // "deck_basket" | "discard_tray" | "game_case" | "case_lid" | "plate_case" | "plate_lid" | "plate_containers" | "assembled" | "all"
 
 /* [Deck de 60 cartas COM sleeve - medido com régua] */
 // Medido em 2026-08-08: 93 x 68 x 45 mm. Trocou de sleeve, mede de novo.
@@ -90,9 +129,9 @@ deck_l = 93; // mm, altura da carta com sleeve (vira Y da cestinha)
 deck_h = 45; // mm, altura da pilha das 60 cartas (vira Z)
 
 /* [Contêineres - footprint externo FIXO] */
-// NÃO MEXER: as molduras em relevo das placas do campo (pokemon-game.scad)
-// já foram exportadas dimensionadas pra receber exatamente este retângulo
-// com 0.4mm de folga por lado.
+// NÃO MEXER: os rebaixos das placas do campo (pokemon-game.scad) já foram
+// dimensionados pra receber exatamente este retângulo com 0.4mm de folga por
+// lado.
 cont_x = 72.4; // mm, largura externa dos dois contêineres
 cont_y = 97.4; // mm, profundidade externa dos dois contêineres
 
@@ -104,65 +143,81 @@ basket_cut_w = 40;  // mm, largura do recorte em U das duas laterais compridas
 basket_cut_r = 6;   // mm, raio dos cantos de baixo do U
 
 /* [Cesta do descarte] */
-discard_h          = 30;  // mm, altura externa
-discard_wall       = 1.2; // mm, paredes
-discard_floor      = 1.6; // mm, chão INTEIRO (sem furo: guarda dados no transporte)
-discard_band       = 8;   // mm, faixa de parede sólida que sobra abaixo dos escalopes
-discard_cut_long   = 52;  // mm, largura do escalope nas paredes compridas (97.4)
-discard_cut_short  = 34;  // mm, largura do escalope nas paredes curtas (72.4)
-discard_cut_r      = 6;   // mm, raio dos cantos de baixo dos escalopes
-discard_floor_relief = 0.6; // mm, profundidade do relevo hexagonal do chão (de 1.6)
+discard_h            = 30;  // mm, altura externa
+discard_wall         = 1.2; // mm, paredes
+discard_floor        = 1.6; // mm, chão INTEIRO (é ele que fecha o bolso dos dados)
+discard_band         = 8;   // mm, faixa sólida que sobra abaixo dos escalopes
+discard_cut_long     = 52;  // mm, escalope das paredes compridas (97.4)
+discard_cut_short    = 34;  // mm, escalope das paredes curtas (72.4)
+discard_cut_r        = 6;   // mm, raio dos cantos de baixo dos escalopes
+discard_floor_relief = 0.6; // mm, relevo hexagonal do chão (de 1.6)
 
-/* [Maleta - interior dimensionado pelas placas REAIS do campo] */
-// Placas medidas com bbox.py: a maior é 152.0 x 109.0; a pilha das 9 dá
-// 6x4.5 + 2x10.5 + 4.5 = 52.5mm. Em cima delas entram os dois contêineres
-// lado a lado (144.8 x 97.4) — a cestinha do deck é a mais alta, 50mm.
-case_in_x  = 158; // mm, interior X (placa 152.0 -> 3.0/lado; contêineres 144.8 -> 6.6/lado)
-case_in_y  = 113; // mm, interior Y (placa 109.0 -> 2.0/lado; contêineres 97.4 -> 7.8/lado)
-case_in_z  = 106; // mm, interior Z (52.5 de placas + 50 da cestinha + 3.5 de folga)
-case_wall  = 2.4; // mm, paredes e fundo
-case_floor_relief = 0.9; // mm, profundidade da colmeia em baixo relevo do chão (de 2.4)
+/* [Placas do campo - medidas REAIS (bbox.py nos STLs), só conferência] */
+// 8 placas TODAS de 7.0mm: 6 de 146.0x107.0 e 2 de 152.0x107.0 (as que têm o
+// rebaixo do contêiner). Miolo hexagonal aberto por baixo; os encaixes viraram
+// ímã 4x2 deitado na parede lateral, o que exige >= 6.55mm de espessura, e
+// por isso sumiram as linguetas. Em pé, encostadas, formam uma fatia de
+// 152.0 (X) x 56.0 (Y) x 107.0 (Z).
+plate_slice_x = 152.0; // mm, maior largura de placa
+plate_slice_y = 56.0;  // mm, soma das espessuras das 8 placas (8 x 7)
+plate_slice_z = 107.0; // mm, altura da placa em pé
 
-/* [Placas do campo - só conferência, geometria mora em pokemon-game.scad] */
-plates_stack_h = 52.5;  // mm, altura da pilha das 9 placas
-plate_max_x    = 152.0; // mm, maior placa em X
-plate_max_y    = 109.0; // mm, maior placa em Y
+/* [Maleta] */
+plate_gap_side  = 1.2; // mm, folga por lado da fatia de placas em X
+plate_gap_depth = 1.0; // mm, folga por lado da fatia de placas em Y
+cont_gap_back   = 1.0; // mm, folga atrás dos contêineres deitados (a boca
+                       //     encosta na nervura, a folga fica só nas costas)
+case_wall       = 2.4; // mm, paredes e fundo
+case_in_z       = 114; // mm, interior Z (placa em pé 107 + saia da tampa 5 + 2)
+case_floor_relief = 0.9; // mm, colmeia em baixo relevo do chão (de 2.4)
+rib_t = 2;   // mm, espessura da nervura que separa placas de contêineres
+rib_h = 4;   // mm, altura da nervura (baixa de propósito: deixa a face de
+             //     trás da fatia de placas acessível de cima)
+
+/* [Flange dos ímãs - só nas duas paredes COMPRIDAS, por fora] */
+// O interior tem que ser um prisma limpo (a placa em pé usa a altura toda),
+// então o material extra pro furo do ímã vai pra fora. Só nas compridas: o
+// eixo X é o apertado (placa de 152), e assim ele não cresce nada.
+flange_w = 4.4; // mm, quanto o flange avança pra fora (2.4+4.4 = 6.8 de material)
+flange_h = 6;   // mm, altura da faixa cheia do flange (rebaixo do ímã tem 2.1)
+
+/* [Janelas das placas e pegadores - dois de cada, fora do centro] */
+feat_off       = 32.6; // mm, distância de cada rasgo/pegador até o centro em X
+plate_window_w = 40;   // mm, largura de cada janela (parede da frente)
+plate_window_h = 32;   // mm, quanto a janela desce a partir do rebordo
+plate_window_r = 10;   // mm, raio dos cantos de baixo da janela
+pull_w         = 34;   // mm, largura de cada mordida no flange (parede de trás)
+pull_r         = 3;    // mm, raio dos cantos internos da mordida
 
 /* [Tampa] */
-lid_t        = 4.0; // mm, espessura do painel (2.1 de rebaixo de ímã + 1.9 de teto)
-lid_skirt_h  = 6;   // mm, quanto a saia desce pra dentro do interior
-lid_skirt_t  = 2.4; // mm, espessura da saia
-lid_clear    = 0.3; // mm, folga por lado entre saia e interior (peça solta em cavidade)
-lid_chamfer  = 1;   // mm, chanfro 45° na borda de cima (vira o 1º layer na chapa)
-lid_relief   = 0.6; // mm, profundidade do relevo hexagonal da cara de cima
+lid_t       = 4.0; // mm, painel (2.1 de rebaixo de ímã + 1.9 de teto)
+lid_skirt_h = 5;   // mm, quanto a saia desce pra dentro do interior
+lid_skirt_t = 2.4; // mm, espessura da saia
+lid_clear   = 0.3; // mm, folga por lado saia x interior (peça solta em cavidade)
+lid_chamfer = 1;   // mm, chanfro 45° na borda de cima (vira o 1º layer na chapa)
+lid_relief  = 0.6; // mm, relevo hexagonal da cara de cima
 
-/* [Ímãs disco 4x2mm - 6 na maleta + 6 na tampa] */
-magnet_d      = 4;    // mm, diâmetro
-magnet_h      = 2;    // mm, espessura
-magnet_fit    = 0.15; // mm, folga de press-fit (padrão do repo)
-magnet_sink   = 0.1;  // mm, quanto o ímã afunda abaixo da face (rebaixo = 2.1)
-boss_t        = 4.6;  // mm, quanto o ressalto engrossa a parede PRA DENTRO (2.4+4.6 = 7.0)
-boss_w        = 9;    // mm, largura do ressalto ao longo da parede
-boss_above_floor = 61; // mm, altura (a partir do chão interno) em que o ressalto começa
-magnet_x_inset = 42;  // mm, X dos ímãs das paredes compridas (e o espelho, out_x - 42)
+/* [Ímãs disco 4x2mm - 3+3 nas paredes compridas da maleta, espelhados na tampa] */
+magnet_d       = 4;    // mm, diâmetro
+magnet_h       = 2;    // mm, espessura
+magnet_fit     = 0.15; // mm, folga de press-fit (padrão do repo)
+magnet_sink    = 0.1;  // mm, quanto o ímã afunda abaixo da face (rebaixo = 2.1)
+magnet_x_inset = 20;   // mm, X dos ímãs das pontas (o do meio fica no centro)
 
-/* [Puxador da tampa] */
-grip_w             = 30;  // mm, largura do entalhe no topo da parede comprida da maleta
-grip_depth         = 5;   // mm, quanto o entalhe afunda o rebordo (= altura do vão pro dedo)
-grip_r             = 4;   // mm, raio dos cantos de baixo do entalhe
-grip_scallop_len   = 30;  // mm, comprimento do escalope decorativo na cara de cima da tampa
-grip_scallop_r     = 5;   // mm, raio (metade da largura) do escalope
-grip_scallop_depth = 1.0; // mm, profundidade do escalope
-grip_scallop_inset = 8;   // mm, distância do centro do escalope até a borda da tampa
+/* [Escalope decorativo dos pegadores na cara de cima da tampa] */
+grip_scallop_len   = 30;  // mm
+grip_scallop_r     = 5;   // mm
+grip_scallop_depth = 1.0; // mm
+grip_scallop_inset = 8;   // mm, distância do centro até a borda da tampa
 
 /* [Colmeia - identidade visual do repo, hexágonos de PONTA PRA CIMA] */
-hex_d      = 8;   // mm, entre-faces do hexágono (paredes/chão da cestinha do deck)
+hex_d      = 8;   // mm, entre-faces (paredes/chão da cestinha do deck)
 hex_web    = 2;   // mm, material entre furos vizinhos
 hex_margin = 2.5; // mm, borda sólida em volta de cada painel
-hex_s_d      = 6;   // mm, colmeia fina (paredes estreitas da cesta do descarte)
+hex_s_d      = 6;   // mm, colmeia fina (paredes estreitas do descarte)
 hex_s_web    = 1.8;
 hex_s_margin = 2.2;
-hex_l_d      = 10;  // mm, colmeia graúda (chão da maleta e cara de cima da tampa)
+hex_l_d      = 10;  // mm, colmeia graúda (chão da maleta e cara da tampa)
 hex_l_web    = 2.5;
 hex_l_margin = 6;
 
@@ -177,71 +232,90 @@ basket_in_x = cont_x - 2 * basket_wall;           // 70 = deck_w + 1mm/lado
 basket_in_y = cont_y - 2 * basket_wall;           // 95 = deck_l + 1mm/lado
 basket_in_z = basket_h - basket_floor;
 
-discard_in_x = cont_x - 2 * discard_wall;
-discard_in_y = cont_y - 2 * discard_wall;
-discard_cut_z = discard_floor + discard_band; // fundo dos escalopes
+discard_in_x  = cont_x - 2 * discard_wall;
+discard_in_y  = cont_y - 2 * discard_wall;
+discard_cut_z = discard_floor + discard_band;
 
-case_out_x = case_in_x + 2 * case_wall;
-case_out_y = case_in_y + 2 * case_wall;
-case_out_z = case_in_z + case_wall; // topo aberto: só o fundo entra na conta
+// interior: fatia de placas em pé | nervura | dois contêineres DEITADOS
+// (deitado, cada contêiner vira cont_x de largura, basket_h de fundo e
+// cont_y de altura — a boca aponta pra fatia de placas)
+cont_lie_y   = basket_h;                            // 50, fundo do contêiner deitado
+plate_zone_y = plate_slice_y + 2 * plate_gap_depth; // 58.0
+cont_zone_y  = cont_lie_y + cont_gap_back;          // 51.0
+case_in_x    = plate_slice_x + 2 * plate_gap_side;  // 154.4 (contêineres 144.8 -> 4.8/lado)
+case_in_y    = plate_zone_y + rib_t + cont_zone_y;  // 111.0
 
-// espessura local da parede no ressalto e profundidade do centro do ímã
-boss_T    = case_wall + boss_t;   // 7.0
-mag_depth = boss_T / 2;           // 3.5 -> sobra (7.0-4.15)/2 = 1.425mm de cada lado do furo
-boss_z0   = case_wall + boss_above_floor; // z onde o ressalto fica com a seção cheia
-boss_ramp_z = boss_z0 - boss_t;           // início da rampa 45° (abaixo disso, parede lisa)
+// retângulo EXTERNO = footprint total da maleta E da tampa; é a origem comum
+// das duas peças (canto em 0,0). X NÃO leva flange (paredes curtas), Y leva.
+case_bb_x  = case_in_x + 2 * case_wall;             // 159.2
+case_bb_y  = case_in_y + 2 * case_wall + 2 * flange_w; // 124.6
+case_out_z = case_in_z + case_wall;                 // 116.4 (topo aberto)
 
-mag_pocket_d = magnet_d + magnet_fit;  // 4.15
-mag_pocket_h = magnet_h + magnet_sink; // 2.1
+flange_z0     = case_out_z - flange_h; // base da faixa cheia do flange
+flange_ramp_z = flange_z0 - flange_w;  // início da rampa 45°
+
+// origem do interior dentro do retângulo externo
+in_x0 = case_wall;
+in_y0 = flange_w + case_wall;
+
+// zonas internas
+plate_y0 = in_y0;                  // fatia de placas encostada na parede da frente
+rib_y0   = in_y0 + plate_zone_y;
+cont_y0  = rib_y0 + rib_t;
+
+mag_depth    = (case_wall + flange_w) / 2; // 3.4 -> centro do ímã no meio dos 6.8
+mag_pocket_d = magnet_d + magnet_fit;      // 4.15
+mag_pocket_h = magnet_h + magnet_sink;     // 2.1
 
 // FONTE ÚNICA das posições de ímã, em coordenadas do retângulo EXTERNO
 // (0,0 = canto da maleta E canto da tampa). Maleta e tampa leem esta mesma
 // lista, então os pares fecham centro com centro por construção — foi
 // exatamente aqui que o deckbox-01 errou (referenciais diferentes).
-// Formato: [cx, cy, nx, ny] com (nx,ny) = normal apontando PRA DENTRO.
-magnets = [
-    [magnet_x_inset,              mag_depth,              0,  1],
-    [case_out_x - magnet_x_inset, mag_depth,              0,  1],
-    [magnet_x_inset,              case_out_y - mag_depth, 0, -1],
-    [case_out_x - magnet_x_inset, case_out_y - mag_depth, 0, -1],
-    [mag_depth,                   case_out_y / 2,         1,  0],
-    [case_out_x - mag_depth,      case_out_y / 2,        -1,  0],
-];
+magnet_xs = [magnet_x_inset, case_bb_x / 2, case_bb_x - magnet_x_inset];
+magnets = [for (yy = [mag_depth, case_bb_y - mag_depth], xx = magnet_xs) [xx, yy]];
 
-grip_cx = case_out_x / 2; // entalhes de puxador no meio das duas paredes compridas
+// os dois rasgos/pegadores, fora do centro pra não bater no ímã do meio
+feat_x = [case_bb_x / 2 - feat_off, case_bb_x / 2 + feat_off];
 
-lid_x      = case_out_x;
-lid_y      = case_out_y;
-skirt_x0   = case_wall + lid_clear;      // 2.7 (interior começa em 2.4)
-skirt_y0   = case_wall + lid_clear;
-skirt_ox   = case_in_x - 2 * lid_clear;  // saia externa
-skirt_oy   = case_in_y - 2 * lid_clear;
-skirt_gap_w = grip_w + 4;                // a saia some nos puxadores, pro dedo entrar
+lid_x    = case_bb_x;
+lid_y    = case_bb_y;
+skirt_x0 = in_x0 + lid_clear;
+skirt_y0 = in_y0 + lid_clear;
+skirt_ox = case_in_x - 2 * lid_clear;
+skirt_oy = case_in_y - 2 * lid_clear;
+skirt_in_face = in_y0 + lid_clear + lid_skirt_t; // face interna da saia (y)
 
-// alturas empilhadas dentro da maleta (conferência)
-stack_top_z     = case_wall + plates_stack_h;              // topo da pilha de placas
-basket_top_z    = stack_top_z + basket_h;                  // topo da cestinha do deck
-cont_free_x     = case_in_x - 2 * cont_x;                  // folga total dos 2 contêineres em X
-cont_boss_clr_x = (case_in_x - 2 * cont_x) / 2 - boss_t;   // folga contêiner <-> ressalto (X)
-cont_boss_clr_y = (case_in_y - cont_y) / 2 - boss_t;       // folga contêiner <-> ressalto (Y)
+// conferências
+plate_top_z  = case_wall + plate_slice_z;   // topo das placas em pé
+cont_top_z   = case_wall + cont_y;          // topo dos contêineres deitados
+skirt_bot_z  = case_out_z - lid_skirt_h;    // até onde a saia desce
+window_bot_z = case_out_z - plate_window_h; // ponto mais baixo das janelas
+mag_edge     = (case_wall + flange_w - mag_pocket_d) / 2;
 
 echo(str("cestinha do deck  ext = ", cont_x, " x ", cont_y, " x ", basket_h,
          "  int = ", basket_in_x, " x ", basket_in_y, " x ", basket_in_z));
 echo(str("cesta do descarte ext = ", cont_x, " x ", cont_y, " x ", discard_h,
          "  int = ", discard_in_x, " x ", discard_in_y, " x ", discard_h - discard_floor));
-echo(str("maleta ext = ", case_out_x, " x ", case_out_y, " x ", case_out_z,
-         "  int = ", case_in_x, " x ", case_in_y, " x ", case_in_z));
-echo(str("tampa  ext = ", lid_x, " x ", lid_y, " x ", lid_t + lid_skirt_h));
-echo(str("placas: maior ", plate_max_x, " x ", plate_max_y, " -> folga ",
-         (case_in_x - plate_max_x) / 2, "/lado em X e ",
-         (case_in_y - plate_max_y) / 2, "/lado em Y"));
-echo(str("pilha: placas ", plates_stack_h, " + cestinha ", basket_h, " = ",
-         plates_stack_h + basket_h, " (interior ", case_in_z, ")"));
-echo(str("ressalto do ima: comeca em z=", boss_z0, " (rampa a partir de ", boss_ramp_z,
-         "), topo da pilha de placas em z=", stack_top_z));
-echo(str("folga contêiner <-> ressalto: X=", cont_boss_clr_x, "/lado  Y=", cont_boss_clr_y, "/lado"));
-echo(str("parede no ima = ", boss_T, "mm, furo ", mag_pocket_d,
-         " -> ", (boss_T - mag_pocket_d) / 2, "mm de material de cada lado"));
+echo(str("maleta EXTERNO (= footprint) ", case_bb_x, " x ", case_bb_y, " x ", case_out_z,
+         "  | 1o layer (corpo, sem flange) ", case_bb_x, " x ", case_in_y + 2 * case_wall));
+echo(str("maleta interior = ", case_in_x, " x ", case_in_y, " x ", case_in_z, " (prisma limpo)"));
+echo(str("tampa ext = ", lid_x, " x ", lid_y, " x ", lid_t + lid_skirt_h));
+echo(str("placas em pé ", plate_slice_x, " x ", plate_slice_y, " x ", plate_slice_z,
+         " -> folga ", plate_gap_side, "/lado em X, ", plate_gap_depth, "/lado em Y, topo em z=",
+         plate_top_z, " (rebordo em ", case_out_z, ")"));
+echo(str("saia da tampa desce até z=", skirt_bot_z, " -> folga sobre a placa = ",
+         skirt_bot_z - plate_top_z));
+echo(str("contêineres DEITADOS 144.8 x ", cont_lie_y, " x ", cont_y, " -> folga ",
+         (case_in_x - 2 * cont_x) / 2, "/lado em X, ", cont_gap_back,
+         " nas costas, topo em z=", cont_top_z, " (interior ", case_in_z, ")"));
+echo(str("bolso dos dados (atrás da cesta do descarte) = ", cont_x, " x ",
+         cont_zone_y - discard_h, " x ", cont_y));
+echo(str("janelas das placas: 2 x ", plate_window_w, " em x=", feat_x,
+         ", do rebordo até z=", window_bot_z, " (piso da bandeja em z=", case_wall, ")"));
+echo(str("ímãs em x=", magnet_xs, " nas duas paredes compridas (y=", mag_depth,
+         " e ", case_bb_y - mag_depth, ")"));
+echo(str("parede no ima = ", case_wall + flange_w, "mm, furo ", mag_pocket_d,
+         " -> ", mag_edge, "mm de material de cada lado"));
 echo(str("teto solido sobre o ima da tampa = ", lid_t - mag_pocket_h,
          "mm (", lid_t - mag_pocket_h - lid_relief, "mm depois do relevo)"));
 
@@ -286,10 +360,10 @@ module hex_relief(a, b, d, skip_w = 0, f = hex_l_d, web = hex_l_web, mg = hex_l_
 }
 
 // ---------------------------------------------------------------------
-// Recorte em U / escalope: aberto no topo, cantos de baixo arredondados,
-// atravessando uma parede no plano XZ (normal +Y) que começa em y0 e tem
-// espessura t. `cx` é o centro ao longo de X, `zb` o fundo do U e `h` o
-// quanto ele sobe (é só passar a altura da peça).
+// Recorte em U / escalope / janela: aberto no topo, cantos de baixo
+// arredondados, atravessando uma parede no plano XZ (normal +Y) que começa
+// em y0 e tem espessura t. `cx` é o centro ao longo de X, `zb` o fundo e `h`
+// o quanto ele sobe (é só passar a altura da peça).
 // ---------------------------------------------------------------------
 module u_cutout(cx, y0, t, w, r, zb, h) {
     translate([0, y0 - 0.1, 0]) {
@@ -304,12 +378,7 @@ module u_cutout(cx, y0, t, w, r, zb, h) {
 }
 
 // ---------------------------------------------------------------------
-// 1) Cestinha do deck
-// Cesta de boca aberta, deck deitado dentro (as 60 cartas empilhadas em Z).
-// Encaixa na moldura da zona de deck do campo; no transporte é a deckbox.
-// Chão e as 4 paredes vazados em colmeia; recorte em U até o chão nas duas
-// laterais compridas, com faixa sólida em volta (skip_w) pra não sobrar
-// lasca fina na beira do U.
+// 1) Cestinha do deck  (inalterada — footprint é interface com o campo)
 // ---------------------------------------------------------------------
 module deck_basket() {
     difference() {
@@ -345,11 +414,7 @@ module deck_basket() {
 }
 
 // ---------------------------------------------------------------------
-// 2) Cesta do descarte
-// Mesmo footprint da cestinha do deck (as molduras do campo são iguais).
-// Escalopes nos QUATRO lados descendo até `discard_band` do chão: o dedo
-// entra por qualquer lado e tira a pilha de descarte inteira. Chão inteiro,
-// só com colmeia em baixo relevo — no transporte esta cesta leva os dados.
+// 2) Cesta do descarte  (inalterada)
 // ---------------------------------------------------------------------
 module discard_tray() {
     wall_z = discard_h - discard_floor;
@@ -384,7 +449,7 @@ module discard_tray() {
                     hex_panel(cont_x, wall_z, discard_wall, skip_w = discard_cut_short,
                               f = hex_s_d, web = hex_s_web, mg = hex_s_margin);
 
-        // chão: baixo relevo, NUNCA passante (senão o dado cai)
+        // chão: baixo relevo, NUNCA passante (é ele que fecha o bolso dos dados)
         translate([discard_wall, discard_wall, discard_floor])
             hex_relief(discard_in_x, discard_in_y, discard_floor_relief,
                        f = hex_s_d, web = hex_s_web, mg = hex_s_margin);
@@ -392,73 +457,85 @@ module discard_tray() {
 }
 
 // ---------------------------------------------------------------------
-// Ressaltos (bosses) dos ímãs
-// A parede da maleta tem 2.4mm — não cabe um furo Ø4.15 nela. Em cada uma
-// das 6 posições o ressalto engrossa a parede PRA DENTRO até 7.0mm, com o
-// centro do ímã a 3.5mm da face externa (1.425mm de material de cada lado
-// do furo). O ressalto só existe do topo até `boss_z0`, bem acima da pilha
-// de placas, e entra com rampa a 45° — não estorva as placas nem precisa de
-// suporte. O bloco é CENTRADO no ímã e tem exatamente 7.0mm na direção da
-// normal, então vai da face externa até a face interna do ressalto.
+// Flange: faixa que corre por FORA das duas paredes compridas, onde moram os
+// 6 ímãs. Faixa cheia de `flange_h` no topo + rampa de 45° (`flange_w` de
+// altura) descendo até a parede — assim não há nenhuma face virada pra baixo
+// e imprime sem suporte. As paredes CURTAS não têm flange: é o que mantém o
+// footprint em X igual ao do corpo.
 // ---------------------------------------------------------------------
-module boss_solid(m, z0, z1, grow = 0) {
-    T = boss_T + 2 * grow;
-    W = boss_w + 2 * grow;
-    sx = abs(m[2]) * T + abs(m[3]) * W;
-    sy = abs(m[3]) * T + abs(m[2]) * W;
-    translate([m[0] - sx / 2, m[1] - sy / 2, z0])
-        cube([sx, sy, z1 - z0]);
+module flange() {
+    band = flange_w + case_wall; // 6.8 = espessura local (o furo do ímã cabe aqui)
+    for (s = [0, 1]) {
+        yo = (s == 0) ? 0        : case_bb_y - band;      // início da faixa cheia
+        yw = (s == 0) ? flange_w : case_bb_y - band;      // início do trecho de parede
+        translate([0, yo, flange_z0])
+            cube([case_bb_x, band, flange_h]);
+        hull() {
+            translate([0, yw, flange_ramp_z]) cube([case_bb_x, case_wall, 0.01]);
+            translate([0, yo, flange_z0])     cube([case_bb_x, band, 0.01]);
+        }
+    }
 }
 
-// Rampa 45° na base do ressalto: da espessura de parede (2.4) até a seção
-// cheia (7.0) ao longo de `boss_t` em Z. As faces laterais ficam verticais.
-module boss_ramp(m) {
-    tx = abs(m[2]) * boss_T + abs(m[3]) * boss_w;
-    ty = abs(m[3]) * boss_T + abs(m[2]) * boss_w;
-    // centro da fatia de baixo: só a espessura de parede, encostada na face externa
-    bcx = m[0] - m[2] * boss_t / 2;
-    bcy = m[1] - m[3] * boss_t / 2;
-    bx = abs(m[2]) * case_wall + abs(m[3]) * boss_w;
-    by = abs(m[3]) * case_wall + abs(m[2]) * boss_w;
-
-    hull() {
-        translate([m[0] - tx / 2, m[1] - ty / 2, boss_z0]) cube([tx, ty, 0.01]);
-        translate([bcx - bx / 2, bcy - by / 2, boss_ramp_z]) cube([bx, by, 0.01]);
-    }
+// Mordida no flange da parede de TRÁS: tira o flange inteiro (faixa + rampa)
+// numa largura `pull_w`, deixando a borda da tampa em balanço sobre um vão de
+// flange_h+flange_w. O dedo entra por baixo da tampa e levanta. A parede de
+// 2.4 fica intacta, então o interior continua fechado.
+module flange_pull(cx) {
+    yi = case_bb_y - (flange_w - pull_r); // centro dos raios (fundo da mordida)
+    translate([0, 0, flange_ramp_z - 0.1])
+        linear_extrude(flange_h + flange_w + 0.2) {
+            hull()
+                for (xx = [cx - pull_w / 2 + pull_r, cx + pull_w / 2 - pull_r])
+                    translate([xx, yi]) circle(r = pull_r);
+            translate([cx - pull_w / 2, yi]) square([pull_w, case_bb_y + 1 - yi]);
+        }
 }
 
 // ---------------------------------------------------------------------
 // 3) Maleta
 // ---------------------------------------------------------------------
 module game_case() {
-    difference() {
-        union() {
-            difference() {
-                cube([case_out_x, case_out_y, case_out_z]);
-                translate([case_wall, case_wall, case_wall])
-                    cube([case_in_x, case_in_y, case_in_z + 1]); // passa do topo -> boca aberta
+    union() {
+        difference() {
+            union() {
+                translate([0, flange_w, 0])
+                    cube([case_bb_x, case_in_y + 2 * case_wall, case_out_z]);
+                flange();
             }
-            for (m = magnets) {
-                boss_solid(m, boss_z0, case_out_z);
-                boss_ramp(m);
-            }
+
+            // interior: prisma LIMPO, sem nenhuma saliência (a placa em pé de
+            // 152 x 107 precisa entrar sem raspar em nada)
+            translate([in_x0, in_y0, case_wall])
+                cube([case_in_x, case_in_y, case_in_z + 1]);
+
+            // as duas janelas das placas, na parede da frente (y=0), do
+            // rebordo pra baixo. Ficam a 84mm do piso — dado não passa.
+            for (cx = feat_x)
+                u_cutout(cx, 0, flange_w + case_wall + 0.5,
+                         plate_window_w, plate_window_r, window_bot_z, case_out_z);
+
+            // os dois pegadores da tampa, na parede de trás
+            for (cx = feat_x)
+                flange_pull(cx);
+
+            // rebaixos de ímã ABERTOS no topo do flange (imprimem sem ponte)
+            for (m = magnets)
+                translate([m[0], m[1], case_out_z - mag_pocket_h])
+                    cylinder(h = mag_pocket_h + 0.1, d = mag_pocket_d);
+
+            // chão interno: colmeia em BAIXO relevo (identidade + amortece o
+            // dado quando a maleta vazia vira bandeja). Não passante.
+            translate([in_x0, in_y0, case_wall])
+                hex_relief(case_in_x, case_in_y, case_floor_relief);
         }
 
-        // rebaixos de ímã ABERTOS no topo do rebordo (imprimem sem ponte)
-        for (m = magnets)
-            translate([m[0], m[1], case_out_z - mag_pocket_h])
-                cylinder(h = mag_pocket_h + 0.1, d = mag_pocket_d);
-
-        // entalhes de puxador no topo das duas paredes compridas: afundam o
-        // rebordo `grip_depth`, criando o vão onde o dedo levanta a tampa
-        for (y0 = [0, case_out_y - case_wall])
-            u_cutout(grip_cx, y0, case_wall + 2, grip_w, grip_r,
-                     case_out_z - grip_depth, grip_depth + 1);
-
-        // chão interno: colmeia em BAIXO relevo (identidade + amortece o dado
-        // quando a maleta vazia vira bandeja de rolagem). Não passante.
-        translate([case_wall, case_wall, case_wall])
-            hex_relief(case_in_x, case_in_y, case_floor_relief);
+        // nervura entre a fatia de placas e a área dos contêineres: segura as
+        // placas em pé, encosta a boca dos contêineres e impede que eles
+        // escorreguem por cima das placas. Baixa (4mm) de propósito — é o que
+        // deixa a face de trás da fatia de placas acessível de cima.
+        translate([in_x0, rib_y0, case_wall - case_floor_relief])
+            cube([case_in_x, rib_t, rib_h + case_floor_relief]);
     }
 }
 
@@ -466,22 +543,23 @@ module game_case() {
 // 4) Tampa
 // Modelada na MESMA origem da maleta (canto do retângulo externo), com a
 // face de baixo em z=0: o painel sobe de 0 a lid_t e a saia desce de 0 a
-// -lid_skirt_h. Assim os rebaixos de ímã da tampa usam literalmente o mesmo
-// [cx, cy] dos da maleta.
+// -lid_skirt_h. Assim os rebaixos de ímã usam literalmente o mesmo [cx, cy]
+// dos da maleta.
 // ---------------------------------------------------------------------
 module case_lid() {
     difference() {
         union() {
             // painel com chanfro 45° na borda de cima (na chapa a tampa vai
-            // de cabeça pra baixo, então esse chanfro vira o 1º layer e some
-            // com a pata de elefante)
+            // de cabeça pra baixo, então o chanfro vira o 1º layer e some com
+            // a pata de elefante)
             hull() {
                 cube([lid_x, lid_y, lid_t - lid_chamfer]);
                 translate([lid_chamfer, lid_chamfer, lid_t - 0.01])
                     cube([lid_x - 2 * lid_chamfer, lid_y - 2 * lid_chamfer, 0.01]);
             }
 
-            // saia que entra no interior da maleta (0.3/lado)
+            // saia que entra no interior da maleta (0.3/lado). O interior é um
+            // prisma limpo, então a saia é um anel inteiro.
             translate([0, 0, -lid_skirt_h])
                 difference() {
                     translate([skirt_x0, skirt_y0, 0])
@@ -492,19 +570,11 @@ module case_lid() {
                 }
         }
 
-        // a saia tem que passar pelos 6 ressaltos internos da maleta:
-        // abre um rasgo em cada um, com 0.3 de folga (só abaixo de z=0, o
-        // painel não é tocado)
-        for (m = magnets)
-            boss_solid(m, -lid_skirt_h - 1, 0, grow = lid_clear);
-
-        // a saia também some nos 2 puxadores, pro dedo entrar de verdade
-        // (vão de 5mm de altura por ~5.1mm de profundidade)
-        for (s = [0, 1])
-            translate([grip_cx - skirt_gap_w / 2,
-                       s == 0 ? -1 : lid_y - (skirt_y0 + lid_skirt_t + 1),
-                       -lid_skirt_h - 1])
-                cube([skirt_gap_w, skirt_y0 + lid_skirt_t + 1, lid_skirt_h + 1]);
+        // a saia é interrompida em cima das duas janelas: senão o dedo que
+        // entra pela janela não alcança a barriga da tampa pra levantar
+        for (cx = feat_x)
+            translate([cx - (plate_window_w + 4) / 2, -1, -lid_skirt_h - 1])
+                cube([plate_window_w + 4, skirt_in_face + 1.5, lid_skirt_h + 1]);
 
         // rebaixos de ímã na face de baixo (cegos, 1.9mm de teto)
         for (m = magnets)
@@ -515,12 +585,12 @@ module case_lid() {
         translate([0, 0, lid_t])
             hex_relief(lid_x, lid_y, lid_relief);
 
-        // escalopes de puxador na cara de cima, em cima dos entalhes da maleta
-        for (yy = [grip_scallop_inset, lid_y - grip_scallop_inset])
+        // escalopes que marcam os quatro pegadores, na cara de cima
+        for (yy = [grip_scallop_inset, lid_y - grip_scallop_inset], cx = feat_x)
             translate([0, 0, lid_t - grip_scallop_depth])
                 hull()
-                    for (xx = [grip_cx - grip_scallop_len / 2 + grip_scallop_r,
-                               grip_cx + grip_scallop_len / 2 - grip_scallop_r])
+                    for (xx = [cx - grip_scallop_len / 2 + grip_scallop_r,
+                               cx + grip_scallop_len / 2 - grip_scallop_r])
                         translate([xx, yy, 0])
                             cylinder(h = grip_scallop_depth + 0.1, r = grip_scallop_r);
     }
@@ -529,7 +599,7 @@ module case_lid() {
 // ---------------------------------------------------------------------
 // Render
 // ---------------------------------------------------------------------
-plate_gap = 6;
+plate_sep = 6;
 
 if (part == "deck_basket") {
     deck_basket();
@@ -552,21 +622,19 @@ if (part == "deck_basket") {
 } else if (part == "plate_containers") {
     // os dois contêineres lado a lado, ambos de boca pra cima
     deck_basket();
-    translate([cont_x + plate_gap, 0, 0])
+    translate([cont_x + plate_sep, 0, 0])
         discard_tray();
 } else if (part == "assembled") {
-    // preview de conferência (não é peça): maleta fechada com a tampa, e em
-    // fantasma (%) o que vai dentro — pilha das 9 placas do campo, cestinha
-    // do deck e cesta do descarte lado a lado em cima delas.
-    %translate([case_wall + (case_in_x - plate_max_x) / 2,
-                case_wall + (case_in_y - plate_max_y) / 2, case_wall])
-        cube([plate_max_x, plate_max_y, plates_stack_h]);
-    %translate([case_wall + (case_in_x - 2 * cont_x) / 2,
-                case_wall + (case_in_y - cont_y) / 2, stack_top_z])
-        cube([cont_x, cont_y, basket_h]);
-    %translate([case_wall + (case_in_x - 2 * cont_x) / 2 + cont_x,
-                case_wall + (case_in_y - cont_y) / 2, stack_top_z])
-        cube([cont_x, cont_y, discard_h]);
+    // preview de conferência (não é peça): maleta fechada e, em fantasma (%),
+    // a fatia das 8 placas EM PÉ + os dois contêineres DEITADOS de boca pra
+    // fatia de placas (as peças reais, não caixas equivalentes).
+    cx0 = in_x0 + (case_in_x - 2 * cont_x) / 2;
+    %translate([in_x0 + plate_gap_side, plate_y0 + plate_gap_depth, case_wall])
+        cube([plate_slice_x, plate_slice_y, plate_slice_z]);
+    // rotate([90,0,0]) vira a boca (+Z) pra -Y; o translate recoloca a peça
+    // em y >= cont_y0, com a boca encostada na nervura
+    %translate([cx0, cont_y0 + basket_h, case_wall]) rotate([90, 0, 0]) deck_basket();
+    %translate([cx0 + cont_x, cont_y0 + discard_h, case_wall]) rotate([90, 0, 0]) discard_tray();
     game_case();
     translate([0, 0, case_out_z]) case_lid();
 } else {
@@ -574,5 +642,5 @@ if (part == "deck_basket") {
     deck_basket();
     translate([cont_x + 15, 0, 0]) discard_tray();
     translate([0, cont_y + 20, 0]) game_case();
-    translate([0, cont_y + case_out_y + 40, lid_skirt_h]) case_lid();
+    translate([0, cont_y + case_bb_y + 40, lid_skirt_h]) case_lid();
 }
