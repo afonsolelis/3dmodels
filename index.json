@@ -43,6 +43,40 @@
       "notes": "No limite da cama: footprint 169.6 (teto ~170) e capa em pé a 171.6 dos 180 de altura. A cestinha é a MESMA peça do deckbox-01."
     },
     {
+      "id": "pokemon-game",
+      "category": "playmats",
+      "path": "playmats/pokemon-game",
+      "scad": ["playmats/pokemon-game/pokemon-game.scad", "playmats/pokemon-game/pokemon-game-case.scad"],
+      "status": "em-andamento",
+      "description": "Plataforma completa de Pokémon TCG: campo de um jogador em 8 placas encaixáveis com as zonas em relevo (banco x5, ativo, 6 prêmios em cascata, deck, descarte, lost zone, estádio); cestinha do deck e cesta do descarte encaixam nas molduras do campo e viram deckbox e porta-dados no transporte; case com tampa magnética guarda tudo e vira bandeja de rolar dados.",
+      "parts": { "tile": 8, "deck_basket": 1, "discard_tray": 1, "game_case": 1, "case_lid": 1 },
+      "print_jobs": [
+        { "file": "3mf/pokemon-game-t1r1.3mf", "contents": "placa: prêmios (baixo)", "footprint_mm": [151.0, 108.0, 4.0] },
+        { "file": "3mf/pokemon-game-t2r1.3mf", "contents": "placa: banco 1-2", "footprint_mm": [151.0, 108.0, 4.0] },
+        { "file": "3mf/pokemon-game-t3r1.3mf", "contents": "placa: banco 3-4", "footprint_mm": [151.0, 108.0, 4.0] },
+        { "file": "3mf/pokemon-game-t4r1.3mf", "contents": "placa: banco 5 + moldura do descarte", "footprint_mm": [151.2, 108.0, 10.0] },
+        { "file": "3mf/pokemon-game-t1r2.3mf", "contents": "placa: prêmios (cima)", "footprint_mm": [151.0, 103.0, 4.0] },
+        { "file": "3mf/pokemon-game-t2r2.3mf", "contents": "placa: lost zone", "footprint_mm": [151.0, 103.0, 4.0] },
+        { "file": "3mf/pokemon-game-t3r2.3mf", "contents": "placa: ativo + estádio", "footprint_mm": [151.0, 103.0, 4.0] },
+        { "file": "3mf/pokemon-game-t4r2.3mf", "contents": "placa: moldura do deck", "footprint_mm": [151.2, 103.0, 10.0] },
+        { "file": "3mf/pokemon-game-containers.3mf", "contents": "cestinha do deck + cesta do descarte", "footprint_mm": [150.8, 97.4, 50.0] },
+        { "file": "3mf/pokemon-game-case.3mf", "contents": "case (boca pra cima, usar brim)", "footprint_mm": [162.8, 117.8, 108.4] },
+        { "file": "3mf/pokemon-game-lid.3mf", "contents": "tampa (imprime de cabeça pra baixo)", "footprint_mm": [162.8, 117.8, 10.0] }
+      ],
+      "assembled_field_mm": [589.2, 206, 4.0],
+      "assembled_case_closed_mm": [162.8, 117.8, 118.4],
+      "key_measures": {
+        "deck_60_sleeved_mm": [93, 68, 45],
+        "carta_com_sleeve_mm": [68, 93],
+        "cavidade_de_carta_mm": [70, 95, 1.0],
+        "footprint_conteineres_mm": [72.4, 97.4],
+        "case_interior_mm": [158, 113, 106],
+        "medido_em": "2026-08-08"
+      },
+      "hardware": "12 ímãs disco 4x2mm (6 no case, 6 na tampa), press-fit 0.15",
+      "notes": "Playmat de torneio é 610x356; este campo é 589.2x206 (45% menos área) porque corta as margens vazias e põe os 6 prêmios em cascata. Costuras das placas caem sempre dentro de parede de ≥4mm, nunca em cavidade de carta. Encaixe: 3 linguetas por costura (20mm cada), montagem VERTICAL esquerda->direita/baixo->cima — deslizante em dois eixos trava num grid 2D, e lingueta corrida colidiria com a da vizinha nos vértices. Relevo de 1.0mm e não mais: carta com sleeve tem 0.75mm, em cavidade de 1.5 ela afundava e não dava pra pegar. IMPRIMIR SEM SUPORTE (suporte automático entope os bolsos das linguetas). Maior placa 151.2x108 define o interior do case."
+    },
+    {
       "id": "ring-01",
       "category": "rings",
       "path": "rings/ring-01",
