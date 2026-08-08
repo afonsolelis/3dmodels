@@ -4,25 +4,31 @@
 // cama da Bambu A1 mini. As zonas do jogo ficam em RELEVO — as cartas caem
 // dentro de cavidades rasas e as paredes entre elas desenham o campo.
 //
-// Tamanho: playmat padrão de torneio é 610x356mm (24"x14"), mas boa parte
-// disso é margem vazia. Aqui o campo é 590 x 214mm — 42% menos área —
-// porque só as zonas de fato entram, e os 6 prêmios ficam em cascata
-// (uma carta encavalando a outra, feito telha) em vez de espalhados.
+// Tamanho: playmat padrão de torneio é 610x356mm (24"x14"). Aqui o campo é
+// 590 x 321mm — mais compacto, mas com folga pra jogar (dois tabuleiros
+// impressos que serviram de referência têm 250 e 220 de profundidade).
 //
 // Zonas (jogador na borda de baixo, oponente em cima), conforme as regras:
 //   - Banco: 5 cavidades na fileira de baixo, na frente do jogador
 //   - Ativo: 1 cavidade centralizada acima do banco
-//   - Prêmios: 6 em cascata (2 colunas x 3), à ESQUERDA — a regra exige
-//     que fiquem do lado OPOSTO ao deck/descarte
+//   - Prêmios: 6 numa GRADE 2x3 à ESQUERDA — a regra exige que fiquem do
+//     lado OPOSTO ao deck/descarte. Cada carta tem seu bolso inteiro e sai
+//     sem mexer nas vizinhas; é a terceira fileira de placas que permite
+//     isso (com duas, uma carta de 93mm não cabia por fileira e os prêmios
+//     precisavam se encavalar feito telha)
 //   - Deck: rebaixo de 5mm no canto superior direito, onde a cestinha
 //     encaixa (a cestinha é o deckbox no transporte)
 //   - Descarte: rebaixo igual logo abaixo, pra cesta de descarte, que no
 //     transporte guarda dados e contadores
-//   - Lost Zone: cavidade na área alta à esquerda (a regra manda ficar
-//     fora do mat, mas deck moderno usa direto — melhor ter o lugar)
-//   - Estádio: cavidade na borda de cima. Por regra o estádio fica ENTRE
-//     os dois jogadores; aqui ele encosta na borda que dá pro oponente,
-//     que é o mais perto disso num campo de 1 jogador
+//   - Lost Zone: cavidade na fileira do meio (a regra manda ficar fora do
+//     mat, mas deck moderno usa direto — melhor ter o lugar)
+//   - Estádio: cavidade na fileira de cima, alinhada com o ativo. Por regra
+//     o estádio fica ENTRE os dois jogadores, e essa fileira é justamente a
+//     que encosta no campo do oponente
+//   - Bandeja de contadores e dish de moeda: os dois cantos da fileira de
+//     cima que sobrariam vazios. Não são zonas de regra, são as duas coisas
+//     que a mesa sempre precisa — onde despejar os contadores de dano e
+//     onde jogar a moeda sem ela sair rolando pela mesa
 //
 // Construção da placa (7mm de espessura):
 //   - pele de 2.4mm em cima, onde as cavidades de carta são escavadas
@@ -46,10 +52,10 @@
 // IMPRIMIR SEM SUPORTE, com a face de jogo PRA CIMA (a colmeia aberta fica
 // na mesa da impressora).
 //
-// Peças: 8 placas do campo (t<coluna>r<fileira>). Cada placa é um job de
-// impressão — não cabem duas na cama da A1 mini:
+// Peças: 12 placas do campo (t<coluna>r<fileira>, 4 colunas x 3 fileiras).
+// Cada placa é um job de impressão — não cabem duas na cama da A1 mini:
 //   openscad -o 3mf/pokemon-game-t1r1.3mf -D 'part="t1r1"' pokemon-game.scad
-//   ... idem t2r1, t3r1, t4r1, t1r2, t2r2, t3r2, t4r2
+//   ... idem t2r1..t4r1, t1r2..t4r2, t1r3..t4r3
 // STLs individuais com os mesmos part=, em stl/.
 // O case, a cestinha do deck e a cesta do descarte estão no arquivo irmão
 // pokemon-game-case.scad; pokemon-game-overview.scad junta tudo numa
@@ -84,6 +90,13 @@ box_x     = 72.4; // mm, largura externa da cestinha/cesta
 box_y     = 97.4; // mm, profundidade externa
 box_fit   = 0.4;  // mm, folga por lado dentro do rebaixo
 recess_d  = 5;    // mm, profundidade do rebaixo (sobram 2mm de fundo)
+
+/* [Bandeja de contadores e dish de moeda] */
+tray_w  = 100; // mm, bandeja de contadores de dano
+tray_h  = 70;
+tray_d  = 4;   // mm, profundidade (sobram 3mm de fundo)
+coin_d  = 90;  // mm, diâmetro do dish onde a moeda é jogada
+coin_dp = 4;   // mm, profundidade do dish
 
 /* [Ímãs 4x2 nas paredes laterais] */
 magnet_d     = 4;    // mm, diâmetro
@@ -128,25 +141,30 @@ bx5 = bx4 + well_w + 4;      // 440, banco 5 (banda 436..440)
 rec_x0 = bx5 + well_w + 2;   // 512, começo da zona de rebaixo
 W = rec_x0 + rec_w + 2 * rail; // 590, largura do campo
 
-// Y: fileira do jogador (banco/descarte) | fileira do oponente (ativo/deck).
-// A fileira tem 107 e não 103 pra sobrar moldura de 4.4mm em volta do
-// rebaixo do contêiner — com 103 o furo de ímã da costura encostava nele.
+// Y: 3 fileiras iguais — jogador (banco/descarte), meio (ativo/deck) e
+// oponente (estádio). A fileira tem 107 e não 103 pra sobrar moldura de
+// 4.4mm em volta do rebaixo do contêiner: com 103 o furo de ímã da costura
+// encostava nele. E 107 comporta uma carta inteira (95) com 6mm de parede
+// de cada lado da costura, que é o que faz os prêmios caberem em grade.
 row_h  = rec_h + 2 * 4.4;    // 107
-by     = 6;                  // banco, base da cavidade
-ay     = row_h + 6;          // 113, ativo, base da cavidade
-H      = 2 * row_h;          // 214, profundidade do campo
+by     = 6;                  // base da cavidade dentro da fileira
+H      = 3 * row_h;          // 321, profundidade do campo
 
-// prêmios em cascata: as duas de baixo são bolsos curtos (a carta
-// encavala a de cima), a de cima é bolso inteiro
-p1y = by;      p1h = 49;
-p2y = 57;      p2h = row_h - 6 - p2y; // 44
-p3y = ay;      p3h = well_h;
+// y da base da cavidade em cada fileira
+row_y  = [by, row_h + by, 2 * row_h + by]; // 6, 113, 220
+
+// bandeja de contadores e dish da moeda, centrados nas placas que sobrariam
+// vazias na fileira de cima (coluna 2 e coluna 4)
+tray_x = 146 + (146 - tray_w) / 2;   // 169
+tray_y = 2 * row_h + (row_h - tray_h) / 2;
+coin_cx = 438 + (W - 438) / 2;
+coin_cy = 2 * row_h + row_h / 2;
 
 // grid de placas: as costuras caem dentro das bandas de parede
 colb = [0, 146, 292, 438, W];
-rowb = [0, row_h, H];
+rowb = [0, row_h, 2 * row_h, H];
 n_cols = 4;
-n_rows = 2;
+n_rows = 3;
 
 // ---------------------------------------------------------------------
 // Primitivas
@@ -180,13 +198,13 @@ module container_recess(x, y) {
 // fileiras: cada hexágono é serrado em duas metades iguais e o corte
 // parece intencional. Hexágono que cavalga costura de coluna é pulado —
 // sobraria um entalhe mais fino que uma extrusão na borda da placa.
-module hex_band() {
+module hex_band(yc) {
     n = floor((rec_x0 - 4) / (hex_af + hex_web));
     for (i = [0 : n - 1]) {
         cx = 2 + hex_af / 2 + i * (hex_af + hex_web);
         gap = min([for (s = [colb[1], colb[2], colb[3]]) abs(cx - s)]);
         if (gap > hex_af / 2 + 1)
-            translate([cx, rowb[1], plate_t - hex_deep])
+            translate([cx, yc, plate_t - hex_deep])
                 hex_prism(hex_af, hex_deep + 1);
     }
 }
@@ -196,32 +214,40 @@ module hex_band() {
 // placa maciça. Cada placa recorta a sua parte disto.
 // ---------------------------------------------------------------------
 module zone_cuts() {
-    // prêmios: 2 colunas x 3 fileiras em cascata
-    for (px = [px1, px2]) {
-        pocket(px, p1y, well_w, p1h);
-        pocket(px, p2y, well_w, p2h);
-        pocket(px, p3y, well_w, p3h);
-    }
+    // prêmios: grade 2 colunas x 3 fileiras, uma carta inteira por bolso
+    for (px = [px1, px2], y = row_y)
+        pocket(px, y, well_w, well_h);
 
     // banco: 5 cavidades na frente do jogador
     for (bx = [bx1, bx2, bx3, bx4, bx5])
-        pocket(bx, by, well_w, well_h);
+        pocket(bx, row_y[0], well_w, well_h);
 
-    pocket(bx3, ay, well_w, well_h); // ativo, centralizado sobre o banco
-    pocket(bx1, ay, well_w, well_h); // lost zone
-    pocket(bx4, ay, well_w, well_h); // estádio
+    pocket(bx3, row_y[1], well_w, well_h); // ativo, centralizado sobre o banco
+    pocket(bx1, row_y[1], well_w, well_h); // lost zone
+    pocket(bx3, row_y[2], well_w, well_h); // estádio, alinhado com o ativo
 
-    container_recess(rec_x0 + rail, 4.4);            // descarte
-    container_recess(rec_x0 + rail, row_h + 4.4);    // deck
+    container_recess(rec_x0 + rail, 4.4);         // descarte, perto do jogador
+    container_recess(rec_x0 + rail, row_h + 4.4); // deck, na fileira do meio
 
-    hex_band();
+    // bandeja de contadores de dano (fileira de cima, coluna 2)
+    translate([tray_x, tray_y, plate_t - tray_d])
+        cube([tray_w, tray_h, tray_d + 1]);
+
+    // dish da moeda (fileira de cima, coluna 4)
+    translate([coin_cx, coin_cy, plate_t - coin_dp])
+        cylinder(h = coin_dp + 1, d = coin_d);
+
+    hex_band(rowb[1]);
+    hex_band(rowb[2]);
 }
 
-// retângulo (em coordenadas do campo) que o miolo não pode invadir:
-// embaixo dos rebaixos o fundo tem que ficar maciço
-function recess_rects() = [
-    [rec_x0 + rail, 4.4],
-    [rec_x0 + rail, row_h + 4.4]
+// retângulos (em coordenadas do campo) que o miolo não pode invadir: embaixo
+// de todo rebaixo o fundo tem que ficar maciço, senão a colmeia fura o piso
+function solid_rects() = [
+    [rec_x0 + rail, 4.4,          rec_w, rec_h],
+    [rec_x0 + rail, row_h + 4.4,  rec_w, rec_h],
+    [tray_x, tray_y, tray_w, tray_h],
+    [coin_cx - coin_d / 2, coin_cy - coin_d / 2, coin_d, coin_d]
 ];
 
 // ---------------------------------------------------------------------
@@ -241,11 +267,11 @@ module hex_core(tw, th, x0, y0) {
         ok_edge = cx + core_af / 2 <= tw - core_inset
                && cy + r <= th - core_inset;
         // longe dos rebaixos? (teste em coordenadas do campo)
-        ok_rec = min([for (rc = recess_rects())
+        ok_rec = min([for (rc = solid_rects())
                         max(rc[0] - 2 - (x0 + cx + core_af / 2),
-                            (x0 + cx - core_af / 2) - (rc[0] + rec_w + 2),
+                            (x0 + cx - core_af / 2) - (rc[0] + rc[2] + 2),
                             rc[1] - 2 - (y0 + cy + r),
-                            (y0 + cy - r) - (rc[1] + rec_h + 2))]) > 0;
+                            (y0 + cy - r) - (rc[1] + rc[3] + 2))]) > 0;
         if (ok_edge && ok_rec)
             translate([cx, cy, -0.1])
                 hex_prism(core_af, core_h + 0.1);

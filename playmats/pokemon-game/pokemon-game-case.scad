@@ -19,9 +19,9 @@
 //    chão: dá pra enfiar o dedo por qualquer lado e tirar a pilha de
 //    descarte inteira. Chão INTEIRO (só relevo, nada passante).
 //
-// 3) "game_case" — a maleta. As 8 placas do campo (todas de 7mm: 6 de
-//    146x107 e 2 de 152x107) viajam EM PÉ, lado a lado como livros numa
-//    estante: uma fatia de 152.0 x 56.0 x 107.0 encostada na parede da
+// 3) "game_case" — a maleta. As 12 placas do campo (3 fileiras de 4, todas
+//    de 7mm: 146x107 ou 152x107) viajam EM PÉ, lado a lado como livros numa
+//    estante: uma fatia de 152.0 x 84.0 x 107.0 encostada na parede da
 //    frente. Uma nervura baixa separa essa faixa da área dos dois
 //    contêineres, que viajam DEITADOS (72.4 x 50 x 97.4 cada; 144.8 x 50 os
 //    dois juntos) com as BOCAS viradas pra fatia de placas — é a parede de
@@ -64,7 +64,8 @@
 //    2.4+4.4 = 6.8mm de material pro furo de Ø4.15 (1.325mm de cada lado).
 //    Os 6 ímãs ficam 3 e 3 nessas duas paredes; as paredes curtas não têm
 //    flange, então o footprint NÃO cresce em X — é isso que segura o
-//    conjunto em 159.2 x 124.6, bem abaixo dos 170 da cama. O flange entra
+//    conjunto em 159.2 x 152.6, abaixo dos 170 da cama mesmo depois da 3ª
+//    fileira de placas (que levou a fatia de 56 pra 84mm). O flange entra
 //    por rampa de 45°, imprime sem suporte, e enrijece a boca da caixa.
 //
 // 4) "case_lid" — a tampa. Painel plano do tamanho exato do contorno da
@@ -101,7 +102,7 @@
 // Orientações de impressão das chapas:
 //   plate_case       — maleta de BOCA PRA CIMA (fundo na cama). O flange
 //                      abre por rampa de 45°: nada de suporte. O 1º layer é
-//                      só o corpo (159.2 x 115.8) — o flange só existe nos
+//                      só o corpo (159.2 x 143.8) — o flange só existe nos
 //                      10.4mm de cima, então brim/aderência não sofrem.
 //   plate_lid        — tampa de CABEÇA PRA BAIXO: cara de cima na cama
 //                      (ganha o acabamento da placa) e saia apontando pra
@@ -153,13 +154,15 @@ discard_cut_r        = 6;   // mm, raio dos cantos de baixo dos escalopes
 discard_floor_relief = 0.6; // mm, relevo hexagonal do chão (de 1.6)
 
 /* [Placas do campo - medidas REAIS (bbox.py nos STLs), só conferência] */
-// 8 placas TODAS de 7.0mm: 6 de 146.0x107.0 e 2 de 152.0x107.0 (as que têm o
-// rebaixo do contêiner). Miolo hexagonal aberto por baixo; os encaixes viraram
-// ímã 4x2 deitado na parede lateral, o que exige >= 6.55mm de espessura, e
-// por isso sumiram as linguetas. Em pé, encostadas, formam uma fatia de
-// 152.0 (X) x 56.0 (Y) x 107.0 (Z).
+// 12 placas TODAS de 7.0mm (3 fileiras de 4): 146.0x107.0 ou 152.0x107.0 (as
+// que têm o rebaixo do contêiner). Miolo hexagonal aberto por baixo; os
+// encaixes viraram ímã 4x2 deitado na parede lateral, o que exige >= 6.55mm
+// de espessura, e por isso sumiram as linguetas. Em pé, encostadas, formam
+// uma fatia de 152.0 (X) x 84.0 (Y) x 107.0 (Z).
+// A 3ª fileira entrou quando o campo foi de 590x214 pra 590x321: agora cabe
+// uma carta inteira por fileira e os 6 prêmios viraram grade 2x3.
 plate_slice_x = 152.0; // mm, maior largura de placa
-plate_slice_y = 56.0;  // mm, soma das espessuras das 8 placas (8 x 7)
+plate_slice_y = 84.0;  // mm, soma das espessuras das 12 placas (12 x 7)
 plate_slice_z = 107.0; // mm, altura da placa em pé
 
 /* [Maleta] */
@@ -626,7 +629,7 @@ if (part == "deck_basket") {
         discard_tray();
 } else if (part == "assembled") {
     // preview de conferência (não é peça): maleta fechada e, em fantasma (%),
-    // a fatia das 8 placas EM PÉ + os dois contêineres DEITADOS de boca pra
+    // a fatia das 12 placas EM PÉ + os dois contêineres DEITADOS de boca pra
     // fatia de placas (as peças reais, não caixas equivalentes).
     cx0 = in_x0 + (case_in_x - 2 * cont_x) / 2;
     %translate([in_x0 + plate_gap_side, plate_y0 + plate_gap_depth, case_wall])
