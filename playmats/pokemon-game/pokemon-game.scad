@@ -105,6 +105,13 @@ magnet_fit   = 0.15; // mm, folga de press-fit (padrão do repo)
 magnet_sink  = 0.1;  // mm, quanto o ímã afunda abaixo da face
 mag_at       = [0.3, 0.7]; // posição dos 2 ímãs ao longo de cada costura
 
+/* [Etiquetas gravadas] */
+// Em baixo relevo no PISO de cada zona: some debaixo da carta durante o
+// jogo e reaparece quando o espaço esvazia, que é quando você precisa dela.
+label_size = 8;   // mm, altura da letra
+label_deep = 0.6; // mm, profundidade da gravação
+label_font = "Liberation Sans:style=Bold";
+
 /* [Textura hexagonal - faixa central gravada] */
 hex_af   = 5;   // mm, hexágono entre faces
 hex_web  = 1.6; // mm, material entre hexágonos
@@ -188,6 +195,14 @@ module pocket(x, y, w, h) {
         cube([w, h, pocket_d + 1]);
 }
 
+// etiqueta gravada no piso de uma zona (`zf` = nível daquele piso)
+module label(cx, cy, s, zf, size = label_size) {
+    translate([cx, cy, zf - label_deep])
+        linear_extrude(label_deep + 1)
+            text(s, size = size, halign = "center", valign = "center",
+                 font = label_font);
+}
+
 // rebaixo que recebe um contêiner (cestinha do deck / cesta do descarte)
 module container_recess(x, y) {
     translate([x, y, plate_t - recess_d])
@@ -214,28 +229,47 @@ module hex_band(yc) {
 // placa maciça. Cada placa recorta a sua parte disto.
 // ---------------------------------------------------------------------
 module zone_cuts() {
+    zf_well  = plate_t - pocket_d;  // piso das cavidades de carta
+    zf_rec   = plate_t - recess_d;  // piso dos rebaixos de contêiner
+    zf_tray  = plate_t - tray_d;
+    zf_coin  = plate_t - coin_dp;
+
     // prêmios: grade 2 colunas x 3 fileiras, uma carta inteira por bolso
-    for (px = [px1, px2], y = row_y)
+    for (px = [px1, px2], y = row_y) {
         pocket(px, y, well_w, well_h);
+        label(px + well_w / 2, y + well_h / 2, "PRÊMIO", zf_well);
+    }
 
     // banco: 5 cavidades na frente do jogador
-    for (bx = [bx1, bx2, bx3, bx4, bx5])
+    for (bx = [bx1, bx2, bx3, bx4, bx5]) {
         pocket(bx, row_y[0], well_w, well_h);
+        label(bx + well_w / 2, row_y[0] + well_h / 2, "BANCO", zf_well);
+    }
 
     pocket(bx3, row_y[1], well_w, well_h); // ativo, centralizado sobre o banco
+    label(bx3 + well_w / 2, row_y[1] + well_h / 2, "ATIVO", zf_well);
+
     pocket(bx1, row_y[1], well_w, well_h); // lost zone
+    label(bx1 + well_w / 2, row_y[1] + well_h / 2 + 5, "ZONA", zf_well, 7);
+    label(bx1 + well_w / 2, row_y[1] + well_h / 2 - 5, "PERDIDA", zf_well, 7);
+
     pocket(bx3, row_y[2], well_w, well_h); // estádio, alinhado com o ativo
+    label(bx3 + well_w / 2, row_y[2] + well_h / 2, "ESTÁDIO", zf_well);
 
     container_recess(rec_x0 + rail, 4.4);         // descarte, perto do jogador
+    label(rec_x0 + rail + rec_w / 2, 4.4 + rec_h / 2, "DESCARTE", zf_rec);
     container_recess(rec_x0 + rail, row_h + 4.4); // deck, na fileira do meio
+    label(rec_x0 + rail + rec_w / 2, row_h + 4.4 + rec_h / 2, "DECK", zf_rec);
 
     // bandeja de contadores de dano (fileira de cima, coluna 2)
-    translate([tray_x, tray_y, plate_t - tray_d])
+    translate([tray_x, tray_y, zf_tray])
         cube([tray_w, tray_h, tray_d + 1]);
+    label(tray_x + tray_w / 2, tray_y + tray_h / 2, "CONTADORES", zf_tray);
 
     // dish da moeda (fileira de cima, coluna 4)
-    translate([coin_cx, coin_cy, plate_t - coin_dp])
+    translate([coin_cx, coin_cy, zf_coin])
         cylinder(h = coin_dp + 1, d = coin_d);
+    label(coin_cx, coin_cy, "MOEDA", zf_coin);
 
     hex_band(rowb[1]);
     hex_band(rowb[2]);

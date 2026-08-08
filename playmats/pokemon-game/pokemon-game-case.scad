@@ -148,6 +148,11 @@ discard_h            = 30;  // mm, altura externa
 discard_wall         = 1.2; // mm, paredes
 discard_floor        = 1.6; // mm, chão INTEIRO (é ele que fecha o bolso dos dados)
 discard_band         = 8;   // mm, faixa sólida que sobra abaixo dos escalopes
+// As paredes CURTAS têm faixa mais alta que as compridas: é nelas que vai a
+// etiqueta DESCARTE, e ela precisa nascer acima do rebaixo de 5mm do campo
+// (senão o campo come o pé da letra). O acesso ao dedo continua sendo pelos
+// escalopes das compridas, que são 52 de largura contra 34 destes.
+discard_band_short   = 15;  // mm, faixa sólida das paredes curtas
 discard_cut_long     = 52;  // mm, escalope das paredes compridas (97.4)
 discard_cut_short    = 34;  // mm, escalope das paredes curtas (72.4)
 discard_cut_r        = 6;   // mm, raio dos cantos de baixo dos escalopes
@@ -213,6 +218,21 @@ grip_scallop_r     = 5;   // mm
 grip_scallop_depth = 1.0; // mm
 grip_scallop_inset = 8;   // mm, distância do centro até a borda da tampa
 
+/* [Etiquetas gravadas nos contêineres] */
+// O nome vai na parede CURTA externa (a que aponta pro jogador), nas duas,
+// pra ler certo em qualquer orientação. No campo o nome também está gravado
+// no piso do rebaixo, mas ali o contêiner tampa — este aqui é o que se vê
+// com o jogo em andamento.
+// A letra nunca cai em cima de furo: a faixa da colmeia que ela ocupa é
+// reservada (parâmetro `band` da malha), então sobra chapa inteira. Fica
+// 0.5 de 1.2 de parede, ou seja, 0.7mm de material atrás da letra.
+cont_label_size = 6;   // mm, altura da letra
+cont_label_deep = 0.5; // mm, profundidade da gravação (parede tem 1.2)
+cont_label_z    = 10;  // mm, centro do texto acima do chão externo (rebaixo
+                       //     do campo tem 5, então a letra nasce livre)
+cont_label_band = 10;  // mm, faixa de colmeia reservada em volta do texto
+cont_label_font = "Liberation Sans:style=Bold";
+
 /* [Colmeia - identidade visual do repo, hexágonos de PONTA PRA CIMA] */
 hex_d      = 8;   // mm, entre-faces (paredes/chão da cestinha do deck)
 hex_web    = 2;   // mm, material entre furos vizinhos
@@ -238,6 +258,7 @@ basket_in_z = basket_h - basket_floor;
 discard_in_x  = cont_x - 2 * discard_wall;
 discard_in_y  = cont_y - 2 * discard_wall;
 discard_cut_z = discard_floor + discard_band;
+discard_cut_z_short = discard_floor + discard_band_short;
 
 // interior: fatia de placas em pé | nervura | dois contêineres DEITADOS
 // (deitado, cada contêiner vira cont_x de largura, basket_h de fundo e
@@ -299,6 +320,12 @@ echo(str("cestinha do deck  ext = ", cont_x, " x ", cont_y, " x ", basket_h,
          "  int = ", basket_in_x, " x ", basket_in_y, " x ", basket_in_z));
 echo(str("cesta do descarte ext = ", cont_x, " x ", cont_y, " x ", discard_h,
          "  int = ", discard_in_x, " x ", discard_in_y, " x ", discard_h - discard_floor));
+echo(str("etiqueta dos contêineres: letra de ", cont_label_size, " ocupando z=",
+         cont_label_z - cont_label_size / 2, "..", cont_label_z + cont_label_size / 2,
+         " (rebaixo do campo tem 5 -> nasce ", cont_label_z - cont_label_size / 2 - 5,
+         "mm acima da superfície); sobra ", discard_wall - cont_label_deep,
+         "mm de parede atrás da letra; escalope curto do descarte começa em z=",
+         discard_cut_z_short));
 echo(str("maleta EXTERNO (= footprint) ", case_bb_x, " x ", case_bb_y, " x ", case_out_z,
          "  | 1o layer (corpo, sem flange) ", case_bb_x, " x ", case_in_y + 2 * case_wall));
 echo(str("maleta interior = ", case_in_x, " x ", case_in_y, " x ", case_in_z, " (prisma limpo)"));
@@ -333,7 +360,13 @@ echo(str("teto solido sobre o ima da tampa = ", lid_t - mag_pocket_h,
 // altura h em +Z a partir de z=0. Só entra hexágono que caiba INTEIRO na
 // área útil (borda sólida `mg`). `skip_w` reserva uma faixa central sem
 // furos ao longo de `a` — é o que evita lasca fina na beira dos recortes.
-module hex_cells(a, b, h, skip_w = 0, f = hex_d, web = hex_web, mg = hex_margin) {
+// `band = [centro, altura]` reserva uma faixa HORIZONTAL (ao longo de `b`)
+// sem furos — é o contrário do `skip_w`, que reserva uma vertical. É o que
+// dá chapa inteira pra gravar a etiqueta do contêiner: a célula que encosta
+// na faixa cai fora, então a letra nunca esbarra em furo, seja qual for o
+// tamanho de hexágono da chamada.
+module hex_cells(a, b, h, skip_w = 0, f = hex_d, web = hex_web, mg = hex_margin,
+                 band = [0, 0]) {
     R  = f / sqrt(3);      // circunraio (centro -> ponta)
     sx = f + web;          // passo entre colunas
     sy = sx * sqrt(3) / 2; // passo entre fileiras (ímpares deslocam sx/2)
@@ -344,7 +377,10 @@ module hex_cells(a, b, h, skip_w = 0, f = hex_d, web = hex_web, mg = hex_margin)
         in_skip = skip_w > 0
             && cx + f / 2 > a / 2 - skip_w / 2 - mg
             && cx - f / 2 < a / 2 + skip_w / 2 + mg;
-        if (cx + f / 2 <= a - mg && cy + R <= b - mg && !in_skip)
+        in_band = band[1] > 0
+            && cy + R > band[0] - band[1] / 2
+            && cy - R < band[0] + band[1] / 2;
+        if (cx + f / 2 <= a - mg && cy + R <= b - mg && !in_skip && !in_band)
             translate([cx, cy, 0])
                 rotate([0, 0, 30])
                     cylinder(h = h, r = R, $fn = 6);
@@ -352,8 +388,9 @@ module hex_cells(a, b, h, skip_w = 0, f = hex_d, web = hex_web, mg = hex_margin)
 }
 
 // Vazado PASSANTE numa chapa de espessura t apoiada em z=0.
-module hex_panel(a, b, t, skip_w = 0, f = hex_d, web = hex_web, mg = hex_margin) {
-    translate([0, 0, -0.1]) hex_cells(a, b, t + 0.2, skip_w, f, web, mg);
+module hex_panel(a, b, t, skip_w = 0, f = hex_d, web = hex_web, mg = hex_margin,
+                 band = [0, 0]) {
+    translate([0, 0, -0.1]) hex_cells(a, b, t + 0.2, skip_w, f, web, mg, band);
 }
 
 // Baixo relevo: cava `d` PRA BAIXO a partir da superfície em z=0. Usado no
@@ -381,7 +418,29 @@ module u_cutout(cx, y0, t, w, r, zb, h) {
 }
 
 // ---------------------------------------------------------------------
-// 1) Cestinha do deck  (inalterada — footprint é interface com o campo)
+// Etiqueta gravada nas DUAS paredes CURTAS externas do contêiner (as normais
+// a Y, de cont_x de largura). Nas duas porque o contêiner cai no rebaixo em
+// qualquer um dos dois sentidos, e o nome tem que ler certo dos dois jeitos.
+// `zc` é a altura do CENTRO do texto medida do chão externo da peça.
+// ---------------------------------------------------------------------
+module cont_label(s, zc = cont_label_z, size = cont_label_size,
+                  deep = cont_label_deep) {
+    // parede da frente: face externa em y=0, lê-se de -Y
+    translate([cont_x / 2, deep, zc])
+        rotate([90, 0, 0])
+            linear_extrude(deep + 0.1)
+                text(s, size = size, halign = "center", valign = "center",
+                     font = cont_label_font);
+    // parede de trás: face externa em y=cont_y, lê-se de +Y
+    translate([cont_x / 2, cont_y - deep, zc])
+        rotate([90, 0, 180])
+            linear_extrude(deep + 0.1)
+                text(s, size = size, halign = "center", valign = "center",
+                     font = cont_label_font);
+}
+
+// ---------------------------------------------------------------------
+// 1) Cestinha do deck  (footprint é interface com o campo — NÃO mexer)
 // ---------------------------------------------------------------------
 module deck_basket() {
     difference() {
@@ -408,11 +467,14 @@ module deck_basket() {
                 rotate([90, 0, 90])
                     hex_panel(cont_y, basket_in_z, basket_wall, skip_w = basket_cut_w);
 
-        // colmeia das laterais curtas
+        // colmeia das laterais curtas, com a faixa da etiqueta reservada
         for (yy = [basket_wall, cont_y])
             translate([0, yy, basket_floor])
                 rotate([90, 0, 0])
-                    hex_panel(cont_x, basket_in_z, basket_wall);
+                    hex_panel(cont_x, basket_in_z, basket_wall,
+                              band = [cont_label_z - basket_floor, cont_label_band]);
+
+        cont_label("DECK");
     }
 }
 
@@ -435,10 +497,11 @@ module discard_tray() {
                     u_cutout(cont_y / 2, 0, discard_wall,
                              discard_cut_long, discard_cut_r, discard_cut_z, discard_h);
 
-        // escalopes das paredes curtas (normais a Y)
+        // escalopes das paredes curtas (normais a Y). Começam mais alto que
+        // os das compridas: é abaixo deles que mora a etiqueta DESCARTE.
         for (y0 = [0, cont_y - discard_wall])
             u_cutout(cont_x / 2, y0, discard_wall,
-                     discard_cut_short, discard_cut_r, discard_cut_z, discard_h);
+                     discard_cut_short, discard_cut_r, discard_cut_z_short, discard_h);
 
         // colmeia fina no que sobra das paredes
         for (xx = [0, cont_x - discard_wall])
@@ -450,7 +513,10 @@ module discard_tray() {
             translate([0, yy, discard_floor])
                 rotate([90, 0, 0])
                     hex_panel(cont_x, wall_z, discard_wall, skip_w = discard_cut_short,
-                              f = hex_s_d, web = hex_s_web, mg = hex_s_margin);
+                              f = hex_s_d, web = hex_s_web, mg = hex_s_margin,
+                              band = [cont_label_z - discard_floor, cont_label_band]);
+
+        cont_label("DESCARTE");
 
         // chão: baixo relevo, NUNCA passante (é ele que fecha o bolso dos dados)
         translate([discard_wall, discard_wall, discard_floor])

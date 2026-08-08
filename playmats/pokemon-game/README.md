@@ -54,6 +54,20 @@ de parede de cada lado da costura.
   vazios viraram a bandeja onde se despeja o dano e o dish onde a moeda é
   jogada sem sair rolando pela mesa
 
+Cada zona tem o **nome gravado em baixo relevo no piso**, em português:
+PRÊMIO, BANCO, ATIVO, ZONA PERDIDA, ESTÁDIO, DECK, DESCARTE, CONTADORES e
+MOEDA. A gravação tem 0,6mm e fica no fundo da cavidade, não na superfície:
+some debaixo da carta durante o jogo e reaparece quando o espaço esvazia,
+que é exatamente quando você precisa dela. Pra trocar o texto (ou voltar
+"ZONA PERDIDA" pra "LOST ZONE"), é uma linha no `.scad`.
+
+DECK e DESCARTE são a exceção: o contêiner tampa o rebaixo inteiro, então
+o nome no piso só aparece com a cestinha fora. Por isso esses dois **também
+vão gravados na parede curta externa do próprio contêiner** (nas duas, pra
+ler certo em qualquer orientação), a 2mm acima da superfície do campo — ali
+o nome fica à vista o jogo inteiro. A faixa de colmeia que a letra ocupa é
+reservada, então nenhuma letra cai em cima de furo.
+
 Com três fileiras, cada carta de prêmio cabe inteira numa placa e a **grade
 2x3 fecha**. Com duas fileiras isso não era possível: uma carta de 93mm não
 cabia por fileira e os prêmios precisavam se encavalar feito telha, o que
