@@ -1,27 +1,38 @@
 # deckbox-01
 
-Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético.
+Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
+**3 compartimentos**: dois decks lado a lado + um compartimento pra dados/moedas.
 
 ## Design
 
-- **Bandeja** (`tray`): guarda as cartas em pé, fundo + 4 paredes fechadas,
-  só o topo aberto.
+- **Bandeja** (`tray`): fundo + 4 paredes fechadas, só o topo aberto. Três
+  compartimentos internos:
+  - dois compartimentos lado a lado, um pra cada deck (60 cartas com sleeve
+    cada), com um **sulco arredondado** de cada lado (parede externa e
+    divisória central) pra pinçar e tirar o deck com facilidade
+  - um compartimento abaixo dos dois (ocupando toda a largura), mais fundo
+    na bandeja, pra dados/moedas/tokens
 - **Caixa externa** (`sleeve`): um tubo fechado em **uma** ponta (diferente
   de um fósforo de verdade, que é aberto nas duas). A bandeja entra pela
   ponta aberta e desliza até o fim.
 - **Fechamento por ímã**: rebaixo pra um ímã de disco **4×2mm** na ponta da
-  bandeja e outro na tampa da caixa, virados um pro outro. Quando a bandeja
-  é empurrada até o fim, os dois ímãs se encostam e travam por atração.
-- Um trecho da bandeja (`pull_tab`) sempre fica pra fora, pra puxar com o dedo.
+  bandeja (do lado do compartimento de dados) e outro na tampa da caixa,
+  virados um pro outro. Quando a bandeja é empurrada até o fim, os dois
+  ímãs se encostam e travam por atração.
+- Um trecho da bandeja (`pull_tab`) sempre fica pra fora, pra puxar com o
+  dedo. Como os compartimentos de deck ficam do lado do `pull_tab`, eles
+  aparecem primeiro ao puxar a bandeja; o compartimento de dados fica mais
+  fundo (só aparece puxando quase até o fim).
 
 ## Specs atuais (parâmetros em `deckbox-01.scad`)
 
 - Carta: 63×88mm (standard TCG)
-- Capacidade: ~80 cartas com sleeve (placeholder — ajustar `card_count` pro
-  número exato do deck)
+- Capacidade: 60 cartas com sleeve **por compartimento** (2 decks)
 - Espessura de carta sleeved: 0.8mm (placeholder — confirmar com a sleeve real)
+- Compartimento de dados/moedas: 30mm de profundidade × largura dos dois decks juntos
+- Sulco pra pegar o deck: raio 10mm, nas duas laterais de cada compartimento
 - Ímã: disco 4mm × 2mm
-- Parede lateral/fundo: 1.6mm | parede das pontas (onde ficam os ímãs): 3mm
+- Parede externa/tubo: 1.6mm | parede das pontas (ímãs): 3mm | divisórias internas: 1.6mm
 - Tolerância de encaixe deslizante: 0.25mm por lado
 
 ## Arquivos
@@ -46,6 +57,5 @@ openscad -o stl/deckbox-01-sleeve.stl -D 'part="sleeve"' deckbox-01.scad
 ## Próximas iterações (ideias, ainda não implementadas)
 
 - Chanfro na borda de entrada da caixa, pra facilitar a bandeja entrar
-- Reentrância pro polegar na ponta de puxar da bandeja
-- Divisória interna (ex: separar deck principal de sideboard)
 - Texto/logo em relevo na caixa
+- Divisória extra dentro do compartimento de dados (dados vs moedas)
