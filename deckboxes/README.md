@@ -7,7 +7,7 @@ OpenSCAD e impressas na Bambu Lab.
 
 | Modelo | Status | Descrição |
 |---|---|---|
-| [deckbox-01](./deckbox-01/) | 🚧 em andamento | primeira deckbox do repo |
+| [deckbox-01](./deckbox-01/) | 🚧 em andamento | estilo caixa de fósforo, fechamento por ímã |
 
 ## Parâmetros que costumam definir uma deckbox
 
