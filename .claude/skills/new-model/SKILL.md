@@ -25,4 +25,11 @@ description: Cria a estrutura de um modelo novo (ou categoria nova) no padrão d
      impressão, respeitando a cama de 180x180 (dividir em jobs se preciso)
 4. Crie `stl/` e `3mf/`; depois rode, nesta ordem: `/preview` (olhar),
    `/export` (gerar), `/bed-check` (medir).
-5. Rode o agente `print-review` antes de dar o modelo por pronto.
+5. **Atualize o `index.json`** da raiz com a entrada do projeto (descrição,
+   parts, print_jobs com footprints, medidas-chave) — obrigatório; o
+   devops recusa commit sem isso.
+6. Rode o agente `print-review` antes de dar o modelo por pronto.
+7. **Fluxo de versionamento**: projeto novo nasce em branch própria e vira
+   PR — acione o agente `devops` (ele cria `feat/<modelo-id>`, commita nos
+   padrões, faz push e abre o PR). De preferência, crie a branch ANTES de
+   começar a modelar.

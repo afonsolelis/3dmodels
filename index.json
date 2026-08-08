@@ -1,0 +1,76 @@
+{
+  "_readme": "Catálogo machine-readable dos projetos do repo, pra consulta rápida por IA. SEMPRE atualizar junto com qualquer mudança de modelo (regra do CLAUDE.md; o agente devops confere antes de commitar). Medidas em mm, footprints como [x, y, z] na orientação de impressão.",
+  "updated": "2026-08-08",
+  "printer": {
+    "model": "Bambu A1 mini",
+    "slicer": "Bambu Studio",
+    "bed_mm": [180, 180, 180],
+    "comfort_limit_mm": 170
+  },
+  "projects": [
+    {
+      "id": "deckbox-01",
+      "category": "deckboxes",
+      "path": "deckboxes/deckbox-01",
+      "scad": "deckboxes/deckbox-01/deckbox-01.scad",
+      "status": "em-andamento",
+      "description": "Deckbox estilo caixa de fósforo: bandeja deslizante em capa com 4 ímãs de canto, 2 decks deitados + compartimento de dados/moedas. Cada deck numa cestinha hexagonal solta, empurrada por baixo por furo no chão (estilo miolo de caixa de fósforo), recorte em U até o chão pra pinçar até a última carta.",
+      "parts": { "tray": 1, "sleeve": 1, "basket": 2 },
+      "print_jobs": [
+        { "file": "3mf/deckbox-01-plate.3mf", "contents": "capa em pé + 2 cestinhas", "footprint_mm": [154.5, 160.9, 137.6] },
+        { "file": "3mf/deckbox-01-tray.3mf", "contents": "bandeja", "footprint_mm": [135.6, 150.8, 53.8] }
+      ],
+      "assembled_closed_mm": [139.6, 154.5, 57.5],
+      "key_measures": { "deck_60_sleeved_mm": [93, 68, 45], "medido_em": "2026-08-08" },
+      "hardware": "8 ímãs disco 4x2mm (4 na bandeja, 4 na capa), press-fit 0.15",
+      "notes": "Parametrizado por medidas reais do deck. deck_lanes parametrizado pra variantes por include."
+    },
+    {
+      "id": "deckbox-02",
+      "category": "deckboxes",
+      "path": "deckboxes/deckbox-02",
+      "scad": "deckboxes/deckbox-02/deckbox-02.scad",
+      "status": "em-andamento",
+      "variant_of": "deckbox-01",
+      "overrides": { "deck_lanes": 1, "dice_depth": 64 },
+      "description": "Versão de 1 deck do deckbox-01, com compartimento de dados bem mais fundo (64mm, ~244cm³). Caixa estreita; conjunto inteiro numa chapa única da A1 mini.",
+      "parts": { "tray": 1, "sleeve": 1, "basket": 1 },
+      "print_jobs": [
+        { "file": "3mf/deckbox-02-plate.3mf", "contents": "bandeja + cestinha + capa em pé (job único)", "footprint_mm": [169.6, 162.1, 171.6] }
+      ],
+      "assembled_closed_mm": [171.6, 79.9, 57.5],
+      "hardware": "8 ímãs disco 4x2mm, press-fit 0.15",
+      "notes": "No limite da cama: footprint 169.6 (teto ~170) e capa em pé a 171.6 dos 180 de altura. A cestinha é a MESMA peça do deckbox-01."
+    },
+    {
+      "id": "ring-01",
+      "category": "rings",
+      "path": "rings/ring-01",
+      "scad": "rings/ring-01/ring-01.scad",
+      "status": "em-andamento",
+      "description": "Anel de playmat: liso por dentro (Ø50 interno), colmeia hexagonal em relevo por fora (células rebaixadas, teia saliente 1.2mm, faixas lisas nas bordas). Parede estrutural de 3mm intacta.",
+      "parts": { "ring": 1 },
+      "print_jobs": [
+        { "file": "3mf/ring-01-plate.3mf", "contents": "anel em pé (job único, sem suporte)", "footprint_mm": [58.4, 58.4, 50.0] }
+      ],
+      "assembled_closed_mm": [58.4, 58.4, 50.0],
+      "key_measures": { "inner_d_mm": 50, "height_mm": 50, "wall_mm": 3 },
+      "notes": "18 colunas de células fecham exatos os 360°; hexágonos de ponta pra cima imprimem sem ponte."
+    },
+    {
+      "id": "ring-02",
+      "category": "rings",
+      "path": "rings/ring-02",
+      "scad": "rings/ring-02/ring-02.scad",
+      "status": "em-andamento",
+      "description": "Anel de playmat 'cristal torcido': furo liso Ø50, silhueta de prisma hexagonal com torção espelhada (+30°/-30°) formando cintura de 6 chevrons. Chanfro 45° nas bocas pra guiar o tapete.",
+      "parts": { "ring": 1 },
+      "print_jobs": [
+        { "file": "3mf/ring-02-plate.3mf", "contents": "anel em pé (job único, sem suporte)", "footprint_mm": [64.7, 64.7, 50.0] }
+      ],
+      "assembled_closed_mm": [64.7, 64.7, 50.0],
+      "key_measures": { "inner_d_mm": 50, "height_mm": 50, "wall_mm": 3, "twist_deg": 30 },
+      "notes": "Hélice dos cantos inclina ~34° da vertical (teto sem suporte ~45° de twist). Bocas alinhadas: apoia em pé e empilha."
+    }
+  ]
+}
