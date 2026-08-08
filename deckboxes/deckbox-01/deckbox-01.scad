@@ -35,12 +35,12 @@ notch_radius = 10; // mm, raio do entalhe nas laterais de cada compartimento de 
 card_gap      = 2;    // folga extra em largura/profundidade pra carta não ficar apertada
 deck_slack    = 6;    // espaço extra na altura da pilha (Z) pra facilitar tirar/guardar as cartas
 fit_tolerance = 0.25; // folga por lado entre bandeja e caixa, pra deslizar sem travar
-pull_tab      = 15;   // mm da bandeja que fica pra fora da caixa quando fechada, pra puxar
 
 /* [Paredes] */
-wall     = 1.6; // paredes externas (laterais/fundo/tubo)
-end_wall = 3;   // paredes das pontas fechadas, onde ficam os ímãs — mais grossa que wall
-divider  = 1.6; // parede interna entre os 3 compartimentos
+wall      = 1.6; // paredes externas (laterais/fundo/tubo)
+end_wall  = 3;   // parede da ponta com ímã — mais grossa que wall, só o suficiente pro rebaixo do ímã
+back_wall = 15;  // parede de trás da bandeja (sólida) — é a aba que sempre fica pra fora da capa, pra puxar
+divider   = 1.6; // parede interna entre os 3 compartimentos
 
 /* [Ímãs 4x2mm - discos, um em cada canto] */
 magnet_d      = 4;    // mm, diâmetro
@@ -70,11 +70,13 @@ tray_inner_l = dice_length + divider + lane_inner_l;
 
 tray_outer_w = tray_inner_w + 2 * wall;
 tray_outer_h = tray_inner_h + 2 * wall;
-tray_outer_l = tray_inner_l + 2 * end_wall; // fechada nas duas pontas, aberta só em cima
+tray_outer_l = tray_inner_l + end_wall + back_wall; // ponta do ímã de um lado, aba de puxar sólida do outro
 
 sleeve_cavity_w = tray_outer_w + 2 * fit_tolerance;
 sleeve_cavity_h = tray_outer_h + 2 * fit_tolerance;
-sleeve_cavity_l = tray_outer_l - pull_tab; // profundidade da caixa externa
+// a capa cobre TUDO até o começo da parede de trás da bandeja (nada de compartimento
+// fica exposto quando fechada — só a parede sólida `back_wall` fica de fora)
+sleeve_cavity_l = tray_inner_l + end_wall;
 
 sleeve_outer_w = sleeve_cavity_w + 2 * wall;
 sleeve_outer_h = sleeve_cavity_h + 2 * wall;
@@ -86,9 +88,10 @@ sleeve_outer_l = sleeve_cavity_l + end_wall; // + a ponta fechada (tampa)
 // A ponta em x=0 é a que entra primeiro na caixa e carrega os 4 ímãs de
 // canto. Nessa ponta fica o compartimento de dados/moedas (mais fundo, só
 // aparece quando a bandeja é puxada quase até o fim); os dois
-// compartimentos de deck ficam do lado do pull_tab (aparecem primeiro ao
-// puxar a bandeja), cada um com um sulco de cada lado pra pinçar e tirar
-// o deck (as cartas ficam deitadas, empilhadas de baixo pra cima).
+// compartimentos de deck ficam do lado da parede de trás — `back_wall` —
+// (aparecem primeiro ao puxar a bandeja), cada um com um sulco de cada
+// lado, do teto até o chão, pra pinçar e tirar o deck inteiro, até a
+// última carta (as cartas ficam deitadas, empilhadas de baixo pra cima).
 // ---------------------------------------------------------------------
 module tray() {
     lanes_x = end_wall + dice_length + divider;
@@ -161,12 +164,12 @@ module finger_hole() {
             cylinder(h = end_wall + 0.2, d = finger_hole_d);
 }
 
-// Sulco arredondado no topo de uma parede (em x, começando em y0, ao longo de
-// `thickness`), pra abrir espaço pro dedo pinçar o deck por baixo do topo.
+// Vão reto numa parede (em x, começando em y0, ao longo de `thickness`), do
+// chão da bandeja até o topo — pra pinçar e tirar o deck inteiro, até a
+// última carta que sobrar no fundo.
 module thumb_notch(x, y0, thickness) {
-    translate([x, y0 - 0.1, tray_outer_h])
-        rotate([-90, 0, 0])
-            cylinder(r = notch_radius, h = thickness + 0.2);
+    translate([x - notch_radius, y0 - 0.1, wall])
+        cube([2 * notch_radius, thickness + 0.2, tray_outer_h]); // sobe além do topo -> sai limpo
 }
 
 // ---------------------------------------------------------------------
