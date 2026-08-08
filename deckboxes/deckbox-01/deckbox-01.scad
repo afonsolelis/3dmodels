@@ -2,22 +2,26 @@
 // Deckbox estilo caixa de fósforo (matchbox), com 3 compartimentos na
 // bandeja: dois lado a lado pra decks de 60 cartas (sleeved) DEITADAS
 // (empilhadas horizontalmente, não em pé), e um terceiro abaixo dos dois
-// (ocupando toda a largura) pra dados/moedas. Sulcos nas laterais dos
-// compartimentos de deck pra pinçar e tirar o deck com facilidade.
+// (ocupando toda a largura) pra dados/moedas. Cada compartimento de deck
+// tem um elevador — uma plataforma solta com uma aba — pra levantar o
+// deck inteiro pra fora, até a última carta.
 //
-// A bandeja desliza dentro de uma caixa externa fechada em UMA ponta (a
-// outra fica aberta, por onde a bandeja entra) — como uma gaveta na capa.
-// Fechamento por 4 ímãs (um em cada canto) na ponta da bandeja, espelhados
-// por outros 4 na tampa da caixa — quando a bandeja é empurrada até o fim,
-// os ímãs se encostam e travam por atração. Um furo passante no fundo da
-// capa deixa empurrar a bandeja de volta pra fora com o dedo.
+// A bandeja desliza dentro de uma capa fechada em UMA ponta (a outra fica
+// aberta, por onde a bandeja entra). Fechamento por 4 ímãs (um em cada
+// canto) na ponta da bandeja, espelhados por outros 4 na tampa da capa —
+// quando a bandeja é empurrada até o fim, os ímãs se encostam e travam por
+// atração. Um furo passante no fundo da capa deixa empurrar a bandeja de
+// volta pra fora com o dedo.
 //
-// Peças: "tray" (bandeja) e "sleeve" (caixa externa). Exportar separado:
-//   openscad -o stl/deckbox-01-tray.stl   -D 'part="tray"'   deckbox-01.scad
-//   openscad -o stl/deckbox-01-sleeve.stl -D 'part="sleeve"' deckbox-01.scad
+// Peças: "tray" (bandeja), "sleeve" (capa) e "lifter" (elevador — imprimir
+// 2, um por compartimento de deck; a mesma peça serve nos dois lados, é só
+// virar 180°). Exportar separado:
+//   openscad -o stl/deckbox-01-tray.stl    -D 'part="tray"'    deckbox-01.scad
+//   openscad -o stl/deckbox-01-sleeve.stl  -D 'part="sleeve"'  deckbox-01.scad
+//   openscad -o stl/deckbox-01-lifter.stl  -D 'part="lifter"'  deckbox-01.scad
 
 /* [Peça a renderizar] */
-part = "both"; // "tray" | "sleeve" | "both" (preview lado a lado, não montado)
+part = "both"; // "tray" | "sleeve" | "lifter" | "both" (preview lado a lado, não montado)
 
 /* [Cartas - deitadas, empilhadas na vertical] */
 card_width             = 63; // mm, largura da carta (standard TCG)
@@ -28,8 +32,13 @@ sleeved_card_thickness  = 0.8; // mm por carta já com sleeve — confirmar com 
 /* [Compartimento de dados/moedas] */
 dice_length = 30; // mm, profundidade do compartimento (largura = a dos dois decks juntos)
 
-/* [Sulco pra pegar o deck] */
-notch_radius = 10; // mm, raio do entalhe nas laterais de cada compartimento de deck
+/* [Elevador do deck - plataforma solta com aba] */
+lifter_thickness = 1.6; // mm, espessura da plataforma e da aba
+lifter_gap       = 0.3; // mm, folga ao redor da plataforma pra subir livre, sem travar
+tab_width        = 12;  // mm, largura da aba (por onde você puxa)
+tab_length       = 8;   // mm, quanto a aba sai pra fora da parede lateral
+notch_w          = tab_width + 2; // mm, largura do vão na parede por onde a aba passa
+notch_h          = 10;  // mm, altura do vão a partir do chão (espaço pro dedo pegar a aba)
 
 /* [Folgas] */
 card_gap      = 2;    // folga extra em largura/profundidade pra carta não ficar apertada
@@ -38,8 +47,8 @@ fit_tolerance = 0.25; // folga por lado entre bandeja e caixa, pra deslizar sem 
 
 /* [Paredes] */
 wall      = 1.6; // paredes externas (laterais/fundo/tubo)
-end_wall  = 3;   // parede da ponta com ímã — mais grossa que wall, só o suficiente pro rebaixo do ímã
-back_wall = 15;  // parede de trás da bandeja (sólida) — é a aba que sempre fica pra fora da capa, pra puxar
+end_wall  = 4;   // parede da ponta com ímã — mais grossa que wall, só o suficiente pro rebaixo do ímã
+back_wall = 2;  // parede de trás da bandeja (sólida) — é a aba que sempre fica pra fora da capa, pra puxar
 divider   = 1.6; // parede interna entre os 3 compartimentos
 
 /* [Ímãs 4x2mm - discos, um em cada canto] */
@@ -64,7 +73,8 @@ lane_inner_l = card_height + card_gap;  // X: profundidade de cada compartimento
 
 // largura interna total: os dois compartimentos de deck lado a lado + a divisória entre eles
 tray_inner_w = 2 * lane_inner_w + divider;
-tray_inner_h = deck_stack_height + deck_slack; // Z: altura da pilha de cartas deitadas + folga
+// Z: elevador embaixo + altura da pilha de cartas deitadas + folga
+tray_inner_h = lifter_thickness + deck_stack_height + deck_slack;
 // comprimento interno total: compartimento de dados + divisória + zona dos decks
 tray_inner_l = dice_length + divider + lane_inner_l;
 
@@ -89,9 +99,9 @@ sleeve_outer_l = sleeve_cavity_l + end_wall; // + a ponta fechada (tampa)
 // canto. Nessa ponta fica o compartimento de dados/moedas (mais fundo, só
 // aparece quando a bandeja é puxada quase até o fim); os dois
 // compartimentos de deck ficam do lado da parede de trás — `back_wall` —
-// (aparecem primeiro ao puxar a bandeja), cada um com um sulco de cada
-// lado, do teto até o chão, pra pinçar e tirar o deck inteiro, até a
-// última carta (as cartas ficam deitadas, empilhadas de baixo pra cima).
+// (aparecem primeiro ao puxar a bandeja). Cada compartimento de deck tem
+// um vão pequeno perto do chão, na parede externa, por onde passa a aba
+// do elevador (as cartas ficam deitadas, empilhadas em cima do elevador).
 // ---------------------------------------------------------------------
 module tray() {
     lanes_x = end_wall + dice_length + divider;
@@ -110,11 +120,9 @@ module tray() {
         translate([lanes_x, wall + lane_inner_w + divider, wall])
             cube([lane_inner_l, lane_inner_w, tray_outer_h]);
 
-        // sulcos pra pegar o deck com facilidade (um de cada lado de cada compartimento;
-        // o do meio fica na divisória, então serve os dois compartimentos de uma vez)
-        thumb_notch(notch_x, 0, wall);                      // parede externa esquerda
-        thumb_notch(notch_x, wall + lane_inner_w, divider);  // divisória entre os dois decks
-        thumb_notch(notch_x, tray_outer_w - wall, wall);     // parede externa direita
+        // vão pequeno em cada parede externa, por onde passa a aba do elevador
+        grab_notch(notch_x, 0, wall);                  // parede externa esquerda
+        grab_notch(notch_x, tray_outer_w - wall, wall); // parede externa direita
 
         // 4 ímãs de canto na ponta (precisa estar dentro do difference() pra CAVAR, não somar)
         magnet_corners(x = 0, w = tray_outer_w, h = tray_outer_h, dir = 1);
@@ -164,12 +172,33 @@ module finger_hole() {
             cylinder(h = end_wall + 0.2, d = finger_hole_d);
 }
 
-// Vão reto numa parede (em x, começando em y0, ao longo de `thickness`), do
-// chão da bandeja até o topo — pra pinçar e tirar o deck inteiro, até a
-// última carta que sobrar no fundo.
-module thumb_notch(x, y0, thickness) {
-    translate([x - notch_radius, y0 - 0.1, wall])
-        cube([2 * notch_radius, thickness + 0.2, tray_outer_h]); // sobe além do topo -> sai limpo
+// Vão pequeno numa parede (em x, começando em y0, ao longo de `thickness`),
+// rente ao chão da bandeja — só o suficiente pra aba do elevador passar e
+// pro dedo alcançar e puxar.
+module grab_notch(x, y0, thickness) {
+    translate([x - notch_w / 2, y0 - 0.1, wall])
+        cube([notch_w, thickness + 0.2, notch_h]);
+}
+
+// ---------------------------------------------------------------------
+// Elevador (lifter): plataforma solta que fica no chão de um compartimento
+// de deck, embaixo das cartas, com uma aba que sai pela parede (pelo
+// grab_notch) pra você puxar e levantar o deck inteiro de uma vez, até a
+// última carta. A mesma peça serve nos dois compartimentos — só virar 180°.
+// Aba sai pelo lado y=0 (visto de cima).
+// ---------------------------------------------------------------------
+module lifter() {
+    platform_l = lane_inner_l - 2 * lifter_gap;
+    platform_w = lane_inner_w - 2 * lifter_gap;
+
+    // plataforma
+    translate([lifter_gap, lifter_gap, 0])
+        cube([platform_l, platform_w, lifter_thickness]);
+
+    // aba, centralizada no comprimento, saindo pelo lado y=0 (sobrepõe um
+    // pouco a plataforma, em vez de só encostar, pra garantir união sólida)
+    translate([lane_inner_l / 2 - tab_width / 2, -tab_length, 0])
+        cube([tab_width, tab_length + lifter_gap + 0.2, lifter_thickness]);
 }
 
 // ---------------------------------------------------------------------
@@ -179,9 +208,13 @@ if (part == "tray") {
     tray();
 } else if (part == "sleeve") {
     sleeve();
+} else if (part == "lifter") {
+    lifter();
 } else {
-    // preview lado a lado (não montado), só pra visualizar as duas peças
+    // preview lado a lado (não montado), só pra visualizar as três peças
     tray();
     translate([0, tray_outer_w + 20, 0])
         sleeve();
+    translate([0, tray_outer_w + sleeve_outer_w + 40, 0])
+        lifter();
 }
