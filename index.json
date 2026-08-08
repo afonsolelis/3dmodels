@@ -21,7 +21,10 @@
         { "file": "3mf/deckbox-01-tray.3mf", "contents": "bandeja", "footprint_mm": [135.6, 150.8, 53.8] }
       ],
       "assembled_closed_mm": [139.6, 154.5, 57.5],
-      "key_measures": { "deck_60_sleeved_mm": [93, 68, 45], "medido_em": "2026-08-08" },
+      "key_measures": {
+        "deck_60_sleeved_mm": [93, 68, 45],
+        "medido_em": "2026-08-08"
+      },
       "hardware": "8 ímãs disco 4x2mm (4 na bandeja, 4 na capa), press-fit 0.15",
       "notes": "Parametrizado por medidas reais do deck. deck_lanes parametrizado pra variantes por include."
     },
@@ -41,6 +44,50 @@
       "assembled_closed_mm": [171.6, 79.9, 57.5],
       "hardware": "8 ímãs disco 4x2mm, press-fit 0.15",
       "notes": "No limite da cama: footprint 169.6 (teto ~170) e capa em pé a 171.6 dos 180 de altura. A cestinha é a MESMA peça do deckbox-01."
+    },
+    {
+      "id": "pokemon-game",
+      "category": "playmats",
+      "path": "playmats/pokemon-game",
+      "scad": [
+        "playmats/pokemon-game/pokemon-game.scad",
+        "playmats/pokemon-game/pokemon-game-case.scad"
+      ],
+      "status": "em-andamento",
+      "description": "Plataforma completa de Pokémon TCG: campo de um jogador em 12 placas de 7mm (4 colunas x 3 fileiras) que se plugam por ímã nas laterais, com as zonas em relevo (banco x5, ativo, 6 prêmios em GRADE 2x3, deck, descarte, lost zone, estádio, bandeja de contadores e dish de moeda); miolo de colmeia aberto por baixo; cestinha do deck e cesta do descarte encaixam em rebaixos de 5mm no campo e viram deckbox e porta-dados; case com tampa magnética guarda tudo e vira bandeja de rolar dados.",
+      "parts": { "tile": 12, "deck_basket": 1, "discard_tray": 1, "game_case": 1, "case_lid": 1 },
+      "print_jobs": [
+        { "file": "3mf/pokemon-game-t1r1.3mf", "contents": "placa: prêmios 1 e 2", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t2r1.3mf", "contents": "placa: banco 1 e 2", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t3r1.3mf", "contents": "placa: banco 3 e 4", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t4r1.3mf", "contents": "placa: banco 5 + rebaixo do descarte", "footprint_mm": [152.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t1r2.3mf", "contents": "placa: prêmios 3 e 4", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t2r2.3mf", "contents": "placa: lost zone", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t3r2.3mf", "contents": "placa: ativo", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t4r2.3mf", "contents": "placa: rebaixo do deck", "footprint_mm": [152.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t1r3.3mf", "contents": "placa: prêmios 5 e 6", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t2r3.3mf", "contents": "placa: bandeja de contadores", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t3r3.3mf", "contents": "placa: estádio", "footprint_mm": [146.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-t4r3.3mf", "contents": "placa: dish da moeda", "footprint_mm": [152.0, 107.0, 7.0] },
+        { "file": "3mf/pokemon-game-containers.3mf", "contents": "cestinha do deck + cesta do descarte", "footprint_mm": [150.8, 97.4, 50.0] },
+        { "file": "3mf/pokemon-game-case.3mf", "contents": "case (boca pra cima, usar brim)", "footprint_mm": [159.2, 152.6, 116.4] },
+        { "file": "3mf/pokemon-game-lid.3mf", "contents": "tampa (imprime de cabeça pra baixo)", "footprint_mm": [159.2, 152.6, 9.0] },
+        { "file": "3mf/pokemon-game-todas-as-plates.3mf", "contents": "PROJETO do Bambu Studio com as 15 plates numa file só (12 placas, contêineres, case, tampa) — abre uma vez e imprime plate por plate; mesmo formato do diversos/Jabonera.3mf. Os 15 arquivos avulsos continuam valendo, este é conveniência", "footprint_mm": [180, 180, 116.4] }
+      ],
+      "assembled_field_mm": [590, 321, 7.0],
+      "assembled_case_closed_mm": [159.2, 152.6, 120.4],
+      "key_measures": {
+        "deck_60_sleeved_mm": [93, 68, 45],
+        "carta_com_sleeve_mm": [68, 93],
+        "cavidade_de_carta_mm": [70, 95, 1.0],
+        "footprint_conteineres_mm": [72.4, 97.4],
+        "case_interior_mm": [154.4, 139, 114],
+        "medido_em": "2026-08-08",
+        "espessura_placa_mm": 7.0
+      },
+      "hardware": "80 ímãs disco 4x2mm: 68 nas laterais das placas (2 por costura, 17 costuras) + 12 no case/tampa. Press-fit 0.15",
+      "notes": "Playmat de torneio é 610x356; dois tabuleiros comerciais de referência têm 570x250 e ~490x220 por jogador; este campo é 590x321. A 3a fileira existe pra caber uma carta inteira por fileira, o que faz os 6 prêmios fecharem em GRADE 2x3 — com 2 fileiras eles precisavam se encavalar em cascata. Costuras caem sempre dentro de parede de >=4mm, nunca em cavidade de carta. Placa de 7mm: é o mínimo pra caber ímã 4x2 deitado na parede lateral (4.15 do furo + 1.2 de material de cada lado). Furos de ímã HEXAGONAIS de ponta pra cima — furo redondo em parede vertical imprime com teto em balanço. Polaridade: faces +X e +Y com um polo pra fora, -X e -Y com o oposto, aí qualquer par do grid atrai. Relevo de 1.0mm: carta com sleeve tem 0.75mm, em cavidade de 1.5 ela afundava e não dava pra pegar. Fileira tem 107 (e não 103) pra sobrar margem em volta do rebaixo do contêiner. IMPRIMIR SEM SUPORTE, face de jogo pra cima. No case as placas ficam EM PÉ (puxa pela borda de cima por duas janelas no rebordo) e os contêineres DEITADOS de boca pras placas; os ímãs foram pra um flange externo porque ressalto interno estrangularia o interior e a placa de 152 não passaria. Dados num bolso de 72.4x21x97.4 atrás da cesta de descarte. Cada zona tem o nome gravado em baixo relevo (0.6mm) no PISO da cavidade, em português (PRÊMIO/BANCO/ATIVO/ZONA PERDIDA/ESTÁDIO/DECK/DESCARTE/CONTADORES/MOEDA): some sob a carta em jogo e reaparece com o espaço vazio. Fonte Liberation Sans Bold, que tem os acentos. No piso das cavidades de carta a letra deixa 0.8mm de pele sobre a colmeia (2.4 de pele - 1.0 de cavidade - 0.6 de letra). DECK e DESCARTE são exceção: o contêiner tampa o rebaixo inteiro, entao o nome no piso só aparece com a cestinha fora — esses dois também vão gravados 0.5mm nas DUAS paredes CURTAS externas do próprio contêiner, letra de 6mm centrada em z=10 (2mm acima da superfície do campo, já descontado o rebaixo de 5). A faixa de colmeia que a letra ocupa é reservada pelo parâmetro `band` da malha (o horizontal, irmão do `skip_w` vertical), então nenhuma letra cai em cima de furo; sobram 0.7mm de parede atrás da letra, de 1.2. O escalope das paredes CURTAS do descarte subiu de z=9.6 pra 16.6 (discard_band_short=15) pra abrir essa faixa; o acesso de dedo continua pelos escalopes das COMPRIDAS, que são 52 de largura contra 34 destes. Footprint dos contêineres segue 72.4x97.4 — a gravação é só pra dentro, a interface com o rebaixo do campo não mudou.",
+      "overview_3mf": "playmats/pokemon-game/pokemon-game-overview.3mf (16 objetos separados numa grade 4x4: as 12 placas + cestinha + cesta + case + tampa; NÃO é job de impressão)"
     },
     {
       "id": "ring-01",

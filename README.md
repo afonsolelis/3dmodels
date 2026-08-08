@@ -20,6 +20,8 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 ├── README.md
 ├── deckboxes/       # caixas para decks de cartas (TCG/LCG/board games)
 │   └── README.md
+├── playmats/        # campos de jogo em placas encaixáveis
+│   └── README.md
 └── rings/           # anéis (tapete de jogo, organização, etc.)
     └── README.md
 ```
