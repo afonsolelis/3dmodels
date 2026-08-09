@@ -18,16 +18,24 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 ```
 3dmodels/
 ├── README.md
-├── deckboxes/       # caixas para decks de cartas (TCG/LCG/board games)
+├── index.json           # catálogo machine-readable de todos os projetos
+├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
 │   └── README.md
-├── playmats/        # campos de jogo em placas encaixáveis
+├── organizadores_tcg/   # organizadores de cartas soltas, sleeved e slabs graduadas
 │   └── README.md
-└── rings/           # anéis (tapete de jogo, organização, etc.)
-    └── README.md
+├── playmats/            # campos de jogo em placas encaixáveis
+│   └── README.md
+├── rings/               # anéis (tapete de jogo, organização, etc.)
+│   └── README.md
+├── diversos/            # (só .3mf de terceiros, sem modelo paramétrico)
+├── logistica_pokemon/   # (só .3mf de terceiros)
+└── manutencao_bambu/    # (só .3mf de terceiros)
 ```
 
 Cada categoria de objeto (deckboxes, suportes, organizadores, etc.) vive na
-sua própria pasta, com subpastas por modelo específico.
+sua própria pasta, com subpastas por modelo específico. As pastas marcadas
+como "só .3mf de terceiros" guardam downloads usados como referência — não
+têm `.scad` e não entram no `index.json` como projeto.
 
 ## Estrutura de um modelo
 
