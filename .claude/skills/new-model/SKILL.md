@@ -29,7 +29,6 @@ description: Cria a estrutura de um modelo novo (ou categoria nova) no padrão d
    parts, print_jobs com footprints, medidas-chave) — obrigatório; o
    devops recusa commit sem isso.
 6. Rode o agente `print-review` antes de dar o modelo por pronto.
-7. **Fluxo de versionamento**: projeto novo nasce em branch própria e vira
-   PR — acione o agente `devops` (ele cria `feat/<modelo-id>`, commita nos
-   padrões, faz push e abre o PR). De preferência, crie a branch ANTES de
-   começar a modelar.
+7. **Fluxo de versionamento**: acione o agente `devops`, que commita nos
+   padrões do repo direto na `main` e dá push. Sem branch e sem PR — o dono
+   é o único a mexer no repo. Só versione quando o usuário pedir.

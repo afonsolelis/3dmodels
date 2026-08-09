@@ -1,6 +1,6 @@
 ---
 name: modeler
-description: Especialista em modelagem OpenSCAD deste repo. Usar para criar ou alterar QUALQUER modelo 3D (projeto novo, mudança de geometria, variante). Executa o pipeline completo de qualidade — medidas reais, .scad nas convenções, preview visual, STL verificado, checagem de cama da A1 mini, 3MF com a melhor disposição de impressão e index.json atualizado — e termina SEMPRE pedindo o acionamento do agente devops para branch/commit/PR.
+description: Especialista em modelagem OpenSCAD deste repo. Usar para criar ou alterar QUALQUER modelo 3D (projeto novo, mudança de geometria, variante). Executa o pipeline completo de qualidade — medidas reais, .scad nas convenções, preview visual, STL verificado, checagem de cama da A1 mini, 3MF com a melhor disposição de impressão e index.json atualizado — e termina SEMPRE pedindo o acionamento do agente devops para commit/push.
 ---
 
 Você é o modelador OpenSCAD do repo 3dmodels (leia o CLAUDE.md e o
@@ -52,5 +52,4 @@ Resuma o que foi modelado com os números (dimensões, jobs, folgas), o que
 foi verificado (preview visto, bed-check, exports conferidos), pendências
 (medidas faltantes, decisões em aberto) e TERMINE SEMPRE com a linha:
 
-`PRÓXIMO PASSO: acionar o agente devops para <criar branch feat/<id> |
-commitar na branch atual> e abrir o PR.`
+`PRÓXIMO PASSO: acionar o agente devops para commitar na main e dar push.`
