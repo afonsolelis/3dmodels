@@ -9,6 +9,37 @@
   },
   "projects": [
     {
+      "id": "cardholder-01",
+      "category": "cardholders",
+      "path": "cardholders/cardholder-01",
+      "scad": "cardholders/cardholder-01/cardholder-01.scad",
+      "status": "em-andamento",
+      "derived_from": "cardholders/card_holder_with_feet.3mf (Don Julio, MakerWorld) — só as medidas úteis; geometria remodelada do zero em OpenSCAD, sem reuso do mesh de terceiro",
+      "description": "Porta-cartas ABERTO reforçado: chapa de fundo em colmeia + 4 cantoneiras em L amarradas por DUAS CINTAS fechadas (meio z=26-32 e topo z=52-58) sobre uma CINTA DE PÉ integrada (z=0-4, recuada 4mm). Nasceu porque o 3MF de terceiro que o usuário imprimiu ficou FRACO: 4 cantoneiras de 2mm com 56mm de balanço solto, sem nada amarrando uma na outra. Aqui a rigidez vem da forma, não da espessura — parede segue 2mm em tudo. Peça única, sem montagem (o pé integrado substitui os 4 pezinhos soltos do original), sem suporte.",
+      "parts": { "holder": 1 },
+      "print_jobs": [
+        { "file": "3mf/cardholder-01.3mf", "contents": "1 unidade (job de teste)", "footprint_mm": [70.0, 94.0, 62.0] },
+        { "file": "3mf/cardholder-01-x2.3mf", "contents": "2 unidades lado a lado", "footprint_mm": [146.0, 94.0, 62.0] }
+      ],
+      "assembled_closed_mm": [70.0, 94.0, 62.0],
+      "capacity": "~220 cartas NUAS (curso de pilha 56mm, ~0.25mm/carta)",
+      "key_measures": {
+        "pocket_mm": [66, 90],
+        "carta_nua_mm": [63, 88],
+        "wall_mm": 2,
+        "plate_t_mm": 2,
+        "post_arm_mm": 10,
+        "post_h_mm": 56,
+        "band_h_mm": 6,
+        "band_z": [[26, 32], [52, 58]],
+        "foot_h_mm": 4,
+        "foot_inset_mm": 4,
+        "vaos_livres_de_cantoneira_mm": [20, 20, 4],
+        "area_1a_camada_mm2": 690
+      },
+      "notes": "BOLSO 66x90 É PRA CARTA NUA — sleeve penny (66x91) NÃO entra; pra sleeve subir pocket_w/pocket_l pra 68x93 (penny) ou 69x94 (double). A face de baixo de cada cinta é ponte entre as cantoneiras (74mm no lado comprido, 50mm no curto): seção de 2mm sai toda em perímetro, extrusões ao longo do vão — não ligar suporte. foot_inset=0.25 faz o pé virar espiga e uma unidade vazia travar dentro da de baixo. Verificado: Volumes 2 (sólido único), níveis Z 0/4/6/26/32/52/58/62, fatias conferidas nos 7 níveis críticos."
+    },
+    {
       "id": "deckbox-01",
       "category": "deckboxes",
       "path": "deckboxes/deckbox-01",
@@ -387,6 +418,24 @@
     }
   ],
   "third_party": [
+    {
+      "file": "cardholders/card_holder_with_feet.3mf",
+      "category": "cardholders",
+      "format": "3mf",
+      "title": "Stackable Pokémon TCG Card Holder - No supports",
+      "designer": "Don Julio",
+      "license": "Standard Digital File License",
+      "modified": "2026-08-09",
+      "objects": 1,
+      "plates": 1,
+      "largest_part_mm": [70.0, 94.0, 58.0],
+      "fits_a1_mini": true,
+      "triangles": 6750,
+      "embedded_profile": { "printer_model": "Bambu Lab A1 mini", "print_settings_id": "0.20mm Standard @BBL A1M", "printable_height": "180", "enable_support": "0" },
+      "needs_profile_swap": false,
+      "description": "&lt;p&gt;Keep your Pokémon cards neatly organized and on display with this easy‑to‑print card holder.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;No supports required&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Simple assembly&lt;/strong&gt;: Insert the four feet into the matching holes—no glue …",
+      "notes": "IMPRESSO E REPROVADO NO TESTE FÍSICO: fraco. Medido do mesh — bolso 66x90 (carta NUA 63x88; sleeve penny 66x91 NÃO entra), chapa 66x90x2 vazada, 4 cantoneiras em L de parede 2mm com braços de 10mm e 56mm de balanço, 5 peças (corpo + 4 pezinhos 5.7x5.7x4 que pressionam nos rebaixos Ø10 dos cantos). Serviu de referência de medidas pro projeto próprio cardholders/cardholder-01, que resolve a rigidez com 2 cintas + pé integrado."
+    },
     {
       "file": "diversos/2x3.3mf",
       "category": "diversos",
