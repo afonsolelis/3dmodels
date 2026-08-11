@@ -56,8 +56,13 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
 - Ímãs: 4× disco 4mm × 2mm por peça (bandeja e capa), 10mm de margem da borda
 - Furo pra empurrar a bandeja: 12mm de diâmetro, no meio da tampa da capa
 - Paredes: externa/tubo 1.6mm | ponta do ímã 4mm | parede de trás (aba de puxar) 2mm | divisórias internas 1.6mm
-- Tolerância de encaixe deslizante (bandeja × capa): 0.25mm por lado
-- Dimensões externas aproximadas (com os defaults): bandeja ~127.6×134.8×58.8mm, capa ~129.6×138.5×62.5mm
+- Tolerância de encaixe deslizante (bandeja × capa): **0.5mm por lado**
+  (era 0.25 — o deckbox-02 impresso travou no meio do curso em 2026-08-10;
+  ver a nota em `fit_tolerance` no `.scad` e a regra 6 do `CLAUDE.md`)
+- Chanfro de entrada na boca da capa: 2.5mm de rampa abrindo 0.8mm por lado,
+  pra bandeja não morder a quina e entrar torta
+- Dimensões externas medidas nos STL atuais: bandeja 135.6×150.8×53.8mm,
+  capa 137.6×155.0×58.0mm, conjunto fechado 139.6×155.0×58.0mm
 
 ## Arquivos
 

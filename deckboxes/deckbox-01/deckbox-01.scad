@@ -64,7 +64,23 @@ hex_margin = 2.5; // mm, borda sólida ao redor de cada painel vazado (junções
 
 /* [Folgas] */
 card_gap      = 2;    // folga extra em largura/profundidade pro deck não ficar apertado na cestinha
-fit_tolerance = 0.25; // folga por lado entre bandeja e caixa, pra deslizar sem travar
+
+// TESTE FÍSICO 2026-08-10 (deckbox-02 impresso): com 0.25 por lado a bandeja
+// TRAVOU NO MEIO DO CURSO e não saiu mais. Não foi folga nominal — foi EMPENO:
+// o encaixe tem ~167mm, a capa imprime EM PÉ (tubo de 171.6mm com parede de
+// 1.6mm, que barriga pra dentro) e a bandeja imprime DEITADA (cavidade em XY
+// sai subdimensionada, sólido em XY sai superdimensionado), mais o pé de
+// elefante das primeiras camadas da bandeja. Os desvios somam mais que 0.25 e
+// a peça agarra na barriga, antes de assentar.
+// 0.5 por lado cobre esse somatório com margem. Se ficar bambo demais no
+// teste físico, descer pra 0.4 — NÃO voltar pra 0.25.
+fit_tolerance = 0.5;  // folga por lado entre bandeja e caixa, pra deslizar sem travar
+
+/* [Chanfro de entrada da capa] */
+// Guia a bandeja na hora de entrar, pra ela não morder a borda da boca e
+// entrar torta (que é o que inicia o travamento).
+mouth_lead = 2.5; // mm, profundidade do chanfro medida ao longo do curso
+mouth_grow = 0.8; // mm, quanto a boca abre a mais por lado na entrada
 
 /* [Paredes] */
 wall      = 1.6; // paredes externas (laterais/fundo/tubo)
@@ -171,6 +187,7 @@ module sleeve() {
         cube([sleeve_outer_l, sleeve_outer_w, sleeve_outer_h]);
         translate([end_wall, wall, wall])
             cube([sleeve_outer_l, sleeve_cavity_w, sleeve_cavity_h]); // sobe além da frente -> frente aberta
+        mouth_lead_in();
         finger_hole();
 
         // 4 ímãs de canto na tampa (precisa estar dentro do difference() pra CAVAR, não somar).
@@ -196,6 +213,21 @@ module magnet_corners(x, w, h, dir, margin = magnet_margin) {
     for (yy = [margin, w - margin])
         for (zz = [margin, h - margin])
             magnet_hole(x, yy, zz, dir);
+}
+
+// Chanfro de entrada na boca da capa: a cavidade abre `mouth_grow` por lado
+// nos últimos `mouth_lead` mm, em rampa. A bandeja encontra uma boca maior que
+// ela e é centrada pela rampa em vez de bater na quina.
+// Imprimibilidade: a capa imprime EM PÉ com a boca pra CIMA, então a rampa só
+// afina a parede conforme sobe — cada camada continua apoiada na de baixo,
+// sem balanço nenhum.
+module mouth_lead_in() {
+    hull() {
+        translate([sleeve_outer_l - mouth_lead, wall, wall])
+            cube([0.01, sleeve_cavity_w, sleeve_cavity_h]);
+        translate([sleeve_outer_l - 0.01, wall - mouth_grow, wall - mouth_grow])
+            cube([0.02, sleeve_cavity_w + 2 * mouth_grow, sleeve_cavity_h + 2 * mouth_grow]);
+    }
 }
 
 // Furo passante centralizado no fundo da capa (sleeve), pra empurrar a

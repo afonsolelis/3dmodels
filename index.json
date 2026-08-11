@@ -1,6 +1,6 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-09",
+  "updated": "2026-08-10",
   "printer": {
     "model": "Bambu A1 mini",
     "slicer": "Bambu Studio",
@@ -48,16 +48,16 @@
       "description": "Deckbox estilo caixa de fósforo: bandeja deslizante em capa com 4 ímãs de canto, 2 decks deitados + compartimento de dados/moedas. Cada deck numa cestinha hexagonal solta, empurrada por baixo por furo no chão (estilo miolo de caixa de fósforo), recorte em U até o chão pra pinçar até a última carta.",
       "parts": { "tray": 1, "sleeve": 1, "basket": 2 },
       "print_jobs": [
-        { "file": "3mf/deckbox-01-plate.3mf", "contents": "capa em pé + 2 cestinhas", "footprint_mm": [154.5, 160.9, 137.6] },
+        { "file": "3mf/deckbox-01-plate.3mf", "contents": "capa em pé + 2 cestinhas", "footprint_mm": [155.0, 161.4, 137.6] },
         { "file": "3mf/deckbox-01-tray.3mf", "contents": "bandeja", "footprint_mm": [135.6, 150.8, 53.8] }
       ],
-      "assembled_closed_mm": [139.6, 154.5, 57.5],
+      "assembled_closed_mm": [139.6, 155.0, 58.0],
       "key_measures": {
         "deck_60_sleeved_mm": [93, 68, 45],
         "medido_em": "2026-08-08"
       },
       "hardware": "8 ímãs disco 4x2mm (4 na bandeja, 4 na capa), press-fit 0.15",
-      "notes": "Parametrizado por medidas reais do deck. deck_lanes parametrizado pra variantes por include."
+      "notes": "Parametrizado por medidas reais do deck. deck_lanes parametrizado pra variantes por include. FOLGA DE DESLIZE 0.5/lado desde 2026-08-10 (era 0.25 — o deckbox-02 impresso travou no meio do curso); a capa ganhou chanfro de entrada de 2.5mm x 0.8/lado na boca. Reexportado, mas ainda NÃO validado no teste físico."
     },
     {
       "id": "deckbox-02",
@@ -70,11 +70,11 @@
       "description": "Versão de 1 deck do deckbox-01, com compartimento de dados bem mais fundo (64mm, ~244cm³). Caixa estreita; conjunto inteiro numa chapa única da A1 mini.",
       "parts": { "tray": 1, "sleeve": 1, "basket": 1 },
       "print_jobs": [
-        { "file": "3mf/deckbox-02-plate.3mf", "contents": "bandeja + cestinha + capa em pé (job único)", "footprint_mm": [169.6, 162.1, 171.6] }
+        { "file": "3mf/deckbox-02-plate.3mf", "contents": "bandeja + cestinha + capa em pé (job único)", "footprint_mm": [169.6, 162.6, 171.6] }
       ],
-      "assembled_closed_mm": [171.6, 79.9, 57.5],
+      "assembled_closed_mm": [173.6, 80.4, 58.0],
       "hardware": "8 ímãs disco 4x2mm, press-fit 0.15",
-      "notes": "No limite da cama: footprint 169.6 (teto ~170) e capa em pé a 171.6 dos 180 de altura. A cestinha é a MESMA peça do deckbox-01."
+      "notes": "No limite da cama: footprint 169.6 (teto ~170) e capa em pé a 171.6 dos 180 de altura. A cestinha é a MESMA peça do deckbox-01. TESTE FÍSICO 2026-08-10: acabamento excelente, MAS com folga de 0.25/lado a bandeja TRAVOU NO MEIO DO CURSO e não saiu (encaixe de ~167mm — empeno da capa impressa em pé + pé de elefante da bandeja comem a folga). Corrigido pra 0.5/lado + chanfro de entrada de 2.5mm x 0.8/lado na boca; a chapa só cresceu 0.5mm em Y (162.1 -> 162.6), comprimento em pé inalterado. Reexportado, aguardando novo teste físico. assembled_closed_mm anterior ([171.6, 79.9, 57.5]) estava errado no comprimento: a bandeja sobra back_wall=2mm pra fora da capa."
     },
     {
       "id": "deckbox-03",

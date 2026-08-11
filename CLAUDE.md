@@ -33,8 +33,14 @@ do TESTE FÍSICO da peça na mão.
    deixar faixa sólida (ex.: `skip_w` do `hex_panel` no deckbox-01).
 5. **Identidade visual**: colmeia hexagonal, hexágonos de ponta pra cima
    (imprimem em parede vertical sem ponte reta).
-6. **Folgas padrão do repo**: deslize bandeja/capa 0.25/lado; peça solta em
+6. **Folgas padrão do repo**: deslize bandeja/capa **0.5/lado**; peça solta em
    cavidade 0.3/lado; press-fit de ímã 0.15; conteúdo ~1mm/lado.
+   (Era 0.25/lado até 2026-08-10, quando o deckbox-02 impresso TRAVOU NO MEIO
+   DO CURSO e não saiu mais. Em deslize longo o inimigo não é a tolerância
+   nominal e sim o EMPENO: tubo alto impresso em pé barriga pra dentro,
+   cavidade em XY sai subdimensionada, sólido em XY sai superdimensionado e
+   ainda tem pé de elefante. Quanto mais longo o encaixe, mais folga — e
+   sempre com chanfro de entrada na boca.)
 7. **Verificar de verdade**: renderizar PNG e OLHAR a imagem; ecoar dimensões
    derivadas; conferir que os exports existem (mtime/tamanho).
 8. **index.json sempre em dia**: toda mudança de modelo atualiza a entrada
