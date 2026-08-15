@@ -17,4 +17,6 @@
 
 deck_lanes = 1;
 dice_depth = 64; // mm, profundidade do compartimento de dados (deckbox-01 usa 30)
+sleeve_tray_reveal = 0; // deixa a traseira da bandeja alinhada com a boca da capa quando fechada
+sleeve_finger_hole_d = 18; // mm, furo maior no fundo da capa pra passar um dedo
 include <../deckbox-01/deckbox-01.scad>

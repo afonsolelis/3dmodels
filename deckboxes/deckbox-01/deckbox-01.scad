@@ -128,15 +128,23 @@ tray_outer_w = tray_inner_w + 2 * wall;
 tray_outer_h = tray_inner_h + 2 * wall;
 tray_outer_l = tray_inner_l + end_wall + back_wall; // ponta do ímã de um lado, aba de puxar sólida do outro
 
+// Quanto da parede de trás da bandeja fica propositalmente pra fora quando
+// fechada. Padrão: deixa a aba inteira exposta pra puxar. Variantes podem
+// reduzir/zerar isso e depender mais do furo traseiro da capa.
+tray_reveal = is_undef(sleeve_tray_reveal) ? back_wall : sleeve_tray_reveal;
+
 sleeve_cavity_w = tray_outer_w + 2 * fit_tolerance;
 sleeve_cavity_h = tray_outer_h + 2 * fit_tolerance;
-// a capa cobre TUDO até o começo da parede de trás da bandeja (nada de compartimento
-// fica exposto quando fechada — só a parede sólida `back_wall` fica de fora)
-sleeve_cavity_l = tray_inner_l + end_wall;
+// a capa cobre a bandeja toda, menos o "reveal" configurado. No padrão o
+// reveal = back_wall; com reveal = 0 a traseira da bandeja fica alinhada com
+// a boca da capa quando fechada.
+sleeve_cavity_l = tray_outer_l - tray_reveal;
 
 sleeve_outer_w = sleeve_cavity_w + 2 * wall;
 sleeve_outer_h = sleeve_cavity_h + 2 * wall;
 sleeve_outer_l = sleeve_cavity_l + end_wall; // + a ponta fechada (tampa)
+
+finger_hole_d_eff = is_undef(sleeve_finger_hole_d) ? finger_hole_d : sleeve_finger_hole_d;
 
 // ---------------------------------------------------------------------
 // Bandeja (tray): fundo + 4 paredes fechadas, aberta só em cima, com 3
@@ -235,7 +243,7 @@ module mouth_lead_in() {
 module finger_hole() {
     translate([-0.1, sleeve_outer_w / 2, sleeve_outer_h / 2])
         rotate([0, 90, 0])
-            cylinder(h = end_wall + 0.2, d = finger_hole_d);
+            cylinder(h = end_wall + 0.2, d = finger_hole_d_eff);
 }
 
 // ---------------------------------------------------------------------

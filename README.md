@@ -19,6 +19,8 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 3dmodels/
 ├── README.md
 ├── index.json           # catálogo machine-readable de todos os projetos
+├── cardholders/         # porta-cartas abertos e torres de sleeve (pilha à vista)
+│   └── README.md
 ├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
 │   └── README.md
 ├── organizadores_tcg/   # organizadores de cartas soltas, sleeved e slabs graduadas
@@ -26,6 +28,8 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 ├── playmats/            # campos de jogo em placas encaixáveis
 │   └── README.md
 ├── rings/               # anéis (tapete de jogo, organização, etc.)
+│   └── README.md
+├── suportes/            # suportes e apoios de mesa (controle de videogame, etc.)
 │   └── README.md
 ├── diversos/            # (só .3mf de terceiros, sem modelo paramétrico)
 ├── logistica_pokemon/   # (só .3mf de terceiros)
