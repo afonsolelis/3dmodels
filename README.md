@@ -1,8 +1,8 @@
 # 3D Models
 
-Base de modelagem 3D para impressão — projetos parametrizados, pensados para
-a **Bambu Lab A1 mini** (cama 180x180), com export final em **3MF** (pronto
-pra abrir no Bambu Studio) e STLs individuais de referência.
+Base de modelagem 3D para impressão — projetos parametrizados, com a **Bambu
+Lab A1 mini** (cama 180x180) como alvo padrão e exceções documentadas por
+projeto, com export final em **3MF** e STLs individuais de referência.
 
 ## Ferramenta de modelagem
 
@@ -24,6 +24,8 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 ├── cartoes/             # cartões utilitários finos (emergência, NFC, identificação)
 │   └── README.md
 ├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
+│   └── README.md
+├── jogos/               # jogos de mesa completos e componentes jogáveis
 │   └── README.md
 ├── organizadores_tcg/   # organizadores de cartas soltas, sleeved e slabs graduadas
 │   └── README.md
@@ -55,8 +57,10 @@ têm `.scad` e não entram no `index.json` como projeto.
 
 ## Impressão
 
-- Impressora alvo: Bambu Lab A1 mini (cama 180x180x180)
-- Fatiador: Bambu Studio
+- Impressora-alvo padrão: Bambu Lab A1 mini (cama 180x180x180); projetos com
+  outra máquina declaram isso no próprio README e no `index.json`
+- Fatiador padrão: Bambu Studio; projetos específicos podem trazer 3MF para o
+  fatiador da impressora-alvo
 - Formato de export: 3MF (jobs de impressão) + STL (peças individuais)
 
 ## Requisitos
