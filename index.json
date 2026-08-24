@@ -1,8 +1,31 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-12",
+  "updated": "2026-08-24",
   "printer": { "model": "Bambu A1 mini", "slicer": "Bambu Studio", "bed_mm": [180, 180, 180], "comfort_limit_mm": 170 },
   "projects": [
+    {
+      "id": "emergency-nfc-card-01",
+      "category": "cartoes",
+      "path": "cartoes/emergency-nfc-card-01",
+      "scad": "cartoes/emergency-nfc-card-01/emergency-nfc-card-01.scad",
+      "status": "em-andamento",
+      "description": "Cartao de emergencia fino no formato bancario ISO ID-1. Frente com dados medicos essenciais e contato de emergencia em baixo-relevo; verso com cavidade aberta para colar uma tag NFC circular adesiva. CPF e WhatsApp pessoal ficam somente no NFC, sem exposicao permanente no plastico. Peca unica, sem suporte.",
+      "parts": { "card": 1 },
+      "print_jobs": [
+        { "file": "3mf/emergency-nfc-card-01.3mf", "contents": "1 cartao, frente apoiada na placa e rebaixo NFC para cima, sem suporte", "footprint_mm": [85.6, 53.98, 1.2] }
+      ],
+      "assembled_closed_mm": [85.6, 53.98, 1.2],
+      "key_measures": {
+        "padrao": "ISO/IEC 7810 ID-1",
+        "cartao_mm": [85.6, 53.98, 1.2],
+        "raio_quinas_mm": 3.18,
+        "tag_nfc_medida_real_mm": { "formato": "circular adesiva", "diametro": 27.0, "espessura": "nao medida" },
+        "rebaixo_tag_mm": { "diametro": 27.4, "profundidade": 0.3, "folga_por_lado": 0.2, "piso_restante": 0.9, "parede_minima_sob_texto_sobreposto": 0.66 },
+        "baixo_relevo_texto_mm": 0.24
+      },
+      "hardware": "1 tag NFC adesiva circular de diametro real 27mm, instalada depois da impressao",
+      "notes": "A tag foi medida em diametro pelo usuario em 2026-08-23; a espessura nao foi medida, entao tag_recess_depth=0.30mm e um primeiro ajuste parametrico. Imprimir com a frente na placa lisa e o rebaixo NFC para cima. Os textos sao gravados, nao aumentam a espessura. Ainda nao validado no teste fisico nem na carteira. Dados pessoais deliberadamente presentes no .scad por pedido do usuario; nao duplicados aqui alem da descricao funcional."
+    },
     {
       "id": "bgs-stand-01",
       "category": "organizadores_tcg",

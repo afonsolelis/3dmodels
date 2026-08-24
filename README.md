@@ -21,6 +21,8 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 ├── index.json           # catálogo machine-readable de todos os projetos
 ├── cardholders/         # porta-cartas abertos e torres de sleeve (pilha à vista)
 │   └── README.md
+├── cartoes/             # cartões utilitários finos (emergência, NFC, identificação)
+│   └── README.md
 ├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
 │   └── README.md
 ├── organizadores_tcg/   # organizadores de cartas soltas, sleeved e slabs graduadas
