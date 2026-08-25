@@ -369,6 +369,66 @@
       "reference_photos": "Auxiliaries/Model Pictures/ dentro do Porta_carte_PSA_x10.3mf mostram o original impresso e o leque de slabs — e a prova de que o manuseio e por leque, nao por pinca entre vizinhas"
     },
     {
+      "id": "dragon-01",
+      "category": "figures",
+      "path": "figures/dragon-01",
+      "scad": "figures/dragon-01/dragon-01.scad",
+      "status": "em-andamento",
+      "description": "Dragão sentinela decorativo em estilo low-poly, de UMA peça: corpo agachado, pescoço elevado, focinho com narinas, olhos em relevo, dois pares de chifres, quatro patas, cauda enrolada e asas dobradas para trás. As duas membranas descem até a base e têm nervuras salientes, então não nascem como ilhas no ar. Base hexagonal chanfrada com 17 células de colmeia em baixo-relevo; quatro escamas hexagonais no peito repetem a identidade visual do repo. Modelo inteiramente original e paramétrico em OpenSCAD.",
+      "parts": { "dragon": 1 },
+      "print_jobs": [
+        { "file": "3mf/dragon-01-plate.3mf", "contents": "1 dragão, base na mesa e cabeça para +Y. Job de geometria em orientação final; no Bambu Studio usar PLA, 0.16-0.20mm, 3 paredes, 12-15% gyroid e suporte orgânico SOMENTE NA MESA sob barriga/queixo. Não preencher o vão entre asa e corpo", "footprint_mm": [108.0, 110.2, 99.8] }
+      ],
+      "assembled_closed_mm": [108.0, 110.2, 99.8],
+      "key_measures": {
+        "envelope_medido_na_malha_mm": [108.0, 110.231, 99.835],
+        "bounds_mm": { "x": [-54.0, 54.0], "y": [-50.507, 59.724], "z": [0.0, 99.835] },
+        "base_mm": [108.0, 101.0, 5.0],
+        "base_primeira_camada_mm2": 7883,
+        "membrana_da_asa_mm": 2.8,
+        "varredura_da_asa_graus": 20,
+        "colmeia_celulas_visiveis": 17,
+        "colmeia_profundidade_mm": 0.65,
+        "malha": { "triangulos": 7910, "vertices_unicos": 3937, "superficies_conectadas": 1, "closed_2_manifold": true },
+        "area_virada_pra_baixo_alem_de_45_graus_mm2": 1749.6
+      },
+      "hardware": "nenhum",
+      "material_estimado": { "volume_solido_cm3": 131.52, "obs": "volume geométrico fechado medido no STL; consumo real depende de paredes, infill e suporte do fatiador" },
+      "notes": "EXPORT VALIDADO: OpenSCAD Simple=yes, Volumes=2 (um sólido + exterior); STL estritamente 2-manifold, uma superfície conectada e 11.865 arestas com incidência exatamente 2; 3MF é ZIP válido, unidade em milímetros e um objeto. Duas células da colmeia são omitidas sob as patas traseiras de propósito: quando existiam, o pé selava o sulco de 0.65mm e criava duas microcavidades internas. AUDITORIA DE BALANÇO: 1749.6mm2 de faces descendentes acima do limite de 45 graus, concentradas principalmente sob barriga/pernas em z=10-20 e sob cabeça/queixo em z=60-70; para acabamento previsível, usar suporte orgânico somente na mesa. As asas são paredes quase verticais e chegam à base; não encher entre asa e corpo. Não reduzir abaixo de 80%: a membrana de 2.8mm cairia para 2.24mm e garras/pontas ficariam finas para bico 0.4mm. Ainda NÃO validado em impressão física."
+    },
+    {
+      "id": "pokemon-coin-binder-01",
+      "category": "coin_holders",
+      "path": "coin_holders/pokemon-coin-binder-01",
+      "scad": "coin_holders/pokemon-coin-binder-01/pokemon-coin-binder-01.scad",
+      "status": "em-andamento",
+      "description": "Insert em formato de carta Pokemon para guardar uma moeda grande em um bolso de pagina plastica 3x3. A moeda e o aro ficam no mesmo plano; a pagina retem pelas duas faces. Remodelado do zero em OpenSCAD a partir da medida real da moeda, sem importar os STL legados da pasta. Abertura com 0.2mm de folga radial e chanfro nas duas faces. Inclui job unitario de teste e chapa de 3 em packing assimetrico dentro da zona confortavel da A1 mini.",
+      "parts": { "holder": 1 },
+      "print_jobs": [
+        { "file": "3mf/pokemon-coin-binder-01.3mf", "contents": "1 insert para validar abertura e bolso da pagina antes de imprimir o conjunto", "footprint_mm": [63.0, 88.0, 2.0] },
+        { "file": "3mf/pokemon-coin-binder-01-x3.3mf", "contents": "3 inserts: um em retrato a esquerda e dois em paisagem a direita, vao de 2mm; imprimir tres vezes para preencher uma pagina 3x3", "footprint_mm": [153.0, 128.0, 2.0] }
+      ],
+      "assembled_closed_mm": [63.0, 88.0, 2.0],
+      "capacity": "1 moeda Pokemon de diametro 51.4mm por insert; 3 por job principal",
+      "key_measures": {
+        "moeda_real_mm": { "diametro": 51.4, "espessura": 2.7 },
+        "medido_em": "2026-08-23 pelo usuario",
+        "insert_mm": [63.0, 88.0, 2.0],
+        "abertura_cilindrica_mm": 51.8,
+        "folga_mm": { "diametral": 0.4, "radial": 0.2 },
+        "abertura_na_face_mm": 52.8,
+        "chanfro_por_face_mm": 0.5,
+        "raio_dos_cantos_mm": 4.0,
+        "aro_minimo_mm": 5.1,
+        "moeda_sobressai_por_face_mm": 0.35,
+        "plate3_mm": [153.0, 128.0, 2.0],
+        "malha_unitaria": { "triangulos": 2064, "vertices_unicos": 1032, "superficies_conectadas": 1, "closed_2_manifold": true }
+      },
+      "hardware": "pagina plastica 3x3 de fichario (nao inclusa); nenhum fixador",
+      "material_estimado": { "holder_cm3": 6.81, "holder_g_pla_solido": 8.44, "plate3_cm3": 20.42, "plate3_g_pla_solido": 25.31 },
+      "notes": "NAO E SNAP-FIT: fora da pagina a moeda passa livre pela abertura. Isso e intencional para nao marcar a borda nem depender de linguetas finas; a folha plastica faz a retencao. A moeda e o insert nao se empilham: ficam lado a lado no mesmo plano, portanto o conjunto continua com espessura maxima de 2.7mm. HOLDER VALIDADO NA MALHA: bbox 63x88x2, uma superficie conectada e todas as 3.096 arestas com incidencia exatamente 2. PLATE3 VALIDADO: bbox 153x128x2, 3 componentes separados, 6.192 triangulos; ambos os 3MF sao ZIP validos. Imprimir primeiro o job unitario, porque o tamanho interno do bolso da pagina do usuario ainda nao foi medido. Ainda NAO validado em teste fisico."
+    },
+    {
       "id": "ring-01",
       "category": "rings",
       "path": "rings/ring-01",

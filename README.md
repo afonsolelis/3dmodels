@@ -23,7 +23,11 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 │   └── README.md
 ├── cartoes/             # cartões utilitários finos (emergência, NFC, identificação)
 │   └── README.md
+├── coin_holders/        # inserts de moeda para páginas de fichário (+ STL de terceiros)
+│   └── README.md
 ├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
+│   └── README.md
+├── figures/             # figuras decorativas e miniaturas
 │   └── README.md
 ├── jogos/               # jogos de mesa completos e componentes jogáveis
 │   └── README.md
@@ -36,8 +40,6 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 ├── suportes/            # suportes e apoios de mesa (controle de videogame, etc.)
 │   └── README.md
 ├── bumpers/             # (só .3mf de terceiros — bumpers de slab graduado)
-│   └── README.md
-├── coin_holders/        # (só STL de terceiros — suportes de moeda de Pokémon)
 │   └── README.md
 ├── diversos/            # (só .3mf de terceiros, sem modelo paramétrico)
 │   └── README.md
