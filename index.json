@@ -332,7 +332,7 @@
       "scad": "organizadores_tcg/psa-box-01/psa-box-01.scad",
       "status": "em-andamento",
       "derived_from": "organizadores_tcg/Porta_carte_PSA_x10.3mf (modelo de terceiro; geometria das vagas obtida por engenharia reversa da malha)",
-      "description": "Caixa grande de slabs PSA NUAS (sem bumper/capa): 2 filas de 19 vagas = 38 slabs, aproveitando a cama inteira da AD5X. Base alta com pente de nervuras nas pontas das canaletas + tampa telescopica que fecha lisa por fora. FECHADA CONTRA LUZ (slab graduada desbota com UV): a colmeia hexagonal da identidade do repo entra em BAIXO RELEVO na face externa, nada passante — de fora o desenho e o mesmo, de dentro nao entra luz. Acompanha um gabarito de 3 vagas pra provar o encaixe da slab antes da caixa grande.",
+      "description": "Caixa grande de slabs PSA NUAS (sem bumper/capa): 2 filas de 19 vagas = 38 slabs. Dimensionada para a cama antiga de 180x180; na AD5X (220) sobra folga em volta. Base alta com pente de nervuras nas pontas das canaletas + tampa telescopica que fecha lisa por fora. FECHADA CONTRA LUZ (slab graduada desbota com UV): a colmeia hexagonal da identidade do repo entra em BAIXO RELEVO na face externa, nada passante — de fora o desenho e o mesmo, de dentro nao entra luz. Acompanha um gabarito de 3 vagas pra provar o encaixe da slab antes da caixa grande.",
       "parts": { "base": 1, "lid": 1, "test_gauge": 1 },
       "print_jobs": [
         { "file": "3mf/psa-box-01-test.3mf", "contents": "gabarito de 3 vagas — IMPRIMIR PRIMEIRO, com a slab na mao", "footprint_mm": [90.0, 31.1, 45.0] },
@@ -569,6 +569,36 @@
         "filament_changes": 230
       },
       "notes": "VALIDADO NO FATIADOR OFICIAL: o FlashForge Print reconhece envelope 168.0 x 248.2 x 46.0mm, 50.396 triângulos, 65 volumes e manifold=yes. O G-code de auditoria usa T0 e T1 em todas as 230 camadas, gera 230 trocas, support=0 e bridge_no_support=0. As duas cores NÃO são dois objetos soltos: são componentes de uma montagem 3MF única, com metadados de extrusor 1/2; isso corrige um teste intermediário em que o FlashForge Print recentrou cada objeto independente e deslocou as casas. A cor clara é laje contínua; as 32 casas escuras são inserts de 0.6mm no topo, separados por filete claro de 0.4mm. Ordem inicial conferida: damas na própria cor e casa clara à direita de cada jogador. As 32 peças têm base de 13.6 a 16.2mm e ficam a passo de 20mm, sem colisão. BLOQUEIO ATUAL: a placa unica tem 248.2mm em Y e NAO CABE na cama de 220 da FlashForge AD5X (unica impressora do usuario); ela foi dimensionada para a Creality K2, de 260. A geometria das pecas e do tabuleiro cabe folgada — o que precisa mudar e a DISPOSICAO: dois jobs, tabuleiro (168x168) e as 32 pecas. PENDÊNCIA: ainda não impresso fisicamente — validar adesão das 32 bases, planicidade do tabuleiro e legibilidade das peças pequenas no primeiro job. Estimativas de tempo/peso incluem purga e mudam com perfil/filamento."
+    },
+    {
+      "id": "slab-tile-01",
+      "category": "organizadores_tcg",
+      "path": "organizadores_tcg/slab-tile-01",
+      "scad": "organizadores_tcg/slab-tile-01/slab-tile-01.scad",
+      "status": "em-andamento",
+      "description": "Sistema MODULAR de slabs graduadas: cada peca impressa e um TILE de UMA slab, e os tiles encaixam lado a lado por rabo-de-andorinha formando uma pagina de fichario 2x2 (4 slabs), 3x3 ou 4x4. As paginas empilham em torre e cada uma sai inteira da torre, com as slabs a vista pela janela da frente. O tile e de uma slab so porque a pagina 2x2 mede 198.6 x 296.6mm e NAO CABE em cama nenhuma; o tile cabe duas por chapa. ACEITA A FAIXA TODA PSA/CGC/TAG/SGC (fora Beckett e ARS) por meio de TRES MOLAS DE LAMINA EM ARCO: duas laterais de curso 4.15mm que autocentram a slab em X (sao 7mm de diferenca entre a PSA de 82 e a SGC de 89) e uma no topo de curso 2.9mm que encosta a slab no piso do bolso. Colmeia hexagonal em baixo relevo na moldura da frente.",
+      "parts": { "tile": 1, "test_gauge": 1 },
+      "print_jobs": [
+        { "file": "3mf/slab-tile-01-gabarito.3mf", "contents": "GABARITO, IMPRIMIR PRIMEIRO — 2 fatias finas do tile (mesma pegada em XY, mesmo bolso/molas/encaixe) pra provar o aperto da slab e o clique do encaixe", "footprint_mm": [209.9, 155.2, 7.7] },
+        { "file": "3mf/slab-tile-01-x2.3mf", "contents": "2 tiles ENTRELACADOS (o macho de um passa na altura da femea do outro), face da frente na cama, bolso pra cima, sem suporte", "footprint_mm": [209.9, 155.2, 12.6] }
+      ],
+      "tile_mm": [99.3, 148.3, 11.4],
+      "tile_bbox_com_encaixes_mm": [106.2, 155.2, 12.6],
+      "pagina_2x2_montada_mm": [198.6, 296.6, 11.4],
+      "passo_da_torre_mm": 11.4,
+      "key_dims": {
+        "envelope_slab_max_mm": [89.0, 138.0, 8.0],
+        "envelope_slab_min_mm": [82.0, 136.0, 6.0],
+        "graduadoras_aceitas": ["PSA", "CGC", "TAG", "SGC"],
+        "graduadoras_fora": ["BGS/Beckett", "ARS"],
+        "bolso_mm": [90.3, 139.3, 8.9],
+        "janela_mm": [72.0, 126.0],
+        "curso_das_molas_mm": { "lateral": 4.15, "topo": 2.9 },
+        "rampa_de_entrada": "6mm a ~35 graus da vertical",
+        "encaixe": "rabo-de-andorinha deslizado em Z, avanco 3.0mm, pescoco 7 / cabeca 12, folga 0.15/lado, detente esferico de 0.45mm",
+        "jobs_por_grade": { "2x2": 2, "3x3": 5, "4x4": 8 }
+      },
+      "notes": "MEDIDAS NAO VIERAM DA REGUA DO USUARIO — sao de catalogo/levantamento, como no psa-box-01. Os cinco numeros que mandam (slab_w_max/h_max/t_max e slab_w_min/h_min) estao no topo do .scad e todo o resto e derivado. Verificacoes geometricas feitas no modelo, no idioma do penny-holder-01: part=fit_x e fit_y saem VAZIOS (tiles vizinhos nao se atravessam), part=gap_x sai NAO-VAZIO (o macho ocupa mesmo a femea), part=probe_gap sai VAZIO (existe vao de flexao atras da lamina) e part=probe_blade sai NAO-VAZIO (a lamina existe). O tile e solido unico (Volumes: 2). A chapa foi de 212.5 pra 209.9mm entrelacando os dois tiles, o que a poe dentro do alvo de 210. Deformacao da lamina lateral no curso maximo ~0.7%, bem abaixo do escoamento do PLA. PENDENCIA: nao impresso — rodar o gabarito com uma slab na mao antes dos tiles."
     }
   ],
   "third_party": [
