@@ -23,7 +23,11 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 │   └── README.md
 ├── cartoes/             # cartões utilitários finos (emergência, NFC, identificação)
 │   └── README.md
+├── coin_holders/        # inserts para moedas em paginas plasticas de fichario
+│   └── README.md
 ├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
+│   └── README.md
+├── figures/             # figuras decorativas e miniaturas
 │   └── README.md
 ├── jogos/               # jogos de mesa completos e componentes jogáveis
 │   └── README.md
