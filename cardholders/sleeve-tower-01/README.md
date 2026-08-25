@@ -7,7 +7,7 @@ seguram a pilha. Piso de 10mm que é lastro e, embaixo dele, um **ressalto de
 empilhamento**. Peça única, imprime **em pé, na orientação de uso, sem suporte**.
 
 É a variante ALTA do
-[`../../organizadores_tcg/PennySleeveHolderStacking_V2.3mf`](../../organizadores_tcg/)
+[`../PennySleeveHolderStacking_V2.3mf`](../PennySleeveHolderStacking_V2.3mf)
 (Sazabi, MakerWorld, MakerWorld Exclusive License — **arquivo de terceiro, não
 redistribuível**; serviu só de referência de geometria, este `.scad` é
 reconstrução paramétrica própria e nada da malha foi copiado).

@@ -21,9 +21,10 @@ organização de sleeve/toploader, [`organizadores_tcg/`](../organizadores_tcg/)
 |---|---|---|---|
 | `card_holder_with_feet.3mf` | Don Julio (MakerWorld) | Standard Digital File License | **Impresso e reprovado no teste físico: fraco.** É a referência de geometria do `cardholder-01`. Não redistribuir. |
 
-A referência do `sleeve-tower-01` mora em outra pasta:
-[`../organizadores_tcg/PennySleeveHolderStacking_V2.3mf`](../organizadores_tcg/)
-(Sazabi, MakerWorld Exclusive License — **não redistribuir**).
+A referência de geometria do `sleeve-tower-01` é o
+[`PennySleeveHolderStacking_V2.3mf`](./PennySleeveHolderStacking_V2.3mf)
+(Sazabi, MakerWorld Exclusive License — **não redistribuir**); as medidas ficaram
+registradas no [`index.json`](../index.json) e no README do modelo.
 
 ## O que define um porta-cartas aberto
 

@@ -9,10 +9,8 @@ Bambu Lab A1 mini.
 | Modelo | Status | Descrição |
 |---|---|---|
 | [psa-box-01](./psa-box-01/) | 🚧 em andamento | caixa de 38 slabs PSA nuas em duas filas de 19, base + tampa telescópica, **fechada contra luz** (colmeia em baixo relevo, nada passante); ocupa a cama inteira da A1 mini (176.4 × 175.1mm, 2 jobs + gabarito de teste) |
-| [psa-bumper-01](./psa-bumper-01/) | 🚧 em andamento | bumper clamshell de VITRINE pra UMA slab PSA: duas metades iguais de moldura, janela de vão único (carta + etiqueta juntas, dá pra ver frente e dorso), 10 pares de ímã Ø4x2 + degrau perimetral de alinhamento; aro de 9mm, 103.1 × 158.1 × 11.5mm fechado, 1 moldura por chapa (imprimir a mesma chapa 2x). **Acompanha gabarito de medição do slab (13.4g) que é o job a imprimir PRIMEIRO** — a chapa da moldura é provisória até a medida voltar. Não é à prova de queda, por escopo |
 | [penny-holder-01](./penny-holder-01/) | 🚧 em andamento | caixa de cartas com **penny sleeve deitadas na aresta longa, em 2 camadas** (~300 cartas), derivada do `PennySleeveHolder_Stackable_Colmeia_80mm.3mf` (Sazabi) — mesma pegada de 74.2 × 102.7, mas **150mm de altura** em vez de 80. Gaveta de fichário em pé: boca aberta em cima e **janela de vão contínuo na frente, do piso ao alto, sem travessa no meio**; quem amarra os lados é a **cinta de 8mm** que fecha a volta no topo, o piso em colmeia de 10mm e os dois montantes de 8mm que viram flange de canto em L. Empilhável (ressalto de 3mm + chaveta que só deixa encaixar numa orientação). Colmeia passante nas laterais e no fundo (47 furos) com **bico de 45°**, colmeia regular de 24mm no piso. ~97g, sem suporte. ⚠️ A medida da carta (66 × 91) é **catálogo, não régua** — ver o bloco abaixo. ⚠️ Com 2 camadas e sem prateleira, **a camada de baixo é arquivo, não é a de giro** (ver README do modelo) |
 | [bgs-stand-01](./bgs-stand-01/) | 🚧 em andamento | suporte de mesa pra UMA slab **Beckett (BGS)**, inclinada 12°, em **duas peças (suporte + tampa que encaixa)**, ambas **sem suporte de impressão**. **Primeiro modelo do repo com medida real de PAQUÍMETRO** (82.5 × 130.2 × 8.5, medida em 2026-08-11). A slab fica presa nos quatro lados e só sai por cima — puxa a tampa e ela desliza pra fora. Como a tampa é removível, a slab não precisa bascular pra entrar: isso libera os trilhos a terem aba (captura de verdade) e deixa a **tampa fechar ACIMA da aresta da slab, sem cobrir nada da face — a etiqueta de nota fica 100% visível**. Encaixe por ranhura sobre o painel + batente nos topos dos trilhos, 0.25mm/lado. Chapa 56.8 × 87.3 × 142.6mm, 0.0mm² de balanço nas duas peças |
-| [psa-bumper-02](./psa-bumper-02/) | 🚧 em andamento | bumper clamshell de VITRINE pra UMA slab PSA, reprojeto em **PLA rígido** do `Trading_card_bumper_-_PSA(2).3mf` (que é peça única em TPU e depende de um lábio flexível de 1mm — em PLA não funciona). Duas metades iguais que fecham por cima e por baixo e travam por **4 pinos Ø3 impressos** de press-fit em padrão diagonal (2 pinos + 2 furos por metade, **sem ímã e sem parafuso**), alinhadas por degrau perimetral de 180.7mm; janela nos dois lados, 52 hexágonos em baixo relevo; aro de 9mm, 98.87 × 153.97 × 11.13mm fechado, **30.9g por metade**. **A diagonal da peça é 182.98mm, então duas metades NUNCA dividem chapa** — 1 metade por job, imprimir a mesma chapa 2x. ⚠️ Usa o envelope de slab do arquivo de origem (80.27 × 135.37 × 5.83), que é o **outlier pequeno** das 6 fontes — escolha consciente do usuário, e o risco está assumido. Não é à prova de queda, por escopo |
 
 ## Os `.3mf` soltos na raiz desta pasta
 
@@ -28,9 +26,10 @@ embutido).
 > Exclusive* ou *BY-NC-SA*, que **não permitem redistribuição**. Foi por isso
 > que o repositório virou **privado** em 2026-08-09. Não republicar.
 
-O `psa-bumper-01` também: ele é o `Main.3mf` (PSA Graded Card Case, do
-MaskForge) sem a travessa central da janela e sem tampa deslizante — virou
-clamshell de duas metades iguais fechado por ímã.
+> **Nota 2026-08:** os modelos paramétricos `psa-bumper-01` e `psa-bumper-02`
+> foram **removidos do repo** (substituídos pelos bumpers de terceiro em
+> [`bumpers/`](../bumpers/)). O bloco de medidas de slab abaixo fica como
+> **registro histórico**; dos modelos PSA paramétricos, só o `psa-box-01` continua.
 
 > **Atualização 2026-08-11 — a primeira medida real chegou.** O usuário mediu
 > uma slab **Beckett (BGS)** com **paquímetro**: **82.5 × 130.2 × 8.5mm**. É a
@@ -77,15 +76,9 @@ clamshell de duas metades iguais fechado por ímã.
 > mais de largura de carta cresce 2mm na altura da caixa**, e o teto de 180 da
 > A1 mini só é atingido com `card_w = 81`.
 >
-> Uma medida de régua resolve os três modelos de uma vez — e o `psa-bumper-01`
-> traz um **gabarito de medição** (`3mf/psa-bumper-01-gauge.3mf`, 13.4g) que
-> devolve largura, altura e espessura em uma impressão, com os números gravados
-> na peça. **É o job a imprimir primeiro**, e o número que sair dele serve para
-> os três modelos. Nos três casos é trocar os parâmetros de slab e re-exportar.
->
-> O envelope do `psa-bumper-01` (84.5 × 139.5 × 7.2) é quase o **mínimo** das 5
-> fontes: 2 delas não entram, e em Z 7.5mm de cavidade contra 0.30" = 7.62mm já
-> dá interferência. Por isso a chapa da moldura está marcada como PROVISÓRIA.
+> Uma medida de régua resolve o `psa-box-01` (e os outros modelos de slab PSA
+> que vierem a existir) de uma vez: é trocar os parâmetros de slab e re-exportar.
+> O `psa-box-01` já traz seu próprio **gabarito de teste** como job de medição.
 
 O `psa-box-01` nasceu de um deles: a geometria das vagas foi tirada por
 engenharia reversa da malha do `Porta_carte_PSA_x10.3mf`, e as medidas da

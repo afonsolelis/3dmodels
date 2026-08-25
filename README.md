@@ -35,9 +35,16 @@ vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência
 │   └── README.md
 ├── suportes/            # suportes e apoios de mesa (controle de videogame, etc.)
 │   └── README.md
+├── bumpers/             # (só .3mf de terceiros — bumpers de slab graduado)
+│   └── README.md
+├── coin_holders/        # (só STL de terceiros — suportes de moeda de Pokémon)
+│   └── README.md
 ├── diversos/            # (só .3mf de terceiros, sem modelo paramétrico)
+│   └── README.md
 ├── logistica_pokemon/   # (só .3mf de terceiros)
+│   └── README.md
 └── manutencao_bambu/    # (só .3mf de terceiros)
+    └── README.md
 ```
 
 Cada categoria de objeto (deckboxes, suportes, organizadores, etc.) vive na

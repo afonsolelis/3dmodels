@@ -26,7 +26,7 @@
 //      dão 297mm de coluna, não 300: a de cima afunda os 3mm do ressalto.
 //
 // DE ONDE VEIO, E POR QUE ESTE ARQUIVO NÃO É O ORIGINAL
-// Referência de geometria: `../../organizadores_tcg/PennySleeveHolderStacking_V2.3mf`
+// Referência de geometria: `../PennySleeveHolderStacking_V2.3mf`
 // ("Stackable Penny Sleeve Holder", Sazabi, MakerWorld, MakerWorld Exclusive
 // License — arquivo de TERCEIRO, NÃO redistribuível; é por essa família de
 // licenças que o repo virou privado em 2026-08-09). Este .scad é reconstrução
