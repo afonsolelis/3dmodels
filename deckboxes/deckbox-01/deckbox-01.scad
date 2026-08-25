@@ -23,8 +23,8 @@
 //   openscad -o stl/deckbox-01-tray.stl    -D 'part="tray"'    deckbox-01.scad
 //   openscad -o stl/deckbox-01-sleeve.stl  -D 'part="sleeve"'  deckbox-01.scad
 //   openscad -o stl/deckbox-01-basket.stl  -D 'part="basket"'  deckbox-01.scad
-// A pasta 3mf/ tem SÓ os 2 arquivos de impressão (cama Bambu A1 mini,
-// 180x180): a chapa "plate" (capa em pé + 2 cestinhas, ~155x161mm) e a
+// A pasta 3mf/ tem SÓ os 2 arquivos de impressão (cama FlashForge AD5X,
+// 220x220): a chapa "plate" (capa em pé + 2 cestinhas, ~155x161mm) e a
 // bandeja à parte (136x151mm — não cabe junto). Conjunto completo = 2 jobs:
 //   openscad -o 3mf/deckbox-01-plate.3mf   -D 'part="plate"'   deckbox-01.scad
 //   openscad -o 3mf/deckbox-01-tray.3mf    -D 'part="tray"'    deckbox-01.scad
@@ -342,7 +342,7 @@ if (part == "tray") {
 } else if (part == "basket") {
     basket();
 } else if (part == "plate") {
-    // chapa pra cama 180x180 (A1 mini), já na orientação de impressão. A
+    // chapa pra cama 220x220 (AD5X), já na orientação de impressão. A
     // capa fica EM PÉ, apoiada na ponta fechada — o tubo imprime sem
     // suporte. Com 1 deck (deckbox-02) o conjunto INTEIRO cabe numa chapa
     // só (~161x162mm); com 2 decks a bandeja não cabe junto e imprime à

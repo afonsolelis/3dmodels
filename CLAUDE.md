@@ -1,9 +1,11 @@
 # 3dmodels — guia do agente
 
-Modelos paramétricos em OpenSCAD pra impressão 3D. Impressora alvo: **Bambu A1
-mini** (cama 180x180x180 — mirar footprint ≤170x170 pra sobrar margem de brim).
-O usuário abre os `.3mf` direto no Bambu Studio e imprime; o feedback dele é
-do TESTE FÍSICO da peça na mão.
+Modelos paramétricos em OpenSCAD pra impressão 3D. Impressora alvo (a ÚNICA
+do usuário): **FlashForge AD5X** — cama 220x220x220, bico 0.4, PEI flex, e
+**IFS de 4 cores** pra multicolor. Mirar footprint ≤210x210 pra sobrar margem
+de brim. O usuário abre os `.3mf` direto no **Flash Studio Desktop**
+(ex-Orca-Flashforge, fork do OrcaSlicer) e imprime; o feedback dele é do
+TESTE FÍSICO da peça na mão.
 
 ## Estrutura e contrato de pastas
 
@@ -66,7 +68,7 @@ modeler termina o relatório pedindo o devops; atenda esse pedido.
 
 **Projeto novo:**
 1. `modeler` — modela tudo: medidas reais → .scad → preview → STL →
-   bed-check (A1 mini) → 3MF com a melhor disposição → index.json → README
+   bed-check (AD5X) → 3MF com a melhor disposição → index.json → README
 2. `print-review` — audita função física, imprimibilidade e dimensões
 3. `devops` — gate de qualidade, commits nos padrões e push
 

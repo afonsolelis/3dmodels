@@ -2,13 +2,13 @@
 
 Caixas e organizadores para cartas de TCG — soltas, com sleeve, em toploader
 ou **graduadas (slabs PSA/BGS)** — modelados em OpenSCAD e impressos na
-Bambu Lab A1 mini.
+FlashForge AD5X.
 
 ## Modelos
 
 | Modelo | Status | Descrição |
 |---|---|---|
-| [psa-box-01](./psa-box-01/) | 🚧 em andamento | caixa de 38 slabs PSA nuas em duas filas de 19, base + tampa telescópica, **fechada contra luz** (colmeia em baixo relevo, nada passante); ocupa a cama inteira da A1 mini (176.4 × 175.1mm, 2 jobs + gabarito de teste) |
+| [psa-box-01](./psa-box-01/) | 🚧 em andamento | caixa de 38 slabs PSA nuas em duas filas de 19, base + tampa telescópica, **fechada contra luz** (colmeia em baixo relevo, nada passante); 176.4 × 175.1mm, 2 jobs + gabarito de teste (folgado na cama de 220 da AD5X) |
 | [penny-holder-01](./penny-holder-01/) | 🚧 em andamento | caixa de cartas com **penny sleeve deitadas na aresta longa, em 2 camadas** (~300 cartas), derivada do `PennySleeveHolder_Stackable_Colmeia_80mm.3mf` (Sazabi) — mesma pegada de 74.2 × 102.7, mas **150mm de altura** em vez de 80. Gaveta de fichário em pé: boca aberta em cima e **janela de vão contínuo na frente, do piso ao alto, sem travessa no meio**; quem amarra os lados é a **cinta de 8mm** que fecha a volta no topo, o piso em colmeia de 10mm e os dois montantes de 8mm que viram flange de canto em L. Empilhável (ressalto de 3mm + chaveta que só deixa encaixar numa orientação). Colmeia passante nas laterais e no fundo (47 furos) com **bico de 45°**, colmeia regular de 24mm no piso. ~97g, sem suporte. ⚠️ A medida da carta (66 × 91) é **catálogo, não régua** — ver o bloco abaixo. ⚠️ Com 2 camadas e sem prateleira, **a camada de baixo é arquivo, não é a de giro** (ver README do modelo) |
 | [bgs-stand-01](./bgs-stand-01/) | 🚧 em andamento | suporte de mesa pra UMA slab **Beckett (BGS)**, inclinada 12°, em **duas peças (suporte + tampa que encaixa)**, ambas **sem suporte de impressão**. **Primeiro modelo do repo com medida real de PAQUÍMETRO** (82.5 × 130.2 × 8.5, medida em 2026-08-11). A slab fica presa nos quatro lados e só sai por cima — puxa a tampa e ela desliza pra fora. Como a tampa é removível, a slab não precisa bascular pra entrar: isso libera os trilhos a terem aba (captura de verdade) e deixa a **tampa fechar ACIMA da aresta da slab, sem cobrir nada da face — a etiqueta de nota fica 100% visível**. Encaixe por ranhura sobre o painel + batente nos topos dos trilhos, 0.25mm/lado. Chapa 56.8 × 87.3 × 142.6mm, 0.0mm² de balanço nas duas peças |
 
@@ -74,7 +74,7 @@ embutido).
 > 8`, profundidade = `91 + 6,5 + 5,2` — então trocar `card_w`/`card_h` e
 > re-exportar conserta o modelo todo. Em Z o efeito é alavancado: **cada 1mm a
 > mais de largura de carta cresce 2mm na altura da caixa**, e o teto de 180 da
-> A1 mini só é atingido com `card_w = 81`.
+> AD5X só é atingido com `card_w = 81`.
 >
 > Uma medida de régua resolve o `psa-box-01` (e os outros modelos de slab PSA
 > que vierem a existir) de uma vez: é trocar os parâmetros de slab e re-exportar.

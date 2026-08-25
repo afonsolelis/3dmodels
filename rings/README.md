@@ -1,7 +1,7 @@
 # Rings
 
 Anéis paramétricos (tapete de jogo, organização, etc.), modelados em OpenSCAD
-e impressos na Bambu Lab.
+e impressos na FlashForge.
 
 ## Modelos
 

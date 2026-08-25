@@ -27,7 +27,7 @@
 //    dois juntos) com as BOCAS viradas pra fatia de placas — é a parede de
 //    placas que tampa os contêineres, então o deck não escorrega pra fora da
 //    cestinha no transporte. Em pé eles não cabiam: o interior passaria de
-//    170 e estouraria a cama da A1 mini.
+//    170 e estouraria a cama da AD5X.
 //
 //    ONDE VÃO OS DADOS: NÃO dentro da cesta do descarte — deitada, ela perde
 //    o dado pelos escalopes das paredes. A cesta tem só 30mm de fundo numa
@@ -94,7 +94,7 @@
 //   openscad -o stl/pokemon-game-case.stl         -D 'part="game_case"'    pokemon-game-case.scad
 //   openscad -o stl/pokemon-game-lid.stl          -D 'part="case_lid"'     pokemon-game-case.scad
 //
-// 3MF — 3 jobs de impressão (cama Bambu A1 mini 180x180), TODOS sem suporte:
+// 3MF — 3 jobs de impressão (cama FlashForge AD5X 220x220), TODOS sem suporte:
 //   openscad -o 3mf/pokemon-game-case.3mf       -D 'part="plate_case"'       pokemon-game-case.scad
 //   openscad -o 3mf/pokemon-game-lid.3mf        -D 'part="plate_lid"'        pokemon-game-case.scad
 //   openscad -o 3mf/pokemon-game-containers.3mf -D 'part="plate_containers"' pokemon-game-case.scad
@@ -109,7 +109,7 @@
 //                      cima. É a única orientação sem suporte — com a saia
 //                      pra baixo o painel inteiro ficaria no ar. Custo: os
 //                      hexágonos rebaixados da cara de cima fecham com ponte
-//                      curta (0.6mm de altura, vão de 10mm), que a A1 mini
+//                      curta (0.6mm de altura, vão de 10mm), que a AD5X
 //                      faz limpo.
 //   plate_containers — cestinha do deck + cesta do descarte lado a lado,
 //                      ambas de boca pra cima.

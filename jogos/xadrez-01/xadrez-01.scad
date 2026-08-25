@@ -1,6 +1,6 @@
 // xadrez-01.scad
 // Xadrez compacto completo, desenhado para sair em UMA unica placa da
-// Creality K2 (260 x 260 mm): tabuleiro central + 32 pecas em quatro fileiras.
+// FlashForge AD5X (260 x 260 mm): tabuleiro central + 32 pecas em quatro fileiras.
 // A geometria e dividida em apenas dois corpos de cor:
 //   COR 1 = tabuleiro claro + 16 pecas claras
 //   COR 2 = 32 casas escuras + 16 pecas escuras
@@ -50,8 +50,13 @@ plate_y = 2 * (major_row_y + max_piece_r);
 plate_z = 46;
 
 assert(board_size == 168, "A grade deve continuar com 168 mm no total");
+// ATENCAO: 250 x 250 e o envelope da impressora ANTIGA (Creality K2, cama
+// 260). A chapa mede 168 x 248.2mm e NAO CABE na FlashForge AD5X (220 x
+// 220), a unica impressora atual. O assert segue no valor legado so pra
+// nao quebrar o export do arquivo historico — a placa unica precisa ser
+// RELAYOUTADA (tabuleiro num job, as 32 pecas noutro) antes de imprimir.
 assert(plate_x <= 250 && plate_y <= 250,
-       "A chapa ultrapassou o envelope seguro de 250 x 250 mm da K2");
+       "A chapa ultrapassou o envelope legado de 250 x 250 mm");
 assert(pawn_row_y - 6.8 > board_size / 2 + 4,
        "Os peoes ficaram perto demais do tabuleiro");
 assert(major_row_y - pawn_row_y > 2 * max_piece_r + 3,

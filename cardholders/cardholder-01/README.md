@@ -53,7 +53,7 @@ entrando e saindo por cima sem encostar em nada.
 - Fatias do STL conferidas nos 7 níveis críticos: pé, chapa, vão 1, cinta do
   meio, vão 2, cinta do topo, ponta da cantoneira
 - Níveis Z do sólido: `0, 4, 6, 26, 32, 52, 58, 62` — batem com o projeto
-- Bed-check A1 mini: 70×94×62 (1 unidade) e 146×94×62 (chapa de 2) → **ok**
+- Bed-check AD5X: 70×94×62 (1 unidade) e 146×94×62 (chapa de 2) → **ok**
 
 ## Arquivos
 

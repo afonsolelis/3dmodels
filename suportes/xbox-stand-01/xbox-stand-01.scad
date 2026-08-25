@@ -202,7 +202,7 @@
 //   é ~1,5mm MAIS LARGO em z=4..6 e ~1,3mm MAIS ESTREITO em z=22. É esse
 //   estreitamento lá em cima que come inserção — ver a faixa de encaixe.
 // - PISO 2,5mm, cradle_gap 124, boca 42x36, cradle_x_off 4,5, cradle_steps 24.
-// - CHAPA GIRADA 90°: os 170mm no eixo X. Na A1 mini quem corre é a CAMA
+// - CHAPA GIRADA 90°: os 170mm no eixo X. Na AD5X quem corre é a CAMA
 //   (eixo Y), então a peça comprida em X poupa inércia num job de 8 horas.
 //
 // SEM COLMEIA HEXAGONAL, e é EXCEÇÃO CONSCIENTE à regra 5 do CLAUDE.md: o
@@ -238,7 +238,7 @@ part = "plate"; // "stand" | "plate" (job cheio) | "gauge" (job de teste) | "cut
 // nunca por -D — os *_override só existem via -D e o is_undef() do ternário
 // é avaliado antes. Num arquivo novo ao lado deste:
 //   cradle_gap_override = 110; include <xbox-stand-01.scad>
-body_len   = is_undef(body_len_override) ? 170 : body_len_override; // mm, COMPRIMENTO (eixo Y do modelo) — é o maior eixo e vai no teto de conforto da A1 mini
+body_len   = is_undef(body_len_override) ? 170 : body_len_override; // mm, COMPRIMENTO (eixo Y do modelo) — é o maior eixo e vai no teto de conforto da AD5X
 body_depth = 60;   // mm, PROFUNDIDADE (eixo X), da frente (-X) pro fundo (+X) da mesa
 body_h     = 25;   // mm, ALTURA MÁXIMA do bloco — é a altura do COROAMENTO da abóbada, em x=0
 round_r    = 4;    // mm, raio dos cantos em planta E do rolamento da aresta de topo (é o mesmo, por construção)
@@ -271,8 +271,8 @@ gauge_z = 12.0;  // mm, altura do corte. Tem que ficar ABAIXO da faixa onde o pu
 /* [Posição na cama] */
 // O modelo é construído em volta da origem (bloco centrado em XY); as peças
 // de EXPORT saem giradas 90° (170 no eixo X) e centradas na cama, pra chapa
-// abrir pronta no Bambu Studio.
-bed_mm = 180; // mm, cama da A1 mini
+// abrir pronta no Flash Studio.
+bed_mm = 220; // mm, cama da AD5X
 
 /* [Qualidade] */
 $fn = 64;
@@ -395,7 +395,7 @@ assert(margin_x    >= 4.5, "borda estreita demais na profundidade: em TPU uma fi
 // curto, e nenhuma delas é ilha. Fatiado e contado, não estimado.
 assert(margin_end  >= 2.5, "borda estreita demais até a ponta do bloco: a plaquinha de ponta da última camada fica com menos de ~10 extrusões");
 assert(middle_flat >= 10,  "os dois berços se encostam: não sobra miolo entre eles");
-assert(max(body_len, body_depth) <= 170, "estoura o teto de conforto de 170mm da A1 mini");
+assert(max(body_len, body_depth) <= 170, "estoura o teto de conforto de 170mm da AD5X");
 assert(mouth_fillet < min(cradle_x_open, cradle_y_open) / 4, "filete de boca grande demais");
 assert(vault_rise > 0 && vault_rise < round_r, "flecha da abóbada fora de faixa (0 = topo chapado; >= round_r come o rolamento da aresta)");
 assert(gauge_z >= cradle_floor + 3, "corte do gabarito rente ao piso: o gabarito vira a peça inteira e não economiza nada");
@@ -544,7 +544,7 @@ module gauge() {
         }
 }
 
-// Peça de export: girada 90° (os 170mm no eixo X, que na A1 mini é o eixo
+// Peça de export: girada 90° (os 170mm no eixo X, que na AD5X é o eixo
 // que NÃO carrega a cama) e centrada na cama, pra chapa abrir pronta.
 module on_bed() { translate([bed_mm / 2, bed_mm / 2, 0]) rotate([0, 0, 90]) children(); }
 

@@ -3,7 +3,7 @@
 
 uso: overview.py saida.3mf peca1.stl peca2.stl ... [--cell 180] [--cols 4]
 
-Cada STL vira um OBJETO SEPARADO no 3MF (o Bambu Studio abre já dividido e
+Cada STL vira um OBJETO SEPARADO no 3MF (o Flash Studio abre já dividido e
 consegue distribuir nas plates sozinho), posicionado numa grade em que cada
 célula tem o tamanho da cama da impressora.
 

@@ -19,7 +19,7 @@ deckbox e porta-dados e um case que guarda tudo e vira bandeja de rolar dados.
 
 Pra comparar: playmat de torneio tem 610 x 356mm, e dois tabuleiros impressos
 que serviram de referência têm 570 x 250 e ~490 x 220 por jogador. O nosso
-fica no meio — e é o único que cabe placa por placa numa A1 mini.
+fica no meio — e é o único que cabe placa por placa numa AD5X.
 
 ## O campo
 
@@ -125,8 +125,8 @@ chão sólido dela, pela parede de trás do case e pela lateral da cestinha.
 
 `pokemon-game-overview.3mf` (na raiz do projeto, fora de `3mf/` porque **não
 é um job de impressão**) traz as **16 peças como objetos separados**, numa
-grade em que cada célula é uma cama da A1 mini. Abre num arquivo só e você vê
-o conjunto inteiro; no Bambu Studio, "Organizar tudo" distribui pelas plates
+grade em que cada célula é uma cama da AD5X. Abre num arquivo só e você vê
+o conjunto inteiro; no Flash Studio, "Organizar tudo" distribui pelas plates
 sozinho. Pra imprimir de verdade, prefira os arquivos de `3mf/`, que já saem
 na orientação certa e com as peças agrupadas como devem ser impressas.
 
@@ -134,19 +134,19 @@ Pra regerar depois de mudar alguma peça, veja `.claude/skills/overview/`.
 
 ## Impressão
 
-Cada placa é um job (não cabem duas na cama da A1 mini). São **15 jobs** no
+Cada placa é um job (não cabem duas na cama da AD5X). São **15 jobs** no
 total: 12 placas, os contêineres juntos, o case e a tampa. Tudo em `3mf/`.
 
 ### O jeito fácil: `pokemon-game-todas-as-plates.3mf`
 
 Abrir 15 arquivos na mão é chato, então tem também
-**`3mf/pokemon-game-todas-as-plates.3mf`**: um **projeto do Bambu Studio com
+**`3mf/pokemon-game-todas-as-plates.3mf`**: um **projeto do Flash Studio com
 as 15 plates dentro**, nomeadas na ordem de impressão. Abre uma vez, as
 plates aparecem na barra de baixo e você imprime uma de cada vez. É o mesmo
 formato do `diversos/Jabonera.3mf`.
 
 Ele não traz perfil de impressora/filamento embutido de propósito — vale o
-perfil que você já tem selecionado no Bambu Studio. Os 15 arquivos avulsos
+perfil que você já tem selecionado no Flash Studio. Os 15 arquivos avulsos
 continuam ali pra quando você quiser fatiar uma peça só.
 
 Pra regerar depois de mudar alguma peça, veja `.claude/skills/plates/`.

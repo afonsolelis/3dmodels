@@ -450,4 +450,4 @@ openscad -o /abs/.../corte.png -D 'part="cut_len"'   xbox-stand-01.scad  # os do
   então a posição dela entre z = 12 e z = 24 é *reconstruída*, não medida. Só
   com dados exatos de nervura a inserção fica em qualquer ponto de [9,5 ; 21,1].
 - O tempo e o peso de impressão são **estimativa calculada**, não saída de
-  fatiador. Abrir o 3MF no Bambu Studio confirma os dois.
+  fatiador. Abrir o 3MF no Flash Studio confirma os dois.

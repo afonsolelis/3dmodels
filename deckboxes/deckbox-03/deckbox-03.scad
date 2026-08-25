@@ -38,7 +38,7 @@
 //
 // NOTA DE CAMA (por que não existe part="plate" com tudo junto): duas
 // circunferências de diâmetro D só cabem juntas num quadrado de lado S se
-// D <= S*(2-sqrt(2)) = 0.586*S — ou seja, 105,4mm na cama de 180 e 99,6mm no
+// D <= S*(2-sqrt(2)) = 0.586*S — ou seja, 128,9mm na cama de 220 e 123,1mm no
 // alvo confortável de 170. Corpo e tampa têm 114mm de diâmetro cada, então
 // NUNCA cabem na mesma chapa; o mesmo vale pro par do cupom de rosca. Cada
 // peça é um job, e é isso mesmo.
@@ -95,7 +95,7 @@ rim_chamfer = 0.8; // mm, chanfro na boca da tampa, pra rosca pegar fácil
 /* [Rosca - trapezoidal, 3 entradas, mão direita] */
 // Perfil trapezoidal (NUNCA V agudo: em FDM o V lasca e imprime mal).
 // Flanco de 50° com a horizontal = 39,8° de balanço; somado aos 3,1° de
-// hélice dá 43° no pior ponto, dentro do que a A1 mini faz sem suporte.
+// hélice dá 43° no pior ponto, dentro do que a AD5X faz sem suporte.
 thread_starts = 3;   // entradas: com 3, a tampa abre em 2/3 de volta em vez de 2 voltas
 thread_pitch  = 6.0; // mm, passo de UMA entrada (o avanço por volta é passo x entradas = 18mm)
 thread_depth  = 1.2; // mm, altura radial do dente
@@ -115,9 +115,9 @@ pocket_chamfer = 1.2; // mm, funil de entrada no topo do bolso, pra guiar o deck
 
 /* [Posição na cama] */
 // O modelo é construído em volta do eixo Z (x,y = 0), então cru ele cairia
-// com 3/4 pra fora da cama no Bambu Studio. As peças de EXPORT saem
+// com 3/4 pra fora da cama no Flash Studio. As peças de EXPORT saem
 // centradas na cama; os previews ficam no eixo mesmo.
-bed_mm = 180; // mm, cama da A1 mini
+bed_mm = 220; // mm, cama da AD5X
 
 /* [Qualidade] */
 $fn = 160;          // facetas dos cilindros: em Ø114 dá corda de 2.2mm (flecha 0.01mm)

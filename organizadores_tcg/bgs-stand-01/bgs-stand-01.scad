@@ -239,7 +239,7 @@ if (part == "stand") {
     slab_ghost();
 } else {
     // chapa: suporte em pé + tampa deitada ao lado, ambos na orientação de
-    // impressão. Cabe folgado na cama da A1 mini.
+    // impressão. Cabe folgado na cama da AD5X.
     plate_gap = 8;
     stand();
     translate([base_back_x + plate_gap, 0, 0]) cap();

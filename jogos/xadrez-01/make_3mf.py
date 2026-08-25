@@ -18,7 +18,7 @@ from xml.sax.saxutils import escape
 
 
 ROOT = Path(__file__).resolve().parent
-OUTPUT = ROOT / "3mf" / "xadrez-01-k2-placa-bicolor.3mf"
+OUTPUT = ROOT / "3mf" / "xadrez-01-placa-bicolor.3mf"
 
 MESHES = (
     {
@@ -98,7 +98,7 @@ def model_xml(meshes) -> bytes:
         'unit="millimeter" xml:lang="pt-BR" requiredextensions="m">\n'
     )
     out.write('  <metadata name="BambuStudio:3mfVersion">1</metadata>\n')
-    out.write('  <metadata name="Title">Xadrez 01 - placa bicolor Creality K2</metadata>\n')
+    out.write('  <metadata name="Title">Xadrez 01 - placa bicolor FlashForge AD5X</metadata>\n')
     out.write('  <metadata name="Designer">afonsolelis</metadata>\n')
     out.write(
         '  <metadata name="Description">Tabuleiro 168 mm e 32 pecas; '
@@ -161,7 +161,7 @@ RELATIONSHIPS = b"""<?xml version="1.0" encoding="UTF-8"?>
 
 
 def model_settings_xml() -> bytes:
-    """Metadados de volumes usados por Creality Print/Orca/Bambu Studio.
+    """Metadados de volumes usados por Orca / Flash Studio Desktop.
 
     O objeto 4 e a montagem; os ids 2 e 3 sao os dois componentes de cor.
     O valor de extrusor e 1-based nesses fatiadores.
@@ -175,7 +175,7 @@ def model_settings_xml() -> bytes:
       <metadata key="name" value="COR 1 CLARA - tabuleiro e 16 pecas"/>
       <metadata key="extruder" value="1"/>
       <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>
-      <metadata key="source_file" value="xadrez-01-k2-placa-bicolor.3mf"/>
+      <metadata key="source_file" value="xadrez-01-placa-bicolor.3mf"/>
       <metadata key="source_object_id" value="0"/>
       <metadata key="source_volume_id" value="0"/>
       <mesh_stat edges_fixed="0" degenerate_facets="0" facets_removed="0" facets_reversed="0" backwards_edges="0"/>
@@ -184,7 +184,7 @@ def model_settings_xml() -> bytes:
       <metadata key="name" value="COR 2 ESCURA - casas e 16 pecas"/>
       <metadata key="extruder" value="2"/>
       <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>
-      <metadata key="source_file" value="xadrez-01-k2-placa-bicolor.3mf"/>
+      <metadata key="source_file" value="xadrez-01-placa-bicolor.3mf"/>
       <metadata key="source_object_id" value="0"/>
       <metadata key="source_volume_id" value="1"/>
       <mesh_stat edges_fixed="0" degenerate_facets="0" facets_removed="0" facets_reversed="0" backwards_edges="0"/>
@@ -192,7 +192,7 @@ def model_settings_xml() -> bytes:
   </object>
   <plate>
     <metadata key="plater_id" value="1"/>
-    <metadata key="plater_name" value="Xadrez completo - K2 - duas cores"/>
+    <metadata key="plater_name" value="Xadrez completo - duas cores"/>
     <metadata key="locked" value="false"/>
     <model_instance>
       <metadata key="object_id" value="4"/>

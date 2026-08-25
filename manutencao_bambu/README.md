@@ -1,6 +1,6 @@
 # Manutenção Bambu
 
-Ferramentas e acessórios de **manutenção da Bambu Lab A1 mini** (bicos de
+Ferramentas e acessórios de **manutenção da FlashForge AD5X** (bicos de
 lubrificação por eixo, suporte de filamento) — **arquivos baixados de
 terceiros**, sem fonte paramétrica no repo. Catalogados no array `third_party`
 do `index.json`.

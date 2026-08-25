@@ -37,7 +37,7 @@ profundidade = card_h + 2 × folga 3,25 + 2 × parede   = 91 + 6,5 + 5,2 = 102,7
 
 Então **medir com régua e re-exportar conserta o modelo todo**. Em Z o efeito é
 alavancado: cada 1mm a mais de largura de carta cresce **2mm** na altura da
-caixa, e o teto de 180 da A1 mini só é atingido com `card_w = 81`.
+caixa, e o teto de 220 da AD5X nem é atingido com `card_w = 81`.
 
 ## ⚠️ A camada de baixo é arquivo, não é a camada de giro
 
@@ -72,7 +72,7 @@ pro ar livre.
 | `3mf/penny-holder-01-par.3mf` | 2 caixas, vão de 6mm | 154,4 × 102,7 × 150,0mm → **ok** | 156,1cm³ (~194g) |
 
 Nos dois casos a caixa vai com os **102,7 no eixo Y**, que é o eixo que a cama
-da A1 mini balança: base maior contra a inércia de uma torre de 150mm.
+da AD5X balança: base maior contra a inércia de uma torre de 150mm.
 
 `stl/penny-holder-01-box.stl` é a peça avulsa, de referência.
 
@@ -119,7 +119,7 @@ primeira versão). Dois motivos pra consertar, e o segundo decide:
 
 - 30° faz cada camada avançar 0,35mm sobre a anterior (camada de 0,2mm), ~17%
   de linha apoiada contra ~52% num teto de 45°;
-- **30° é exatamente o limiar de suporte padrão do Bambu Studio**, e o usuário
+- **30° é exatamente o limiar de suporte padrão do Flash Studio**, e o usuário
   fatia com suporte ligado. Teto no limiar é sorteio, e o prêmio é suporte
   dentro dos 47 furos, num rasgo de 2,6mm de profundidade de onde não se tira.
 
@@ -214,7 +214,7 @@ card_w_override = 68;   include <penny-holder-01.scad>   // carta mais larga -> 
 stack_x_override = 45;  include <penny-holder-01.scad>   // pilha mais rasa
 ```
 
-Os `assert` do `.scad` travam o export se a variante estourar a A1 mini, se a
+Os `assert` do `.scad` travam o export se a variante estourar a AD5X, se a
 carta não couber no comprimento, se a boca ficar com menos ar que o ressalto,
 se a janela ficar estreita demais pra entrar dedo ou se a chaveta perder mordida.
 

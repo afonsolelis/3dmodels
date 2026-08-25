@@ -1,9 +1,14 @@
 # psa-box-01
 
 Caixa **grande** para slabs PSA (cartas graduadas, lacradas no acrílico da
-PSA), em **duas filas de 19 vagas = 38 slabs**, aproveitando a cama inteira
-da Bambu A1 mini. Base alta + tampa telescópica, no mesmo espírito do modelo
-de terceiro que a originou.
+PSA), em **duas filas de 19 vagas = 38 slabs**. Base alta + tampa
+telescópica, no mesmo espírito do modelo de terceiro que a originou.
+
+> **Nota de migração (AD5X).** Este modelo foi dimensionado para a cama
+> antiga de 180x180 e por isso encosta nos 176mm — na AD5X (220x220) ele
+> agora sobra folga em todos os lados. A geometria segue válida e imprime
+> igual; o que mudou é que **deixou de ser um print apertado**. Há espaço
+> para uma revisão futura (mais vagas por fila, ou brim liberado).
 
 É pra guardar a **slab PSA NUA** — sem bumper, sem capa, sem case extra.
 
@@ -63,12 +68,12 @@ o **teto** das fontes, porque altura sobrando é barata (só encompre a base
 
 | | Máximo | Se passar disso |
 |---|---|---|
-| largura | **84.4mm** | subir `slot_gap_w` custa **0.4mm de cama por 0.1mm de folga** — acima de ~84.4 as duas filas não cabem mais na A1 mini; o caminho vira `rows_override = 1` |
+| largura | **84.4mm** | subir `slot_gap_w` custa **0.4mm de cama por 0.1mm de folga** — acima de ~84.4 a canaleta modelada não aceita mais a slab; na cama de 220 da AD5X ainda há folga de sobra para subir esse teto, basta re-exportar |
 | altura | **142mm** | subir `slab_h`; a tampa acompanha sozinha (é derivada) |
 | espessura | **7.5mm** | subir `slot_gap_t`; muda o passo e o comprimento da caixa |
 
 Se a slab real medir 85mm de largura, **duas filas são geometricamente
-impossíveis** na A1 mini: 2 × 85 já são 170 dos 180, e ainda faltam paredes e
+impossíveis** na A1 mini antiga: 2 × 85 já eram 170 dos 180, e ainda faltavam paredes e
 espinho.
 
 ## Como se manuseia
@@ -128,21 +133,19 @@ espinho.
 - **Cantos verticais arredondados** (r=3): melhor na mão e menos empeno numa
   peça grande e alta.
 
-## Cama da A1 mini — ATENÇÃO
+## Cama da AD5X — ATENÇÃO
 
 | Peça | Medido (bbox.py) | Veredito |
 |---|---|---|
-| base | 176.4 × 175.1 × 111.4 | **justo** (170–180) |
-| tampa | 176.4 × 175.1 × 55.4 | **justo** (170–180) |
+| base | 176.4 × 175.1 × 111.4 | ok |
+| tampa | 176.4 × 175.1 × 55.4 | ok |
 | gabarito | 90.0 × 31.1 × 45.0 | ok |
 
-Base e tampa **estouram o alvo de conforto de 170×170** do CLAUDE.md, e é
-inevitável: duas filas de slab são 168.8mm só de canaleta. Consequências:
-
-- sobram **1.8mm por lado em X e 2.45mm em Y** — sem espaço pra brim nem
-  skirt. **Desligar brim e skirt** no Bambu Studio e centralizar a chapa.
-- confira no slicer se a peça não conflita com a linha de purga / área de
-  limpeza da A1 mini. Se conflitar, dá pra ganhar footprint:
+Na cama de 220x220 da AD5X as três peças passam **folgadas** — sobram ~21mm
+por lado em X e ~22mm em Y, espaço de sobra pra brim e skirt. (Na A1 mini
+antiga isto era um print apertado, com brim e skirt desligados na mão; não é
+mais o caso.) Ainda assim, confira no slicer se a peça não conflita com a
+linha de purga / área de limpeza. Se conflitar, dá pra ganhar footprint:
   - **X**: cada 0.1mm a menos de `slot_gap_w` tira 0.4mm do X;
   - **Y**: `slots_override = 18` tira 9.0mm do Y (e 2 slabs de capacidade).
 - a aderência vem do chão maciço da base e do teto maciço da tampa (as duas

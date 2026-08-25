@@ -1,7 +1,7 @@
 # Playmats
 
 Plataformas de jogo (tapetes/campos) montadas a partir de placas que se
-encaixam, cada uma cabendo na cama da Bambu A1 mini.
+encaixam, cada uma cabendo na cama da FlashForge AD5X.
 
 ## Modelos
 

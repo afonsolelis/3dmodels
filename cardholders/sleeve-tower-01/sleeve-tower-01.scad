@@ -301,8 +301,8 @@ cav_h_stacked = cav_h - boss_h;             // 137.0 — curso útil com torre e
 cap_loose  = floor(cav_h / sleeve_t);       // ~1750 — ESTIMATIVA, sleeve_t não é régua
 cap_stacked= floor(cav_h_stacked / sleeve_t);
 
-assert(total_h <= 180, "ALTURA ESTOURA A A1 MINI (180)");
-assert(ext_w <= 170 && ext_d <= 170, "FOOTPRINT ESTOURA O ALVO DE 170 DA A1 MINI");
+assert(total_h <= 220, "ALTURA ESTOURA A AD5X (220)");
+assert(ext_w <= 170 && ext_d <= 170, "FOOTPRINT ESTOURA O ALVO DE 170 DA AD5X");
 assert(seat_ledge < wall + stack_clear, "seat_ledge grande demais: a rampa da saia fura a face externa");
 assert(seat_grip > 0.4, "assento de menos: o ledge nao pousa no aro da torre de baixo");
 assert(boss_grip > 1.0, "engate reto de menos: baixe boss_lead ou suba boss_h");

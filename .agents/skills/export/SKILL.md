@@ -21,7 +21,7 @@ description: Exporta STL e 3MF de um modelo OpenSCAD do repo com verificação a
    - `Volumes: N` = sólidos esperados + 1 (ex.: chapa com 3 peças → 4)
 5. Contrato do repo: `3mf/` contém SÓ jobs de impressão; STL individual vai
    em `stl/`. Se a geometria mudou e o modelo tem chapa (`part="plate"`),
-   re-exportar a chapa também — o usuário abre o 3MF direto no Bambu Studio.
+   re-exportar a chapa também — o usuário abre o 3MF direto no Flash Studio.
 6. **Atualize o `index.json` (SEMPRE)**: a entrada do projeto precisa
    refletir o export — `print_jobs` (arquivo, conteúdo, footprint medido
    com o bbox.py do /bed-check), medidas-chave e notes. O agente devops

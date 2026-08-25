@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Bounding box de STLs (binário ou ASCII) + veredito pra cama Bambu A1 mini.
+"""Bounding box de STLs (binário ou ASCII) + veredito pra cama FlashForge AD5X.
 
 uso: bbox.py arquivo.stl [outro.stl ...]
-sai com código 2 se algum arquivo estourar a cama (>180 em qualquer eixo).
+sai com código 2 se algum arquivo estourar a cama (>220 em qualquer eixo).
 """
 import struct
 import sys
 
-BED = 180.0      # cama da A1 mini (mm)
-COMFORT = 170.0  # alvo com margem pra brim/skirt (mm)
+BED = 220.0      # cama da AD5X (mm)
+COMFORT = 210.0  # alvo com margem pra brim/skirt (mm)
 
 
 def bbox(path):
@@ -41,9 +41,9 @@ def main():
     for path in sys.argv[1:]:
         dx, dy, dz = bbox(path)
         if max(dx, dy, dz) > BED:
-            verdict, fail = "REPROVADO (estoura a cama de 180)", True
+            verdict, fail = "REPROVADO (estoura a cama de 220)", True
         elif dx > COMFORT or dy > COMFORT:
-            verdict = "justo (170-180: brim/skirt podem nao caber)"
+            verdict = "justo (210-220: brim/skirt podem nao caber)"
         else:
             verdict = "ok"
         print(f"{path}: {dx:.1f} x {dy:.1f} x {dz:.1f} mm -> {verdict}")

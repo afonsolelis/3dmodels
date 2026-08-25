@@ -179,7 +179,7 @@ feature, é o lastro.
 - Preview lido em 6 câmeras: perspectiva, topo ortográfico, elevação frontal,
   duas de baixo e **um corte no plano XZ** mostrando o perfil do pé (chanfro →
   ressalto reto → ledge → rampa de 45 → parede)
-- Bed-check A1 mini: 75.0 × 102.5 × 150.0 (**ok**) e o par 156.0 × 102.5 × 150.0
+- Bed-check AD5X: 75.0 × 102.5 × 150.0 (**ok**) e o par 156.0 × 102.5 × 150.0
   (**ok**, abaixo do teto confortável de 170)
 
 ## Arquivos
@@ -189,7 +189,7 @@ feature, é o lastro.
 - `3mf/sleeve-tower-01-plate.3mf` — **job principal**: 1 torre (75 × 102.5)
 - `3mf/sleeve-tower-01-par.3mf` — job: 2 torres lado a lado, vão de 6mm
   (156 × 102.5). Conveniência pra quem já vai empilhar; dobra o tempo e põe
-  duas torres de 150mm balançando no eixo Y da A1 mini
+  duas torres de 150mm balançando no eixo Y da AD5X
 
 ## Como gerar
 
@@ -205,7 +205,7 @@ Diagnóstico (não vai pra `3mf/`): `part="fit"` (tem que sair vazio) e
 ## Impressão
 
 - **Em pé, na orientação de uso, boca pra cima. Sem suporte.**
-- Os **102.5 vão no eixo Y** de propósito: é o eixo que a cama da A1 mini
+- Os **102.5 vão no eixo Y** de propósito: é o eixo que a cama da AD5X
   balança, e a base maior é o que segura a inércia de uma torre de 150mm.
 - **Brim não é necessário**: a 1ª camada é o ressalto inteiro, ~6.7 mil mm²
   maciços.
@@ -222,7 +222,7 @@ Diagnóstico (não vai pra `3mf/`): `part="fit"` (tem que sair vazio) e
 | Override | Efeito |
 |---|---|
 | `cav_w_override` / `cav_d_override` | quando a régua chegar. Refaz o modelo inteiro |
-| `total_h_override` | altura da torre (assert reprova acima de 180) |
+| `total_h_override` | altura da torre (assert reprova acima de 220) |
 | `wall_override` | 2.6 economiza ~20 cm³; abaixo disso a 150mm de altura não vale |
 | `open_frac_override` | largura do sulco. 0.93 deixa passar carta enseleevada e mata a aba |
 | `stack_clear_override` | folga do empilhamento; 0.4 é o mínimo que a lição do deckbox-02 recomenda pra esta altura |

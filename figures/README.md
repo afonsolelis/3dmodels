@@ -1,7 +1,7 @@
 # Figures
 
 Figuras decorativas paramétricas, modeladas em OpenSCAD e dimensionadas para
-a Bambu Lab A1 mini.
+a FlashForge AD5X.
 
 ## Modelos
 

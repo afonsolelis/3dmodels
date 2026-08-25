@@ -14,7 +14,7 @@ ar e deixando a estátua mais resistente ao manuseio.
 | Orientação | base na mesa; cabeça para `+Y` |
 | Arquivo de impressão | `3mf/dragon-01-plate.3mf` |
 | STL de referência | `stl/dragon-01.stl` |
-| Impressora-alvo | Bambu Lab A1 mini |
+| Impressora-alvo | FlashForge AD5X |
 | Volume geométrico | 131,52 cm³ (sólido; não é consumo fatiado) |
 | Malha | 7.910 triângulos, fechada, uma superfície, 2-manifold |
 

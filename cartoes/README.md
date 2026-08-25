@@ -1,7 +1,7 @@
 # Cartões
 
 Cartões utilitários paramétricos, modelados em OpenSCAD para impressão na
-Bambu Lab A1 mini.
+FlashForge AD5X.
 
 ## Modelos
 

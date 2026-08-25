@@ -67,7 +67,7 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
 ## Arquivos
 
 - `deckbox-01.scad` — fonte paramétrico (OpenSCAD), três peças: `tray`, `sleeve`, `lifter`
-- `stl/` — exports prontos pra fatiar no Bambu Studio (`deckbox-01-lifter.stl` imprime 2×)
+- `stl/` — exports prontos pra fatiar no Flash Studio (`deckbox-01-lifter.stl` imprime 2×)
 
 ## Como gerar os STL
 

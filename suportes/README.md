@@ -1,7 +1,7 @@
 # Suportes
 
 Suportes e apoios de mesa (controles, aparelhos, acessórios), modelados em
-OpenSCAD e impressos na Bambu Lab A1 mini.
+OpenSCAD e impressos na FlashForge AD5X.
 
 > Suportes de **cartas graduadas** (slabs PSA/BGS) ficam em
 > [`../organizadores_tcg/`](../organizadores_tcg/), junto com o resto do TCG.

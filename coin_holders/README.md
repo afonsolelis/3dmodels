@@ -8,7 +8,7 @@ TCG).
 
 | Modelo | Status | Descrição |
 |---|---|---|
-| [pokemon-coin-binder-01](./pokemon-coin-binder-01/) | em andamento | Insert 63×88×2mm para moeda Pokémon Ø51,4×2,7mm; abertura Ø51,8 e chapa de 3 unidades para a A1 mini |
+| [pokemon-coin-binder-01](./pokemon-coin-binder-01/) | em andamento | Insert 63×88×2mm para moeda Pokémon Ø51,4×2,7mm; abertura Ø51,8 e chapa de 3 unidades para a AD5X |
 
 ## Arquivos de terceiros
 

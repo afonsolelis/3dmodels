@@ -95,7 +95,7 @@ por isso que existe o cupom.
 
 ## Imprimir: o cupom PRIMEIRO
 
-`3mf/deckbox-03-teste-rosca.3mf` — um arquivo, **2 plates** (o Bambu Studio
+`3mf/deckbox-03-teste-rosca.3mf` — um arquivo, **2 plates** (o Flash Studio
 mostra as duas na barra de baixo). É um pedaço do gargalo de verdade + o
 anel da tampa, no **diâmetro real** e na **mesma orientação de impressão**
 das peças grandes. 15mm de altura cada, ~42g somados.
@@ -124,7 +124,7 @@ de ~2,4mm de largura. O gargalo não precisa (a base dele é uma coroa de
 
 **Por que não tem chapa com tudo junto**: duas circunferências de diâmetro D
 só cabem juntas num quadrado de lado S se `D ≤ S·(2−√2) = 0,586·S` — 105,4mm
-na cama de 180 e 99,6mm no alvo confortável de 170. Corpo e tampa têm 114mm
+na cama de 220 e 123,1mm no alvo confortável de 210. Corpo e tampa têm 114mm
 cada: **nunca** cabem na mesma chapa, nem o par do cupom. Cada peça é um job,
 e é isso mesmo. Todos os 3MF já saem **centrados na cama**.
 

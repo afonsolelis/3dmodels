@@ -15,7 +15,7 @@ python3 .Codex/skills/overview/overview.py <saida.3mf> <peça1.stl> <peça2.stl>
 
 1. Passe os STLs de `stl/` na ordem em que fazem sentido ser lidos (por
    exemplo, a ordem de montagem), não em ordem alfabética.
-2. Cada STL vira um **objeto separado** no 3MF: o Bambu Studio abre já
+2. Cada STL vira um **objeto separado** no 3MF: o Flash Studio abre já
    dividido e o "Organizar tudo" distribui pelas plates sozinho.
 3. Salve como `<modelo>-overview.3mf` na RAIZ da pasta do modelo, nunca em
    `3mf/` — aquela pasta é só pra jobs de impressão de verdade (contrato do

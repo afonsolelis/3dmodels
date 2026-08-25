@@ -38,8 +38,7 @@ de 2mm, mas a espessura maxima do conjunto continua sendo a da propria moeda,
 - `3mf/pokemon-coin-binder-01-x3.3mf` — job principal com tres inserts
 
 A chapa de 3 usa um insert em retrato e dois em paisagem. Assim ocupa apenas
-153 x 128mm e fica dentro do limite confortavel de 170 x 170mm da Bambu A1
-mini. Para preencher uma pagina 3x3, imprimir o job `x3` tres vezes.
+153 x 128mm e fica dentro do limite confortavel de 210x210mm da AD5X. Para preencher uma pagina 3x3, imprimir o job `x3` tres vezes.
 
 ## Impressao
 

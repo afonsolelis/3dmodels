@@ -6,7 +6,7 @@ Jogos de mesa e componentes paramétricos, modelados para impressão 3D.
 
 | Modelo | Status | Descrição |
 |---|---|---|
-| [xadrez-01](./xadrez-01/) | 🚧 aguardando teste físico | xadrez compacto completo: tabuleiro bicolor e 32 peças Staunton simplificadas em uma única placa da Creality K2 |
+| [xadrez-01](./xadrez-01/) | ⛔ bloqueado (não cabe na AD5X) | xadrez compacto completo: tabuleiro bicolor e 32 peças Staunton simplificadas. A placa única tem 248,2mm em Y contra os 220 da cama — foi feita para a Creality K2 (260). Precisa relayout em 2 jobs |
 
 ## Convenção da pasta
 

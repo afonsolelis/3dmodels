@@ -22,7 +22,7 @@ description: Cria a estrutura de um modelo novo (ou categoria nova) no padrão d
    - Variantes por include: parâmetros de variante via
      `x = is_undef(x_override) ? padrao : x_override` (ver deck_lanes)
    - Se houver mais de uma peça: `part="plate"` com tudo em orientação de
-     impressão, respeitando a cama de 180x180 (dividir em jobs se preciso)
+     impressão, respeitando a cama de 220x220 (dividir em jobs se preciso)
 4. Crie `stl/` e `3mf/`; depois rode, nesta ordem: `/preview` (olhar),
    `/export` (gerar), `/bed-check` (medir).
 5. **Atualize o `index.json`** da raiz com a entrada do projeto (descrição,

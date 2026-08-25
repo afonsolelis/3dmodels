@@ -1,7 +1,7 @@
 // pokemon-game.scad
 // Plataforma de jogo pra Pokémon TCG: o campo de UM jogador, montado a
 // partir de placas ("quadros") que se plugam por ímã, cada uma cabendo na
-// cama da Bambu A1 mini. As zonas do jogo ficam em RELEVO — as cartas caem
+// cama da FlashForge AD5X. As zonas do jogo ficam em RELEVO — as cartas caem
 // dentro de cavidades rasas e as paredes entre elas desenham o campo.
 //
 // Tamanho: playmat padrão de torneio é 610x356mm (24"x14"). Aqui o campo é
@@ -53,7 +53,7 @@
 // na mesa da impressora).
 //
 // Peças: 12 placas do campo (t<coluna>r<fileira>, 4 colunas x 3 fileiras).
-// Cada placa é um job de impressão — não cabem duas na cama da A1 mini:
+// Cada placa é um job de impressão — duas não cabem lado a lado na AD5X:
 //   openscad -o 3mf/pokemon-game-t1r1.3mf -D 'part="t1r1"' pokemon-game.scad
 //   ... idem t2r1..t4r1, t1r2..t4r2, t1r3..t4r3
 // STLs individuais com os mesmos part=, em stl/.

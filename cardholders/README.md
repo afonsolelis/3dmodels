@@ -3,7 +3,7 @@
 Porta-cartas **abertos** — pilha de cartas à vista, apoiada numa chapa e
 presa por cantoneiras, em vez de fechada numa caixa. Pra bulk de energias,
 cartas de troca e pilhas de mesa. Modelados em OpenSCAD e impressos na
-Bambu Lab.
+FlashForge.
 
 Pra deck guardado/fechado, ver [`deckboxes/`](../deckboxes/); pra
 organização de sleeve/toploader, [`organizadores_tcg/`](../organizadores_tcg/).

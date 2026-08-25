@@ -21,7 +21,7 @@
 //   piso em colmeia: célula 24 entre faces, nervura 1.6, moldura perimetral 3.0
 //   travessa traseira em z=42.1..46.9, com ponte plana de 53 x 2.6 (o pior ponto
 //     da peça) — NÃO foi recriada aqui
-//   volume sólido 52.4 cm3; fatiado real na A1 mini 2h32 / 61.2g
+//   volume sólido 52.4 cm3; fatiado real na AD5X 2h32 / 61.2g
 //
 // ATENÇÃO — A MEDIDA DA CARTA NÃO É DE RÉGUA
 // card_w/card_h = 66 x 91 são CATÁLOGO (carta 63 x 88 + penny sleeve), não
@@ -32,7 +32,7 @@
 //   profundidade  = card_h + 2*card_gap_y + 2*wall = 91 + 6.5 + 5.2 = 102.7
 // então medir com régua e re-exportar conserta o modelo inteiro. Se a carta
 // medir mais que 66 de largura, a caixa CRESCE em Z (2mm por mm de carta) e o
-// teto de 180 da A1 mini só é atingido com card_w = 81.
+// teto de 220 da AD5X é folgado: nem com card_w = 81 se chega perto.
 //
 // COMO SE MANUSEIA (é uma gaveta de fichário em pé, não uma deckbox):
 //   1. A caixa fica de pé na mesa, com a JANELA GRANDE virada pra você. As
@@ -93,7 +93,7 @@
 //   a) 30 graus da horizontal significa cada camada avançar 0.35mm sobre a
 //      anterior (camada de 0.2), o que deixa ~17% da linha apoiada contra os
 //      ~52% de um teto de 45. Cai, mesmo que só cosmeticamente.
-//   b) 30 graus é EXATAMENTE o limiar de suporte padrão do Bambu Studio. O
+//   b) 30 graus é EXATAMENTE o limiar de suporte padrão do Flash Studio. O
 //      usuário fatia com SUPORTE LIGADO: um teto no limiar é sorteio, e o
 //      prêmio é suporte dentro dos 47 furos de colmeia, num rasgo de 2.6mm de
 //      profundidade de onde não se tira.
@@ -195,7 +195,7 @@
 //     flatpak run org.openscad.OpenSCAD -o .../stl/penny-holder-01-box.stl \
 //       -D 'part="box"' .../penny-holder-01.scad
 //   JOBS DE IMPRESSÃO (3mf/ só tem job; footprints medidos com o bbox.py do
-//   /bed-check, teto confortável da A1 mini = 170)
+//   /bed-check, teto confortável da AD5X = 170)
 //     flatpak run org.openscad.OpenSCAD -o .../3mf/penny-holder-01-plate.3mf \
 //       -D 'part="plate"' .../penny-holder-01.scad
 //         1 caixa  ->  74.2 x 102.7 x 150.0  (ok)   ~78 cm3, ~97g
@@ -203,7 +203,7 @@
 //       -D 'part="par"' .../penny-holder-01.scad
 //         2 caixas -> 154.4 x 102.7 x 150.0  (ok)  ~156 cm3, ~194g
 //   Nos dois casos a caixa vai com os 102.7 no eixo Y, que é o eixo que a cama
-//   da A1 mini balança: é a base MAIOR contra a inércia de uma torre de 150mm.
+//   da AD5X balança: é a base MAIOR contra a inércia de uma torre de 150mm.
 //   DIAGNÓSTICO (não exportar pra 3mf/)
 //     part="fit"    -> empilhado certo:  TEM QUE SAIR VAZIO
 //     part="fit180" -> empilhado virado: TEM QUE SAIR NÃO-VAZIO (a chaveta)
@@ -212,7 +212,7 @@
 // VARIANTE: por INCLUDE, nunca por -D (os *_override só existem via -D e o
 // ternário is_undef() é avaliado antes). Ex.: um arquivo com
 //   layers_override = 3; include <penny-holder-01.scad>
-// dá a caixa de 3 camadas (216mm — ESTOURA a A1 mini, o assert avisa).
+// dá a caixa de 3 camadas (216mm — ESTOURA a AD5X, o assert avisa).
 //
 // PENDÊNCIA FUNCIONAL, DECLARADA (não é descuido, é o resultado da conta):
 // com DUAS camadas e SEM prateleira, a camada de baixo é ARQUIVO, não é a
@@ -337,8 +337,8 @@ floor_cell_h = floor_side + 2 * floor_cap;// 27.71 — ponta a ponta, piso
 cap_layer= floor(inner_x / card_t);       // ~153  — cartas por camada
 cap_total= cap_layer * layers;            // ~306
 
-assert(box_z <= 180, "ALTURA ESTOURA A A1 MINI: floor_h + layers*card_w + head > 180");
-assert(box_x <= 170 && box_y <= 170, "FOOTPRINT ESTOURA O ALVO DE 170 DA A1 MINI");
+assert(box_z <= 220, "ALTURA ESTOURA A AD5X: floor_h + layers*card_w + head > 220");
+assert(box_x <= 170 && box_y <= 170, "FOOTPRINT ESTOURA O ALVO DE 170 DA AD5X");
 assert(inner_y >= card_h + 2, "a carta nao cabe no comprimento: aumente card_gap_y");
 assert(head > lip_h, "a boca precisa de mais ar que o ressalto, senao a caixa de cima aperta a carta");
 assert(win_w > 40, "janela estreita demais pra entrar dedo: baixe front_jamb");

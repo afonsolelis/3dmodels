@@ -1,8 +1,8 @@
 # 3D Models
 
-Base de modelagem 3D para impressão — projetos parametrizados, com a **Bambu
-Lab A1 mini** (cama 180x180) como alvo padrão e exceções documentadas por
-projeto, com export final em **3MF** e STLs individuais de referência.
+Base de modelagem 3D para impressão — projetos parametrizados para a
+**FlashForge AD5X** (cama 220x220x220, bico 0.4, IFS de 4 cores), com export
+final em **3MF** e STLs individuais de referência.
 
 ## Ferramenta de modelagem
 
@@ -11,7 +11,7 @@ código em vez de clique-clique, fácil de versionar no git, fácil de ajustar
 dimensões/parâmetros depois (largura, tolerância de encaixe, altura etc).
 
 Cada modelo gera os `.3mf` de impressão (chapas já na orientação certa, que
-vão direto pro Bambu Studio) e `.stl` individuais de cada peça, de referência.
+vão direto pro Flash Studio) e `.stl` individuais de cada peça, de referência.
 
 ## Estrutura
 
@@ -59,16 +59,16 @@ têm `.scad` e não entram no `index.json` como projeto.
 ```
 <categoria>/<nome-do-modelo>/
 ├── <nome-do-modelo>.scad   # fonte paramétrico
-├── 3mf/                     # SÓ os jobs de impressão (abrir no Bambu Studio)
+├── 3mf/                     # SÓ os jobs de impressão (abrir no Flash Studio)
 ├── stl/                     # peças individuais, referência
 └── README.md                # medidas, notas de impressão, tolerâncias
 ```
 
 ## Impressão
 
-- Impressora-alvo padrão: Bambu Lab A1 mini (cama 180x180x180); projetos com
+- Impressora-alvo padrão: FlashForge AD5X (cama 220x220x220); projetos com
   outra máquina declaram isso no próprio README e no `index.json`
-- Fatiador padrão: Bambu Studio; projetos específicos podem trazer 3MF para o
+- Fatiador padrão: Flash Studio; projetos específicos podem trazer 3MF para o
   fatiador da impressora-alvo
 - Formato de export: 3MF (jobs de impressão) + STL (peças individuais)
 
@@ -77,7 +77,7 @@ têm `.scad` e não entram no `index.json` como projeto.
 - [OpenSCAD](https://openscad.org/downloads.html) instalado para editar/renderizar os `.scad`
   (nesta máquina, instalado via Flatpak: `flatpak install flathub org.openscad.OpenSCAD`,
   chamado como `flatpak run org.openscad.OpenSCAD ...`)
-- Bambu Studio para fatiar os `.3mf`
+- Flash Studio para fatiar os `.3mf`
 
 > Sistema Fedora Atomic (imutável): `dnf install` direto no sistema base não
 > funciona. Use Flatpak (apps) ou Distrobox (ferramentas de linha de comando).

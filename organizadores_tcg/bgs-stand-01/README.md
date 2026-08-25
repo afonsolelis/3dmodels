@@ -77,7 +77,7 @@ medir com paquímetro e trocar só esses três números.
   centro de massa do conjunto em x=9,9, base apoiando de x=−11,5 a +20,4 →
   ~10,5 mm de margem pra trás.
 - `Volumes: 2` em cada peça (sólido único) e `3` na chapa (as duas separadas).
-- Bed-check A1 mini: suporte 44,1 × 87,3 × 142,6 e chapa 56,8 × 87,3 × 142,6 →
+- Bed-check AD5X: suporte 44,1 × 87,3 × 142,6 e chapa 56,8 × 87,3 × 142,6 →
   **ok** nos dois.
 
 > Nota sobre o `Volumes` do montado: dá 4 (suporte, tampa, slab e o exterior)
@@ -116,7 +116,7 @@ encaixe.
   não girar no slicer.
 - Perfil: `0.20mm Standard @BBL A1M`, 2 paredes.
 - 143 mm de altura com base de 32 mm de profundidade: orientar os 87,3 mm ao
-  longo do eixo que a cama movimenta (Y na A1 mini) — que é como o 3MF já sai.
+  longo do eixo que a cama movimenta (Y na AD5X) — que é como o 3MF já sai.
 - Se a tampa ficar dura demais ou frouxa, o ajuste é `cap_fit` (0,25 por lado
   hoje) — uma linha, re-exporta e pronto.
 

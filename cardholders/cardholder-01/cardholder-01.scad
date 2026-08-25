@@ -36,7 +36,7 @@
 //   openscad -o 3mf/cardholder-01.3mf     -D 'part="holder"' cardholder-01.scad
 //   openscad -o 3mf/cardholder-01-x2.3mf  -D 'part="plate2"' cardholder-01.scad
 // A pasta 3mf/ tem 2 jobs: uma unidade (70x94mm, pra testar) e a chapa de
-// duas unidades lado a lado (146x94mm) — a cama da A1 mini comporta as duas
+// duas unidades lado a lado (146x94mm) — a cama da AD5X comporta as duas
 // numa tacada só.
 
 /* [Peça a renderizar] */
@@ -221,7 +221,7 @@ module hex_panel(a, b, t) {
 // Render
 // ---------------------------------------------------------------------
 if (part == "plate2") {
-    // 2 unidades lado a lado — 146 x 94mm, folgado na cama da A1 mini
+    // 2 unidades lado a lado — 146 x 94mm, folgado na cama da AD5X
     holder();
     translate([outer_w + plate_gap, 0, 0]) holder();
 } else {

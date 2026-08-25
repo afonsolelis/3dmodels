@@ -1,6 +1,7 @@
 // psa-box-01.scad
 // Caixa GRANDE para slabs PSA (cartas graduadas, lacradas no acrílico da
-// PSA), em DUAS FILAS, aproveitando a cama inteira da Bambu A1 mini.
+// PSA), em DUAS FILAS. Dimensionada para a cama antiga de 180; na AD5X
+// (220x220) sobra folga em volta.
 // Guarda 38 slabs NUAS — sem bumper, sem capa, sem case extra por cima.
 //
 // Derivada do "Porta_carte_PSA_x10" (modelo de terceiro, em
@@ -29,7 +30,7 @@
 // das peças grandes.
 //
 // Peças: "base" (o corpo com os pentes) e "lid" (a tampa). Cada uma ocupa a
-// cama inteira, então são DOIS jobs de impressão separados. As duas imprimem
+// muita cama, então são DOIS jobs de impressão separados. As duas imprimem
 // SEM SUPORTE na orientação exportada (base com o chão na cama, boca pra
 // cima; tampa com a face fechada na cama, boca pra cima). Existe ainda um
 // terceiro job, "test": o gabarito de 3 vagas pra conferir o encaixe da slab
@@ -65,8 +66,8 @@ part = "both"; // "base" | "lid" | "test" (gabarito de 3 vagas) | "plate" (job 1
 // barata (só encompre a base) e altura faltando trava a tampa.
 // ENVELOPE QUE ESTA CAIXA ACEITA: até 84.4 de largura, 142 de altura, 7.5 de
 // espessura. IMPRIMA ANTES o part="test" (~45g, ~1h) com uma slab na mão.
-// Se a slab real passar de 84.4 de largura, DUAS FILAS NÃO CABEM na A1 mini
-// (2 x 85 já são 170 dos 180) — aí o caminho é rows_override = 1.
+// Se a slab real passar de 84.4 de largura, DUAS FILAS NÃO CABEM na AD5X
+// (na cama de 220 da AD5X ainda há folga: 2 x 85 = 170 de 220).
 slab_w = 83.6; // mm, largura da slab (vira X, atravessa a canaleta)
 slab_h = 139;  // mm, altura da slab (vira Z, é o que fica em pé)
 slab_t = 7.1;  // mm, espessura da slab (vira Y, é o passo das vagas)

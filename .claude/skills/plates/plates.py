@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""Monta um 3MF de PROJETO do Bambu Studio com varias plates numa so file.
+"""Monta um 3MF de PROJETO do Flash Studio com varias plates numa so file.
 
 uso: plates.py saida.3mf --plate "Nome da plate" peca.stl [peca2.stl ...] \
                          --plate "Outra plate" peca3.stl ... \
-                         [--bed 180] [--usable 170] [--gap 5]
+                         [--bed 220] [--usable 210] [--gap 5]
 
 O 3MF cru que o OpenSCAD exporta so sabe de UMA chapa: pra imprimir 15 peças
-o usuario abria 15 arquivos. Este aqui escreve o formato de PROJETO do Bambu
+o usuario abria 15 arquivos. Este aqui escreve o formato de PROJETO do Orca/Flash
 Studio, que guarda varias plates no mesmo arquivo — abre uma vez e imprime
 plate por plate.
 
 Como o formato funciona (engenharia reversa de diversos/Jabonera.3mf, que e
-um projeto do Bambu Studio 02.07.01 pra A1 mini):
+um projeto do Flash Studio 02.07.01 pra AD5X):
 
   3D/3dmodel.model            objetos + um <item> por peça, com a translacao
                               num espaco VIRTUAL onde cada plate ocupa uma
-                              celula de `bed * 1.2` (180 -> 216mm)
+                              celula de `bed * 1.2` (220 -> 264mm)
   Metadata/model_settings.config   as tags <plate>, cada uma com plater_name
                               e a lista de object_id que vivem nela
 
@@ -23,7 +23,7 @@ um projeto do Bambu Studio 02.07.01 pra A1 mini):
   origem da plate  : (col * stride, -row * stride)   <- Y cresce pra BAIXO
   a peça fica centrada na cama: origem + (bed/2, bed/2)
 
-Nao escrevemos Metadata/project_settings.config de proposito: sem ele o Bambu
+Nao escrevemos Metadata/project_settings.config de proposito: sem ele o Flash
 Studio aplica o perfil de impressora/filamento que o usuario ja tem
 selecionado, em vez de arrastar o perfil de outra pessoa junto.
 """
@@ -33,7 +33,7 @@ import sys
 import zipfile
 
 NS = "http://schemas.microsoft.com/3dmanufacturing/core/2015/02"
-STRIDE_RATIO = 1.2  # cama 180 -> celula 216, igual ao Bambu Studio
+STRIDE_RATIO = 1.2  # cama 220 -> celula 264, igual ao Flash Studio
 
 
 def read_stl(path):
@@ -117,7 +117,7 @@ def shelf_pack(sizes, usable, gap):
 
 
 def parse_args(argv):
-    out, plates, bed, usable, gap = None, [], 180.0, 170.0, 5.0
+    out, plates, bed, usable, gap = None, [], 220.0, 210.0, 5.0
     i = 0
     while i < len(argv):
         a = argv[i]

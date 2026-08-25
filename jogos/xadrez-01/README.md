@@ -1,23 +1,33 @@
 # xadrez-01
 
 Conjunto de xadrez compacto completo, desenhado para imprimir **tabuleiro + 32
-peças de uma vez** usando somente **duas cores**. A placa foi dimensionada para
-a [Creality K2](https://www.creality.com/products/k2-series-3d-printer) de
-260 × 260 mm e, por consequência, também cabe na K2 Pro e K2 Plus.
+peças de uma vez** usando somente **duas cores**.
+
+> ## ⚠️ NÃO IMPRIME NA AD5X COMO ESTÁ
+>
+> Esta placa foi dimensionada para a impressora **antiga** (Creality K2, cama
+> de 260 × 260). Ela mede **168 × 248,2 mm** — os 248,2 de Y **estouram os
+> 220 mm** da FlashForge AD5X, que hoje é a única impressora do usuário.
+>
+> A geometria das peças e do tabuleiro está boa e cabe folgada; o que não
+> cabe é a **disposição em placa única**. Para imprimir na AD5X é preciso
+> **relayoutar em dois jobs** — tabuleiro (168 × 168) num, as 32 peças
+> noutro. Enquanto isso não for feito, o `.3mf` abaixo serve só de
+> referência histórica.
 
 ![Prévia do xadrez completo na placa](./xadrez-01-preview.png)
 
 | | |
 |---|---|
-| Arquivo para imprimir | [`3mf/xadrez-01-k2-placa-bicolor.3mf`](./3mf/xadrez-01-k2-placa-bicolor.3mf) |
+| Arquivo para imprimir | [`3mf/xadrez-01-placa-bicolor.3mf`](./3mf/xadrez-01-placa-bicolor.3mf) |
 | Conteúdo | 1 tabuleiro + 16 peças claras + 16 peças escuras |
 | Cores | 2 corpos nomeados e atribuídos aos filamentos 1 e 2 |
 | Envelope da placa | **168,0 × 248,2 × 46,0 mm** |
 | Tabuleiro | **168 × 168 × 3,6 mm** |
 | Casas | **20 × 20 mm**; área de jogo 160 × 160 mm |
-| Malha no Creality Print | 50.396 triângulos, manifold, 65 volumes |
+| Malha no FlashForge Print | 50.396 triângulos, manifold, 65 volumes |
 | Suportes | nenhum |
-| Impressora-alvo | Creality K2 / bico 0,4 mm / CFS |
+| Impressora-alvo | ⚠️ placa feita p/ Creality K2 (260) — **não cabe** na AD5X (220) |
 
 ## O que vem no conjunto
 
@@ -41,7 +51,7 @@ mm separa as casas escuras e evita fronteiras ambíguas no fatiador.
 
 ## Como abrir e imprimir
 
-1. Abra o 3MF no Creality Print e selecione **Creality K2 0.4 nozzle**.
+1. Abra o 3MF no FlashForge Print e selecione **FlashForge AD5X 0.4 nozzle**.
 2. Confirme os dois componentes do conjunto:
    - `COR 1 CLARA - tabuleiro e 16 pecas` → slot claro do CFS;
    - `COR 2 ESCURA - casas e 16 pecas` → slot escuro do CFS.
@@ -50,13 +60,13 @@ mm separa as casas escuras e evita fronteiras ambíguas no fatiador.
 4. Use PLA, perfil 0,20 mm Standard, 2 paredes, 15% de infill e suporte
    desligado. Limpe bem a chapa antes do job longo.
 
-O teste de fatiamento foi feito no Creality Print 7.2.1 com os perfis oficiais
-`0.20mm Standard @Creality K2 0.4 nozzle` e `Generic PLA @Creality K2 0.4
+O teste de fatiamento foi feito no FlashForge Print 7.2.1 com os perfis oficiais
+`0.20mm Standard @FlashForge AD5X 0.4 nozzle` e `Generic PLA @FlashForge AD5X 0.4
 nozzle`. Resultado: **230 camadas, 230 trocas, 11h30 e 217,35 g** incluindo
 purga — 126,26 g na cor clara e 91,09 g na escura. São estimativas de fatiador;
 temperatura, fluxo, purga e tempo mudam conforme os filamentos e o firmware.
 
-A área ocupada deixa 5,9 mm em cada ponta do eixo Y da K2. O próprio perfil
+Na cama de 260 do K2 antigo a área ocupada deixava 5,9 mm em cada ponta do eixo Y. O próprio perfil
 oficial aceitou e fatiou a placa, mas não adicione brim global: ele consumiria
 essa margem. Se a sua chapa tiver adesão ruim, prefira brim localizado só nas
 peças altas.
@@ -74,7 +84,7 @@ O [`xadrez-01.scad`](./xadrez-01.scad) é a fonte paramétrica. O helper
 
 ## Validação e pendência
 
-- O 3MF abre no Creality Print com envelope 168,0 × 248,2 × 46,0 mm, malha
+- O 3MF abre no FlashForge Print com envelope 168,0 × 248,2 × 46,0 mm, malha
   manifold e 65 volumes.
 - O G-code de auditoria usou os dois filamentos (`T0` e `T1`) e não gerou
   suporte nem ponte sem apoio.

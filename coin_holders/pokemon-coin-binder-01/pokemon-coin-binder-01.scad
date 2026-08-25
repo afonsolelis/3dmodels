@@ -16,7 +16,7 @@
 //     -D 'part="plate3"' pokemon-coin-binder-01.scad
 
 /* [Peca a renderizar] */
-part = "holder"; // "holder" (1 insert) | "plate3" (3 inserts na A1 mini)
+part = "holder"; // "holder" (1 insert) | "plate3" (3 inserts na AD5X)
 
 /* [Moeda - medida real] */
 coin_d = 51.4;       // mm, diametro medido pelo usuario
@@ -100,7 +100,7 @@ module holder() {
 }
 
 // Packing assimetrico para manter tudo dentro do limite confortavel de
-// 170x170 da A1 mini: um insert retrato a esquerda e dois paisagem a direita.
+// 210x210 da AD5X: um insert retrato a esquerda e dois paisagem a direita.
 module plate3() {
     translate([-plate_w / 2, -plate_h / 2, 0]) {
         translate([card_w / 2, plate_h / 2, 0])
