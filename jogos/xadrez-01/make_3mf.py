@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Monta o 3MF bicolor padrao a partir dos dois STLs da placa.
+"""Monta os dois jobs 3MF bicolores compatíveis com a AD5X.
 
 Usa somente a biblioteca padrao para manter o projeto reproduzivel. O 3MF
 resultante tem dois objetos nomeados e dois materiais-base; fatiadores que
@@ -18,18 +18,28 @@ from xml.sax.saxutils import escape
 
 
 ROOT = Path(__file__).resolve().parent
-OUTPUT = ROOT / "3mf" / "xadrez-01-placa-bicolor.3mf"
-
-MESHES = (
+JOBS = (
     {
-        "path": ROOT / "stl" / "xadrez-01-cor-1-clara.stl",
-        "name": "COR_1_CLARA__TABULEIRO_E_16_PECAS",
-        "material": 0,
+        "output": ROOT / "3mf" / "xadrez-01-tabuleiro-bicolor.3mf",
+        "title": "Xadrez 01 - tabuleiro bicolor - AD5X",
+        "plate": "Tabuleiro bicolor 168 mm",
+        "meshes": (
+            {"path": ROOT / "stl" / "xadrez-01-tabuleiro-claro.stl",
+             "name": "COR_1_CLARA__BASE_DO_TABULEIRO", "material": 0},
+            {"path": ROOT / "stl" / "xadrez-01-tabuleiro-escuro.stl",
+             "name": "COR_2_ESCURA__32_CASAS", "material": 1},
+        ),
     },
     {
-        "path": ROOT / "stl" / "xadrez-01-cor-2-escura.stl",
-        "name": "COR_2_ESCURA__CASAS_E_16_PECAS",
-        "material": 1,
+        "output": ROOT / "3mf" / "xadrez-01-pecas-bicolor.3mf",
+        "title": "Xadrez 01 - 32 pecas bicolores - AD5X",
+        "plate": "32 pecas em quatro fileiras",
+        "meshes": (
+            {"path": ROOT / "stl" / "xadrez-01-pecas-claras.stl",
+             "name": "COR_1_CLARA__16_PECAS", "material": 0},
+            {"path": ROOT / "stl" / "xadrez-01-pecas-escuras.stl",
+             "name": "COR_2_ESCURA__16_PECAS", "material": 1},
+        ),
     },
 )
 
@@ -88,7 +98,7 @@ def fmt(value: float) -> str:
     return f"{value:.7f}".rstrip("0").rstrip(".") or "0"
 
 
-def model_xml(meshes) -> bytes:
+def model_xml(meshes, title) -> bytes:
     out = io.StringIO()
     out.write('<?xml version="1.0" encoding="UTF-8"?>\n')
     out.write(
@@ -98,11 +108,11 @@ def model_xml(meshes) -> bytes:
         'unit="millimeter" xml:lang="pt-BR" requiredextensions="m">\n'
     )
     out.write('  <metadata name="BambuStudio:3mfVersion">1</metadata>\n')
-    out.write('  <metadata name="Title">Xadrez 01 - placa bicolor FlashForge AD5X</metadata>\n')
+    out.write(f'  <metadata name="Title">{escape(title)}</metadata>\n')
     out.write('  <metadata name="Designer">afonsolelis</metadata>\n')
     out.write(
-        '  <metadata name="Description">Tabuleiro 168 mm e 32 pecas; '
-        'placa unica, dois corpos de cor, sem suporte.</metadata>\n'
+        '  <metadata name="Description">Job bicolor para FlashForge AD5X; '
+        'dois corpos de cor, sem suporte.</metadata>\n'
     )
     out.write('  <metadata name="CreationDate">2026-08-23</metadata>\n')
     out.write('  <resources>\n')
@@ -160,13 +170,13 @@ RELATIONSHIPS = b"""<?xml version="1.0" encoding="UTF-8"?>
 """
 
 
-def model_settings_xml() -> bytes:
+def model_settings_xml(plate_name: str, source_name: str) -> bytes:
     """Metadados de volumes usados por Orca / Flash Studio Desktop.
 
     O objeto 4 e a montagem; os ids 2 e 3 sao os dois componentes de cor.
     O valor de extrusor e 1-based nesses fatiadores.
     """
-    return b"""<?xml version="1.0" encoding="UTF-8"?>
+    return f"""<?xml version="1.0" encoding="UTF-8"?>
 <config>
   <object id="4">
     <metadata key="name" value="XADREZ_01__CONJUNTO_BICOLOR"/>
@@ -175,7 +185,7 @@ def model_settings_xml() -> bytes:
       <metadata key="name" value="COR 1 CLARA - tabuleiro e 16 pecas"/>
       <metadata key="extruder" value="1"/>
       <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>
-      <metadata key="source_file" value="xadrez-01-placa-bicolor.3mf"/>
+      <metadata key="source_file" value="{escape(source_name)}"/>
       <metadata key="source_object_id" value="0"/>
       <metadata key="source_volume_id" value="0"/>
       <mesh_stat edges_fixed="0" degenerate_facets="0" facets_removed="0" facets_reversed="0" backwards_edges="0"/>
@@ -184,7 +194,7 @@ def model_settings_xml() -> bytes:
       <metadata key="name" value="COR 2 ESCURA - casas e 16 pecas"/>
       <metadata key="extruder" value="2"/>
       <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>
-      <metadata key="source_file" value="xadrez-01-placa-bicolor.3mf"/>
+      <metadata key="source_file" value="{escape(source_name)}"/>
       <metadata key="source_object_id" value="0"/>
       <metadata key="source_volume_id" value="1"/>
       <mesh_stat edges_fixed="0" degenerate_facets="0" facets_removed="0" facets_reversed="0" backwards_edges="0"/>
@@ -192,7 +202,7 @@ def model_settings_xml() -> bytes:
   </object>
   <plate>
     <metadata key="plater_id" value="1"/>
-    <metadata key="plater_name" value="Xadrez completo - duas cores"/>
+    <metadata key="plater_name" value="{escape(plate_name)}"/>
     <metadata key="locked" value="false"/>
     <model_instance>
       <metadata key="object_id" value="4"/>
@@ -202,7 +212,7 @@ def model_settings_xml() -> bytes:
   <assemble>
   </assemble>
 </config>
-"""
+""".encode("utf-8")
 
 
 def zip_write(archive: zipfile.ZipFile, name: str, data: bytes) -> None:
@@ -218,26 +228,29 @@ def bbox(vertices):
 
 
 def main() -> None:
-    meshes = []
-    for spec in MESHES:
-        if not spec["path"].is_file():
-            raise SystemExit(f"Falta exportar: {spec['path'].relative_to(ROOT)}")
-        vertices, faces = indexed_mesh(load_stl(spec["path"]))
-        meshes.append({**spec, "vertices": vertices, "faces": faces})
+    for job in JOBS:
+        meshes = []
+        for spec in job["meshes"]:
+            if not spec["path"].is_file():
+                raise SystemExit(f"Falta exportar: {spec['path'].relative_to(ROOT)}")
+            vertices, faces = indexed_mesh(load_stl(spec["path"]))
+            meshes.append({**spec, "vertices": vertices, "faces": faces})
 
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-    with zipfile.ZipFile(OUTPUT, "w") as archive:
-        zip_write(archive, "[Content_Types].xml", CONTENT_TYPES)
-        zip_write(archive, "_rels/.rels", RELATIONSHIPS)
-        zip_write(archive, "3D/3dmodel.model", model_xml(meshes))
-        zip_write(archive, "Metadata/model_settings.config", model_settings_xml())
+        output = job["output"]
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(output, "w") as archive:
+            zip_write(archive, "[Content_Types].xml", CONTENT_TYPES)
+            zip_write(archive, "_rels/.rels", RELATIONSHIPS)
+            zip_write(archive, "3D/3dmodel.model", model_xml(meshes, job["title"]))
+            zip_write(archive, "Metadata/model_settings.config",
+                      model_settings_xml(job["plate"], output.name))
 
-    all_vertices = [v for mesh in meshes for v in mesh["vertices"]]
-    size = bbox(all_vertices)
-    print(f"criado: {OUTPUT.relative_to(ROOT)}")
-    print(f"item de placa: 1 conjunto; corpos de cor: {len(meshes)}; materiais: 2")
-    print(f"triangulos: {sum(len(mesh['faces']) for mesh in meshes)}")
-    print(f"envelope: {size[0]:.2f} x {size[1]:.2f} x {size[2]:.2f} mm")
+        all_vertices = [v for mesh in meshes for v in mesh["vertices"]]
+        size = bbox(all_vertices)
+        print(f"criado: {output.relative_to(ROOT)}")
+        print(f"item de placa: 1 conjunto; corpos de cor: {len(meshes)}; materiais: 2")
+        print(f"triangulos: {sum(len(mesh['faces']) for mesh in meshes)}")
+        print(f"envelope: {size[0]:.2f} x {size[1]:.2f} x {size[2]:.2f} mm")
 
 
 if __name__ == "__main__":

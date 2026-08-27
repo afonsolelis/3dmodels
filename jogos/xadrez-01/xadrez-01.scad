@@ -1,6 +1,7 @@
 // xadrez-01.scad
-// Xadrez compacto completo, desenhado para sair em UMA unica placa da
-// FlashForge AD5X (260 x 260 mm): tabuleiro central + 32 pecas em quatro fileiras.
+// Xadrez compacto completo para a FlashForge AD5X (220 x 220 x 220 mm).
+// O usuario imprime dois jobs: primeiro o tabuleiro bicolor deitado; depois
+// as 32 pecas em pe, com as bases na mesa, em quatro fileiras compactas.
 // A geometria e dividida em apenas dois corpos de cor:
 //   COR 1 = tabuleiro claro + 16 pecas claras
 //   COR 2 = 32 casas escuras + 16 pecas escuras
@@ -10,13 +11,18 @@
 // ser exportadas para reposicao.
 //
 // Export canonico (usar caminhos absolutos nesta maquina):
-//   flatpak run org.openscad.OpenSCAD -o stl/xadrez-01-cor-1-clara.stl \
-//     -D 'part="light"' xadrez-01.scad
-//   flatpak run org.openscad.OpenSCAD -o stl/xadrez-01-cor-2-escura.stl \
-//     -D 'part="dark"' xadrez-01.scad
+//   flatpak run org.openscad.OpenSCAD -o stl/xadrez-01-tabuleiro-claro.stl \
+//     -D 'part="board_light"' xadrez-01.scad
+//   flatpak run org.openscad.OpenSCAD -o stl/xadrez-01-tabuleiro-escuro.stl \
+//     -D 'part="board_dark"' xadrez-01.scad
+//   flatpak run org.openscad.OpenSCAD -o stl/xadrez-01-pecas-claras.stl \
+//     -D 'part="pieces_light"' xadrez-01.scad
+//   flatpak run org.openscad.OpenSCAD -o stl/xadrez-01-pecas-escuras.stl \
+//     -D 'part="pieces_dark"' xadrez-01.scad
 //   python3 make_3mf.py
 //
-// Valores de part: plate, light, dark, board_light, board_dark,
+// Valores de part: plate, board_plate, pieces_plate, board_light, board_dark,
+// pieces_light, pieces_dark,
 // pawn, rook, knight, bishop, queen, king.
 
 part = "plate";
@@ -29,10 +35,9 @@ dark_layer_h = 0.6;     // tres camadas a 0.20 mm
 dark_square_gap = 0.4;  // filete claro entre casas, largura de um bico 0.4
 board_corner_r = 3;
 
-/* [Disposicao na placa] */
-pawn_row_y = 95;
-major_row_y = 116;
-piece_pitch = 20;
+/* [Disposicao nas chapas] */
+piece_pitch = 20;       // centro a centro; deixa >=3.8mm entre bases
+piece_row_pitch = 20;   // quatro fileiras compactas no job de pecas
 
 /* [Qualidade] */
 round_fn = 48;
@@ -45,26 +50,22 @@ field_size = 8 * square_size;
 board_size = field_size + 2 * frame_w;
 dark_z = board_h - dark_layer_h;
 max_piece_r = 8.1;
-plate_x = board_size;
-plate_y = 2 * (major_row_y + max_piece_r);
+pieces_plate_x = 7 * piece_pitch + 2 * max_piece_r;
+pieces_plate_y = 3 * piece_row_pitch + 2 * max_piece_r;
 plate_z = 46;
 
 assert(board_size == 168, "A grade deve continuar com 168 mm no total");
-// ATENCAO: 250 x 250 e o envelope da impressora ANTIGA (Creality K2, cama
-// 260). A chapa mede 168 x 248.2mm e NAO CABE na FlashForge AD5X (220 x
-// 220), a unica impressora atual. O assert segue no valor legado so pra
-// nao quebrar o export do arquivo historico — a placa unica precisa ser
-// RELAYOUTADA (tabuleiro num job, as 32 pecas noutro) antes de imprimir.
-assert(plate_x <= 250 && plate_y <= 250,
-       "A chapa ultrapassou o envelope legado de 250 x 250 mm");
-assert(pawn_row_y - 6.8 > board_size / 2 + 4,
-       "Os peoes ficaram perto demais do tabuleiro");
-assert(major_row_y - pawn_row_y > 2 * max_piece_r + 3,
-       "As fileiras de pecas ficaram perto demais");
+assert(board_size <= 210 && pieces_plate_x <= 210 && pieces_plate_y <= 210,
+       "Um job ultrapassou o alvo confortavel de 210mm da AD5X");
+assert(piece_pitch - 2 * max_piece_r >= 3.8,
+       "As pecas ficaram perto demais no eixo X");
+assert(piece_row_pitch - 2 * max_piece_r >= 3.8,
+       "As fileiras ficaram perto demais no eixo Y");
 
 echo(str("BOARD_MM=", board_size, "x", board_size, "x", board_h));
-echo(str("PLATE_MM=", plate_x, "x", plate_y, "x", plate_z));
-echo("CONTENTS=tabuleiro + 16 claras + 16 escuras; COLORS=2");
+echo(str("BOARD_JOB_MM=", board_size, "x", board_size, "x", board_h));
+echo(str("PIECES_JOB_MM=", pieces_plate_x, "x", pieces_plate_y, "x", plate_z));
+echo("CONTENTS=job 1 tabuleiro; job 2 16 claras + 16 escuras; COLORS=2");
 
 // --------------------------------------------------------------------------
 // Utilitarios
@@ -270,33 +271,33 @@ module major_piece(kind, mirrored_knight = false) {
 // caem na mesma coluna e cada uma fica na casa da propria cor.
 major_order = [1, 2, 3, 5, 4, 3, 2, 1];
 
-module army(side = 1) {
+module army_compact(row_offset = 0) {
     for (i = [0 : 7]) {
         x = (i - 3.5) * piece_pitch;
 
-        translate([x, side * pawn_row_y, 0])
-            rotate([0, 0, side < 0 ? 180 : 0])
-                pawn();
+        translate([x, row_offset, 0]) pawn();
 
-        translate([x, side * major_row_y, 0])
-            rotate([0, 0, side < 0 ? 180 : 0])
-                major_piece(major_order[i], i == 6);
+        translate([x, row_offset + piece_row_pitch, 0])
+            major_piece(major_order[i], i == 6);
     }
 }
 
-module light_geometry() {
-    board_light();
-    army(1);
+module pieces_light() { army_compact(-1.5 * piece_row_pitch); }
+module pieces_dark() { army_compact(0.5 * piece_row_pitch); }
+
+module board_plate() {
+    color(preview_light) board_light();
+    color(preview_dark) board_dark();
 }
 
-module dark_geometry() {
-    board_dark();
-    army(-1);
+module pieces_plate() {
+    color(preview_light) pieces_light();
+    color(preview_dark) pieces_dark();
 }
 
 module plate_preview() {
-    color(preview_light) light_geometry();
-    color(preview_dark) dark_geometry();
+    translate([-board_size / 2 - 12, 0, 0]) board_plate();
+    translate([board_size / 2 + 12, 0, 0]) pieces_plate();
 }
 
 // --------------------------------------------------------------------------
@@ -304,10 +305,12 @@ module plate_preview() {
 // --------------------------------------------------------------------------
 
 if (part == "plate") plate_preview();
-else if (part == "light") light_geometry();
-else if (part == "dark") dark_geometry();
+else if (part == "board_plate") board_plate();
+else if (part == "pieces_plate") pieces_plate();
 else if (part == "board_light") board_light();
 else if (part == "board_dark") board_dark();
+else if (part == "pieces_light") pieces_light();
+else if (part == "pieces_dark") pieces_dark();
 else if (part == "pawn") pawn();
 else if (part == "rook") rook();
 else if (part == "knight") knight();
