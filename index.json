@@ -1,8 +1,45 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-24",
+  "updated": "2026-08-26",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
+    {
+      "id": "switch-case-organizer-01",
+      "category": "diversos",
+      "path": "diversos/switch-case-organizer-01",
+      "scad": "diversos/switch-case-organizer-01/switch-case-organizer-01.scad",
+      "status": "em-andamento",
+      "derived_from": "diversos/switch_game_tray_12.3mf (3Dravs, Standard Digital File License) — somente medidas de interface extraidas da malha; geometria refeita do zero em OpenSCAD",
+      "description": "Organizador modular aberto para 12 caixas fisicas de jogos Nintendo Switch / Switch 2. Duas sapatas de 28mm e guias de 30mm seguram cada caixa em quatro regioes; dois rabos-de-andorinha verticais, macho a direita e femea a esquerda, permitem repetir unidades identicas lado a lado. As longarinas ficam fora da interface para preservar 11.25mm inclusive nos canais extremos. Peca unica, sem suporte.",
+      "parts": { "organizer": 1 },
+      "print_jobs": [
+        { "file": "3mf/switch-case-organizer-01.3mf", "contents": "1 organizador modular para 12 caixas, na orientacao de uso, sem suporte", "footprint_mm": [176.25, 110.1, 32.4] }
+      ],
+      "assembled_closed_mm": [164.25, 110.1, 32.4],
+      "capacity": "12 caixas fisicas de jogos Nintendo Switch / Switch 2",
+      "key_measures": {
+        "canais": 12,
+        "vao_por_caixa_mm": 11.25,
+        "passo_mm": 13.0,
+        "divisoria_mm": 1.75,
+        "interface_total_mm": 158.25,
+        "canais_extremos_livres_mm": [11.25, 11.25],
+        "profundidade_apoiada_mm": 110.1,
+        "sapata_em_cada_ponta_mm": 28.0,
+        "guia_acima_do_piso_mm": 30.0,
+        "piso_mm": 2.4,
+        "abertura_central_mm": 54.1,
+        "conectores_por_lado": 2,
+        "folga_deslizamento_por_lado_mm": 0.5,
+        "engate_vertical_mm": 24.0,
+        "chanfro_entrada_mm": 1.2,
+        "curso_vertical_desmontagem_mm": 28.0,
+        "passo_entre_modulos_acoplados_mm": 169.75,
+        "origem_das_medidas": "Engenharia reversa inequivoca da malha de referencia: envelope 158.25 x 27.0 x 110.1mm, canais de 11.25mm e passo de 13mm. Nao foram usadas dimensoes de catalogo da caixa."
+      },
+      "hardware": "nenhum",
+      "notes": "Geometria propria, sem reutilizacao da malha protegida. Identidade visual em hexagonos ponta-pra-cima nas longarinas, mantendo faixas solidas nas bordas. Longarinas de 3mm posicionadas totalmente para fora da interface de 158.25mm; primeiro e ultimo canais tambem medem 11.25mm. Acoplamento parametrizavel por modular_connectors_override, com dois rabos-de-andorinha verticais, canal aberto e chanfro inferior contra pe de elefante; montagem de duas unidades simulada no part assembly. STL e chapa medidos em 176.2 x 110.1 x 32.4mm: ok na AD5X e abaixo do alvo 210x210. Volumes 2 no CGAL = solido unico. Previews perspectiva, topo e montagem inspecionados. Acoplamento e caixas ainda dependem de teste fisico."
+    },
     {
       "id": "emergency-nfc-card-01",
       "category": "cartoes",

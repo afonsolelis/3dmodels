@@ -41,7 +41,7 @@ vão direto pro Flash Studio) e `.stl` individuais de cada peça, de referência
 │   └── README.md
 ├── bumpers/             # (só .3mf de terceiros — bumpers de slab graduado)
 │   └── README.md
-├── diversos/            # (só .3mf de terceiros, sem modelo paramétrico)
+├── diversos/            # downloads avulsos + projetos paramétricos diversos
 │   └── README.md
 ├── logistica_pokemon/   # (só .3mf de terceiros)
 │   └── README.md
