@@ -10,10 +10,19 @@ peças de uma vez** usando somente **duas cores**.
 > 220 mm** da FlashForge AD5X, que hoje é a única impressora do usuário.
 >
 > A geometria das peças e do tabuleiro está boa e cabe folgada; o que não
-> cabe é a **disposição em placa única**. Para imprimir na AD5X é preciso
-> **relayoutar em dois jobs** — tabuleiro (168 × 168) num, as 32 peças
-> noutro. Enquanto isso não for feito, o `.3mf` abaixo serve só de
-> referência histórica.
+> cabe é a **disposição em placa única**. Enquanto isso não for resolvido, o
+> `.3mf` abaixo serve só de referência histórica.
+>
+> **Estado em 2026-08-28:** o relayout **já está no `.scad`** — dois jobs,
+> `part=board_light`/`board_dark` (tabuleiro 168 × 168) e
+> `part=pieces_light`/`pieces_dark` (32 peças em 4 fileiras a passo 20) — e o
+> `make_3mf.py` já monta `3mf/xadrez-01-tabuleiro-bicolor.3mf` e
+> `3mf/xadrez-01-pecas-bicolor.3mf`. **Os arquivos em `stl/` e `3mf/` ainda
+> são os antigos**, da placa única: o commit do relayout não re-exportou, e a
+> re-exportação de 28/08 falhou porque **o OpenSCAD não está mais instalado
+> nesta máquina** (nem o flatpak `org.openscad.OpenSCAD`, nem binário no
+> PATH). Reinstalar e rodar os quatro exports do cabeçalho do `.scad` mais
+> `python3 make_3mf.py` antes de imprimir qualquer coisa daqui.
 
 ![Prévia do xadrez completo na placa](./xadrez-01-preview.png)
 
@@ -74,9 +83,11 @@ peças altas.
 ## Arquivos de referência e reposição
 
 Os dois STLs `xadrez-01-cor-1-clara.stl` e
-`xadrez-01-cor-2-escura.stl` reproduzem a placa por cor. A pasta [`stl/`](./stl/)
-também contém tabuleiro claro, casas escuras e um STL individual de cada tipo
-de peça, permitindo imprimir reposições sem refazer o conjunto inteiro.
+`xadrez-01-cor-2-escura.stl` reproduzem a **placa única antiga** por cor — o
+`.scad` de hoje não gera mais esses `part`s, então eles são histórico até a
+re-exportação. A pasta [`stl/`](./stl/) também contém tabuleiro claro, casas
+escuras e um STL individual de cada tipo de peça, permitindo imprimir
+reposições sem refazer o conjunto inteiro.
 
 O [`xadrez-01.scad`](./xadrez-01.scad) é a fonte paramétrica. O helper
 [`make_3mf.py`](./make_3mf.py) reúne os dois STLs de cor em uma única montagem
