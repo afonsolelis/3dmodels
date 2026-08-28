@@ -13,3 +13,7 @@ Thumbs.db
 
 # Slicer (Bambu Studio) - configs de projeto locais, mantemos os .stl gerados
 *.3mf.bak
+
+# Python
+__pycache__/
+*.pyc
