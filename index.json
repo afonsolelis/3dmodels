@@ -1,6 +1,6 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-26",
+  "updated": "2026-08-28",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
     {
@@ -104,7 +104,7 @@
       "path": "cardholders/cardholder-01",
       "scad": "cardholders/cardholder-01/cardholder-01.scad",
       "status": "em-andamento",
-      "derived_from": "cardholders/card_holder_with_feet.3mf (Don Julio, MakerWorld) — só as medidas úteis; geometria remodelada do zero em OpenSCAD, sem reuso do mesh de terceiro",
+      "derived_from": "cardholders/card_holder_with_feet.3mf (Don Julio, MakerWorld — arquivo REMOVIDO do repo em 2026-08-28, medidas preservadas aqui e no README do modelo) — só as medidas úteis; geometria remodelada do zero em OpenSCAD, sem reuso do mesh de terceiro",
       "description": "Porta-cartas ABERTO reforçado: chapa de fundo em colmeia + 4 cantoneiras em L amarradas por DUAS CINTAS fechadas (meio z=26-32 e topo z=52-58) sobre uma CINTA DE PÉ integrada (z=0-4, recuada 4mm). Nasceu porque o 3MF de terceiro que o usuário imprimiu ficou FRACO: 4 cantoneiras de 2mm com 56mm de balanço solto, sem nada amarrando uma na outra. Aqui a rigidez vem da forma, não da espessura — parede segue 2mm em tudo. Peça única, sem montagem (o pé integrado substitui os 4 pezinhos soltos do original), sem suporte.",
       "parts": { "holder": 1 },
       "print_jobs": [
@@ -135,7 +135,7 @@
       "path": "cardholders/sleeve-tower-01",
       "scad": "cardholders/sleeve-tower-01/sleeve-tower-01.scad",
       "status": "em-andamento",
-      "derived_from": "cardholders/PennySleeveHolderStacking_V2.3mf (\"Stackable Penny Sleeve Holder\", Sazabi, MakerWorld, MakerWorld Exclusive License - arquivo de TERCEIRO, NAO redistribuivel). RECONSTRUCAO PARAMETRICA propria: nada da malha foi copiado, so medidas de engenharia reversa da variante Stackable (3D/Objects/object_1.model, 296 vertices): externo 73.0 x 101.5 x 45.0, parede 2.0, cavidade 69.0 x 99.5, piso 10.0, ressalto z 0..3 de 68.6 x 99.3 (0.2/lado), abas em L de 3.5 de fundura com aresta interna em x +-25.0 na face da frente, quinas r ~1.0",
+      "derived_from": "cardholders/PennySleeveHolderStacking_V2.3mf (\"Stackable Penny Sleeve Holder\", Sazabi, MakerWorld, MakerWorld Exclusive License - arquivo de TERCEIRO, NAO redistribuivel, REMOVIDO do repo em 2026-08-28; ficaram as variantes _kobra3 e as medidas abaixo). RECONSTRUCAO PARAMETRICA propria: nada da malha foi copiado, so medidas de engenharia reversa da variante Stackable (3D/Objects/object_1.model, 296 vertices): externo 73.0 x 101.5 x 45.0, parede 2.0, cavidade 69.0 x 99.5, piso 10.0, ressalto z 0..3 de 68.6 x 99.3 (0.2/lado), abas em L de 3.5 de fundura com aresta interna em x +-25.0 na face da frente, quinas r ~1.0",
       "description": "Torre de PENNY SLEEVES DEITADOS: bandeja aberta em cima, 75 x 102.5 x 150mm, tres paredes MACICAS de 3.0mm (duas laterais + fundo) e a frente aberta num SULCO vertical de 50mm que vai do piso ao topo, ladeado por DUAS ABAS EM L de 9.5mm de retorno que seguram a pilha. O sleeve entra deitado (66 no X, 91 no Y) e a pilha cresce em Z: 140mm de curso. Piso de 10mm que e lastro contra tombamento e, embaixo dele, ressalto de empilhamento de 3mm (passo 147, duas torres = 297mm). Variante ALTA da referencia de 45mm. PAREDE MACICA E PEDIDO LITERAL DO USUARIO e SOBREPOE a regra 5 (identidade visual em colmeia) do CLAUDE.md - decisao consciente, nao esquecimento. Peca unica, imprime em pe na orientacao de uso, sem suporte.",
       "parts": { "tower": 1 },
       "print_jobs": [
@@ -570,7 +570,7 @@
           "contents": "JOB ÚNICO: tabuleiro + 16 peças claras + 16 peças escuras, em uma montagem com 2 corpos de cor. Filamento 1 = claro; filamento 2 = escuro. Não reorganizar nem separar os componentes. Sem suporte e sem brim global.",
           "footprint_mm": [168.0, 248.2, 46.0],
           "colors": 2,
-          "printer": "INCOMPATIVEL com a AD5X: placa de 248.2mm em Y contra cama de 220. Feita para a Creality K2 (260), impressora antiga. Precisa relayout em 2 jobs (tabuleiro + pecas)."
+          "printer": "INCOMPATIVEL com a AD5X: placa de 248.2mm em Y contra cama de 220. Feita para a Creality K2 (260), impressora antiga. ARQUIVO DEFASADO: o .scad ja foi relayoutado em 2 jobs (tabuleiro + pecas) em 2026-08-26, mas este 3MF e o export velho da placa unica e NAO deve ser impresso; falta re-exportar (OpenSCAD desinstalado da maquina em 2026-08-28)."
         }
       ],
       "assembled_open_mm": [168.0, 168.0, 46.0],
@@ -605,7 +605,7 @@
         "layers": 230,
         "filament_changes": 230
       },
-      "notes": "VALIDADO NO FATIADOR OFICIAL: o FlashForge Print reconhece envelope 168.0 x 248.2 x 46.0mm, 50.396 triângulos, 65 volumes e manifold=yes. O G-code de auditoria usa T0 e T1 em todas as 230 camadas, gera 230 trocas, support=0 e bridge_no_support=0. As duas cores NÃO são dois objetos soltos: são componentes de uma montagem 3MF única, com metadados de extrusor 1/2; isso corrige um teste intermediário em que o FlashForge Print recentrou cada objeto independente e deslocou as casas. A cor clara é laje contínua; as 32 casas escuras são inserts de 0.6mm no topo, separados por filete claro de 0.4mm. Ordem inicial conferida: damas na própria cor e casa clara à direita de cada jogador. As 32 peças têm base de 13.6 a 16.2mm e ficam a passo de 20mm, sem colisão. BLOQUEIO ATUAL: a placa unica tem 248.2mm em Y e NAO CABE na cama de 220 da FlashForge AD5X (unica impressora do usuario); ela foi dimensionada para a Creality K2, de 260. A geometria das pecas e do tabuleiro cabe folgada — o que precisa mudar e a DISPOSICAO: dois jobs, tabuleiro (168x168) e as 32 pecas. PENDÊNCIA: ainda não impresso fisicamente — validar adesão das 32 bases, planicidade do tabuleiro e legibilidade das peças pequenas no primeiro job. Estimativas de tempo/peso incluem purga e mudam com perfil/filamento."
+      "notes": "VALIDADO NO FATIADOR OFICIAL: o FlashForge Print reconhece envelope 168.0 x 248.2 x 46.0mm, 50.396 triângulos, 65 volumes e manifold=yes. O G-code de auditoria usa T0 e T1 em todas as 230 camadas, gera 230 trocas, support=0 e bridge_no_support=0. As duas cores NÃO são dois objetos soltos: são componentes de uma montagem 3MF única, com metadados de extrusor 1/2; isso corrige um teste intermediário em que o FlashForge Print recentrou cada objeto independente e deslocou as casas. A cor clara é laje contínua; as 32 casas escuras são inserts de 0.6mm no topo, separados por filete claro de 0.4mm. Ordem inicial conferida: damas na própria cor e casa clara à direita de cada jogador. As 32 peças têm base de 13.6 a 16.2mm e ficam a passo de 20mm, sem colisão. BLOQUEIO ATUAL: a placa unica tem 248.2mm em Y e NAO CABE na cama de 220 da FlashForge AD5X (unica impressora do usuario); ela foi dimensionada para a Creality K2, de 260. A geometria das pecas e do tabuleiro cabe folgada — o que precisa mudar e a DISPOSICAO: dois jobs, tabuleiro (168x168) e as 32 pecas. RELAYOUT JA FEITO NO .SCAD (2026-08-26), EXPORTS AINDA NAO: o xadrez-01.scad ja traz os dois jobs (part=board_light/board_dark = tabuleiro 168x168; part=pieces_light/pieces_dark = 4 fileiras a passo 20, chapa 156.2 x 76.2) e o make_3mf.py ja aponta para 3mf/xadrez-01-tabuleiro-bicolor.3mf e 3mf/xadrez-01-pecas-bicolor.3mf, mas os arquivos em stl/ e 3mf/ SAO OS ANTIGOS, da placa unica de 248.2mm — o commit do relayout nao re-exportou. Em 2026-08-28 a re-exportacao foi tentada e falhou porque O OPENSCAD NAO ESTA MAIS INSTALADO NESTA MAQUINA (nem flatpak org.openscad.OpenSCAD, nem binario no PATH; so o flatpak do Brave sobrou). NAO IMPRIMIR NADA DAQUI ate reinstalar o OpenSCAD e rodar os quatro exports do cabecalho do .scad + python3 make_3mf.py. PENDÊNCIA: ainda não impresso fisicamente — validar adesão das 32 bases, planicidade do tabuleiro e legibilidade das peças pequenas no primeiro job. Estimativas de tempo/peso incluem purga e mudam com perfil/filamento."
     },
     {
       "id": "slab-tile-01",
@@ -692,25 +692,8 @@
       "embedded_profile": { "printer_model": "Bambu Lab A1 mini", "print_settings_id": "0.20mm Standard @BBL A1M", "printer_settings_id": "Bambu Lab A1 mini 0.4 nozzle", "printable_height": "180", "enable_support": "1", "filament_type": "PETG" }
     },
     {
-      "file": "cardholders/card_holder_with_feet.3mf",
-      "category": "cardholders",
-      "format": "3mf",
-      "title": "Stackable Pokémon TCG Card Holder - No supports",
-      "designer": "Don Julio",
-      "license": "Standard Digital File License",
-      "modified": "2026-08-09",
-      "objects": 1,
-      "plates": 1,
-      "largest_part_mm": [70.0, 94.0, 58.0],
-      "fits_a1_mini": true,
-      "triangles": 6750,
-      "embedded_profile": { "printer_model": "Bambu Lab A1 mini", "print_settings_id": "0.20mm Standard @BBL A1M", "printable_height": "180", "enable_support": "0" },
-      "needs_profile_swap": false,
-      "description": "&lt;p&gt;Keep your Pokémon cards neatly organized and on display with this easy‑to‑print card holder.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;strong&gt;No supports required&lt;/strong&gt;.&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Simple assembly&lt;/strong&gt;: Insert the four feet into the matching holes—no glue …",
-      "notes": "IMPRESSO E REPROVADO NO TESTE FÍSICO: fraco. Medido do mesh — bolso 66x90 (carta NUA 63x88; sleeve penny 66x91 NÃO entra), chapa 66x90x2 vazada, 4 cantoneiras em L de parede 2mm com braços de 10mm e 56mm de balanço, 5 peças (corpo + 4 pezinhos 5.7x5.7x4 que pressionam nos rebaixos Ø10 dos cantos). Serviu de referência de medidas pro projeto próprio cardholders/cardholder-01, que resolve a rigidez com 2 cintas + pé integrado."
-    },    {
-      "file": "cardholders/Main.3mf",
-      "category": "cardholders",
+      "file": "bumpers/bumper_main.3mf",
+      "category": "bumpers",
       "format": "3mf",
       "title": "PSA Graded Card Case 3D Printed Protective Holder",
       "designer": "MaskForge",
@@ -723,22 +706,6 @@
       "embedded_profile": { "printer_model": "Bambu Lab A1 mini", "print_settings_id": "0.20mm Standard @BBL A1M", "printable_height": "180", "enable_support": "1" },
       "needs_profile_swap": false,
       "description": "&lt;boostme&gt;&lt;boosttitle&gt;Boost Me&lt;/boosttitle&gt;&lt;boostcontent&gt;Support My Work 🙌&lt;br&gt;I’m working on upgrading to a new printer and tools so I can prototype faster and share better models with the community. Every bit of support helps me keep improving and creating more for ever…"
-    },
-    {
-      "file": "cardholders/PennySleeveHolderStacking_V2.3mf",
-      "category": "cardholders",
-      "format": "3mf",
-      "title": "Stackable Penny Sleeve Holder",
-      "designer": "Sazabi",
-      "license": "MakerWorld Exclusive License",
-      "modified": "2026-03-02",
-      "plates": 2,
-      "largest_part_mm": [73.0, 101.5, 45.0],
-      "fits_a1_mini": true,
-      "triangles": 1146,
-      "embedded_profile": { "printer_model": "Bambu Lab P1S", "print_settings_id": "0.20mm Standard @BBL X1C", "printable_height": "250", "enable_support": "1" },
-      "needs_profile_swap": true,
-      "description": "&lt;boostme&gt;&lt;boosttitle&gt;Boost Me&lt;/boosttitle&gt;&lt;boostcontent&gt;If you enjoyed this project, please consider boosting this model and rating. I am new to designing but this allows me to continue and learn new things. Thank you!&lt;/boostcontent&gt;&lt;/boostme&gt;&lt;p&gt;Designed for…"
     },
     {
       "file": "cardholders/PennySleeveHolderStacking_V2_kobra3.3mf",
@@ -870,20 +837,25 @@
       "embedded_profile": { "printer_model": "Bambu Lab A1 mini", "print_settings_id": "0.16mm Optimal @BBL A1M", "printer_settings_id": "Bambu Lab A1 mini 0.4 nozzle", "printable_height": "180", "enable_support": "0", "filament_type": "PETG" },
       "notes": "Peça de 200mm de altura: NÃO cabe na A1 mini (180)."
     },
+
+
     {
-      "file": "diversos/plainones(2).3mf",
+      "file": "diversos/controller_stand_x4.3mf",
       "category": "diversos",
       "format": "3mf",
-      "title": "Plain Ones (2)",
+      "title": "Controller Stand x4",
       "designer": "a confirmar",
       "license": "a confirmar",
-      "modified": "2026-08-09",
-      "largest_part_mm": [61.2, 15.8, 81.0],
-      "fits_a1_mini": true,
-      "triangles": 413,
-      "embedded_profile": { "printer_model": "Bambu Lab A1 mini", "print_settings_id": "0.20mm Standard @BBL A1M", "printer_settings_id": "Bambu Lab A1 mini 0.4 nozzle", "printable_height": "180", "enable_support": "1", "filament_type": "PLA" }
+      "modified": "2026-08-28",
+      "objects": 1,
+      "plates": 1,
+      "largest_part_mm": [211.2, 168.5, 32.5],
+      "fits_ad5x": true,
+      "triangles": 11432,
+      "embedded_profile": { "printer_model": "Flashforge Adventurer 5M", "print_settings_id": "0.20mm Standard @Flashforge AD5M 0.4 Nozzle", "printer_settings_id": "Flashforge Adventurer 5M 0.4 Nozzle", "printable_height": "220", "enable_support": "0", "filament_type": "PLA" },
+      "needs_profile_swap": false,
+      "notes": "Rack de 4 braços numa espinha curva, impresso deitado. Malha original 250 x 207.4 x 38.7 NÃO CABE na cama; o job está ESCALADO A 84% e girado ~2.3°, o que dá 211.2 x 168.5 x 32.5 — cabe nos 220, mas passa 1.2mm do limite de conforto de 210mm do repo, então é brim curto ou nada. Nome antigo do arquivo: 20260423015513_23efe3ec.3mf (export default do fatiador)."
     },
-
     {
       "file": "diversos/2x3.3mf",
       "category": "diversos",
@@ -1387,8 +1359,21 @@
       "description": "&lt;p&gt;Simple single card (inner sleeved) carrying case. Perfect for portable transportation or in your pocket at a trade show. Also ideal for shipping cards. Low filament usage, fast print. &lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;I made this model so that I could wrap single cards for Chr…"
     },
     {
-      "file": "manutencao_bambu/A1LubeXAxis.3mf",
-      "category": "manutencao_bambu",
+      "file": "manutencao_impressoras/Flashforge_Guide_V2.stl",
+      "category": "manutencao_impressoras",
+      "format": "stl",
+      "title": "Flashforge Guide V2",
+      "designer": "a confirmar",
+      "license": "a confirmar",
+      "modified": "2026-08-28",
+      "objects": 1,
+      "largest_part_mm": [70.0, 36.0, 98.7],
+      "fits_ad5x": true,
+      "notes": "Guia de filamento da AD5X, com caveira em relevo no topo. STL puro, sem perfil de fatiador embutido — orientar e fatiar no Flash Studio."
+    },
+    {
+      "file": "manutencao_impressoras/A1LubeXAxis.3mf",
+      "category": "manutencao_impressoras",
       "format": "3mf",
       "title": "A1 / A1 Mini Lube Nozzle - X-Axis Lubrication",
       "designer": "fifindr",
@@ -1401,8 +1386,8 @@
       "description": "&lt;p&gt;&lt;strong&gt;EDIT 17.1.2026&lt;/strong&gt; - Bambulab started providing&lt;strong&gt; new tubes&lt;/strong&gt; with a &lt;strong&gt;different thread&lt;/strong&gt;. I added new applicator printing profile that is compatible.&lt;/p&gt;&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;p&gt;&lt;span style=&am…"
     },
     {
-      "file": "manutencao_bambu/FILAMENT-HOLDER-BAMBU-LAB-A1-MINI.3mf",
-      "category": "manutencao_bambu",
+      "file": "manutencao_impressoras/FILAMENT-HOLDER-BAMBU-LAB-A1-MINI.3mf",
+      "category": "manutencao_impressoras",
       "format": "3mf",
       "title": "Universal Spool Holder with Bearings - Filament Holder for your Desk for Bambulab A1 mini, P1P, X1",
       "designer": "3DPTK",
@@ -1415,8 +1400,8 @@
       "description": "&lt;p&gt;I created this Spool holder because I don&amp;#39;t like how the spool on the original holder that is attached to the printer burrs when the printer is calibrating. At the same time, the original Bambu Lab holders are not wide enough for larger spools, this one can handle all the 1 kilogram…"
     },
     {
-      "file": "manutencao_bambu/GreaseNozzle.3mf",
-      "category": "manutencao_bambu",
+      "file": "manutencao_impressoras/GreaseNozzle.3mf",
+      "category": "manutencao_impressoras",
       "format": "3mf",
       "title": "Grease Nozzle - Z-Axis Lubrication",
       "designer": "fifindr",
@@ -1496,8 +1481,8 @@
     },
 
     {
-      "file": "manutencao_bambu/LubeNozzleA1.3mf",
-      "category": "manutencao_bambu",
+      "file": "manutencao_impressoras/LubeNozzleA1.3mf",
+      "category": "manutencao_impressoras",
       "format": "3mf",
       "title": "A1 / A1 Mini Lube Nozzle - Y-Axis Lubrication",
       "designer": "fifindr",
