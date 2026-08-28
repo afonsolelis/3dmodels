@@ -19,12 +19,17 @@ organização de sleeve/toploader, [`organizadores_tcg/`](../organizadores_tcg/)
 
 | Arquivo | Autor | Licença | Nota |
 |---|---|---|---|
-| `card_holder_with_feet.3mf` | Don Julio (MakerWorld) | Standard Digital File License | **Impresso e reprovado no teste físico: fraco.** É a referência de geometria do `cardholder-01`. Não redistribuir. |
+| `PennySleeveHolderStacking_V2_kobra3.3mf` | Sazabi (MakerWorld) | MakerWorld Exclusive License | variante Kobra 3 do *Stackable Penny Sleeve Holder*. Não redistribuir. |
+| `PennySleeveHolderStacking_V2_kobra3_15cm.3mf` | Sazabi (MakerWorld) | MakerWorld Exclusive License | mesma peça, versão de 15cm. Não redistribuir. |
 
-A referência de geometria do `sleeve-tower-01` é o
-[`PennySleeveHolderStacking_V2.3mf`](./PennySleeveHolderStacking_V2.3mf)
-(Sazabi, MakerWorld Exclusive License — **não redistribuir**); as medidas ficaram
-registradas no [`index.json`](../index.json) e no README do modelo.
+**Os dois originais de referência saíram do repo em 2026-08-28** — o
+`card_holder_with_feet.3mf` (Don Julio, MakerWorld; impresso e **reprovado no
+teste físico: fraco**), que era a referência de geometria do `cardholder-01`,
+e o `PennySleeveHolderStacking_V2.3mf` (Sazabi, MakerWorld Exclusive
+License), referência do `sleeve-tower-01`. As medidas de engenharia reversa
+dos dois continuam registradas no [`index.json`](../index.json) (campo
+`derived_from` de cada projeto) e nos READMEs dos modelos, que é o que os
+modelos paramétricos realmente usam.
 
 ## O que define um porta-cartas aberto
 
