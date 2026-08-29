@@ -1,6 +1,6 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-28",
+  "updated": "2026-08-29",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
     {
@@ -13,7 +13,8 @@
       "description": "Organizador modular aberto para 12 caixas fisicas de jogos Nintendo Switch / Switch 2. Duas sapatas de 28mm e guias de 30mm seguram cada caixa em quatro regioes; cintas externas autoportantes de 1.2mm amarram o topo das divisorias. Dois rabos-de-andorinha verticais, macho a direita e femea a esquerda, permitem repetir unidades identicas lado a lado. As longarinas ficam fora da interface para preservar 11.25mm inclusive nos canais extremos. Peca unica, sem suporte.",
       "parts": { "organizer": 1 },
       "print_jobs": [
-        { "file": "3mf/switch-case-organizer-01.3mf", "contents": "1 organizador modular para 12 caixas, na orientacao de uso, sem suporte", "footprint_mm": [176.25, 112.5, 32.4] }
+        { "file": "3mf/switch-case-organizer-01.3mf", "contents": "1 organizador modular para 12 caixas, com os dois pares de rabos-de-andorinha, na orientacao de uso, sem suporte", "footprint_mm": [176.25, 112.5, 32.4] },
+        { "file": "3mf/sem-encaixe.3mf", "contents": "1 organizador avulso para 12 caixas, mesma geometria sem os rabos-de-andorinha (modular_connectors=false), na orientacao de uso, sem suporte", "footprint_mm": [164.25, 112.5, 32.4] }
       ],
       "assembled_closed_mm": [164.25, 110.1, 32.4],
       "capacity": "12 caixas fisicas de jogos Nintendo Switch / Switch 2",

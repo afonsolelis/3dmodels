@@ -37,5 +37,12 @@ substituem pontes retas por diagonais autoportantes. O acesso central e a
 inserção vertical das caixas permanecem livres. Com as cintas, a profundidade
 total de impressão passa a 112,5 mm.
 
+## Jobs de impressão
+
+| Arquivo | Conteúdo | Footprint |
+|---|---|---|
+| `3mf/switch-case-organizer-01.3mf` | unidade **modular**, com os dois pares de rabos-de-andorinha | 176,25 × 112,5 × 32,4 mm |
+| `3mf/sem-encaixe.3mf` | unidade **avulsa**, mesma geometria sem os conectores — para quem vai imprimir uma só | 164,25 × 112,5 × 32,4 mm |
+
 Imprima o arquivo em `3mf/` na orientação em que ele abre no Flash Studio,
 sem suporte. O teste físico com as caixas do usuário ainda é necessário.
