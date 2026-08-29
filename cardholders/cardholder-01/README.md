@@ -6,8 +6,9 @@ integrada. Peça única, sem montagem, sem suporte.
 
 ## Por que este modelo existe
 
-O `../card_holder_with_feet.3mf` (Don Julio, MakerWorld — arquivo de terceiro,
-sem fonte) foi impresso e **reprovou no teste físico: ficou fraco**.
+O `../card_holder_with_feet.3mf` (Don Julio, MakerWorld — arquivo de terceiro
+sem fonte, removido do repo em 2026-08-28) foi impresso e **reprovou no teste
+físico: ficou fraco**.
 
 O diagnóstico saiu da medição do mesh dele: 4 cantoneiras de 2mm de parede com
 **56mm de balanço**, soldadas numa chapa de 2mm por uma junta de só **2×10mm**

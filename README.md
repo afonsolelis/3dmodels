@@ -45,7 +45,7 @@ vão direto pro Flash Studio) e `.stl` individuais de cada peça, de referência
 │   └── README.md
 ├── logistica_pokemon/   # (só .3mf de terceiros)
 │   └── README.md
-└── manutencao_bambu/    # (só .3mf de terceiros)
+└── manutencao_impressoras/ # (só arquivos de terceiros)
     └── README.md
 ```
 
