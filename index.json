@@ -84,14 +84,15 @@
       "path": "ferramentas/toolbox-snap-01",
       "scad": "ferramentas/toolbox-snap-01/toolbox-snap-01.scad",
       "status": "em-andamento",
-      "description": "Caixa de ferramentas de bancada que ocupa a cama inteira da AD5X: 206 x 208 x 60mm externos, layout interno fixo impresso junto com a caixa e TAMPA DESLIZANTE que da um clique e trava no fim de 202.7mm de curso. Interior: canaleta de 200 x 50 x 47 para um alicate de 180mm deitado, grade 3x2 de 65 x 70.5 x 47 e, num dos 6 compartimentos, porta-bits com 25 encaixes hexagonais para bits de 1/4 de polegada. A tampa corre em dois rasgos escavados nas paredes da frente e de tras, com teto a 45 graus, e e destravada pela saia/puxador de 11mm que desce por fora da parede da boca. Duas pecas, dois jobs, nenhuma com suporte.",
+      "description": "Caixa de ferramentas de bancada que ocupa a cama inteira da AD5X: 206 x 208 x 60mm externos, layout interno fixo impresso junto com a caixa e TAMPA DESLIZANTE que da um clique e trava no fim de 202.7mm de curso. O snap e feito por DUAS LINGUETAS FLEXIVEIS recortadas em U na propria tampa (cantilever de 8 x 24.5 x 3mm, k ~16.9 N/mm), que fletem 0.3mm sobre duas saliencias de 1.0mm no piso do trilho; um alivio local de teto de 1.2mm da curso a elas. Interior: canaleta de 200 x 50 x 47 para um alicate de 180mm deitado, grade 3x2 de 65 x 70.5 x 47 e, na coluna do FUNDO do curso, porta-bits com 25 encaixes hexagonais para bits de 1/4 de polegada. A tampa e destravada pela saia/puxador de 11mm, cujo bico recua 2.2mm sobre tres escalopos de dedo na parede da boca. Duas pecas, tres jobs (o primeiro e um cupom de teste), nenhuma com suporte.",
       "parts": { "box": 1, "lid": 1 },
       "print_jobs": [
-        { "file": "3mf/toolbox-snap-01-caixa.3mf", "contents": "1 caixa na orientacao de uso, boca dos compartimentos para cima, sem suporte", "footprint_mm": [206.0, 208.0, 60.0] },
-        { "file": "3mf/toolbox-snap-01-tampa.3mf", "contents": "1 tampa DE CABECA PARA BAIXO (face de cima na cama, saia do puxador apontando para cima), sem suporte, COM BRIM", "footprint_mm": [206.0, 202.6, 11.0] }
+        { "file": "3mf/toolbox-snap-01-cupom.3mf", "contents": "CUPOM DE TESTE, IMPRIMIR PRIMEIRO (~1h): mini-caixa de 60x60 com a mesma secao de trilho, mesmo funil de boca, mesma saliencia de snap e mesmo escalopo de dedo, mais a mini-tampa com as duas linguetas flexiveis. Valida folga, pe de elefante, forca do snap e pega antes das 16-20h da caixa", "footprint_mm": [126.0, 60.0, 20.0] },
+        { "file": "3mf/toolbox-snap-01-caixa.3mf", "contents": "1 caixa na orientacao de uso, boca dos compartimentos para cima, sem suporte, com 4 mouse ears modelados (sem brim)", "footprint_mm": [211.0, 213.0, 60.0] },
+        { "file": "3mf/toolbox-snap-01-tampa.3mf", "contents": "1 tampa DE CABECA PARA BAIXO (face de cima na cama, saia do puxador apontando para cima), sem suporte, com 4 mouse ears modelados (sem brim)", "footprint_mm": [211.0, 207.6, 11.0] }
       ],
       "assembled_closed_mm": [209.3, 208.0, 60.0],
-      "capacity": "1 alicate de 180mm deitado + 5 compartimentos de 65 x 70.5 x 47mm + 25 bits de 1/4 de polegada",
+      "capacity": "1 alicate de 180mm deitado + 5 compartimentos de 65 x 70.5 x 47mm + 25 bits de 1/4 de polegada + uma canaleta de 6.5 x 65 x 47mm para haste fina",
       "key_measures": {
         "externo_mm": [206.0, 208.0, 60.0],
         "interno_mm": [200.0, 196.0, 47.0],
@@ -103,30 +104,49 @@
         "canaleta_alicate_mm": 180.0,
         "canaleta_sobra_por_ponta_mm": 10.0,
         "canaleta_minimo_exigido_mm": 182.0,
-        "grade": { "colunas": 3, "linhas": 2, "compartimento_mm": [65.0, 70.5, 47.0], "divisoria_mm": 2.5 },
+        "canaleta_nota": "tirar o alicate exige a tampa praticamente toda fora (a canaleta tem 200 dos 206mm de comprimento da caixa); inerente ao layout pedido",
+        "grade": { "colunas": 3, "linhas": 2, "compartimento_mm": [65.0, 70.5, 47.0], "divisoria_mm": 2.5, "chanfro_topo_da_divisoria_mm": 1.0 },
         "porta_bits": {
-          "compartimento": "linha do meio, coluna da boca (bit_row=0, bit_col=2)",
+          "compartimento": "linha colada na canaleta, COLUNA DO FUNDO do curso (bit_row=0, bit_col=0) - a primeira que a tampa descobre",
+          "abertura_para_descobrir_a_matriz_mm": 65.0,
           "encaixes": 25, "matriz": [5, 5],
           "bit_entre_faces_mm": 6.35, "furo_entre_faces_mm": 6.95, "folga_por_lado_mm": 0.3,
           "furo_circunscrito_mm": 8.03, "profundidade_mm": 12.0, "bit_len_mm": 25.0,
-          "sobra_do_bit_mm": 13.0, "passo_mm": 11.5, "parede_entre_bits_mm": 3.47,
-          "bloco_mm": [65.0, 70.5, 15.0], "funil_de_entrada_mm": 0.6,
+          "sobra_do_bit_mm": 13.0, "passo_mm": 12.5, "ar_entre_bits_mm": 4.47,
+          "bloco_mm": [65.0, 64.03, 15.0], "canaleta_que_sobra_na_celula_mm": 6.47,
+          "funil_de_entrada_mm": 1.2,
           "orientacao": "furo cego VERTICAL: nao ha teto, nao existe ponte reta; hexagono com vertice para +Y em planta"
         },
         "tampa_mm": [206.0, 202.6, 3.0],
         "tampa_bbox_impressao_mm": [206.0, 202.6, 11.0],
         "curso_mm": 202.7,
+        "curso_livre_mm": 191.7,
         "trilho": {
           "rasgo_profundidade_mm": 4.0, "rasgo_altura_mm": 7.0, "piso_do_trilho_z": 50.0,
           "engate_por_lado_mm": 3.3, "folga_por_lado_mm": 0.7, "teto": "plano a 45 graus, autoportante",
           "funil_de_entrada_mm": [8.0, 0.6], "chanfro_quinas_da_tampa_mm": 2.0,
-          "chanfro_face_de_baixo_da_aresta_mm": 1.2, "lip_acima_do_rasgo_mm": 3.0
+          "chanfro_face_de_baixo_da_aresta_mm": 1.2, "lip_acima_do_rasgo_mm": 3.0,
+          "chanfro_anti_pe_de_elefante_da_tampa_mm": 0.4
         },
         "snap": {
           "saliencias": 2, "saliencia_mm": [6.0, 1.0], "x_da_saliencia_mm": 12.0,
-          "bolso_na_tampa_mm": [6.4, 1.1], "folga_do_bolso_mm": 0.2,
-          "flexao_exigida_da_tampa_mm": 0.3, "rampas": "45 graus nos dois sentidos",
-          "destrave": "puxar pela saia de 11mm; a rampa converte o puxao em levantamento"
+          "lingueta_flexivel_mm": [8.0, 24.5, 3.0], "braco_util_mm": 20.0, "rasgo_em_U_mm": 1.6,
+          "rigidez_estimada_N_por_mm": 16.9, "forca_por_lado_N": 5.1, "forca_total_N": 10.1,
+          "flexao_exigida_mm": 0.3, "alivio_local_de_teto_mm": 1.2, "janela_do_alivio_x_mm": [1.0, 23.0],
+          "bolso_na_tampa_mm": [6.6, 1.1], "folga_longitudinal_medida_por_lado_mm": 0.3,
+          "chapa_sobre_o_bolso_mm": 1.9, "faixa_na_frente_do_rasgo_mm": 2.6,
+          "zona_de_engajamento_mm": [0.32, 10.5],
+          "destrave": "puxar pela saia de 11mm; a rampa de 45 graus do bolso converte o puxao em flexao das linguetas"
+        },
+        "pega_da_tampa": {
+          "saia_mm": [3.0, 11.0], "ar_saia_parede_mm": 0.3, "recuo_do_bico_da_saia_mm": 2.2,
+          "escalopos_na_parede_da_boca": 3, "escalopo_mm": [45.0, 9.0, 1.5],
+          "parede_restante_no_escalopo_mm": 1.5, "espaco_total_para_o_dedo_mm": 4.0
+        },
+        "pega_para_carregar": {
+          "onde": "so nas paredes Y, de 6mm", "rebaixo_mm": [70.0, 12.0, 2.5],
+          "z": [32.0, 44.0], "parede_restante_mm": 3.5, "teto": "rampa a 45 graus, autoportante",
+          "motivo": "carregada a caixa passa de 1 kg; nas paredes X de 3mm nao ha rebaixo porque comeria a parede"
         },
         "apoio_central_da_tampa": {
           "travessas": 2, "altura_do_topo_z": 49.6, "folga_sob_a_tampa_mm": 0.4,
@@ -138,11 +158,13 @@
           "saia_da_tampa": "celula de raio 3.0, faixa 1.5",
           "excecao": "face de cima da tampa fica LISA de proposito - e a face que vai na cama"
         },
-        "volume_solido_cm3": { "caixa": 444.6, "tampa": 129.2 }
+        "mouse_ears": { "discos": 4, "diametro_mm": 10.0, "altura_mm": 0.4, "recuo_do_canto_mm": 2.5,
+          "motivo": "brim de 5mm daria 216 x 218 e estoura o alvo de 210; mouse ears cabem nos 220 fisicos e nao dependem de configuracao do fatiador" },
+        "volume_solido_cm3": { "caixa": 433.4, "tampa": 128.0, "cupom": 34.1 }
       },
       "hardware": "nenhum",
-      "material_estimado": { "caixa_cm3": 444.6, "tampa_cm3": 129.2, "obs": "volume de SOLIDO medido nas malhas exportadas. Estimativa grossa com 15% de preenchimento: ~200cm3 / ~250g / ~16h a caixa e ~85cm3 / ~105g / ~7h a tampa (a tampa e chapa de 3mm, sai quase macica). O numero real quem da e o Flash Studio."},
-      "notes": "FOLGA DE TRILHO 0.7/LADO, ACIMA DOS 0.5 PADRAO DO REPO - decisao consciente. O curso de 202.7mm e o encaixe deslizante mais longo do repo e a tampa e uma chapa de 206 x 202.6 x 3mm que imprime deitada e empena; a regra 6 do CLAUDE.md (deckbox-02 IMPRESSO travou no meio do curso) manda dar mais folga quanto mais longo o encaixe. Alem da folga, quatro decisoes atacam o empeno: (1) teto do rasgo em plano a 45 graus, que devolve a tampa para baixo em vez de cunhar em quina viva - e imprime sem ponte; (2) funil de entrada na boca (piso cai 0.6mm nos ultimos 8mm) mais chanfro de 2mm nas duas quinas de ataque e 1.2mm na face de baixo da aresta; (3) APOIO CENTRAL: as duas travessas em X vao de parede a parede e param 0.4mm sob a tampa, derrubando o maior vao sem apoio de 196 para 70.5mm; (4) engate de 3.3mm por lado. Nao ha alivio de pe de elefante no trilho porque o trilho nao nasce na cama (z=50 na caixa; topo do objeto na tampa impressa de cabeca para baixo). PROVAS RODADAS NA GEOMETRIA: intersecao caixa x tampa VAZIA em slide 0, 20, 60, 120, 190 e 200mm (os ~193mm de corrida sao livres, sem raspar em divisoria) e NAO VAZIA so em 2, 4, 6, 8 e 10mm (1.8 a 21mm3, sempre em x 9-15 e z 50-51, exatamente as duas saliencias) - a zona do snap. RETENCAO: abrir 2mm sem levantar da 9.25mm3 de interferencia. CAPTURA: levantar 0.6 e 0.7mm e livre (folga nominal), 0.8mm ja bate no teto a 45 graus (1.4mm3) e 4.0mm da 1522mm3 - a tampa nao sai por cima. Volumes 2 (solido unico) nas duas pecas; bed-check ok nas duas (206x208 e 206x202.6). A colmeia e BAIXO RELEVO de 1mm, nao furo passante: a caixa fica fechada contra poeira e a parede do trilho mantem 5 dos 6mm; a faixa termina em z=44, 6mm abaixo do piso do trilho. A face de cima da tampa fica LISA (excecao consciente a regra 5) porque e a face que vai na cama e a primeira camada macica de ~41.000mm2 e o que segura o empeno - usar BRIM nela. PENDENCIAS: nada foi impresso ainda; a largura e a espessura do alicate nao foram medidas com regua (so o comprimento de 180mm); a forca do snap so se calibra na mao, via bump_h; o conteudo dos outros 5 compartimentos nao foi definido."
+      "material_estimado": { "caixa_cm3": 433.4, "tampa_cm3": 128.0, "cupom_cm3": 34.1, "obs": "volume de SOLIDO medido nas malhas exportadas. Estimativa grossa com 15% de preenchimento: ~200cm3 / ~250g / ~16h a caixa, ~85cm3 / ~105g / ~7h a tampa e ~20cm3 / ~25g / ~1h o cupom. O numero real quem da e o Flash Studio."},
+      "notes": "REPROVADO PELO PRINT-REVIEW NA v1 E CORRIGIDO: (a) o porta-bits estava na coluna da BOCA, que so aparecia com 199.7 dos 202.7mm de curso - foi para a coluna do FUNDO, que a tampa descobre com 65mm de abertura; (b) o snap nao tinha MEMBRO FLEXIVEL: a interferencia de 0.3mm caia numa chapa macica de 3mm que nao flete, entao a quina viva se aplainaria na primeira montagem e a retencao viraria o peso da tampa. Agora ha duas LINGUETAS de 8 x 24.5mm recortadas em U na propria tampa, com o bolso na ponta e 20mm de braco (k ~16.9 N/mm, ~5N por lado, ~10N para abrir), mais um ALIVIO LOCAL DE TETO de 1.2mm sobre a saliencia que da curso a elas - provado com intersecao VAZIA levantando a tampa 1.0mm inteiro dentro da janela x 1..23. FOLGA DE TRILHO 0.7/LADO, acima dos 0.5 padrao: o curso de 202.7mm e o encaixe deslizante mais longo do repo e a tampa e uma chapa de 206 x 202.6 x 3mm que imprime deitada e empena (regra 6 do CLAUDE.md, deckbox-02 IMPRESSO travou no meio do curso). Alem da folga: teto do rasgo a 45 graus; funil na boca; chanfro de 45 x 1mm no topo das divisorias na aresta virada para a boca (o piso do funil passava a 67 um da aresta viva); APOIO CENTRAL com as duas travessas em X parando 0.4mm sob a tampa, derrubando o maior vao sem apoio de 196 para 70.5mm; engate de 3.3mm por lado. PE DE ELEFANTE: nao existe no trilho da CAIXA (nasce em z=50), mas existe na TAMPA, cujas duas arestas longas da primeira camada SAO as pontas das linguetas do trilho - por isso o perimetro da face de cima leva chanfro MODELADO de 0.4 x 45 graus, sem depender do fatiador. PROVAS RODADAS NA GEOMETRIA: intersecao caixa x tampa VAZIA em slide 0, 0.25, 0.28, 0.30, 11, 12, 20, 60, 120, 190 e 200mm (191.7 dos 202.7mm de curso sao livres) e NAO VAZIA de 0.32 a 10.5mm, com pico de 12.934mm3 em 6mm, toda em x 9-15 e z 50-51 (as duas saliencias) - e a zona em que as linguetas estao fletidas. FOLGA LONGITUDINAL REAL DO BOLSO medida na malha: livre em 0.30mm de deslocamento, colide em 0.32 - sao 0.30/lado de verdade, contra os 0.11 nominais-mas-falsos da v1 (o poligono do bolso comecava 0.1mm abaixo do plano do piso e as paredes a 45 graus comiam a abertura). RETENCAO: abrir 2mm sem levantar da 7.875mm3. CAPTURA: levantar 0.7mm e livre, 0.8mm bate no teto a 45 graus (1.392mm3), 4.0mm da 1504mm3. CUPOM: mesma secao, comportamento identico (VAZIA em 0, 15, 40 e 56mm; 12.934mm3 em 6mm, o mesmo numero da caixa grande). Volumes 2 em cada peca e tambem nas chapas com mouse ears, provando que os discos estao FUNDIDOS. SEM BRIM: 5mm de brim dariam 216 x 218, fora do alvo de 210; as chapas grandes saem em 211 x 213 e 211 x 207.6 com mouse ears, dentro dos 220 fisicos - o excesso sobre 210 e deliberado, e o preco de cama cheia. PENDENCIAS: nada foi impresso (comecar pelo CUPOM); largura e espessura do alicate seguem sem medida de regua; a forca do snap so se calibra na mao, via bump_h; os rasgos em U de 1.6mm deixam duas frestas junto a quina do fundo por onde peca miuda pode cair na canaleta; o conteudo dos outros 5 compartimentos nao foi definido."
     },
     {
       "id": "switch-case-organizer-01",

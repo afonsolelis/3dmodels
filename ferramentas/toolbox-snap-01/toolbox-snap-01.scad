@@ -115,7 +115,7 @@
 */
 
 /* [Exportacao] */
-part = "box"; // [box,lid,plate_box,plate_lid,plate_coupon,coupon_box,coupon_lid,assembly,collision,retention,lift,relief,section]
+part = "box"; // [box,lid,plate_box,plate_lid,plate_coupon,coupon_box,coupon_lid,assembly,collision,retention,lift,relief,coupon_col,section]
 slide = is_undef(slide_override) ? 0 : slide_override;  // mm; quanto a tampa esta puxada para fora (0 = fechada e travada).
 lift  = is_undef(lift_override)  ? 0 : lift_override;   // mm; quanto a tampa esta levantada (teste de captura no trilho).
 $fn = 32;      // segmentos; hexagonos, chanfros e mouse ears.
@@ -192,6 +192,12 @@ sc_w      = 45.0; // mm; largura de cada escalopo (em Y).
 sc_depth  = 1.5;  // mm; profundidade escavada na face externa; a parede NAO e furada.
 sc_z0     = 32.0; // mm; base do escalopo.
 sc_z1     = 41.0; // mm; topo do escalopo, logo abaixo da ponta da saia (z = 42).
+
+/* [Rebaixo de pega para carregar - so nas paredes Y, que tem 6 mm] */
+carry_w     = 70.0; // mm; largura do rebaixo (em X), centrado na parede.
+carry_z0    = 32.0; // mm; base do rebaixo.
+carry_z1    = 44.0; // mm; topo; coincide com o topo da faixa de colmeia.
+carry_depth = 2.5;  // mm; profundidade; deixa 3.5 dos 6.0 mm de parede.
 
 /* [Colmeia - baixo relevo, identidade do repo] */
 hex_r      = 5.0;  // mm; raio das celulas hexagonais ponta-pra-cima.
@@ -303,6 +309,9 @@ assert(hex_z1 + 4 <= rail_z, "colmeia perto demais do trilho");
 assert(tongue_d >= 3.0, "engate lateral da tampa curto demais para uma chapa de 200 mm");
 assert(div_top < rail_z, "divisoria interna encostando na tampa");
 assert(wall_x - sc_depth >= 1.2, "escalopo de dedo fura a parede da boca");
+assert(wall_y - carry_depth >= 3.0,
+       "rebaixo de pega comeria a parede do trilho abaixo de 3 mm");
+assert(carry_z1 + 4 <= rail_z, "rebaixo de pega perto demais do trilho");
 assert(sc_z1 < skirt_z0, "escalopo de dedo alto demais: bate na saia");
 assert(bit_air >= 4.0, "ar entre bits apertado para o dedo");
 assert(bit_out >= 8.0, "bit afogado: sobra pouco para pegar com o dedo");
@@ -336,6 +345,8 @@ echo(bits=bit_count, matriz=[bit_cols, bit_rows], furo_entre_faces_mm=bit_hole_a
      ar_entre_bits_mm=bit_air, passo_mm=bit_pitch, funil_mm=bit_lead,
      bloco_mm=[cell_w, bit_block_d, bit_block_h], canaleta_que_sobra_na_celula_mm=bit_rest_d,
      coluna=bit_col, abertura_para_descobrir_a_matriz_mm=col_x0(bit_col)+cell_w-wall_x);
+echo(pega_para_carregar_mm=[carry_w, carry_z1-carry_z0, carry_depth],
+     parede_Y_restante_mm=wall_y-carry_depth, teto_da_pega="rampa a 45 graus, autoportante");
 echo(escalopo_de_dedo=[sc_n, sc_w, sc_z1-sc_z0, sc_depth], parede_restante_mm=wall_x-sc_depth,
      recuo_da_ponta_da_saia_mm=skirt_taper);
 echo(chapa_caixa_mm=plate_box_fp, chapa_tampa_mm=plate_lid_fp, chapa_cupom_mm=plate_coupon_fp,
@@ -468,6 +479,25 @@ module mouth_scallops(W, D) {
   }
 }
 
+// Rebaixo de pega: a caixa carregada passa de 1 kg e nao tinha onde segurar.
+// So nas paredes Y (6 mm): sobram 3.5 mm, e o teto do rebaixo e uma rampa de
+// 45 graus, entao imprime sem balanco. Fica em z 32..44, MUITO abaixo do
+// trilho (z = 50) - a parede que segura o trilho nao e tocada.
+module carry_grip_front(W) {
+  translate([W/2 - carry_w/2, 0, 0])
+    rotate([90, 0, 90])
+      linear_extrude(height = carry_w)
+        polygon([[-0.1,        carry_z0],
+                 [carry_depth, carry_z0],
+                 [carry_depth, carry_z1 - carry_depth],
+                 [-0.1,        carry_z1]]);
+}
+
+module carry_grips(W, D) {
+  carry_grip_front(W);
+  translate([0, D, 0]) mirror([0,1,0]) carry_grip_front(W);
+}
+
 // ---------------------------------------------------------------------
 // Layout interno
 // ---------------------------------------------------------------------
@@ -550,7 +580,7 @@ module box_body(W, D, z0, with_hex) {
         cube([wall_x + 1.01, D - 2*wall_y, box_h]);
       rail_cuts(W, D);
       mouth_scallops(W, D);
-      if (with_hex) hex_walls();
+      if (with_hex) { hex_walls(); carry_grips(W, D); }
     }
     detent_bumps(D);
   }
@@ -703,6 +733,11 @@ module relief_test() {
   }
 }
 
+// O cupom tem que se comportar igual: mesma secao, mesmo snap, mesmo curso.
+module coupon_collision() {
+  intersection() { coupon_box(); translate([slide, 0, lift]) coupon_lid(); }
+}
+
 // Corte de verificacao: fatia de 1 mm no plano do trilho da frente.
 section_y = 4.0; // mm; y do corte de verificacao.
 module section() {
@@ -749,5 +784,6 @@ else if (part == "collision")    collision();
 else if (part == "retention")    retention_test();
 else if (part == "lift")         lift_test();
 else if (part == "relief")       relief_test();
+else if (part == "coupon_col")   coupon_collision();
 else if (part == "section")      section();
 else assert(false, str("part desconhecida: ", part));
