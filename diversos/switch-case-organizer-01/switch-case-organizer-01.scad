@@ -18,6 +18,11 @@
   Export canonico (caminhos absolutos):
     flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/Repos/3dmodels/diversos/switch-case-organizer-01/stl/switch-case-organizer-01.stl -D 'part="organizer"' /home/afonsolelis/Repos/3dmodels/diversos/switch-case-organizer-01/switch-case-organizer-01.scad
     flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/Repos/3dmodels/diversos/switch-case-organizer-01/3mf/switch-case-organizer-01.3mf -D 'part="plate"' /home/afonsolelis/Repos/3dmodels/diversos/switch-case-organizer-01/switch-case-organizer-01.scad
+    flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/Repos/3dmodels/diversos/switch-case-organizer-01/3mf/sem-encaixe.3mf -D 'part="plate"' -D 'modular_connectors=false' /home/afonsolelis/Repos/3dmodels/diversos/switch-case-organizer-01/switch-case-organizer-01.scad
+
+  ATENCAO: pela linha de comando, mire a variavel FINAL (-D modular_connectors=false),
+  nunca o *_override. No OpenSCAD 2021.01 o -D entra no fim do escopo de topo, entao o
+  is_undef(..._override) da linha 48 ja foi avaliado e o valor e ignorado EM SILENCIO.
 */
 
 /* [Exportacao] */
