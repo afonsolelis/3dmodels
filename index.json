@@ -806,6 +806,55 @@
         "jobs_por_grade": { "2x2": 2, "3x3": 5, "4x4": 8 }
       },
       "notes": "MEDIDAS NAO VIERAM DA REGUA DO USUARIO — sao de catalogo/levantamento, como no psa-box-01. Os cinco numeros que mandam (slab_w_max/h_max/t_max e slab_w_min/h_min) estao no topo do .scad e todo o resto e derivado. Verificacoes geometricas feitas no modelo, no idioma do penny-holder-01: part=fit_x e fit_y saem VAZIOS (tiles vizinhos nao se atravessam), part=gap_x sai NAO-VAZIO (o macho ocupa mesmo a femea), part=probe_gap sai VAZIO (existe vao de flexao atras da lamina) e part=probe_blade sai NAO-VAZIO (a lamina existe). O tile e solido unico (Volumes: 2). A chapa foi de 212.5 pra 209.9mm entrelacando os dois tiles, o que a poe dentro do alvo de 210. Deformacao da lamina lateral no curso maximo ~0.7%, bem abaixo do escoamento do PLA. PENDENCIA: nao impresso — rodar o gabarito com uma slab na mao antes dos tiles."
+    },
+    {
+      "id": "pokemon-filler-card-01",
+      "category": "cartoes",
+      "path": "cartoes/pokemon-filler-card-01",
+      "scad": "cartoes/pokemon-filler-card-01/pokemon-filler-card-01.scad",
+      "status": "em-andamento",
+      "description": "Card tapa-buraco de album Pokemon em 67 x 90mm — MAIOR que o card oficial de 63x88 de proposito, porque o card real fica solto no bolso do album. Corpo de 1.2mm (a espessura minima que sai solida em FDM) mais relevo, dando 2.0mm no ponto mais alto: a MESMA espessura do insert do pokemon-coin-binder-01, que ja foi impresso e prova que 2.0mm entra nesse album. A arte e um BAIXO RELEVO DE 4 NIVEIS gerado de um SVG de trace colorido pelo svg2relief.py — a luminancia de cada cor vira altura, entao armadura clara sobe e contorno escuro desce. Sai em DUAS VERSOES do mesmo .scad e do mesmo heightmap: COR UNICA (peca unica, relevo com transicao em rampa) e MULTICOLOR de 4 filamentos no IFS (um objeto com 6 pecas, transicao em parede vertical pra nao borrar a fronteira de cor). Frente com moldura, quatro hexagonos de identidade nos cantos, nome e numero da dex em alto relevo; verso liso. Impresso com o verso na mesa, sem suporte e sem ponte. Primeira arte pronta: Armarouge #936.",
+      "parts": { "card_cor_unica": 1, "multicolor_corpo": 1, "multicolor_moldura_e_texto": 1, "multicolor_arte_amarelo": 1, "multicolor_arte_vermelho": 1, "multicolor_arte_escuro": 1, "multicolor_arte_vao": 1 },
+      "print_jobs": [
+        { "file": "3mf/pokemon-filler-card-01-armarouge-4cores.3mf", "contents": "MULTICOLOR, job recomendado: 1 card do Armarouge como UM objeto com 6 pecas em 4 filamentos do IFS, com as CORES gravadas no arquivo (abre colorido) — 1 #F2EDE3 creme, 2 #E5CD2C amarelo, 3 #CD321F vermelho, 4 #3B2C2B escuro (moldura, texto e sombras). Verso na placa, relevo para cima, sem suporte, BRIM recomendado", "footprint_mm": [67.0, 90.0, 2.0] },
+        { "file": "3mf/pokemon-filler-card-01-armarouge.3mf", "contents": "COR UNICA: 1 card do Armarouge, verso na placa lisa e relevo para cima, sem suporte, BRIM recomendado", "footprint_mm": [67.0, 90.0, 2.0] },
+        { "file": "3mf/pokemon-filler-card-01-armarouge-x4.3mf", "contents": "COR UNICA, chapa 2x2 com 4 cards iguais, vao de 4mm, verso na placa e relevo para cima, sem suporte, BRIM recomendado; 3x2 tambem cabe na cama (209 x 184) mas encosta no limite de conforto de 210 e nao sobra margem de brim", "footprint_mm": [138.0, 184.0, 2.0] }
+      ],
+      "part_footprints_mm": { "card": [67.0, 90.0, 2.0] },
+      "assembled_closed_mm": [67.0, 90.0, 2.0],
+      "key_measures": {
+        "card_mm": [67.0, 90.0],
+        "card_oficial_mm": [63.0, 88.0],
+        "sobremedida_por_lado_mm": { "x": 2.0, "y": 1.0 },
+        "corpo_mm": 1.2,
+        "espessura_total_mm": 2.0,
+        "raio_das_quinas_mm": 3.5,
+        "chanfro_pe_de_elefante_mm": 0.4,
+        "moldura_margem_mm": 3.5,
+        "moldura_largura_da_linha_mm": 1.6,
+        "janela_de_arte_mm": [51.8, 62.8],
+        "arte_encaixada_mm": [38.3442, 62.8],
+        "arte_centro_mm": [33.5, 51.0],
+        "heightmap_px": [128, 209],
+        "resolucao_do_relevo_mm_por_px": 0.302,
+        "niveis_do_relevo_mm_acima_da_face": [0.2, 0.4, 0.6, 0.8],
+        "degrau_entre_niveis_mm": 0.2,
+        "relevo_de_moldura_texto_e_hexagonos_mm": 0.4,
+        "plato_de_fundo_do_heightmap_enterrado_mm": 0.05,
+        "piso_solido_sob_o_heightmap_mm": 0.927,
+        "distribuicao_de_area_do_relevo_pct": { "+0.20": 23.5, "+0.40": 22.9, "+0.60": 10.7, "+0.80": 42.8 },
+        "multicolor": {
+          "filamentos": 4,
+          "mapa": { "1": "#F2EDE3 creme — corpo do card + vaos internos do trace", "2": "#E5CD2C amarelo — arte", "3": "#CD321F vermelho — arte", "4": "#3B2C2B escuro — moldura, texto, hexagonos e sombras da arte" },
+          "pecas_e_triangulos": { "corpo": 452, "moldura-e-texto": 6588, "arte-vao": 708, "arte-amarelo": 6348, "arte-vermelho": 5328, "arte-escuro": 2760 },
+          "area_de_topo_por_peca_mm2": { "amarelo": 473.02, "vermelho": 376.43, "escuro": 187.5, "vao": 9.0 },
+          "celula_do_voxel_mm": [0.2996, 0.3005],
+          "malha": "caixas fundidas por greedy meshing, cada caixa um solido fechado; 0 caixas abertas em 1262 caixas"
+        },
+        "malha_do_card_cor_unica": { "facets": 12701, "volumes_cgal": 2, "solidos": 1 }
+      },
+      "hardware": "nenhum",
+      "notes": "Escalas MEDIDAS nesta maquina em 2026-08-29, nao chutadas: import() de SVG do OpenSCAD 2021.01 le a 72 dpi (1 px = 0.352778mm) honrando width/height e viewBox; surface() de PNG mapeia cinza 0 -> z 0 e cinza 255 -> z 100 linear, cada pixel vale 1 unidade em XY (a imagem ocupa px-1 unidades) e o solido fecha o fundo 1 unidade abaixo do minimo. surface() gera RAMPA de 1 px entre niveis, nao parede vertical — por isso numa vista de topo ortografica o relevo aparece como contorno enquanto moldura e texto somem, por motivo oposto (parede vertical tem area projetada zero de cima). art_flip_y=false foi confirmado em render de topo: surface() ja poe a primeira linha do PNG no y maximo, e o true de partida deixava a figura de cabeca pra baixo. 8 niveis de 0.1mm foram TESTADOS E REJEITADOS: o nivel mais baixo da figura ficava a 0.056mm da face, a silhueta nao descolava do card e a arte sumia; 4 niveis de 0.2mm dao degrau de uma camada inteira a 0.20mm de altura de camada. O svg2relief.py equaliza por quantil porque o mapa linear de luminancia empilhava 70% da area num nivel so. BUG CORRIGIDO na v1 da moldura: offset(r) cresce para os DOIS lados e o translate nao compensava o raio, entao a moldura saia a 1.30mm da borda esquerda e 5.70mm da direita; agora e' 3.50mm nos quatro lados, com ECHO de conferencia. MULTICOLOR: as pecas de cor NAO saem do OpenSCAD e sim do svg2relief.py --parts-dir, porque so ele tem o mapa de cor pixel a pixel e assim a cor casa com o relevo sem meio-pixel de desalinhamento; os grupos vem de k-means na paleta ponderado por area (14 cores -> 3 grupos cromaticos, sobreposicao medida entre grupos de so 0.17% da figura, ou seja o trace e' segmentacao limpa). A primeira tentativa de malhar as pecas como casca unica de campo de alturas VAZOU (734 arestas sem par na cor1) por T-junction nas arestas verticais de canto; a versao boa e' caixa fundida por greedy meshing, cada caixa fechada sozinha. A soma das areas de topo das 4 pecas deu 1045.9mm2 contra 1046.1 esperados, o que prova que elas ladrilham a figura sem sobra nem vao. COR NO ARQUIVO: a v1 do 3MF multicolor carregava so o NUMERO do filamento e abria cinza. Conferido nos projetos reais do repo (diversos/4floral_travel_pill_box_single_colour.3mf e Jabonera.3mf, ambos de 4 filamentos) que o 3dmodel.model deles NAO usa <basematerials> nem grupo de cor — a cor vem so de filament_colour em Metadata/project_settings.config. Passamos a escrever esse arquivo, o que e um desvio consciente da regra do plates.py; a regra existia pra nao arrastar perfil de impressora de terceiro, e aqui o arquivo tem so SEIS chaves, todas de filamento (colour, multi_colour, type, diameter, density, self_index), nenhuma de impressora/processo/altura de camada. PENDENCIA: nao impresso — falta o teste fisico confirmar que 2.0mm entra folgado no bolso do album, que o degrau de 0.2mm le a olho nu, e falta ABRIR o 3MF multicolor no Flash Studio pra confirmar que ele mostra as 6 pecas nos filamentos e cores certos (o slicer nao roda headless nesta maquina)."
     }
   ],
   "third_party": [
