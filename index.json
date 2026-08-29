@@ -10,10 +10,10 @@
       "scad": "diversos/switch-case-organizer-01/switch-case-organizer-01.scad",
       "status": "em-andamento",
       "derived_from": "diversos/switch_game_tray_12.3mf (3Dravs, Standard Digital File License) — somente medidas de interface extraidas da malha; geometria refeita do zero em OpenSCAD",
-      "description": "Organizador modular aberto para 12 caixas fisicas de jogos Nintendo Switch / Switch 2. Duas sapatas de 28mm e guias de 30mm seguram cada caixa em quatro regioes; dois rabos-de-andorinha verticais, macho a direita e femea a esquerda, permitem repetir unidades identicas lado a lado. As longarinas ficam fora da interface para preservar 11.25mm inclusive nos canais extremos. Peca unica, sem suporte.",
+      "description": "Organizador modular aberto para 12 caixas fisicas de jogos Nintendo Switch / Switch 2. Duas sapatas de 28mm e guias de 30mm seguram cada caixa em quatro regioes; cintas externas autoportantes de 1.2mm amarram o topo das divisorias. Dois rabos-de-andorinha verticais, macho a direita e femea a esquerda, permitem repetir unidades identicas lado a lado. As longarinas ficam fora da interface para preservar 11.25mm inclusive nos canais extremos. Peca unica, sem suporte.",
       "parts": { "organizer": 1 },
       "print_jobs": [
-        { "file": "3mf/switch-case-organizer-01.3mf", "contents": "1 organizador modular para 12 caixas, na orientacao de uso, sem suporte", "footprint_mm": [176.25, 110.1, 32.4] }
+        { "file": "3mf/switch-case-organizer-01.3mf", "contents": "1 organizador modular para 12 caixas, na orientacao de uso, sem suporte", "footprint_mm": [176.25, 112.5, 32.4] }
       ],
       "assembled_closed_mm": [164.25, 110.1, 32.4],
       "capacity": "12 caixas fisicas de jogos Nintendo Switch / Switch 2",
@@ -34,11 +34,17 @@
         "engate_vertical_mm": 24.0,
         "chanfro_entrada_mm": 1.2,
         "curso_vertical_desmontagem_mm": 28.0,
-        "passo_entre_modulos_acoplados_mm": 169.75,
+        "passo_entre_modulos_acoplados_mm": 171.75,
+        "abertura_receptor_mm": 9.4,
+        "retencao_lateral_por_lado_mm": 1.3,
+        "alivio_pe_de_elefante_mm_por_face": 0.3,
+        "altura_funil_base_femea_mm": 1.2,
+        "cinta_externa_espessura_mm": 1.2,
+        "cinta_externa_altura_mm": 4.0,
         "origem_das_medidas": "Engenharia reversa inequivoca da malha de referencia: envelope 158.25 x 27.0 x 110.1mm, canais de 11.25mm e passo de 13mm. Nao foram usadas dimensoes de catalogo da caixa."
       },
       "hardware": "nenhum",
-      "notes": "Geometria propria, sem reutilizacao da malha protegida. Identidade visual em hexagonos ponta-pra-cima nas longarinas, mantendo faixas solidas nas bordas. Longarinas de 3mm posicionadas totalmente para fora da interface de 158.25mm; primeiro e ultimo canais tambem medem 11.25mm. Acoplamento parametrizavel por modular_connectors_override, com dois rabos-de-andorinha verticais, canal aberto e chanfro inferior contra pe de elefante; montagem de duas unidades simulada no part assembly. STL e chapa medidos em 176.2 x 110.1 x 32.4mm: ok na AD5X e abaixo do alvo 210x210. Volumes 2 no CGAL = solido unico. Previews perspectiva, topo e montagem inspecionados. Acoplamento e caixas ainda dependem de teste fisico."
+      "notes": "Geometria propria, sem reutilizacao da malha protegida. Identidade visual em hexagonos ponta-pra-cima nas longarinas, mantendo faixas solidas nas bordas. Longarinas de 3mm posicionadas totalmente fora da interface de 158.25mm; primeiro e ultimo canais tambem medem 11.25mm. Acoplamento parametrizavel por modular_connectors_override, com dois rabos-de-andorinha verticais e negativo da femea derivado da posicao do macho vizinho. Paredes externas da femea nascem em z=0, integralmente apoiadas na cama; canal aberto por baixo recebe funil de 1.2mm com 0.3mm extra por face contra pe de elefante, convergindo para folga nominal de 0.5mm/lado. Intersecao booleana vazia em 9 alturas do curso 0-28mm; tentativa de extracao lateral de 1mm produz Volumes 5, comprovando retencao. Assembly final tem Volumes 3 = dois solidos sem colisao. Cintas frontal/traseira externas de 1.2 x 4mm usam aberturas triangulares autoportantes e nao invadem canais. STL e chapa medidos em 176.2 x 112.5 x 32.4mm: ok na AD5X. Acoplamento, cintas e caixas ainda dependem de novo teste fisico."
     },
     {
       "id": "emergency-nfc-card-01",
