@@ -489,6 +489,72 @@
       "notes": "PENDÊNCIA FUNCIONAL DECLARADA, e é o resultado da conta que o usuário pediu: com DUAS camadas e SEM prateleira, a camada de baixo é ARQUIVO, não é a camada de trabalho. Puxar uma carta de baixo pela janela deixa uma fenda de ~0.5mm embaixo da carta que estava por cima, e essa carta cai dentro da fenda (66mm de queda) ou emperra torta. NÃO existe conserto dentro dos 150mm: uma prateleira no meio seria uma PONTE de 69 x 93mm no ar (exatamente o defeito que se removeu do original, a travessa traseira com ponte plana de 53 x 2.6) e ainda comeria os 8mm de folga que sobraram. Os caminhos honestos são (a) camada de baixo = estoque, camada de cima = giro; ou (b) `layers_override = 1` num include, o que dá caixa de 84mm, e empilhar DUAS — o ressalto e a chaveta existem pra isso e aí cada camada tem boca própria. A camada de CIMA não tem esse problema: a boca é aberta, a carta sai reta pro ar livre. ORÇAMENTO DE ALTURA fecha sem espremer conteúdo: 10 de piso + 132 de carta + 8 de ar = 150, e os 8 de ar são o MESMO espaço que a cinta ocupa na parede (a cinta é rente, não avança pra dentro), então não brigam; com uma caixa empilhada em cima ainda sobram 5mm sobre a carta. COLMEIA COM BICO DE 45 E NÃO HEXÁGONO REGULAR: a auditoria da malha pegou que no hexágono regular os flancos do bico ficam a 30 graus DA HORIZONTAL (= 60 de balanço, pior que os 45 do resto da peça) — foram 3094mm2 de teto de furo a 30 graus na primeira versão. Dois motivos pra consertar: (a) 30 graus faz cada camada avançar 0.35mm sobre a anterior (camada de 0.2), ~17% de linha apoiada contra ~52% num teto de 45; (b) decisivo, 30 graus é EXATAMENTE o limiar de suporte padrão do Flash Studio e o usuário fatia com SUPORTE LIGADO — teto no limiar é sorteio, e o prêmio é suporte dentro de 47 furos de 2.6mm de profundidade, de onde não se tira. A célula das paredes virou 24 de largura x 32 de altura (lateral reta de 8 + bico de 45 de 12mm), com o passo entre fileiras recalculado pra manter a nervura de 2.6 TAMBÉM na costura diagonal (confere no caso regular: dá dy = 0.866*dx). No PISO a célula segue o hexágono REGULAR de 24mm medido no original, porque piso é horizontal e não tem teto de furo pra pender. FRENTE SEM TRAVESSA por decisão do usuário: o segmento da frente da cinta trabalha em TRAÇÃO ao longo de X, seção 2.6 x 8 = 20.8mm2, ~620N em PLA — o empurrão de ~300 cartas soltas não chega a 1% disso; e quem de fato impede o lado de abrir são os montantes de 8mm, que dão a cada lateral uma seção em L de 8 x 8mm correndo os 150mm. CHAVETA REDESENHADA em relação ao original: a de lá deixa 0.3-0.6mm de parede atrás do rasgo (a língua avança até 0.6mm da face externa numa parede de 2.6); aqui é um ressalto PRA DENTRO na boca do fundo (36 x 1.2) com rasgo no ressalto de baixo, então a parede fica com os 2.6mm inteiros e quem paga o espaço é o ar de sobra atrás da carta (6.5mm de folga em Y). PROVAS NA GEOMETRIA: part=\"fit\" (as duas caixas empilhadas na orientação certa) sai VAZIO — 0.00mm3, sobra só a face plana do assento em z=150; part=\"fit180\" (a de cima virada) dá 93.24mm3 em z 147..150, que é a chaveta batendo na moldura cheia do piso: a caixa para 3mm alta e óbvia, não entra 'quase encaixando'. CURSO DO EMPILHAMENTO simulado com número: 1.00mm de separação o chanfro de 0.4 do pé encontra o funil de 0.6 da boca (aceita 1.0mm de erro de mão); 0.60mm entra o reto com 0.25/lado e a chaveta decide; 0.00 assenta, com 2.0mm de engate reto e o batente feito pela ABA contra o ARO, nunca por carta. CAMA: 74.2 x 102.7 x 150 (ok, teto confortável 170) e o par 154.4 x 102.7 (ok). Os 102.7 vão no eixo Y de propósito, que é o que a cama da AD5X balança. USAR BRIM: 150mm de torre sobre uma 1a camada de 1739mm2 que é grade de nervura de 1.6 mais moldura de 2.6. SUPORTE: o modelo não precisa de nenhum; o único lugar em que o fatiador pode querer pôr algo é embaixo da aba de z=3, a 3mm da cama — anel fino que sai com a unha, MAS ele encosta justo na superfície de assento do empilhamento, então se as caixas ficarem bambas empilhadas o primeiro suspeito é resto de suporte, não geometria. FOOTPRINT MANTIDO igual ao do original (74.2 x 102.7) de propósito: preserva a intercambialidade de empilhamento com uma cópia do modelo de origem e deixa a carta abrir em leque. O preço é folga de 3.25/lado no comprimento da carta em vez do 1.0 de conteúdo do repo; com 1.0 a caixa ficaria 98.2 em Y. PENDÊNCIAS: (1) medida da carta é catálogo, não régua; (2) não foi impresso nem testado na mão; (3) com a caixa pela metade as cartas tombam no eixo da pilha — não tem seguidor/divisória, mesma limitação do original."
     },
     {
+      "id": "toploader-holder-01",
+      "category": "organizadores_tcg",
+      "path": "organizadores_tcg/toploader-holder-01",
+      "scad": "organizadores_tcg/toploader-holder-01/toploader-holder-01.scad",
+      "status": "em-andamento",
+      "derived_from": "organizadores_tcg/2-in-1_Top_Loader___Sleeve_Holder.3mf (\"2-in-1 Top Loader & Sleeve Holder\" / \"Deck Daddy\", HeyHalo, MakerWorld, 2025-06-23, licença CC0 declarada no próprio 3mf — o raro caso REDISTRIBUÍVEL desta pasta). RECONSTRUÇÃO PARAMÉTRICA própria: nada da malha foi copiado, só medidas de engenharia reversa (1809 vértices / 3614 triângulos, 1 sólido estanque, volume 121.1 cm3): envelope 82.0 x 107.0 x 84.0; piso maciço 4.0; parede 2.5 na câmara de cima (vão 77.0 x 102.0) e 5.5 no bolso de baixo (vão 71.0 x 99.0) — ou seja DEGRAU de 3.0 lateral e 3.0 no fundo a 30mm do piso, com filete de ~1mm; frente SEM degrau (os dois vãos rentes); janela frontal de 60.0 de largura do topo do piso até a boca, sem travessa, montante de 11.0 de cada lado; aro do topo arredondado. A AUSÊNCIA DE PRATELEIRA FOI CONFIRMADA POR CORTE BOOLEANO RENDERIZADO na malha de origem, não deduzida: é uma câmara só, com o degrau na parede",
+      "description": "Dispenser 2-EM-1 de TOP LOADER (em cima) e PENNY SLEEVE (embaixo) numa caixa única de 84 x 109 x 150mm, aberta em cima, com janela de vão contínuo de 60 x 138 na frente e cinta de 8mm fechando a volta no topo. QUEM SEPARA OS DOIS CONTEÚDOS É A GRAVIDADE, não uma divisória: um DEGRAU a 34mm do chão (a parede passa de 6.5 pra 3.0) deixa o bolso de baixo com 71.0 de vão — estreito demais pro top loader de 76.2, que para em cima do degrau com 2.6/lado de apoio, e folgado pro penny sleeve de 66.7, que cai livre com 2.15/lado. Sem divisória, sem prateleira, sem ponte, sem peça móvel. Como o material RECUA subindo, o degrau é uma face virada pra CIMA e tem balanço ZERO. Colmeia hexagonal passante de 18mm com bico de 45 graus nas duas laterais e no fundo, só ACIMA do degrau — o bolso de sleeve fica MACIÇO de propósito (sleeve mole e largo demais pra 71mm de bolso faz barriga pelo furo e enrosca ao puxar), o que de quebra vira lastro contra tombamento. Variante ALTA da referência de 84mm: os 66mm extras vão inteiros pra câmara de top loader (50 -> 116mm, ~40 -> ~92 peças). Peça única, imprime em pé na orientação de uso, SEM SUPORTE.",
+      "parts": { "box": 1 },
+      "print_jobs": [
+        { "file": "3mf/toploader-holder-01-plate.3mf", "contents": "JOB PRINCIPAL: 1 caixa em pé, boca pra cima, piso na mesa, SEM SUPORTE. Brim dispensável (a 1a camada é o piso inteiro, 9154 mm2 maciços), mas skirt ajuda a estabilizar 150mm de torre com a frente aberta. Os 109 vão no eixo Y, que é o que a cama da AD5X balança", "footprint_mm": [84.0, 109.0, 150.0], "material_cm3": 158.8 },
+        { "file": "3mf/toploader-holder-01-par.3mf", "contents": "2 caixas lado a lado, vão de 6mm. Mesma orientação e mesmas notas do job de 1; dobra tempo e material (~394g) e põe duas torres de 150mm balançando no eixo Y — é conveniência, não substitui o job de 1", "footprint_mm": [174.0, 109.0, 150.0], "material_cm3": 317.6 }
+      ],
+      "assembled_closed_mm": [84.0, 109.0, 150.0],
+      "capacity": "~92 top loaders 3x4 (116mm de curso útil a 1.25mm cada) e ~375 penny sleeves vazios (30mm de bolso a 0.08mm cada). ESTIMATIVA GROSSA: nem a espessura do top loader nem a do sleeve foram medidas, e as duas variam muito entre marcas",
+      "key_measures": {
+        "externo_mm": [84.0, 109.0, 150.0],
+        "camara_toploader_mm": [78.0, 103.0, 116.0],
+        "bolso_sleeve_mm": [71.0, 99.0, 30.0],
+        "degrau": {
+          "z_mm": 34.0,
+          "lateral_mm": 3.5,
+          "fundo_mm": 4.0,
+          "frente_mm": 0.0,
+          "frente_nota": "frente RENTE de propósito (herdado do original): é o que deixa o dedo entrar no bolso pela janela",
+          "apoio_do_toploader_por_lado_mm": 2.6,
+          "balanco": "ZERO — subindo, a parede passa de 6.5 pra 3.0, então o material RECUA e o degrau é uma face virada pra CIMA",
+          "funcao": "É O MECANISMO INTEIRO do 2-em-1. Só funciona enquanto pocket_w ficar ENTRE sleeve_w (66.7) e tl_w (76.2); o assert bite_tl_x >= 2.0 guarda isso"
+        },
+        "folgas_por_lado_mm": { "toploader_em_X": 0.9, "toploader_em_Y": 0.7, "sleeve_em_X": 2.15, "sleeve_no_fundo_em_Y": 6.9 },
+        "parede_mm": 3.0,
+        "parede_do_bolso_mm": 6.5,
+        "parede_nota": "3.0 e não os 2.5 do original: a 150mm de altura 2.5 empena, e aqui a quarta parede é um rasgo de 138mm. Cresceu PRA FORA (82x107 -> 84x109), nunca comendo o vão",
+        "vao_de_cima_nota": "78.0 x 103.0 e não os 77.0 x 102.0 medidos: +1.0 de anti-empeno, levando a folga do top loader de 0.4 pra 0.9/lado. Regra 6 do repo na versão aprendida no deckbox-02 — tubo alto impresso em pé entra de barriga e a cavidade em XY sai subdimensionada",
+        "piso_mm": 4.0,
+        "janela_mm": { "largura": 60.0, "altura": 138.0, "peitoril_z": 4.0, "ombro_z": 112.0, "bico_z": 142.0, "montante": 12.0, "flange": 9.0, "mordida_sobre_o_sleeve_por_lado": 3.35, "mordida_sobre_o_toploader_por_lado": 8.1, "nota": "vão único do peitoril (rente ao topo do piso, sem degrau pra enroscar) até o bico, sem travessa. Fecha em duas águas de 45 graus: 60mm de vão em 30mm de subida" },
+        "cinta_mm": 8.0,
+        "cinta_nota": "o original não tem — a janela dele vai até a boca. A 84mm passa; a 150mm o montante da frente vira coluna esbelta. Trabalha em TRAÇÃO ao longo de X: seção 3.0 x 8.0 = 24mm2, ~720N em PLA a 30MPa, contra um empurrão de pilha que não chega a 1% disso",
+        "chanfro_boca_mm": 1.2,
+        "chanfro_aro_mm": 0.6,
+        "cantos_verticais_r_mm": 1.5,
+        "colmeia": {
+          "celula_mm": [18.0, 24.0],
+          "bico_graus": 45,
+          "nervura_mm": 3.0,
+          "faixa_z_mm": [39.0, 137.0],
+          "onde": "duas laterais e o fundo, só ACIMA do degrau — o bolso de sleeve fica maciço",
+          "celula_nota": "18 e não os 24 do penny-holder-01: aqui a célula tem que caber INTEIRA na faixa útil e com 24 sobravam 3 fileiras com vazio morto em cima e embaixo",
+          "recorte_nota": "o recorte do campo é SÓ NA HORIZONTAL. Cortar a célula na vertical decapitaria o bico e deixaria o furo com TETO PLANO de até 18mm de vão — apareceu no 1o render deste modelo e foi corrigido no hex_field",
+          "bico_nota": "45 graus e não os 30 do hexágono regular: 30 é exatamente o limiar de suporte do Flash Studio, e o usuário fatia com suporte ligado"
+        },
+        "medidas_de_conteudo": {
+          "toploader_mm": [76.2, 101.6, 1.25],
+          "sleeve_mm": [66.7, 92.1, 0.08],
+          "origem": "CATÁLOGO (3x4 pol e 2.625x3.625 pol), NÃO É RÉGUA — e os vãos vieram da malha de origem. Mesma ressalva do penny-holder-01 e do sleeve-tower-01. Atenuante: a caixa de origem foi impressa e aprovada por terceiros com esses vãos. Parametrizado em cav_w/cav_d/pocket_w/pocket_d: quando a régua chegar, um include com os *_override refaz o modelo inteiro"
+        }
+      },
+      "printability": {
+        "orientacao": "em pé, boca pra cima, piso na mesa — a MESMA orientação de uso",
+        "suporte": "NÃO",
+        "brim": "dispensável (1a camada = piso inteiro, 9154 mm2); skirt recomendado",
+        "auditoria_de_balanco": "medida na malha exportada, excluindo a face que assenta na cama: 5096.7 mm2 de face virada pra baixo, 100% dela a 45 graus. ZERO mm2 abaixo de 45, zero ponte reta",
+        "malha": "estanque (0 arestas não-casadas), 2140 triângulos, volume sólido 158.8 cm3"
+      },
+      "notes": "Fluxo: engenharia reversa da malha de origem (bbox, planos alinhados aos eixos, varredura de intervalos sólidos e corte booleano renderizado) -> .scad -> preview conferido em imagem -> STL e 3MF exportados e auditados -> bed-check ok. FALTA o veredito que importa: o TESTE FÍSICO da peça na mão do usuário. Os dois pontos a olhar quando ela sair da impressora são (1) se o top loader realmente para no degrau e não entra de canto no bolso, e (2) se o vão de 78.0 não fechou com o empeno da parede de 150mm"
+    },
+    {
       "id": "pokemon-game",
       "category": "playmats",
       "path": "playmats/pokemon-game",
@@ -1686,8 +1752,10 @@
       "category": "organizadores_tcg",
       "format": "3mf",
       "title": "2-in-1 Top Loader & Sleeve Holder",
-      "designer": "a confirmar",
-      "license": "a confirmar",
+      "designer": "HeyHalo",
+      "license": "CC0",
+      "license_fonte": "declarada no próprio 3mf (3D/3dmodel.model: License=CC0, Designer=HeyHalo, CreationDate=2025-06-23) — é o raro caso REDISTRIBUÍVEL desta pasta",
+      "reused_by": "organizadores_tcg/toploader-holder-01 (reconstrução paramétrica, 150mm)",
       "modified": "2026-08-10",
       "largest_part_mm": [82.0, 107.0, 84.0],
       "fits_a1_mini": true,
