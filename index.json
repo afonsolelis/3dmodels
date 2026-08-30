@@ -1,6 +1,6 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-29",
+  "updated": "2026-08-30",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
     {
@@ -855,6 +855,56 @@
       },
       "hardware": "nenhum",
       "notes": "Escalas MEDIDAS nesta maquina em 2026-08-29, nao chutadas: import() de SVG do OpenSCAD 2021.01 le a 72 dpi (1 px = 0.352778mm) honrando width/height e viewBox; surface() de PNG mapeia cinza 0 -> z 0 e cinza 255 -> z 100 linear, cada pixel vale 1 unidade em XY (a imagem ocupa px-1 unidades) e o solido fecha o fundo 1 unidade abaixo do minimo. surface() gera RAMPA de 1 px entre niveis, nao parede vertical — por isso numa vista de topo ortografica o relevo aparece como contorno enquanto moldura e texto somem, por motivo oposto (parede vertical tem area projetada zero de cima). art_flip_y=false foi confirmado em render de topo: surface() ja poe a primeira linha do PNG no y maximo, e o true de partida deixava a figura de cabeca pra baixo. 8 niveis de 0.1mm foram TESTADOS E REJEITADOS: o nivel mais baixo da figura ficava a 0.056mm da face, a silhueta nao descolava do card e a arte sumia; 4 niveis de 0.2mm dao degrau de uma camada inteira a 0.20mm de altura de camada. O svg2relief.py equaliza por quantil porque o mapa linear de luminancia empilhava 70% da area num nivel so. BUG CORRIGIDO na v1 da moldura: offset(r) cresce para os DOIS lados e o translate nao compensava o raio, entao a moldura saia a 1.30mm da borda esquerda e 5.70mm da direita; agora e' 3.50mm nos quatro lados, com ECHO de conferencia. MULTICOLOR: as pecas de cor NAO saem do OpenSCAD e sim do svg2relief.py --parts-dir, porque so ele tem o mapa de cor pixel a pixel e assim a cor casa com o relevo sem meio-pixel de desalinhamento; os grupos vem de k-means na paleta ponderado por area (14 cores -> 3 grupos cromaticos, sobreposicao medida entre grupos de so 0.17% da figura, ou seja o trace e' segmentacao limpa). A primeira tentativa de malhar as pecas como casca unica de campo de alturas VAZOU (734 arestas sem par na cor1) por T-junction nas arestas verticais de canto; a versao boa e' caixa fundida por greedy meshing, cada caixa fechada sozinha. A soma das areas de topo das 4 pecas deu 1045.9mm2 contra 1046.1 esperados, o que prova que elas ladrilham a figura sem sobra nem vao. COR NO ARQUIVO: a v1 do 3MF multicolor carregava so o NUMERO do filamento e abria cinza. Conferido nos projetos reais do repo (diversos/4floral_travel_pill_box_single_colour.3mf e Jabonera.3mf, ambos de 4 filamentos) que o 3dmodel.model deles NAO usa <basematerials> nem grupo de cor — a cor vem so de filament_colour em Metadata/project_settings.config. Passamos a escrever esse arquivo, o que e um desvio consciente da regra do plates.py; a regra existia pra nao arrastar perfil de impressora de terceiro, e aqui o arquivo tem so SEIS chaves, todas de filamento (colour, multi_colour, type, diameter, density, self_index), nenhuma de impressora/processo/altura de camada. PENDENCIA: nao impresso — falta o teste fisico confirmar que 2.0mm entra folgado no bolso do album, que o degrau de 0.2mm le a olho nu, e falta ABRIR o 3MF multicolor no Flash Studio pra confirmar que ele mostra as 6 pecas nos filamentos e cores certos (o slicer nao roda headless nesta maquina)."
+    },
+    {
+      "id": "armarouge-card-2cores-01",
+      "category": "cartoes",
+      "path": "cartoes/armarouge-card-2cores-01",
+      "scad": "cartoes/armarouge-card-2cores-01/armarouge-card-2cores-01.scad",
+      "status": "em-andamento",
+      "description": "Variante enxuta do pokemon-filler-card-01: mesmo card tapa-buraco de album Pokemon de 67 x 90mm com o Armarouge, mas SEM NOME E SEM NUMERO da dex e em DUAS CORES no IFS — corpo preto (filamento 1) e arte + moldura cinza claro (filamento 2). Tirar o texto liberou a faixa de 12mm que existia so pra abriga-lo (band_h = 0), entao a arte cresce de 38.3 x 62.8 para 45.7 x 74.8mm e ocupa o card inteiro dentro da moldura. Corpo de 1.2mm mais relevo de 4 niveis ate +0.80mm, dando 2.0mm acabado, a mesma espessura ja provada no insert do pokemon-coin-binder-01. O heightmap e as malhas de cor saem do mesmo svg2relief.py do 01, agora com --colors 1 (um grupo cromatico so), e o 3MF de 2 filamentos sai do multicolor3mf.py com as cores gravadas no arquivo. Frente com moldura e quatro hexagonos de identidade nos cantos; verso liso. Verso na mesa, relevo pra cima, sem suporte e sem ponte.",
+      "parts": { "corpo": 1, "moldura": 1, "arte_figura": 1, "arte_detalhe": 1 },
+      "print_jobs": [
+        { "file": "3mf/armarouge-card-2cores-01.3mf", "contents": "job RECOMENDADO: 1 card como UM objeto com 4 pecas em 2 filamentos do IFS, com as CORES gravadas no arquivo (abre colorido) — 1 #C8C8C8 cinza claro (corpo do card e detalhe interno da figura), 2 #1A1A1A preto (moldura, hexagonos e silhueta da figura). Verso na placa, relevo pra cima, sem suporte, BRIM recomendado", "footprint_mm": [67.0, 90.0, 2.0] },
+        { "file": "3mf/armarouge-card-2cores-01-fundo-preto.3mf", "contents": "MESMA geometria com o mapa de filamento trocado: corpo preto e figura cinza clara. Testado em render e le PIOR que o de fundo claro — os vazios escuros da arte se fundem com o corpo do card e a silhueta se parte. Fica como alternativa, nao como padrao", "footprint_mm": [67.0, 90.0, 2.0] }
+      ],
+      "part_footprints_mm": { "card": [67.0, 90.0, 2.0] },
+      "assembled_closed_mm": [67.0, 90.0, 2.0],
+      "key_measures": {
+        "card_mm": [67.0, 90.0],
+        "card_oficial_mm": [63.0, 88.0],
+        "corpo_mm": 1.2,
+        "espessura_total_mm": 2.0,
+        "raio_das_quinas_mm": 3.5,
+        "chanfro_pe_de_elefante_mm": 0.4,
+        "moldura_margem_mm": 3.5,
+        "moldura_largura_da_linha_mm": 1.6,
+        "faixa_de_texto_mm": 0.0,
+        "janela_de_arte_mm": [51.8, 74.8],
+        "arte_encaixada_mm": [45.6712, 74.8],
+        "arte_centro_mm": [33.5, 45.0],
+        "heightmap_px": [128, 209],
+        "resolucao_do_relevo_mm_por_px": 0.3596,
+        "niveis_do_relevo_mm_acima_da_face": [0.2, 0.4, 0.6, 0.8],
+        "degrau_entre_niveis_mm": 0.2,
+        "relevo_de_moldura_e_hexagonos_mm": 0.4,
+        "plato_de_fundo_do_heightmap_enterrado_mm": 0.05,
+        "piso_solido_sob_o_heightmap_mm": 0.927,
+        "distribuicao_de_area_do_relevo_pct": { "+0.20": 23.6, "+0.40": 23.4, "+0.60": 13.5, "+0.80": 39.5 },
+        "multicolor": {
+          "filamentos": 2,
+          "mapa": {
+            "1": "#C8C8C8 cinza claro — corpo do card + detalhe interno da figura (nivel 1 do relevo)",
+            "2": "#1A1A1A preto — moldura, hexagonos e silhueta da figura (niveis 2 a 4)"
+          },
+          "corte_de_cor": "por NIVEL do relevo, nao por matiz: nivel 1 (+0.20mm, 23.6% da figura) vai pro claro e vira a linha de detalhe; niveis 2-4 (+0.40 a +0.80mm, 76.4%) vao pro escuro e formam a silhueta cheia",
+          "pecas_e_triangulos": { "corpo": 452, "moldura": 688, "arte-detalhe": 2496, "arte-figura": 8856 },
+          "celula_do_voxel_mm": [0.3568, 0.3579],
+          "bbox_da_arte_mm": { "x": [11.38, 55.62], "y": [8.32, 81.68], "z": [1.15, 2.0] }
+        }
+      },
+      "hardware": "nenhum",
+      "notes": "Feito em 2026-08-30 a pedido do usuario ('tire o nome e numero, duas cores, preto e cinza claro'). Reaproveita integralmente o svg2relief.py e o multicolor3mf.py do pokemon-filler-card-01 — as armadilhas de escala, o contrato de cinza, o bug de offset() da moldura e a razao do project_settings.config estao documentados LA e valem aqui igual. Diferenca de pipeline, e a licao do projeto: `svg2relief.py --colors 2` NAO SERVE em duas cores. Os grupos dele saem de k-means em RGB, que num trace do Armarouge separa AMARELO de VERMELHO — duas cores igualmente claras; testado e renderizado, a figura virou uma mancha chapada unica e sumiu. O que da leitura em dois tons e' separar CLARO de ESCURO, e a luminancia ja esta codificada no heightmap, porque o svg2relief converteu luminancia em ALTURA: o NIVEL do relevo E' o tom. Por isso este projeto tem o art2parts.py, que corta o heightmap por nivel reusando o blocky_mesh/write_binary_stl do svg2relief (mesma malha de caixas fundidas, parede vertical na fronteira de cor). Corte em 1x3 e nao 2x2: com os niveis 1-2 juntos no escuro quase metade da figura ia pro preto e a silhueta se partia — conferido em render. ORIENTACAO DE COR conferida em render lado a lado: fundo CLARO com figura PRETA le muito melhor que o contrario, porque num card preto os vazios escuros da arte se fundem com o corpo e a silhueta se parte; por isso o job padrao e' cinza/preto e o fundo preto ficou como variante. Conferido no STL exportado que a arte ocupa x 11.38..55.62 e y 8.32..81.68, dentro da janela de 51.8 x 74.8 centrada em [33.5, 45], e que ela nao encosta na moldura (face interna em x = 5.1). PENDENTE: nao impresso, e o 3MF ainda nao foi aberto no Flash Studio pra confirmar as 4 pecas nos 2 filamentos (o fatiador nao roda headless nesta maquina). RESSALVA DE ARTE: o trace e' automatico a 0.36mm/px e em dois tons chapados le como silhueta com sombreado, nao como o Armarouge desenhado; se o teste fisico decepcionar, o caminho e' limpar o SVG a mao (fechar contorno, engrossar linha fina) e regerar o heightmap, nao mexer em fatiador nem em altura de camada."
     }
   ],
   "third_party": [
