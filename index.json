@@ -1,8 +1,171 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. Campos: `fits_ad5x` = a maior peça cabe nos 220 da cama (substituiu o `fits_a1_mini` legado em 2026-08-28, quando a A1 mini saiu do repo); `needs_profile_swap` = o perfil embutido não é de AD5X e precisa ser trocado ao abrir no Flash Studio — hoje vale pra TODOS os 72 arquivos que trazem perfil: 71 foram fatiados em Bambu/Anycubic e o único FlashForge traz perfil de Adventurer 5M, que é a máquina sem IFS. Os 7 restantes são STL puro, sem perfil nenhum. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-28",
+  "updated": "2026-08-30",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
+    {
+      "id": "snap-organizer-01",
+      "category": "organizadores",
+      "path": "organizadores/snap-organizer-01",
+      "scad": "organizadores/snap-organizer-01/snap-organizer-01.scad",
+      "status": "em-andamento",
+      "description": "Sistema modular de bancada com passo de grade 50x50mm e tres modulos de ALTURAS diferentes que se unem lado a lado por imas de disco 5x1mm embutidos nas quatro paredes: canetas (80mm, copo unico de 78mm), pen drives (45mm, 6 nichos de 14 x 21.8mm com piso elevado em z=10) e parafusos (30mm, 2 cubas com a parede da frente rebaixada para 19mm e rampa interna a 45 graus). O ponto critico do projeto e a fileira UNIVERSAL de imas com centro a 12mm do piso, presente em todos os modulos e ate na parede baixa do parafusos, para que alturas diferentes grudem entre si; paredes de 37.975mm ou mais ganham uma fileira 2 de reforco a 32mm. Sao 2 COLUNAS de imas por parede, simetricas a 17mm do centro (posicoes 8 e 42), entao qualquer face encontra qualquer face em qualquer rotacao de 90 graus. Peca unica por modulo, impressa na orientacao de uso, sem suporte.",
+      "parts": { "canetas": 1, "pendrives": 1, "parafusos": 1 },
+      "print_jobs": [
+        { "file": "3mf/snap-organizer-01-set.3mf", "contents": "jogo inicial e job recomendado pra comecar: 1 canetas + 1 pen drives + 1 parafusos em linha, valida a junta entre as 3 alturas, todos de pe e de boca para cima, vao de 6mm, sem suporte", "footprint_mm": [162.0, 50.0, 80.0] },
+        { "file": "3mf/snap-organizer-01-canetas-x3.3mf", "contents": "3 modulos de canetas em linha, de pe e de boca para cima, vao de 6mm, sem suporte", "footprint_mm": [162.0, 50.0, 80.0] },
+        { "file": "3mf/snap-organizer-01-pendrives-x3.3mf", "contents": "3 modulos de pen drives em linha, de pe e de boca para cima, vao de 6mm, sem suporte", "footprint_mm": [162.0, 50.0, 45.0] },
+        { "file": "3mf/snap-organizer-01-parafusos-x3.3mf", "contents": "3 modulos de parafusos em linha, de pe e de boca para cima, vao de 6mm, sem suporte", "footprint_mm": [162.0, 50.0, 30.0] },
+        { "file": "3mf/snap-organizer-01-jogo.3mf", "contents": "jogo completo: grade 3x3 com 3 canetas + 3 pen drives + 3 parafusos, todos de pe e de boca para cima, vao de 6mm, sem suporte; ~20h de impressao num ponto unico de falha, imprimir so depois de validar o set", "footprint_mm": [162.0, 162.0, 80.0] }
+      ],
+      "part_footprints_mm": { "canetas": [50.0, 50.0, 80.0], "pendrives": [50.0, 50.0, 45.0], "parafusos": [50.0, 50.0, 30.0] },
+      "capacity": "modular: cada modulo ocupa 50x50mm de bancada; 9 modulos por chapa (3x3 com vao de 6mm); encostados, 4x4 = 16 modulos cabem em 200x200mm",
+      "key_measures": {
+        "passo_da_grade_mm": 50.0,
+        "alturas_mm": { "canetas": 80.0, "pendrives": 45.0, "parafusos": 30.0, "parafusos_parede_da_frente": 19.0 },
+        "parede_mm": 2.4,
+        "piso_mm": 2.0,
+        "interno_mm": [45.2, 45.2],
+        "divisoria_mm": 1.6,
+        "alivio_pe_de_elefante_mm": 0.6,
+        "ima_mm": [5.0, 1.0],
+        "ima_folga_diametro_mm": 0.35,
+        "ima_folga_profundidade_mm": 0.25,
+        "bolso_do_ima_diametro_nominal_mm": 5.35,
+        "bolso_do_ima_entre_faces_real_mm": 5.344,
+        "bolso_do_ima_folga_diametral_real_mm": 0.34,
+        "bolso_do_ima_profundidade_mm": 1.25,
+        "bolso_do_ima_chanfro_de_boca_mm": 0.3,
+        "bolso_do_ima_diametro_da_boca_mm": 5.95,
+        "pele_solida_atras_do_ima_mm": 1.15,
+        "ima_afunda_mm": 0.25,
+        "ar_entre_dois_imas_mm": 0.5,
+        "fileira_universal_z_mm": 12.0,
+        "fileira_reforco_z_mm": 32.0,
+        "altura_minima_de_parede_por_fileira_mm": [17.975, 37.975],
+        "colunas_de_ima_por_parede": 2,
+        "posicao_das_colunas_na_parede_mm": [8.0, 42.0],
+        "offset_do_centro_da_parede_mm": 17.0,
+        "imas_por_modulo": { "canetas": 16, "pendrives": 16, "parafusos": 8 },
+        "imas_por_jogo_de_3": 40,
+        "marca_de_polaridade": "ponto gravado D2.4 x 0.7mm de profundidade, 5.5mm abaixo do centro do ima, sob TODO bolso da COLUNA esquerda (vista de fora) em TODAS as fileiras — nas paredes de 2 fileiras sao 2 pontos por parede. O criterio de colagem e de COLUNA, nao de bolso isolado: coluna esquerda = NORTE para fora nos dois bolsos, coluna direita = SUL para fora nos dois. Marcar so a fileira 1 (como na v1) fazia colar a fileira 2 invertida e a junta canetas-pendrives dava forca liquida zero com binario.",
+        "canetas_copo_mm": [45.2, 45.2, 78.0],
+        "canetas_hexagonos_por_parede": 20,
+        "pendrives_nichos": 6,
+        "pendrives_nicho_mm": [14.0, 21.8],
+        "pendrives_costela_transversal_mm": 1.6,
+        "pendrives_piso_do_nicho_z_mm": 10.0,
+        "pendrives_engate_mm": 35.0,
+        "pendrives_hexagonos_por_parede": 5,
+        "pendrives_faixa_aceita": "espessura 8 a 13mm (9.7 a 1.6 graus de inclinacao), largura 16 a 21.8mm (9.4 a 0 graus), comprimento a partir de ~45mm; pen drive tipico de 10 x 20 x 55mm da 6.5 graus no eixo estreito, 2.9 graus no comprido e sobra 20mm para pegar",
+        "parafusos_cubas": 2,
+        "parafusos_cuba_mm": [21.8, 45.2, 28.0],
+        "parafusos_rampa_graus": 45.0,
+        "parafusos_rampa_avanco_mm": 17.0,
+        "parafusos_piso_plano_por_cuba_mm": 28.2,
+        "parafusos_volume_por_cuba_cm3": { "ate_o_aro_de_30mm": 24.44, "ate_a_boca_de_despejo_de_19mm": 13.6 },
+        "parafusos_divisoria": "topo em rampa de 45 graus: sai de z=19 na boca de despejo e sobe 11mm ate o aro de 30, em vez de atravessar a boca como lamina de 1.6 x 11mm",
+        "hexagono_entre_faces_mm": 7.0,
+        "hexagono_web_mm": 2.6,
+        "hexagono_margem_de_borda_mm": 3.5,
+        "hexagono_folga_ao_redor_da_boca_do_bolso_mm": 3.0,
+        "hexagono_padrao_centrado": "primeiro centro em x=10.6, ultimo em x=39.4 (simetrico em relacao aos 25mm da parede)",
+        "vao_entre_pecas_na_chapa_mm": 6.0,
+        "forca_da_junta": "junta de 4 imas ~8.4N na normal contra ~1.05N de cisalhamento exigido pelo canetas carregado; por ALAVANCA ~64gf no topo do canetas descolam uma junta de 2 imas. Canetas sozinho tomba com ~19gf de empurrao lateral (CM a 59.4mm com 12 canetas, angulo de tombamento 22.8 graus); acoplado ao pen drives sobe para ~62gf. A junta e de ALINHAMENTO, nao estrutural: recomendacao de uso e o canetas SEMPRE acoplado, de preferencia ao pen drives.",
+        "origem_das_medidas": "Passo de 50mm, altura de 80mm do modulo de canetas e ima de disco 5.0 x 1.0mm foram DADOS PELO USUARIO. A faixa aceita pelo modulo de pen drives e declarada e parametrizada, nao medida: o usuario ainda nao mediu um pen drive especifico."
+      },
+      "hardware": "40 imas de disco de neodimio 5.0 x 1.0 mm por jogo de 3 modulos (canetas 16, pen drives 16, parafusos 8), COLADOS com cola instantanea (o bolso NAO e press-fit de proposito: folga diametral de 0.34)",
+      "notes": "Regra de montagem, obrigatoria: olhando uma parede DE FORA, a COLUNA da esquerda e NORTE para fora e a da direita e SUL; todo bolso da coluna esquerda tem um ponto gravado embaixo, em todas as fileiras. Como duas paredes que se encostam sao vistas de fora em direcoes opostas, a esquerda de uma sempre encontra a direita da outra: N-S, atrai, em qualquer rotacao de 90 graus e entre alturas diferentes. Verificado extraindo os planos de fundo dos recessos dos 3 STL: 12/12 paredes com bolsos e marcas nas posicoes corretas (4 bolsos + 2 marcas nas paredes de canetas e pen drives, 2 bolsos + 1 marca nas do parafusos). Paredes do modulo de parafusos ficaram SEM furo hexagonal de proposito (parafuso e arruela pequena escapariam, e com apenas ~10mm de parede livre acima da faixa dos imas sobraria 1 hexagono por parede, regra 4 do CLAUDE.md); no lugar, um hexagono ponta-para-cima GRAVADO de 0.8mm centrado entre as duas colunas. Os recessos de parede sao cortados na CASCA, antes de qualquer divisoria ser unida — senao um hexagono abre janela de 0.2mm na divisoria atras dele e liga dois nichos vizinhos; conferido por area de face, as 4 faces das divisorias longitudinais e as 2 da costela batem com o esperado descontando so os cruzamentos entre elas. Nenhuma face externa tem relevo, so recessos. Unicas superficies voltadas para baixo em toda a peca: chanfro de pe de elefante (45 graus exatos), teto dos bolsos de ima, teto dos pontos de polaridade e teto dos hexagonos ponta-para-cima — a rampa de 45 graus e a divisoria em rampa do parafusos nao geram balanco nenhum. ARMADILHA DO OPENSCAD 2021.01 registrada no .scad: o range [0:-1] nao e vazio, ele INVERTE e itera 2 vezes, entao uma chapa de um tipo so saia com 7 pecas em vez de 3 em silencio (pego pelo Volumes=8 do sumario CGAL); o .scad usa a funcao rep(nome, n) com guarda n<=0.",
+      "revisoes": "v2 (2026-08-29) apos reprovacao do print-review: (1) CRITICO — ponto de polaridade agora existe em TODAS as fileiras, nao so na fileira 1, e o criterio de colagem virou de COLUNA; antes a junta canetas-pendrives repelia na fileira 2, com forca liquida zero e binario. (2) bolso de ima passou de press-fit 0.15 (que dava interferencia real, somando o polinomio inscrito de $fn=48 com o encolhimento de furo horizontal) para folga de 0.35 no diametro com $fn=64 e chanfro de boca. (3) profundidade do bolso de 1.15 para 1.25, para o ima nunca sobrar para fora. (4) pen drives ganhou costela transversal (6 nichos em vez de 3 canaletas): sem ela o item caia deitado, 35.8 graus, saindo 4.6mm do footprint. (5) divisoria do parafusos deixou de atravessar a boca de despejo. (6) rampa do parafusos de 60 para 45 graus (a 60 nada ficava parado: aco em PLA tem angulo de repouso de ~17 graus). (7) colmeia recentrada na parede. (8) chapas por tipo acrescentadas."
+    },
+    {
+      "id": "toolbox-snap-01",
+      "category": "ferramentas",
+      "path": "ferramentas/toolbox-snap-01",
+      "scad": "ferramentas/toolbox-snap-01/toolbox-snap-01.scad",
+      "status": "em-andamento",
+      "description": "Caixa de ferramentas de bancada que ocupa a cama inteira da AD5X: 206 x 208 x 60mm externos, layout interno fixo impresso junto com a caixa e TAMPA DESLIZANTE que da um clique e trava no fim de 202.7mm de curso. O snap e feito por DUAS LINGUETAS FLEXIVEIS recortadas em U na propria tampa (cantilever de 8 x 24.5 x 3mm, k ~16.9 N/mm), que fletem 0.3mm sobre duas saliencias de 1.0mm no piso do trilho; um alivio local de teto de 1.2mm da curso a elas. Interior: canaleta de 200 x 50 x 47 para um alicate de 180mm deitado, grade 3x2 de 65 x 70.5 x 47 e, na coluna do FUNDO do curso, porta-bits com 25 encaixes hexagonais para bits de 1/4 de polegada. A tampa e destravada pela saia/puxador de 11mm, cujo bico recua 2.2mm sobre tres escalopos de dedo na parede da boca. Duas pecas, tres jobs (o primeiro e um cupom de teste), nenhuma com suporte.",
+      "parts": { "box": 1, "lid": 1 },
+      "print_jobs": [
+        { "file": "3mf/toolbox-snap-01-cupom.3mf", "contents": "CUPOM DE TESTE, IMPRIMIR PRIMEIRO (~1h): mini-caixa de 60x60 com a mesma secao de trilho, mesmo funil de boca, mesma saliencia de snap e mesmo escalopo de dedo, mais a mini-tampa com as duas linguetas flexiveis. Valida folga, pe de elefante, forca do snap e pega antes das 16-20h da caixa", "footprint_mm": [126.0, 60.0, 20.0] },
+        { "file": "3mf/toolbox-snap-01-caixa.3mf", "contents": "1 caixa na orientacao de uso, boca dos compartimentos para cima, sem suporte, com 4 mouse ears modelados (sem brim)", "footprint_mm": [211.0, 213.0, 60.0] },
+        { "file": "3mf/toolbox-snap-01-tampa.3mf", "contents": "1 tampa DE CABECA PARA BAIXO (face de cima na cama, saia do puxador apontando para cima), sem suporte, com 4 mouse ears modelados (sem brim)", "footprint_mm": [211.0, 207.6, 11.0] }
+      ],
+      "assembled_closed_mm": [209.3, 208.0, 60.0],
+      "capacity": "1 alicate de 180mm deitado + 5 compartimentos de 65 x 70.5 x 47mm + 25 bits de 1/4 de polegada + uma canaleta de 6.5 x 65 x 47mm para haste fina",
+      "key_measures": {
+        "externo_mm": [206.0, 208.0, 60.0],
+        "interno_mm": [200.0, 196.0, 47.0],
+        "piso_mm": 3.0,
+        "parede_x_mm": 3.0,
+        "parede_y_mm": 6.0,
+        "parede_y_motivo": "6.0 e nao 3.0 porque e a parede que leva o trilho escavado: 4.0 de rasgo + 2.0 de pele",
+        "canaleta_mm": [200.0, 50.0, 47.0],
+        "canaleta_alicate_mm": 180.0,
+        "canaleta_sobra_por_ponta_mm": 10.0,
+        "canaleta_minimo_exigido_mm": 182.0,
+        "canaleta_nota": "tirar o alicate exige a tampa praticamente toda fora (a canaleta tem 200 dos 206mm de comprimento da caixa); inerente ao layout pedido",
+        "grade": { "colunas": 3, "linhas": 2, "compartimento_mm": [65.0, 70.5, 47.0], "divisoria_mm": 2.5, "chanfro_topo_da_divisoria_mm": 1.0 },
+        "porta_bits": {
+          "compartimento": "linha colada na canaleta, COLUNA DO FUNDO do curso (bit_row=0, bit_col=0) - a primeira que a tampa descobre",
+          "abertura_para_descobrir_a_matriz_mm": 65.0,
+          "encaixes": 25, "matriz": [5, 5],
+          "bit_entre_faces_mm": 6.35, "furo_entre_faces_mm": 6.95, "folga_por_lado_mm": 0.3,
+          "furo_circunscrito_mm": 8.03, "profundidade_mm": 12.0, "bit_len_mm": 25.0,
+          "sobra_do_bit_mm": 13.0, "passo_mm": 12.5, "ar_entre_bits_mm": 4.47,
+          "bloco_mm": [65.0, 64.03, 15.0], "canaleta_que_sobra_na_celula_mm": 6.47,
+          "funil_de_entrada_mm": 1.2,
+          "orientacao": "furo cego VERTICAL: nao ha teto, nao existe ponte reta; hexagono com vertice para +Y em planta"
+        },
+        "tampa_mm": [206.0, 202.6, 3.0],
+        "tampa_bbox_impressao_mm": [206.0, 202.6, 11.0],
+        "curso_mm": 202.7,
+        "curso_livre_mm": 191.7,
+        "trilho": {
+          "rasgo_profundidade_mm": 4.0, "rasgo_altura_mm": 7.0, "piso_do_trilho_z": 50.0,
+          "engate_por_lado_mm": 3.3, "folga_por_lado_mm": 0.7, "teto": "plano a 45 graus, autoportante",
+          "funil_de_entrada_mm": [8.0, 0.6], "chanfro_quinas_da_tampa_mm": 2.0,
+          "chanfro_face_de_baixo_da_aresta_mm": 1.2, "lip_acima_do_rasgo_mm": 3.0,
+          "chanfro_anti_pe_de_elefante_da_tampa_mm": 0.4
+        },
+        "snap": {
+          "saliencias": 2, "saliencia_mm": [6.0, 1.0], "x_da_saliencia_mm": 12.0,
+          "lingueta_flexivel_mm": [8.0, 24.5, 3.0], "braco_util_mm": 20.0, "rasgo_em_U_mm": 1.6,
+          "rigidez_estimada_N_por_mm": 16.9, "forca_por_lado_N": 5.1, "forca_total_N": 10.1,
+          "flexao_exigida_mm": 0.3, "alivio_local_de_teto_mm": 1.2, "janela_do_alivio_x_mm": [1.0, 23.0],
+          "bolso_na_tampa_mm": [6.6, 1.1], "folga_longitudinal_medida_por_lado_mm": 0.3,
+          "chapa_sobre_o_bolso_mm": 1.9, "faixa_na_frente_do_rasgo_mm": 2.6,
+          "zona_de_engajamento_mm": [0.32, 10.5],
+          "destrave": "puxar pela saia de 11mm; a rampa de 45 graus do bolso converte o puxao em flexao das linguetas"
+        },
+        "pega_da_tampa": {
+          "saia_mm": [3.0, 11.0], "ar_saia_parede_mm": 0.3, "recuo_do_bico_da_saia_mm": 2.2,
+          "escalopos_na_parede_da_boca": 3, "escalopo_mm": [45.0, 9.0, 1.5],
+          "parede_restante_no_escalopo_mm": 1.5, "espaco_total_para_o_dedo_mm": 4.0
+        },
+        "pega_para_carregar": {
+          "onde": "so nas paredes Y, de 6mm", "rebaixo_mm": [70.0, 12.0, 2.5],
+          "z": [32.0, 44.0], "parede_restante_mm": 3.5, "teto": "rampa a 45 graus, autoportante",
+          "motivo": "carregada a caixa passa de 1 kg; nas paredes X de 3mm nao ha rebaixo porque comeria a parede"
+        },
+        "apoio_central_da_tampa": {
+          "travessas": 2, "altura_do_topo_z": 49.6, "folga_sob_a_tampa_mm": 0.4,
+          "maior_vao_sem_apoio_mm": 70.5, "vao_sem_o_apoio_mm": 196.0
+        },
+        "colmeia": {
+          "tipo": "baixo relevo, NAO passante", "profundidade_mm": 1.0, "raio_mm": 5.0,
+          "nervura_mm": 2.6, "faixa_z": [5.0, 44.0], "faixa_solida_no_painel_mm": 4.0,
+          "saia_da_tampa": "celula de raio 3.0, faixa 1.5",
+          "excecao": "face de cima da tampa fica LISA de proposito - e a face que vai na cama"
+        },
+        "mouse_ears": { "discos": 4, "diametro_mm": 10.0, "altura_mm": 0.4, "recuo_do_canto_mm": 2.5,
+          "motivo": "brim de 5mm daria 216 x 218 e estoura o alvo de 210; mouse ears cabem nos 220 fisicos e nao dependem de configuracao do fatiador" },
+        "volume_solido_cm3": { "caixa": 433.4, "tampa": 128.0, "cupom": 34.1 }
+      },
+      "hardware": "nenhum",
+      "material_estimado": { "caixa_cm3": 433.4, "tampa_cm3": 128.0, "cupom_cm3": 34.1, "obs": "volume de SOLIDO medido nas malhas exportadas. Estimativa grossa com 15% de preenchimento: ~200cm3 / ~250g / ~16h a caixa, ~85cm3 / ~105g / ~7h a tampa e ~20cm3 / ~25g / ~1h o cupom. O numero real quem da e o Flash Studio."},
+      "notes": "REPROVADO PELO PRINT-REVIEW NA v1 E CORRIGIDO: (a) o porta-bits estava na coluna da BOCA, que so aparecia com 199.7 dos 202.7mm de curso - foi para a coluna do FUNDO, que a tampa descobre com 65mm de abertura; (b) o snap nao tinha MEMBRO FLEXIVEL: a interferencia de 0.3mm caia numa chapa macica de 3mm que nao flete, entao a quina viva se aplainaria na primeira montagem e a retencao viraria o peso da tampa. Agora ha duas LINGUETAS de 8 x 24.5mm recortadas em U na propria tampa, com o bolso na ponta e 20mm de braco (k ~16.9 N/mm, ~5N por lado, ~10N para abrir), mais um ALIVIO LOCAL DE TETO de 1.2mm sobre a saliencia que da curso a elas - provado com intersecao VAZIA levantando a tampa 1.0mm inteiro dentro da janela x 1..23. FOLGA DE TRILHO 0.7/LADO, acima dos 0.5 padrao: o curso de 202.7mm e o encaixe deslizante mais longo do repo e a tampa e uma chapa de 206 x 202.6 x 3mm que imprime deitada e empena (regra 6 do CLAUDE.md, deckbox-02 IMPRESSO travou no meio do curso). Alem da folga: teto do rasgo a 45 graus; funil na boca; chanfro de 45 x 1mm no topo das divisorias na aresta virada para a boca (o piso do funil passava a 67 um da aresta viva); APOIO CENTRAL com as duas travessas em X parando 0.4mm sob a tampa, derrubando o maior vao sem apoio de 196 para 70.5mm; engate de 3.3mm por lado. PE DE ELEFANTE: nao existe no trilho da CAIXA (nasce em z=50), mas existe na TAMPA, cujas duas arestas longas da primeira camada SAO as pontas das linguetas do trilho - por isso o perimetro da face de cima leva chanfro MODELADO de 0.4 x 45 graus, sem depender do fatiador. PROVAS RODADAS NA GEOMETRIA: intersecao caixa x tampa VAZIA em slide 0, 0.25, 0.28, 0.30, 11, 12, 20, 60, 120, 190 e 200mm (191.7 dos 202.7mm de curso sao livres) e NAO VAZIA de 0.32 a 10.5mm, com pico de 12.934mm3 em 6mm, toda em x 9-15 e z 50-51 (as duas saliencias) - e a zona em que as linguetas estao fletidas. FOLGA LONGITUDINAL REAL DO BOLSO medida na malha: livre em 0.30mm de deslocamento, colide em 0.32 - sao 0.30/lado de verdade, contra os 0.11 nominais-mas-falsos da v1 (o poligono do bolso comecava 0.1mm abaixo do plano do piso e as paredes a 45 graus comiam a abertura). RETENCAO: abrir 2mm sem levantar da 7.875mm3. CAPTURA: levantar 0.7mm e livre, 0.8mm bate no teto a 45 graus (1.392mm3), 4.0mm da 1504mm3. CUPOM: mesma secao, comportamento identico (VAZIA em 0, 15, 40 e 56mm; 12.934mm3 em 6mm, o mesmo numero da caixa grande). Volumes 2 em cada peca e tambem nas chapas com mouse ears, provando que os discos estao FUNDIDOS. SEM BRIM: 5mm de brim dariam 216 x 218, fora do alvo de 210; as chapas grandes saem em 211 x 213 e 211 x 207.6 com mouse ears, dentro dos 220 fisicos - o excesso sobre 210 e deliberado, e o preco de cama cheia. PENDENCIAS: nada foi impresso (comecar pelo CUPOM); largura e espessura do alicate seguem sem medida de regua; a forca do snap so se calibra na mao, via bump_h; os rasgos em U de 1.6mm deixam duas frestas junto a quina do fundo por onde peca miuda pode cair na canaleta; o conteudo dos outros 5 compartimentos nao foi definido."
+    },
     {
       "id": "switch-case-organizer-01",
       "category": "diversos",
@@ -10,10 +173,11 @@
       "scad": "diversos/switch-case-organizer-01/switch-case-organizer-01.scad",
       "status": "em-andamento",
       "derived_from": "diversos/switch_game_tray_12.3mf (3Dravs, Standard Digital File License) — somente medidas de interface extraidas da malha; geometria refeita do zero em OpenSCAD",
-      "description": "Organizador modular aberto para 12 caixas fisicas de jogos Nintendo Switch / Switch 2. Duas sapatas de 28mm e guias de 30mm seguram cada caixa em quatro regioes; dois rabos-de-andorinha verticais, macho a direita e femea a esquerda, permitem repetir unidades identicas lado a lado. As longarinas ficam fora da interface para preservar 11.25mm inclusive nos canais extremos. Peca unica, sem suporte.",
+      "description": "Organizador modular aberto para 12 caixas fisicas de jogos Nintendo Switch / Switch 2. Duas sapatas de 28mm e guias de 30mm seguram cada caixa em quatro regioes; cintas externas autoportantes de 1.2mm amarram o topo das divisorias. Dois rabos-de-andorinha verticais, macho a direita e femea a esquerda, permitem repetir unidades identicas lado a lado. As longarinas ficam fora da interface para preservar 11.25mm inclusive nos canais extremos. Peca unica, sem suporte.",
       "parts": { "organizer": 1 },
       "print_jobs": [
-        { "file": "3mf/switch-case-organizer-01.3mf", "contents": "1 organizador modular para 12 caixas, na orientacao de uso, sem suporte", "footprint_mm": [176.25, 110.1, 32.4] }
+        { "file": "3mf/switch-case-organizer-01.3mf", "contents": "1 organizador modular para 12 caixas, com os dois pares de rabos-de-andorinha, na orientacao de uso, sem suporte", "footprint_mm": [176.25, 112.5, 32.4] },
+        { "file": "3mf/sem-encaixe.3mf", "contents": "1 organizador avulso para 12 caixas, mesma geometria sem os rabos-de-andorinha (modular_connectors=false), na orientacao de uso, sem suporte", "footprint_mm": [164.25, 112.5, 32.4] }
       ],
       "assembled_closed_mm": [164.25, 110.1, 32.4],
       "capacity": "12 caixas fisicas de jogos Nintendo Switch / Switch 2",
@@ -34,11 +198,17 @@
         "engate_vertical_mm": 24.0,
         "chanfro_entrada_mm": 1.2,
         "curso_vertical_desmontagem_mm": 28.0,
-        "passo_entre_modulos_acoplados_mm": 169.75,
+        "passo_entre_modulos_acoplados_mm": 171.75,
+        "abertura_receptor_mm": 9.4,
+        "retencao_lateral_por_lado_mm": 1.3,
+        "alivio_pe_de_elefante_mm_por_face": 0.3,
+        "altura_funil_base_femea_mm": 1.2,
+        "cinta_externa_espessura_mm": 1.2,
+        "cinta_externa_altura_mm": 4.0,
         "origem_das_medidas": "Engenharia reversa inequivoca da malha de referencia: envelope 158.25 x 27.0 x 110.1mm, canais de 11.25mm e passo de 13mm. Nao foram usadas dimensoes de catalogo da caixa."
       },
       "hardware": "nenhum",
-      "notes": "Geometria propria, sem reutilizacao da malha protegida. Identidade visual em hexagonos ponta-pra-cima nas longarinas, mantendo faixas solidas nas bordas. Longarinas de 3mm posicionadas totalmente para fora da interface de 158.25mm; primeiro e ultimo canais tambem medem 11.25mm. Acoplamento parametrizavel por modular_connectors_override, com dois rabos-de-andorinha verticais, canal aberto e chanfro inferior contra pe de elefante; montagem de duas unidades simulada no part assembly. STL e chapa medidos em 176.2 x 110.1 x 32.4mm: ok na AD5X e abaixo do alvo 210x210. Volumes 2 no CGAL = solido unico. Previews perspectiva, topo e montagem inspecionados. Acoplamento e caixas ainda dependem de teste fisico."
+      "notes": "Geometria propria, sem reutilizacao da malha protegida. Identidade visual em hexagonos ponta-pra-cima nas longarinas, mantendo faixas solidas nas bordas. Longarinas de 3mm posicionadas totalmente fora da interface de 158.25mm; primeiro e ultimo canais tambem medem 11.25mm. Acoplamento parametrizavel por modular_connectors_override, com dois rabos-de-andorinha verticais e negativo da femea derivado da posicao do macho vizinho. Paredes externas da femea nascem em z=0, integralmente apoiadas na cama; canal aberto por baixo recebe funil de 1.2mm com 0.3mm extra por face contra pe de elefante, convergindo para folga nominal de 0.5mm/lado. Intersecao booleana vazia em 9 alturas do curso 0-28mm; tentativa de extracao lateral de 1mm produz Volumes 5, comprovando retencao. Assembly final tem Volumes 3 = dois solidos sem colisao. Cintas frontal/traseira externas de 1.2 x 4mm usam aberturas triangulares autoportantes e nao invadem canais. STL e chapa medidos em 176.2 x 112.5 x 32.4mm: ok na AD5X. Acoplamento, cintas e caixas ainda dependem de novo teste fisico."
     },
     {
       "id": "emergency-nfc-card-01",
@@ -317,6 +487,72 @@
       "hardware": "nenhum",
       "material_estimado": { "caixa_cm3": 78.05, "caixa_g_pla": 97, "par_cm3": 156.1, "par_g_pla": 194, "origem_80mm_cm3": 52.4, "obs": "volume de SÓLIDO medido na malha exportada; o fatiador mostra menos, com infill. O original de 80mm fatiou em 2h32/61.2g na AD5X" },
       "notes": "PENDÊNCIA FUNCIONAL DECLARADA, e é o resultado da conta que o usuário pediu: com DUAS camadas e SEM prateleira, a camada de baixo é ARQUIVO, não é a camada de trabalho. Puxar uma carta de baixo pela janela deixa uma fenda de ~0.5mm embaixo da carta que estava por cima, e essa carta cai dentro da fenda (66mm de queda) ou emperra torta. NÃO existe conserto dentro dos 150mm: uma prateleira no meio seria uma PONTE de 69 x 93mm no ar (exatamente o defeito que se removeu do original, a travessa traseira com ponte plana de 53 x 2.6) e ainda comeria os 8mm de folga que sobraram. Os caminhos honestos são (a) camada de baixo = estoque, camada de cima = giro; ou (b) `layers_override = 1` num include, o que dá caixa de 84mm, e empilhar DUAS — o ressalto e a chaveta existem pra isso e aí cada camada tem boca própria. A camada de CIMA não tem esse problema: a boca é aberta, a carta sai reta pro ar livre. ORÇAMENTO DE ALTURA fecha sem espremer conteúdo: 10 de piso + 132 de carta + 8 de ar = 150, e os 8 de ar são o MESMO espaço que a cinta ocupa na parede (a cinta é rente, não avança pra dentro), então não brigam; com uma caixa empilhada em cima ainda sobram 5mm sobre a carta. COLMEIA COM BICO DE 45 E NÃO HEXÁGONO REGULAR: a auditoria da malha pegou que no hexágono regular os flancos do bico ficam a 30 graus DA HORIZONTAL (= 60 de balanço, pior que os 45 do resto da peça) — foram 3094mm2 de teto de furo a 30 graus na primeira versão. Dois motivos pra consertar: (a) 30 graus faz cada camada avançar 0.35mm sobre a anterior (camada de 0.2), ~17% de linha apoiada contra ~52% num teto de 45; (b) decisivo, 30 graus é EXATAMENTE o limiar de suporte padrão do Flash Studio e o usuário fatia com SUPORTE LIGADO — teto no limiar é sorteio, e o prêmio é suporte dentro de 47 furos de 2.6mm de profundidade, de onde não se tira. A célula das paredes virou 24 de largura x 32 de altura (lateral reta de 8 + bico de 45 de 12mm), com o passo entre fileiras recalculado pra manter a nervura de 2.6 TAMBÉM na costura diagonal (confere no caso regular: dá dy = 0.866*dx). No PISO a célula segue o hexágono REGULAR de 24mm medido no original, porque piso é horizontal e não tem teto de furo pra pender. FRENTE SEM TRAVESSA por decisão do usuário: o segmento da frente da cinta trabalha em TRAÇÃO ao longo de X, seção 2.6 x 8 = 20.8mm2, ~620N em PLA — o empurrão de ~300 cartas soltas não chega a 1% disso; e quem de fato impede o lado de abrir são os montantes de 8mm, que dão a cada lateral uma seção em L de 8 x 8mm correndo os 150mm. CHAVETA REDESENHADA em relação ao original: a de lá deixa 0.3-0.6mm de parede atrás do rasgo (a língua avança até 0.6mm da face externa numa parede de 2.6); aqui é um ressalto PRA DENTRO na boca do fundo (36 x 1.2) com rasgo no ressalto de baixo, então a parede fica com os 2.6mm inteiros e quem paga o espaço é o ar de sobra atrás da carta (6.5mm de folga em Y). PROVAS NA GEOMETRIA: part=\"fit\" (as duas caixas empilhadas na orientação certa) sai VAZIO — 0.00mm3, sobra só a face plana do assento em z=150; part=\"fit180\" (a de cima virada) dá 93.24mm3 em z 147..150, que é a chaveta batendo na moldura cheia do piso: a caixa para 3mm alta e óbvia, não entra 'quase encaixando'. CURSO DO EMPILHAMENTO simulado com número: 1.00mm de separação o chanfro de 0.4 do pé encontra o funil de 0.6 da boca (aceita 1.0mm de erro de mão); 0.60mm entra o reto com 0.25/lado e a chaveta decide; 0.00 assenta, com 2.0mm de engate reto e o batente feito pela ABA contra o ARO, nunca por carta. CAMA: 74.2 x 102.7 x 150 (ok, teto confortável 170) e o par 154.4 x 102.7 (ok). Os 102.7 vão no eixo Y de propósito, que é o que a cama da AD5X balança. USAR BRIM: 150mm de torre sobre uma 1a camada de 1739mm2 que é grade de nervura de 1.6 mais moldura de 2.6. SUPORTE: o modelo não precisa de nenhum; o único lugar em que o fatiador pode querer pôr algo é embaixo da aba de z=3, a 3mm da cama — anel fino que sai com a unha, MAS ele encosta justo na superfície de assento do empilhamento, então se as caixas ficarem bambas empilhadas o primeiro suspeito é resto de suporte, não geometria. FOOTPRINT MANTIDO igual ao do original (74.2 x 102.7) de propósito: preserva a intercambialidade de empilhamento com uma cópia do modelo de origem e deixa a carta abrir em leque. O preço é folga de 3.25/lado no comprimento da carta em vez do 1.0 de conteúdo do repo; com 1.0 a caixa ficaria 98.2 em Y. PENDÊNCIAS: (1) medida da carta é catálogo, não régua; (2) não foi impresso nem testado na mão; (3) com a caixa pela metade as cartas tombam no eixo da pilha — não tem seguidor/divisória, mesma limitação do original."
+    },
+    {
+      "id": "toploader-holder-01",
+      "category": "organizadores_tcg",
+      "path": "organizadores_tcg/toploader-holder-01",
+      "scad": "organizadores_tcg/toploader-holder-01/toploader-holder-01.scad",
+      "status": "em-andamento",
+      "derived_from": "organizadores_tcg/2-in-1_Top_Loader___Sleeve_Holder.3mf (\"2-in-1 Top Loader & Sleeve Holder\" / \"Deck Daddy\", HeyHalo, MakerWorld, 2025-06-23, licença CC0 declarada no próprio 3mf — o raro caso REDISTRIBUÍVEL desta pasta). RECONSTRUÇÃO PARAMÉTRICA própria: nada da malha foi copiado, só medidas de engenharia reversa (1809 vértices / 3614 triângulos, 1 sólido estanque, volume 121.1 cm3): envelope 82.0 x 107.0 x 84.0; piso maciço 4.0; parede 2.5 na câmara de cima (vão 77.0 x 102.0) e 5.5 no bolso de baixo (vão 71.0 x 99.0) — ou seja DEGRAU de 3.0 lateral e 3.0 no fundo a 30mm do piso, com filete de ~1mm; frente SEM degrau (os dois vãos rentes); janela frontal de 60.0 de largura do topo do piso até a boca, sem travessa, montante de 11.0 de cada lado; aro do topo arredondado. A AUSÊNCIA DE PRATELEIRA FOI CONFIRMADA POR CORTE BOOLEANO RENDERIZADO na malha de origem, não deduzida: é uma câmara só, com o degrau na parede",
+      "description": "Dispenser 2-EM-1 de TOP LOADER (em cima) e PENNY SLEEVE (embaixo) numa caixa única de 84 x 109 x 150mm, aberta em cima, com janela de vão contínuo de 60 x 138 na frente e cinta de 8mm fechando a volta no topo. QUEM SEPARA OS DOIS CONTEÚDOS É A GRAVIDADE, não uma divisória: um DEGRAU a 34mm do chão (a parede passa de 6.5 pra 3.0) deixa o bolso de baixo com 71.0 de vão — estreito demais pro top loader de 76.2, que para em cima do degrau com 2.6/lado de apoio, e folgado pro penny sleeve de 66.7, que cai livre com 2.15/lado. Sem divisória, sem prateleira, sem ponte, sem peça móvel. Como o material RECUA subindo, o degrau é uma face virada pra CIMA e tem balanço ZERO. Colmeia hexagonal passante de 18mm com bico de 45 graus nas duas laterais e no fundo, só ACIMA do degrau — o bolso de sleeve fica MACIÇO de propósito (sleeve mole e largo demais pra 71mm de bolso faz barriga pelo furo e enrosca ao puxar), o que de quebra vira lastro contra tombamento. Variante ALTA da referência de 84mm: os 66mm extras vão inteiros pra câmara de top loader (50 -> 116mm, ~40 -> ~92 peças). Peça única, imprime em pé na orientação de uso, SEM SUPORTE.",
+      "parts": { "box": 1 },
+      "print_jobs": [
+        { "file": "3mf/toploader-holder-01-plate.3mf", "contents": "JOB PRINCIPAL: 1 caixa em pé, boca pra cima, piso na mesa, SEM SUPORTE. Brim dispensável (a 1a camada é o piso inteiro, 9154 mm2 maciços), mas skirt ajuda a estabilizar 150mm de torre com a frente aberta. Os 109 vão no eixo Y, que é o que a cama da AD5X balança", "footprint_mm": [84.0, 109.0, 150.0], "material_cm3": 158.8 },
+        { "file": "3mf/toploader-holder-01-par.3mf", "contents": "2 caixas lado a lado, vão de 6mm. Mesma orientação e mesmas notas do job de 1; dobra tempo e material (~394g) e põe duas torres de 150mm balançando no eixo Y — é conveniência, não substitui o job de 1", "footprint_mm": [174.0, 109.0, 150.0], "material_cm3": 317.6 }
+      ],
+      "assembled_closed_mm": [84.0, 109.0, 150.0],
+      "capacity": "~92 top loaders 3x4 (116mm de curso útil a 1.25mm cada) e ~375 penny sleeves vazios (30mm de bolso a 0.08mm cada). ESTIMATIVA GROSSA: nem a espessura do top loader nem a do sleeve foram medidas, e as duas variam muito entre marcas",
+      "key_measures": {
+        "externo_mm": [84.0, 109.0, 150.0],
+        "camara_toploader_mm": [78.0, 103.0, 116.0],
+        "bolso_sleeve_mm": [71.0, 99.0, 30.0],
+        "degrau": {
+          "z_mm": 34.0,
+          "lateral_mm": 3.5,
+          "fundo_mm": 4.0,
+          "frente_mm": 0.0,
+          "frente_nota": "frente RENTE de propósito (herdado do original): é o que deixa o dedo entrar no bolso pela janela",
+          "apoio_do_toploader_por_lado_mm": 2.6,
+          "balanco": "ZERO — subindo, a parede passa de 6.5 pra 3.0, então o material RECUA e o degrau é uma face virada pra CIMA",
+          "funcao": "É O MECANISMO INTEIRO do 2-em-1. Só funciona enquanto pocket_w ficar ENTRE sleeve_w (66.7) e tl_w (76.2); o assert bite_tl_x >= 2.0 guarda isso"
+        },
+        "folgas_por_lado_mm": { "toploader_em_X": 0.9, "toploader_em_Y": 0.7, "sleeve_em_X": 2.15, "sleeve_no_fundo_em_Y": 6.9 },
+        "parede_mm": 3.0,
+        "parede_do_bolso_mm": 6.5,
+        "parede_nota": "3.0 e não os 2.5 do original: a 150mm de altura 2.5 empena, e aqui a quarta parede é um rasgo de 138mm. Cresceu PRA FORA (82x107 -> 84x109), nunca comendo o vão",
+        "vao_de_cima_nota": "78.0 x 103.0 e não os 77.0 x 102.0 medidos: +1.0 de anti-empeno, levando a folga do top loader de 0.4 pra 0.9/lado. Regra 6 do repo na versão aprendida no deckbox-02 — tubo alto impresso em pé entra de barriga e a cavidade em XY sai subdimensionada",
+        "piso_mm": 4.0,
+        "janela_mm": { "largura": 60.0, "altura": 138.0, "peitoril_z": 4.0, "ombro_z": 112.0, "bico_z": 142.0, "montante": 12.0, "flange": 9.0, "mordida_sobre_o_sleeve_por_lado": 3.35, "mordida_sobre_o_toploader_por_lado": 8.1, "nota": "vão único do peitoril (rente ao topo do piso, sem degrau pra enroscar) até o bico, sem travessa. Fecha em duas águas de 45 graus: 60mm de vão em 30mm de subida" },
+        "cinta_mm": 8.0,
+        "cinta_nota": "o original não tem — a janela dele vai até a boca. A 84mm passa; a 150mm o montante da frente vira coluna esbelta. Trabalha em TRAÇÃO ao longo de X: seção 3.0 x 8.0 = 24mm2, ~720N em PLA a 30MPa, contra um empurrão de pilha que não chega a 1% disso",
+        "chanfro_boca_mm": 1.2,
+        "chanfro_aro_mm": 0.6,
+        "cantos_verticais_r_mm": 1.5,
+        "colmeia": {
+          "celula_mm": [18.0, 24.0],
+          "bico_graus": 45,
+          "nervura_mm": 3.0,
+          "faixa_z_mm": [39.0, 137.0],
+          "onde": "duas laterais e o fundo, só ACIMA do degrau — o bolso de sleeve fica maciço",
+          "celula_nota": "18 e não os 24 do penny-holder-01: aqui a célula tem que caber INTEIRA na faixa útil e com 24 sobravam 3 fileiras com vazio morto em cima e embaixo",
+          "recorte_nota": "o recorte do campo é SÓ NA HORIZONTAL. Cortar a célula na vertical decapitaria o bico e deixaria o furo com TETO PLANO de até 18mm de vão — apareceu no 1o render deste modelo e foi corrigido no hex_field",
+          "bico_nota": "45 graus e não os 30 do hexágono regular: 30 é exatamente o limiar de suporte do Flash Studio, e o usuário fatia com suporte ligado"
+        },
+        "medidas_de_conteudo": {
+          "toploader_mm": [76.2, 101.6, 1.25],
+          "sleeve_mm": [66.7, 92.1, 0.08],
+          "origem": "CATÁLOGO (3x4 pol e 2.625x3.625 pol), NÃO É RÉGUA — e os vãos vieram da malha de origem. Mesma ressalva do penny-holder-01 e do sleeve-tower-01. Atenuante: a caixa de origem foi impressa e aprovada por terceiros com esses vãos. Parametrizado em cav_w/cav_d/pocket_w/pocket_d: quando a régua chegar, um include com os *_override refaz o modelo inteiro"
+        }
+      },
+      "printability": {
+        "orientacao": "em pé, boca pra cima, piso na mesa — a MESMA orientação de uso",
+        "suporte": "NÃO",
+        "brim": "dispensável (1a camada = piso inteiro, 9154 mm2); skirt recomendado",
+        "auditoria_de_balanco": "medida na malha exportada, excluindo a face que assenta na cama: 5096.7 mm2 de face virada pra baixo, 100% dela a 45 graus. ZERO mm2 abaixo de 45, zero ponte reta",
+        "malha": "estanque (0 arestas não-casadas), 2140 triângulos, volume sólido 158.8 cm3"
+      },
+      "notes": "Fluxo: engenharia reversa da malha de origem (bbox, planos alinhados aos eixos, varredura de intervalos sólidos e corte booleano renderizado) -> .scad -> preview conferido em imagem -> STL e 3MF exportados e auditados -> bed-check ok. FALTA o veredito que importa: o TESTE FÍSICO da peça na mão do usuário. Os dois pontos a olhar quando ela sair da impressora são (1) se o top loader realmente para no degrau e não entra de canto no bolso, e (2) se o vão de 78.0 não fechou com o empeno da parede de 150mm"
     },
     {
       "id": "pokemon-game",
@@ -678,6 +914,105 @@
         "jobs_por_grade": { "2x2": 2, "3x3": 5, "4x4": 8 }
       },
       "notes": "MEDIDAS NAO VIERAM DA REGUA DO USUARIO — sao de catalogo/levantamento, como no psa-box-01. Os cinco numeros que mandam (slab_w_max/h_max/t_max e slab_w_min/h_min) estao no topo do .scad e todo o resto e derivado. Verificacoes geometricas feitas no modelo, no idioma do penny-holder-01: part=fit_x e fit_y saem VAZIOS (tiles vizinhos nao se atravessam), part=gap_x sai NAO-VAZIO (o macho ocupa mesmo a femea), part=probe_gap sai VAZIO (existe vao de flexao atras da lamina) e part=probe_blade sai NAO-VAZIO (a lamina existe). O tile e solido unico (Volumes: 2). A chapa foi de 212.5 pra 209.9mm entrelacando os dois tiles, o que a poe dentro do alvo de 210. Deformacao da lamina lateral no curso maximo ~0.7%, bem abaixo do escoamento do PLA. PENDENCIA: nao impresso — rodar o gabarito com uma slab na mao antes dos tiles."
+    },
+    {
+      "id": "pokemon-filler-card-01",
+      "category": "cartoes",
+      "path": "cartoes/pokemon-filler-card-01",
+      "scad": "cartoes/pokemon-filler-card-01/pokemon-filler-card-01.scad",
+      "status": "em-andamento",
+      "description": "Card tapa-buraco de album Pokemon em 67 x 90mm — MAIOR que o card oficial de 63x88 de proposito, porque o card real fica solto no bolso do album. Corpo de 1.2mm (a espessura minima que sai solida em FDM) mais relevo, dando 2.0mm no ponto mais alto: a MESMA espessura do insert do pokemon-coin-binder-01, que ja foi impresso e prova que 2.0mm entra nesse album. A arte e um BAIXO RELEVO DE 4 NIVEIS gerado de um SVG de trace colorido pelo svg2relief.py — a luminancia de cada cor vira altura, entao armadura clara sobe e contorno escuro desce. Sai em DUAS VERSOES do mesmo .scad e do mesmo heightmap: COR UNICA (peca unica, relevo com transicao em rampa) e MULTICOLOR de 4 filamentos no IFS (um objeto com 6 pecas, transicao em parede vertical pra nao borrar a fronteira de cor). Frente com moldura, quatro hexagonos de identidade nos cantos, nome e numero da dex em alto relevo; verso liso. Impresso com o verso na mesa, sem suporte e sem ponte. Primeira arte pronta: Armarouge #936.",
+      "parts": { "card_cor_unica": 1, "multicolor_corpo": 1, "multicolor_moldura_e_texto": 1, "multicolor_arte_amarelo": 1, "multicolor_arte_vermelho": 1, "multicolor_arte_escuro": 1, "multicolor_arte_vao": 1 },
+      "print_jobs": [
+        { "file": "3mf/pokemon-filler-card-01-armarouge-4cores.3mf", "contents": "MULTICOLOR, job recomendado: 1 card do Armarouge como UM objeto com 6 pecas em 4 filamentos do IFS, com as CORES gravadas no arquivo (abre colorido) — 1 #F2EDE3 creme, 2 #E5CD2C amarelo, 3 #CD321F vermelho, 4 #3B2C2B escuro (moldura, texto e sombras). Verso na placa, relevo para cima, sem suporte, BRIM recomendado", "footprint_mm": [67.0, 90.0, 2.0] },
+        { "file": "3mf/pokemon-filler-card-01-armarouge.3mf", "contents": "COR UNICA: 1 card do Armarouge, verso na placa lisa e relevo para cima, sem suporte, BRIM recomendado", "footprint_mm": [67.0, 90.0, 2.0] },
+        { "file": "3mf/pokemon-filler-card-01-armarouge-x4.3mf", "contents": "COR UNICA, chapa 2x2 com 4 cards iguais, vao de 4mm, verso na placa e relevo para cima, sem suporte, BRIM recomendado; 3x2 tambem cabe na cama (209 x 184) mas encosta no limite de conforto de 210 e nao sobra margem de brim", "footprint_mm": [138.0, 184.0, 2.0] }
+      ],
+      "part_footprints_mm": { "card": [67.0, 90.0, 2.0] },
+      "assembled_closed_mm": [67.0, 90.0, 2.0],
+      "key_measures": {
+        "card_mm": [67.0, 90.0],
+        "card_oficial_mm": [63.0, 88.0],
+        "sobremedida_por_lado_mm": { "x": 2.0, "y": 1.0 },
+        "corpo_mm": 1.2,
+        "espessura_total_mm": 2.0,
+        "raio_das_quinas_mm": 3.5,
+        "chanfro_pe_de_elefante_mm": 0.4,
+        "moldura_margem_mm": 3.5,
+        "moldura_largura_da_linha_mm": 1.6,
+        "janela_de_arte_mm": [51.8, 62.8],
+        "arte_encaixada_mm": [38.3442, 62.8],
+        "arte_centro_mm": [33.5, 51.0],
+        "heightmap_px": [128, 209],
+        "resolucao_do_relevo_mm_por_px": 0.302,
+        "niveis_do_relevo_mm_acima_da_face": [0.2, 0.4, 0.6, 0.8],
+        "degrau_entre_niveis_mm": 0.2,
+        "relevo_de_moldura_texto_e_hexagonos_mm": 0.4,
+        "plato_de_fundo_do_heightmap_enterrado_mm": 0.05,
+        "piso_solido_sob_o_heightmap_mm": 0.927,
+        "distribuicao_de_area_do_relevo_pct": { "+0.20": 23.5, "+0.40": 22.9, "+0.60": 10.7, "+0.80": 42.8 },
+        "multicolor": {
+          "filamentos": 4,
+          "mapa": { "1": "#F2EDE3 creme — corpo do card + vaos internos do trace", "2": "#E5CD2C amarelo — arte", "3": "#CD321F vermelho — arte", "4": "#3B2C2B escuro — moldura, texto, hexagonos e sombras da arte" },
+          "pecas_e_triangulos": { "corpo": 452, "moldura-e-texto": 6588, "arte-vao": 708, "arte-amarelo": 6348, "arte-vermelho": 5328, "arte-escuro": 2760 },
+          "area_de_topo_por_peca_mm2": { "amarelo": 473.02, "vermelho": 376.43, "escuro": 187.5, "vao": 9.0 },
+          "celula_do_voxel_mm": [0.2996, 0.3005],
+          "malha": "caixas fundidas por greedy meshing, cada caixa um solido fechado; 0 caixas abertas em 1262 caixas"
+        },
+        "malha_do_card_cor_unica": { "facets": 12701, "volumes_cgal": 2, "solidos": 1 }
+      },
+      "hardware": "nenhum",
+      "notes": "Escalas MEDIDAS nesta maquina em 2026-08-29, nao chutadas: import() de SVG do OpenSCAD 2021.01 le a 72 dpi (1 px = 0.352778mm) honrando width/height e viewBox; surface() de PNG mapeia cinza 0 -> z 0 e cinza 255 -> z 100 linear, cada pixel vale 1 unidade em XY (a imagem ocupa px-1 unidades) e o solido fecha o fundo 1 unidade abaixo do minimo. surface() gera RAMPA de 1 px entre niveis, nao parede vertical — por isso numa vista de topo ortografica o relevo aparece como contorno enquanto moldura e texto somem, por motivo oposto (parede vertical tem area projetada zero de cima). art_flip_y=false foi confirmado em render de topo: surface() ja poe a primeira linha do PNG no y maximo, e o true de partida deixava a figura de cabeca pra baixo. 8 niveis de 0.1mm foram TESTADOS E REJEITADOS: o nivel mais baixo da figura ficava a 0.056mm da face, a silhueta nao descolava do card e a arte sumia; 4 niveis de 0.2mm dao degrau de uma camada inteira a 0.20mm de altura de camada. O svg2relief.py equaliza por quantil porque o mapa linear de luminancia empilhava 70% da area num nivel so. BUG CORRIGIDO na v1 da moldura: offset(r) cresce para os DOIS lados e o translate nao compensava o raio, entao a moldura saia a 1.30mm da borda esquerda e 5.70mm da direita; agora e' 3.50mm nos quatro lados, com ECHO de conferencia. MULTICOLOR: as pecas de cor NAO saem do OpenSCAD e sim do svg2relief.py --parts-dir, porque so ele tem o mapa de cor pixel a pixel e assim a cor casa com o relevo sem meio-pixel de desalinhamento; os grupos vem de k-means na paleta ponderado por area (14 cores -> 3 grupos cromaticos, sobreposicao medida entre grupos de so 0.17% da figura, ou seja o trace e' segmentacao limpa). A primeira tentativa de malhar as pecas como casca unica de campo de alturas VAZOU (734 arestas sem par na cor1) por T-junction nas arestas verticais de canto; a versao boa e' caixa fundida por greedy meshing, cada caixa fechada sozinha. A soma das areas de topo das 4 pecas deu 1045.9mm2 contra 1046.1 esperados, o que prova que elas ladrilham a figura sem sobra nem vao. COR NO ARQUIVO: a v1 do 3MF multicolor carregava so o NUMERO do filamento e abria cinza. Conferido nos projetos reais do repo (diversos/4floral_travel_pill_box_single_colour.3mf e Jabonera.3mf, ambos de 4 filamentos) que o 3dmodel.model deles NAO usa <basematerials> nem grupo de cor — a cor vem so de filament_colour em Metadata/project_settings.config. Passamos a escrever esse arquivo, o que e um desvio consciente da regra do plates.py; a regra existia pra nao arrastar perfil de impressora de terceiro, e aqui o arquivo tem so SEIS chaves, todas de filamento (colour, multi_colour, type, diameter, density, self_index), nenhuma de impressora/processo/altura de camada. PENDENCIA: nao impresso — falta o teste fisico confirmar que 2.0mm entra folgado no bolso do album, que o degrau de 0.2mm le a olho nu, e falta ABRIR o 3MF multicolor no Flash Studio pra confirmar que ele mostra as 6 pecas nos filamentos e cores certos (o slicer nao roda headless nesta maquina)."
+    },
+    {
+      "id": "armarouge-card-2cores-01",
+      "category": "cartoes",
+      "path": "cartoes/armarouge-card-2cores-01",
+      "scad": "cartoes/armarouge-card-2cores-01/armarouge-card-2cores-01.scad",
+      "status": "em-andamento",
+      "description": "Variante enxuta do pokemon-filler-card-01: mesmo card tapa-buraco de album Pokemon de 67 x 90mm com o Armarouge, mas SEM NOME E SEM NUMERO da dex e em DUAS CORES no IFS — corpo preto (filamento 1) e arte + moldura cinza claro (filamento 2). Tirar o texto liberou a faixa de 12mm que existia so pra abriga-lo (band_h = 0), entao a arte cresce de 38.3 x 62.8 para 45.7 x 74.8mm e ocupa o card inteiro dentro da moldura. Corpo de 1.2mm mais relevo de 4 niveis ate +0.80mm, dando 2.0mm acabado, a mesma espessura ja provada no insert do pokemon-coin-binder-01. O heightmap e as malhas de cor saem do mesmo svg2relief.py do 01, agora com --colors 1 (um grupo cromatico so), e o 3MF de 2 filamentos sai do multicolor3mf.py com as cores gravadas no arquivo. Frente com moldura e quatro hexagonos de identidade nos cantos; verso liso. Verso na mesa, relevo pra cima, sem suporte e sem ponte.",
+      "parts": { "corpo": 1, "moldura": 1, "arte_figura": 1, "arte_detalhe": 1 },
+      "print_jobs": [
+        { "file": "3mf/armarouge-card-2cores-01.3mf", "contents": "job RECOMENDADO: 1 card como UM objeto com 4 pecas em 2 filamentos do IFS, com as CORES gravadas no arquivo (abre colorido) — 1 #C8C8C8 cinza claro (corpo do card e detalhe interno da figura), 2 #1A1A1A preto (moldura, hexagonos e silhueta da figura). Verso na placa, relevo pra cima, sem suporte, BRIM recomendado", "footprint_mm": [67.0, 90.0, 2.0] },
+        { "file": "3mf/armarouge-card-2cores-01-fundo-preto.3mf", "contents": "MESMA geometria com o mapa de filamento trocado: corpo preto e figura cinza clara. Testado em render e le PIOR que o de fundo claro — os vazios escuros da arte se fundem com o corpo do card e a silhueta se parte. Fica como alternativa, nao como padrao", "footprint_mm": [67.0, 90.0, 2.0] }
+      ],
+      "part_footprints_mm": { "card": [67.0, 90.0, 2.0] },
+      "assembled_closed_mm": [67.0, 90.0, 2.0],
+      "key_measures": {
+        "card_mm": [67.0, 90.0],
+        "card_oficial_mm": [63.0, 88.0],
+        "corpo_mm": 1.2,
+        "espessura_total_mm": 2.0,
+        "raio_das_quinas_mm": 3.5,
+        "chanfro_pe_de_elefante_mm": 0.4,
+        "moldura_margem_mm": 3.5,
+        "moldura_largura_da_linha_mm": 1.6,
+        "faixa_de_texto_mm": 0.0,
+        "janela_de_arte_mm": [51.8, 74.8],
+        "arte_encaixada_mm": [45.6712, 74.8],
+        "arte_centro_mm": [33.5, 45.0],
+        "heightmap_px": [128, 209],
+        "resolucao_do_relevo_mm_por_px": 0.3596,
+        "niveis_do_relevo_mm_acima_da_face": [0.2, 0.4, 0.6, 0.8],
+        "degrau_entre_niveis_mm": 0.2,
+        "relevo_de_moldura_e_hexagonos_mm": 0.4,
+        "plato_de_fundo_do_heightmap_enterrado_mm": 0.05,
+        "piso_solido_sob_o_heightmap_mm": 0.927,
+        "distribuicao_de_area_do_relevo_pct": { "+0.20": 23.6, "+0.40": 23.4, "+0.60": 13.5, "+0.80": 39.5 },
+        "multicolor": {
+          "filamentos": 2,
+          "mapa": {
+            "1": "#C8C8C8 cinza claro — corpo do card + detalhe interno da figura (nivel 1 do relevo)",
+            "2": "#1A1A1A preto — moldura, hexagonos e silhueta da figura (niveis 2 a 4)"
+          },
+          "corte_de_cor": "por NIVEL do relevo, nao por matiz: nivel 1 (+0.20mm, 23.6% da figura) vai pro claro e vira a linha de detalhe; niveis 2-4 (+0.40 a +0.80mm, 76.4%) vao pro escuro e formam a silhueta cheia",
+          "pecas_e_triangulos": { "corpo": 452, "moldura": 688, "arte-detalhe": 2496, "arte-figura": 8856 },
+          "celula_do_voxel_mm": [0.3568, 0.3579],
+          "bbox_da_arte_mm": { "x": [11.38, 55.62], "y": [8.32, 81.68], "z": [1.15, 2.0] }
+        }
+      },
+      "hardware": "nenhum",
+      "notes": "Feito em 2026-08-30 a pedido do usuario ('tire o nome e numero, duas cores, preto e cinza claro'). Reaproveita integralmente o svg2relief.py e o multicolor3mf.py do pokemon-filler-card-01 — as armadilhas de escala, o contrato de cinza, o bug de offset() da moldura e a razao do project_settings.config estao documentados LA e valem aqui igual. Diferenca de pipeline, e a licao do projeto: `svg2relief.py --colors 2` NAO SERVE em duas cores. Os grupos dele saem de k-means em RGB, que num trace do Armarouge separa AMARELO de VERMELHO — duas cores igualmente claras; testado e renderizado, a figura virou uma mancha chapada unica e sumiu. O que da leitura em dois tons e' separar CLARO de ESCURO, e a luminancia ja esta codificada no heightmap, porque o svg2relief converteu luminancia em ALTURA: o NIVEL do relevo E' o tom. Por isso este projeto tem o art2parts.py, que corta o heightmap por nivel reusando o blocky_mesh/write_binary_stl do svg2relief (mesma malha de caixas fundidas, parede vertical na fronteira de cor). Corte em 1x3 e nao 2x2: com os niveis 1-2 juntos no escuro quase metade da figura ia pro preto e a silhueta se partia — conferido em render. ORIENTACAO DE COR conferida em render lado a lado: fundo CLARO com figura PRETA le muito melhor que o contrario, porque num card preto os vazios escuros da arte se fundem com o corpo e a silhueta se parte; por isso o job padrao e' cinza/preto e o fundo preto ficou como variante. Conferido no STL exportado que a arte ocupa x 11.38..55.62 e y 8.32..81.68, dentro da janela de 51.8 x 74.8 centrada em [33.5, 45], e que ela nao encosta na moldura (face interna em x = 5.1). PENDENTE: nao impresso, e o 3MF ainda nao foi aberto no Flash Studio pra confirmar as 4 pecas nos 2 filamentos (o fatiador nao roda headless nesta maquina). RESSALVA DE ARTE: o trace e' automatico a 0.36mm/px e em dois tons chapados le como silhueta com sombreado, nao como o Armarouge desenhado; se o teste fisico decepcionar, o caminho e' limpar o SVG a mao (fechar contorno, engrossar linha fina) e regerar o heightmap, nao mexer em fatiador nem em altura de camada."
     }
   ],
   "third_party": [
@@ -1468,8 +1803,10 @@
       "category": "organizadores_tcg",
       "format": "3mf",
       "title": "2-in-1 Top Loader & Sleeve Holder",
-      "designer": "a confirmar",
-      "license": "a confirmar",
+      "designer": "HeyHalo",
+      "license": "CC0",
+      "license_fonte": "declarada no próprio 3mf (3D/3dmodel.model: License=CC0, Designer=HeyHalo, CreationDate=2025-06-23) — é o raro caso REDISTRIBUÍVEL desta pasta",
+      "reused_by": "organizadores_tcg/toploader-holder-01 (reconstrução paramétrica, 150mm)",
       "modified": "2026-08-10",
       "largest_part_mm": [82.0, 107.0, 84.0],
       "fits_ad5x": true,

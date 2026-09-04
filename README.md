@@ -27,9 +27,13 @@ vão direto pro Flash Studio) e `.stl` individuais de cada peça, de referência
 │   └── README.md
 ├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
 │   └── README.md
+├── ferramentas/         # caixas e organizadores de ferramenta de bancada
+│   └── README.md
 ├── figures/             # figuras decorativas e miniaturas
 │   └── README.md
 ├── jogos/               # jogos de mesa completos e componentes jogáveis
+│   └── README.md
+├── organizadores/       # organizadores de bancada/escritório (modulares, canetas, peças)
 │   └── README.md
 ├── organizadores_tcg/   # organizadores de cartas soltas, sleeved e slabs graduadas
 │   └── README.md

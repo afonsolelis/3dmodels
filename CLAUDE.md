@@ -70,6 +70,13 @@ TESTE FÍSICO da peça na mão.
 - No sumário CGAL, `Volumes: N` = nº de sólidos + 1 (o exterior conta).
 - PNG de verificação: nome de arquivo NOVO a cada render (senão dá pra reler
   imagem velha sem perceber) e sempre LER a imagem depois.
+- **`-D nome_override=...` NÃO funciona por CLI** (OpenSCAD 2021.01, verificado
+  em 2026-08-29). O `-D` é inserido no FIM do escopo de topo, então o
+  `is_undef(nome_override)` do padrão `x = is_undef(x_override) ? pad : x_override;`
+  já foi avaliado e cai no default — sem erro, sem warning, exportando a peça
+  ERRADA. O padrão `*_override` só vale pro customizer da GUI. Por CLI, mirar
+  sempre a variável FINAL: `-D modular_connectors=false`, `-D case_count=6`.
+  Depois de exportar com `-D`, CONFERIR nos ECHO de derivados que o valor pegou.
 
 ## Fluxo multi-agente (orquestrado pelo loop principal)
 
