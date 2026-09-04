@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
-"""Monta os dois jobs 3MF bicolores compatíveis com a AD5X.
+"""Monta os tres jobs 3MF do xadrez-01 para a AD5X.
 
-Usa somente a biblioteca padrao para manter o projeto reproduzivel. O 3MF
-resultante tem dois objetos nomeados e dois materiais-base; fatiadores que
-nao importam a cor visual ainda preservam os corpos separados para atribuicao
-manual aos dois slots do CFS.
+Usa somente a biblioteca padrao para manter o projeto reproduzivel.
+
+  job 1  tabuleiro BICOLOR: dois corpos de cor numa montagem unica, porque
+         as 32 casas escuras PRECISAM nascer alinhadas com a laje clara.
+  job 2  16 pecas CLARAS   -> uma cor so
+  job 3  16 pecas ESCURAS  -> uma cor so, mesma malha do job 2
+
+As pecas sairam do job bicolor em 2026-08-28: as duas cores sao solidos
+disjuntos, entao dividir chapa so pagava purga (~320 mm3 por troca x 230
+camadas = ~89 g de purga para ~44 g de peca).
 """
 
 from __future__ import annotations
@@ -18,27 +24,46 @@ from xml.sax.saxutils import escape
 
 
 ROOT = Path(__file__).resolve().parent
+ARMY_STL = ROOT / "stl" / "xadrez-01-exercito.stl"
 JOBS = (
     {
         "output": ROOT / "3mf" / "xadrez-01-tabuleiro-bicolor.3mf",
         "title": "Xadrez 01 - tabuleiro bicolor - AD5X",
         "plate": "Tabuleiro bicolor 168 mm",
+        "assembly": "XADREZ_01__TABULEIRO_BICOLOR",
+        "description": ("Job 1: tabuleiro deitado, dois corpos de cor numa "
+                        "montagem unica. Sem suporte; brim recomendado."),
         "meshes": (
             {"path": ROOT / "stl" / "xadrez-01-tabuleiro-claro.stl",
-             "name": "COR_1_CLARA__BASE_DO_TABULEIRO", "material": 0},
+             "name": "COR_1_CLARA__BASE_DO_TABULEIRO",
+             "label": "COR 1 CLARA - laje do tabuleiro", "material": 0},
             {"path": ROOT / "stl" / "xadrez-01-tabuleiro-escuro.stl",
-             "name": "COR_2_ESCURA__32_CASAS", "material": 1},
+             "name": "COR_2_ESCURA__32_CASAS",
+             "label": "COR 2 ESCURA - 32 casas de 0.6mm", "material": 1},
         ),
     },
     {
-        "output": ROOT / "3mf" / "xadrez-01-pecas-bicolor.3mf",
-        "title": "Xadrez 01 - 32 pecas bicolores - AD5X",
-        "plate": "32 pecas em quatro fileiras",
+        "output": ROOT / "3mf" / "xadrez-01-pecas-claras.3mf",
+        "title": "Xadrez 01 - 16 pecas claras - AD5X",
+        "plate": "16 pecas claras 4x4",
+        "assembly": "XADREZ_01__16_PECAS_CLARAS",
+        "description": ("Job 2: 16 pecas em pe numa cor so, arranjo 4x4 a "
+                        "passo 20 mm. Sem suporte e sem troca de filamento."),
         "meshes": (
-            {"path": ROOT / "stl" / "xadrez-01-pecas-claras.stl",
-             "name": "COR_1_CLARA__16_PECAS", "material": 0},
-            {"path": ROOT / "stl" / "xadrez-01-pecas-escuras.stl",
-             "name": "COR_2_ESCURA__16_PECAS", "material": 1},
+            {"path": ARMY_STL, "name": "COR_1_CLARA__16_PECAS",
+             "label": "COR 1 CLARA - 16 pecas", "material": 0},
+        ),
+    },
+    {
+        "output": ROOT / "3mf" / "xadrez-01-pecas-escuras.3mf",
+        "title": "Xadrez 01 - 16 pecas escuras - AD5X",
+        "plate": "16 pecas escuras 4x4",
+        "assembly": "XADREZ_01__16_PECAS_ESCURAS",
+        "description": ("Job 3: 16 pecas em pe numa cor so, arranjo 4x4 a "
+                        "passo 20 mm. Mesma malha do job 2, outro filamento."),
+        "meshes": (
+            {"path": ARMY_STL, "name": "COR_2_ESCURA__16_PECAS",
+             "label": "COR 2 ESCURA - 16 pecas", "material": 1},
         ),
     },
 )
@@ -95,26 +120,42 @@ def indexed_mesh(triangles):
 
 
 def fmt(value: float) -> str:
-    return f"{value:.7f}".rstrip("0").rstrip(".") or "0"
+    text = f"{value + 0.0:.7f}".rstrip("0").rstrip(".") or "0"
+    return "0" if text in ("-0", "") else text
 
 
-def model_xml(meshes, title) -> bytes:
+def bed_transform(meshes, bed=220.0):
+    """Translacao que centraliza a montagem na cama e assenta a base em z=0.
+
+    No 3MF a origem do sistema e o CANTO do volume de impressao, nao o centro.
+    Como os STLs saem do OpenSCAD centrados na origem, sem isto metade do job
+    nasce em coordenada negativa.
+    """
+    pts = [v for mesh in meshes for v in mesh["vertices"]]
+    xs, ys, zs = zip(*pts)
+    tx = bed / 2 - (min(xs) + max(xs)) / 2
+    ty = bed / 2 - (min(ys) + max(ys)) / 2
+    tz = -min(zs)
+    return tx, ty, tz
+
+
+def model_xml(job, meshes) -> bytes:
     out = io.StringIO()
     out.write('<?xml version="1.0" encoding="UTF-8"?>\n')
     out.write(
         '<model xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02" '
         'xmlns:m="http://schemas.microsoft.com/3dmanufacturing/material/2015/02" '
         'xmlns:BambuStudio="http://schemas.bambulab.com/package/2021" '
-        'unit="millimeter" xml:lang="pt-BR" requiredextensions="m">\n'
+        'unit="millimeter" xml:lang="pt-BR">\n'
     )
     out.write('  <metadata name="BambuStudio:3mfVersion">1</metadata>\n')
-    out.write(f'  <metadata name="Title">{escape(title)}</metadata>\n')
+    out.write(f'  <metadata name="Title">{escape(job["title"])}</metadata>\n')
     out.write('  <metadata name="Designer">afonsolelis</metadata>\n')
     out.write(
-        '  <metadata name="Description">Job bicolor para FlashForge AD5X; '
-        'dois corpos de cor, sem suporte.</metadata>\n'
+        f'  <metadata name="Description">{escape(job["description"])}'
+        '</metadata>\n'
     )
-    out.write('  <metadata name="CreationDate">2026-08-23</metadata>\n')
+    out.write('  <metadata name="CreationDate">2026-08-28</metadata>\n')
     out.write('  <resources>\n')
     out.write('    <m:basematerials id="1">\n')
     out.write('      <m:base name="COR 1 - clara" displaycolor="#F2E8D5FF"/>\n')
@@ -139,19 +180,25 @@ def model_xml(meshes, title) -> bytes:
         out.write('        </triangles>\n      </mesh>\n    </object>\n')
 
     # Um unico item de build impede que fatiadores auto-organizem/recentrem
-    # os dois corpos de cor separadamente. Os filhos continuam selecionaveis
-    # como componentes e mantem seus materiais-base.
+    # os corpos separadamente. Os filhos continuam selecionaveis como
+    # componentes e mantem seus materiais-base. Num job de uma cor so ele
+    # tambem serve: as 16 pecas viram UM objeto de build com 16 ilhas, que e
+    # o que faz o brim do Orca nascer em volta de cada base.
     assembly_id = 2 + len(meshes)
     out.write(
         f'    <object id="{assembly_id}" type="model" '
-        'name="XADREZ_01__CONJUNTO_BICOLOR">\n'
+        f'name="{escape(job["assembly"])}">\n'
     )
     out.write('      <components>\n')
     for object_id in range(2, assembly_id):
         out.write(f'        <component objectid="{object_id}"/>\n')
     out.write('      </components>\n    </object>\n')
     out.write('  </resources>\n  <build>\n')
-    out.write(f'    <item objectid="{assembly_id}"/>\n')
+    tx, ty, tz = bed_transform(meshes)
+    out.write(
+        f'    <item objectid="{assembly_id}" '
+        f'transform="1 0 0 0 1 0 0 0 1 {fmt(tx)} {fmt(ty)} {fmt(tz)}"/>\n'
+    )
     out.write('  </build>\n</model>\n')
     return out.getvalue().encode("utf-8")
 
@@ -159,7 +206,7 @@ def model_xml(meshes, title) -> bytes:
 CONTENT_TYPES = b"""<?xml version="1.0" encoding="UTF-8"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-  <Extension Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>
+  <Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/>
 </Types>
 """
 
@@ -170,42 +217,41 @@ RELATIONSHIPS = b"""<?xml version="1.0" encoding="UTF-8"?>
 """
 
 
-def model_settings_xml(plate_name: str, source_name: str) -> bytes:
+def model_settings_xml(job, meshes, source_name: str) -> bytes:
     """Metadados de volumes usados por Orca / Flash Studio Desktop.
 
-    O objeto 4 e a montagem; os ids 2 e 3 sao os dois componentes de cor.
-    O valor de extrusor e 1-based nesses fatiadores.
+    A montagem e o objeto 2+len(meshes); os ids 2.. sao os corpos. O valor de
+    extrusor e 1-based nesses fatiadores, entao material 0 -> extrusor 1.
     """
+    assembly_id = 2 + len(meshes)
+    parts = []
+    for index, mesh in enumerate(meshes):
+        parts.append(
+            f'    <part id="{2 + index}" subtype="normal_part">\n'
+            f'      <metadata key="name" value="{escape(mesh["label"])}"/>\n'
+            f'      <metadata key="extruder" value="{mesh["material"] + 1}"/>\n'
+            '      <metadata key="matrix" '
+            'value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>\n'
+            f'      <metadata key="source_file" value="{escape(source_name)}"/>\n'
+            '      <metadata key="source_object_id" value="0"/>\n'
+            f'      <metadata key="source_volume_id" value="{index}"/>\n'
+            '      <mesh_stat edges_fixed="0" degenerate_facets="0" '
+            'facets_removed="0" facets_reversed="0" backwards_edges="0"/>\n'
+            '    </part>\n'
+        )
+
     return f"""<?xml version="1.0" encoding="UTF-8"?>
 <config>
-  <object id="4">
-    <metadata key="name" value="XADREZ_01__CONJUNTO_BICOLOR"/>
+  <object id="{assembly_id}">
+    <metadata key="name" value="{escape(job["assembly"])}"/>
     <metadata key="extruder" value="0"/>
-    <part id="2" subtype="normal_part">
-      <metadata key="name" value="COR 1 CLARA - tabuleiro e 16 pecas"/>
-      <metadata key="extruder" value="1"/>
-      <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>
-      <metadata key="source_file" value="{escape(source_name)}"/>
-      <metadata key="source_object_id" value="0"/>
-      <metadata key="source_volume_id" value="0"/>
-      <mesh_stat edges_fixed="0" degenerate_facets="0" facets_removed="0" facets_reversed="0" backwards_edges="0"/>
-    </part>
-    <part id="3" subtype="normal_part">
-      <metadata key="name" value="COR 2 ESCURA - casas e 16 pecas"/>
-      <metadata key="extruder" value="2"/>
-      <metadata key="matrix" value="1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1"/>
-      <metadata key="source_file" value="{escape(source_name)}"/>
-      <metadata key="source_object_id" value="0"/>
-      <metadata key="source_volume_id" value="1"/>
-      <mesh_stat edges_fixed="0" degenerate_facets="0" facets_removed="0" facets_reversed="0" backwards_edges="0"/>
-    </part>
-  </object>
+{"".join(parts)}  </object>
   <plate>
     <metadata key="plater_id" value="1"/>
-    <metadata key="plater_name" value="{escape(plate_name)}"/>
+    <metadata key="plater_name" value="{escape(job["plate"])}"/>
     <metadata key="locked" value="false"/>
     <model_instance>
-      <metadata key="object_id" value="4"/>
+      <metadata key="object_id" value="{assembly_id}"/>
       <metadata key="instance_id" value="0"/>
     </model_instance>
   </plate>
@@ -241,14 +287,14 @@ def main() -> None:
         with zipfile.ZipFile(output, "w") as archive:
             zip_write(archive, "[Content_Types].xml", CONTENT_TYPES)
             zip_write(archive, "_rels/.rels", RELATIONSHIPS)
-            zip_write(archive, "3D/3dmodel.model", model_xml(meshes, job["title"]))
+            zip_write(archive, "3D/3dmodel.model", model_xml(job, meshes))
             zip_write(archive, "Metadata/model_settings.config",
-                      model_settings_xml(job["plate"], output.name))
+                      model_settings_xml(job, meshes, output.name))
 
         all_vertices = [v for mesh in meshes for v in mesh["vertices"]]
         size = bbox(all_vertices)
         print(f"criado: {output.relative_to(ROOT)}")
-        print(f"item de placa: 1 conjunto; corpos de cor: {len(meshes)}; materiais: 2")
+        print(f"item de placa: 1 conjunto; corpos: {len(meshes)}; cores usadas: {len({m['material'] for m in meshes})}")
         print(f"triangulos: {sum(len(mesh['faces']) for mesh in meshes)}")
         print(f"envelope: {size[0]:.2f} x {size[1]:.2f} x {size[2]:.2f} mm")
 

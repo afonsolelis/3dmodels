@@ -6,7 +6,7 @@ Jogos de mesa e componentes paramétricos, modelados para impressão 3D.
 
 | Modelo | Status | Descrição |
 |---|---|---|
-| [xadrez-01](./xadrez-01/) | ⛔ bloqueado (não cabe na AD5X) | xadrez compacto completo: tabuleiro bicolor e 32 peças Staunton simplificadas. A placa única tem 248,2mm em Y contra os 220 da cama — foi feita para a Creality K2 (260). Precisa relayout em 2 jobs |
+| [xadrez-01](./xadrez-01/) | 🚧 em andamento | xadrez compacto completo: tabuleiro bicolor de 168mm e 32 peças Staunton simplificadas. **Três jobs** desde 28/08/2026 (tabuleiro bicolor 168×168×3,6 + dois exércitos de 16 peças 4×4, 76,2×73,6×46 cada, uma cor por job — zero purga nas peças). Dama subiu pra 41mm (era mais baixa que o bispo) e o chanfro da base foi pra 45°. Falta fatiar e imprimir |
 
 ## Convenção da pasta
 

@@ -10,7 +10,7 @@ vira 15 arquivos pra abrir na mão. O Flash Studio tem um formato de PROJETO
 que guarda várias plates no mesmo arquivo — é o que este script escreve.
 
 ```
-python3 .Codex/skills/plates/plates.py <saida.3mf> \
+python3 .agents/skills/plates/plates.py <saida.3mf> \
     --plate "Nome da plate" peca.stl [peca2.stl ...] \
     --plate "Outra plate"   peca3.stl ... \
     [--bed 220] [--usable 210] [--gap 5]

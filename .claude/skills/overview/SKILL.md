@@ -10,7 +10,7 @@ enxergar como conjunto. Este 3MF põe tudo numa grade em que cada célula tem o
 tamanho da cama, uma peça por célula.
 
 ```
-python3 .claude/skills/overview/overview.py <saida.3mf> <peça1.stl> <peça2.stl> ... [--cell 180] [--cols 4]
+python3 .claude/skills/overview/overview.py <saida.3mf> <peça1.stl> <peça2.stl> ... [--cell 220] [--cols 4]
 ```
 
 1. Passe os STLs de `stl/` na ordem em que fazem sentido ser lidos (por

@@ -50,8 +50,18 @@ TESTE FÍSICO da peça na mão.
 
 ## OpenSCAD nesta máquina (armadilhas!)
 
-- Usar SEMPRE `flatpak run org.openscad.OpenSCAD ...` — o `openscad` do PATH
-  é um shim distrobox que NÃO sobe aqui.
+- Usar SEMPRE `flatpak run org.openscad.OpenSCAD ...` — não existe `openscad`
+  no PATH desta máquina.
+- **Versão: 2021.01, branch `stable` do flathub**, reinstalado em 2026-08-28
+  (o flatpak tinha SUMIDO da máquina e o erro era `app/org.openscad.OpenSCAD/
+  x86_64/master não instalado`, que não parece falta de instalação). Se um
+  `.scad` do repo usar recurso de versão nova (`textmetrics`, `roof`,
+  `exact` em `offset`), é aqui que ele quebra. Reinstalar com
+  `flatpak install -y flathub org.openscad.OpenSCAD`.
+- A ordem das facetas no STL exportado NÃO é estável entre versões: dois
+  exports da MESMA geometria podem diferir byte a byte. Pra saber se algo
+  mudou de verdade, comparar nº de triângulos + bbox + hash do conjunto
+  ORDENADO de vértices, nunca `cmp`/`diff` cru.
 - PNG (render offscreen) exige `--env=DISPLAY=:0 --socket=x11`.
 - O flatpak NÃO enxerga `/tmp` nem o scratchpad — entrada e saída no home.
 - Caminhos SEMPRE absolutos: com relativo o erro é `Can't open input file`,

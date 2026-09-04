@@ -9,7 +9,7 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
 |---|---|---|---|
 | **bandeja** | `tray` | 1 | peça interna, com os 3 compartimentos, desliza pra dentro da capa |
 | **capa** | `sleeve` | 1 | peça externa, fechada numa ponta, a bandeja entra por dentro dela |
-| **elevador** | `lifter` | 2 (uma por compartimento de deck) | plataforma solta com aba, fica embaixo do deck |
+| **cestinha** | `basket` | 2 (uma por compartimento de deck) | cesta solta de paredes finas, vazada em colmeia, que segura o deck inteiro |
 
 ## Design
 
@@ -18,8 +18,8 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
   - dois compartimentos lado a lado, um pra cada deck (60 cartas com sleeve
     cada), **cartas deitadas** (empilhadas horizontalmente, não em pé — a
     caixa fica baixa e achatada, tipo gaveta de verdade). Cada compartimento
-    tem um **elevador** por baixo do deck (ver abaixo) e um vão pequeno na
-    parede externa, perto do chão, por onde passa a aba do elevador
+    guarda uma **cestinha** com o deck dentro (ver abaixo) e tem um furo
+    Ø16mm no chão da bandeja, embaixo dela, pra empurrar com o dedo
   - um compartimento abaixo dos dois (ocupando toda a largura), mais fundo
     na bandeja, pra dados/moedas/tokens
 - **Capa**: um tubo fechado em **uma** ponta (diferente de um fósforo de
@@ -28,11 +28,19 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
   compartimento de cartas e de dados quando fechada — só a parede sólida de
   trás da bandeja (`back_wall`) fica exposta, nada de compartimento fica
   desprotegido pra fora.
-- **Elevador**: uma plataforma fina e solta que fica no chão de cada
-  compartimento de deck, embaixo das cartas. Tem uma aba que sai pelo vão
-  da parede lateral — puxa a aba e o deck inteiro sobe junto, até a última
-  carta, sem precisar pinçar cartas uma a uma. A mesma peça serve nos dois
-  compartimentos, só virando 180°.
+- **Cestinha**: uma cesta solta de paredes de 1,2mm que vive dentro do
+  compartimento, com o deck deitado dentro dela. O dedo empurra o chão dela
+  **por baixo**, pelo furo Ø16mm no chão da bandeja — igual ao miolo de uma
+  caixa de fósforo — até a borda aparecer; daí é só pegar e tirar a cestinha
+  inteira, com o deck junto. Chão e paredes são **vazados em colmeia** e os
+  dois lados compridos têm **recorte em U de 40mm** que desce até o chão,
+  então dá pra pinçar até a última carta com a cestinha fora da bandeja. A
+  mesma peça serve nos dois compartimentos.
+
+  > A primeira versão desta peça era um **elevador** — plataforma com aba
+  > saindo por um vão na parede lateral. Foi **impressa e reprovada**: 10mm
+  > de vão para um curso de 48mm, a aba travava a capa. A cestinha é a
+  > substituta e não tem aba nenhuma.
 - **Fechamento por 4 ímãs**: um em cada canto da ponta da bandeja (disco
   4×2mm), espelhados por outros 4 na tampa da capa. Quando a bandeja é
   empurrada até o fim, os ímãs se encostam e travam por atração — 4 pontos
@@ -51,8 +59,8 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
 - Capacidade: 60 cartas com sleeve **por compartimento** (2 decks)
 - Espessura de carta sleeved: 0.8mm (placeholder — confirmar com a sleeve real)
 - Compartimento de dados/moedas: 30mm de profundidade × largura dos dois decks juntos
-- Elevador: plataforma de 1.6mm de espessura, folga de 0.3mm pra subir livre; aba de 12mm de largura × 8mm de saliência
-- Vão pra aba do elevador: 14mm de largura × 10mm de altura, rente ao chão
+- Cestinha: paredes 1.2mm, chão 1.6mm, folga 0.3mm/lado pra subir livre, borda 3mm acima da pilha; recorte em U de 40mm nas duas laterais compridas
+- Furo pra empurrar a cestinha: Ø16mm no chão da bandeja, um por compartimento
 - Ímãs: 4× disco 4mm × 2mm por peça (bandeja e capa), 10mm de margem da borda
 - Furo pra empurrar a bandeja: 12mm de diâmetro, no meio da tampa da capa
 - Paredes: externa/tubo 1.6mm | ponta do ímã 4mm | parede de trás (aba de puxar) 2mm | divisórias internas 1.6mm
@@ -66,8 +74,13 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
 
 ## Arquivos
 
-- `deckbox-01.scad` — fonte paramétrico (OpenSCAD), três peças: `tray`, `sleeve`, `lifter`
-- `stl/` — exports prontos pra fatiar no Flash Studio (`deckbox-01-lifter.stl` imprime 2×)
+- `deckbox-01.scad` — fonte paramétrico (OpenSCAD), três peças: `tray`, `sleeve`, `basket`
+- `stl/` — peças individuais (`deckbox-01-basket.stl` imprime 2×)
+- `3mf/` — os **2 jobs de impressão**: `deckbox-01-plate.3mf` (capa em pé +
+  2 cestinhas, ~155 × 161mm) e `deckbox-01-tray.3mf` (a bandeja, 136 × 151mm
+  — não cabe junto)
+- A variante de **um deck só** é a [`deckbox-02`](../deckbox-02/), que inclui
+  este arquivo com `deck_lanes = 1` e `dice_depth = 64`
 
 ## Como gerar os STL
 
@@ -76,25 +89,32 @@ OpenSCAD está instalado via Flatpak (`org.openscad.OpenSCAD`) nesta máquina.
 ```sh
 flatpak run org.openscad.OpenSCAD -D 'part="tray"'   -o stl/deckbox-01-tray.stl   deckbox-01.scad
 flatpak run org.openscad.OpenSCAD -D 'part="sleeve"' -o stl/deckbox-01-sleeve.stl deckbox-01.scad
-flatpak run org.openscad.OpenSCAD -D 'part="lifter"' -o stl/deckbox-01-lifter.stl deckbox-01.scad
+flatpak run org.openscad.OpenSCAD -D 'part="basket"' -o stl/deckbox-01-basket.stl deckbox-01.scad
+flatpak run org.openscad.OpenSCAD -D 'part="plate"'  -o 3mf/deckbox-01-plate.3mf  deckbox-01.scad
+flatpak run org.openscad.OpenSCAD -D 'part="tray"'   -o 3mf/deckbox-01-tray.3mf   deckbox-01.scad
 ```
 
-> Nota: renderizar PNG (`-o preview.png`) não funciona headless nesta máquina
-> (sem servidor gráfico pro OpenGL offscreen). Exportar STL funciona normal,
-> não depende de display.
+> Use **caminhos absolutos**: o flatpak não enxerga `/tmp` e, com caminho
+> relativo, o erro é `Can't open input file` — que não contém "error" e passa
+> batido em filtro de log.
+>
+> PNG **funciona**, mas precisa de display: acrescente
+> `--env=DISPLAY=:0 --socket=x11` ao `flatpak run`.
 
 ## Impressão
 
 - As três peças imprimem sem suporte (nenhum overhang além de paredes retas).
 - Bandeja e capa: ponta fechada pra baixo, abertura pra cima.
-- Elevador: deitado, face de baixo (lisa) na mesa — imprimir 2×.
+- Cestinha: chão na mesa, boca pra cima — imprimir 2×. Os hexágonos são de
+  ponta pra cima, então as paredes vazadas saem sem ponte e sem suporte.
 - Ímãs: encaixe pressionado (press-fit) nos rebaixos; um pingo de cola CA
   resolve se ficar frouxo. Confira a polaridade antes de colar — os 4 pares
   (bandeja × capa) precisam se atrair, não repelir.
 
 ## Próximas iterações (ideias, ainda não implementadas)
 
-- Grade/furos vazados no elevador (visual de grade de verdade, economiza filamento)
-- Chanfro na borda de entrada da capa, pra facilitar a bandeja entrar
 - Texto/logo em relevo na capa
 - Divisória extra dentro do compartimento de dados (dados vs moedas)
+
+*(Já implementados e riscados desta lista: vazado em colmeia — hoje é a
+cestinha inteira — e o chanfro de entrada na boca da capa.)*

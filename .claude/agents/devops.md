@@ -25,7 +25,15 @@ aqui**:
 
 1. `index.json` tem a entrada do projeto e os `print_jobs` apontam pra
    arquivos que EXISTEM em `3mf/`; footprints preenchidos.
-2. Exports em dia: mtime dos `.stl`/`.3mf` >= mtime do `.scad` do modelo.
+2. Exports em dia. **Não use mtime**: um `git checkout`/rebase reescreve o
+   arquivo e marca todo mundo como "atrasado" (falso positivo em massa).
+   Use, nesta ordem: (a) histórico — `git log -1 --format=%ad` do `.scad`
+   contra o do `3mf/`+`stl/`, e se o `.scad` for mais novo, olhar o DIFF
+   daquele commit (mudança só de comentário/assert não exige re-export);
+   (b) na dúvida, re-exportar pra um diretório temporário e comparar
+   GEOMETRIA — nº de triângulos + bbox + hash do conjunto ORDENADO de
+   vértices. Comparar bytes não serve: a ordem das facetas do STL muda
+   entre versões do OpenSCAD.
 3. `3mf/` contém SÓ jobs de impressão (sem peça avulsa redundante).
 4. README da categoria tem a linha do modelo (categoria nova: também na
    árvore do README raiz).
@@ -37,8 +45,9 @@ aqui**:
 - Corpo explica o PORQUÊ (decisões físicas, medidas, o que foi rejeitado),
   não só o quê.
 - Commits lógicos separados (modelo ≠ infra ≠ docs quando fizer sentido).
-- Trailer obrigatório:
-  `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`
+- Trailer obrigatório: `Co-Authored-By:` com o modelo que está rodando a
+  sessão (o harness informa qual é), no formato
+  `Co-Authored-By: <modelo> <noreply@anthropic.com>`.
 
 ## Push
 

@@ -9,7 +9,7 @@ description: Renderiza PNGs de um .scad (perspectiva + vista de topo) pra inspe�
    se o render falhar silenciosamente, você relê a imagem velha sem notar):
    ```
    flatpak run --env=DISPLAY=:0 --socket=x11 org.openscad.OpenSCAD \
-     -o /var/home/afonsolelis/.cache/<nome-novo>.png --render \
+     -o /home/afonsolelis/.cache/<nome-novo>.png --render \
      --imgsize=900,800 --camera=<cx>,<cy>,<cz>,60,0,25,<dist> /abs/.../<modelo>.scad
    ```
    (fora do sandbox; caminhos absolutos SEMPRE — relativo dá `Can't open

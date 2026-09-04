@@ -8,7 +8,7 @@ description: Confere se peças e chapas cabem na cama da FlashForge AD5X (220x22
 1. Rode o medidor de bounding box nos STLs do modelo (pra uma chapa 3MF,
    exporte um STL temporário da mesma `part` dentro do home e meça esse):
    ```
-   python3 /var/home/afonsolelis/Repos/3dmodels/.Codex/skills/bed-check/bbox.py <arquivo.stl> [...]
+   python3 /home/afonsolelis/repos/3dmodels/.agents/skills/bed-check/bbox.py <arquivo.stl> [...]
    ```
 2. Critérios:
    - **ok**: X e Y ≤ 210 (margem pra brim/skirt), Z ≤ 220

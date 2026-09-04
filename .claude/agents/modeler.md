@@ -30,8 +30,11 @@ trabalho do agente devops.
    ortográfico pra chapas). Armadilhas: `flatpak run --env=DISPLAY=:0
    --socket=x11 org.openscad.OpenSCAD`, caminhos ABSOLUTOS, nome de PNG
    novo a cada render, `Can't open input file` não contém "error".
-4. **STL**: exporte cada part pra `stl/` e verifique de verdade (mtime,
-   tamanho, `Volumes` = sólidos+1).
+4. **STL**: exporte cada part pra `stl/` e verifique de verdade (mtime
+   DESTE export, tamanho > 0, `Volumes` = sólidos+1). Pra saber se a
+   geometria mudou de verdade, compare nº de triângulos + bbox + hash dos
+   vértices ORDENADOS — a ordem das facetas muda entre versões do OpenSCAD,
+   então `cmp`/`diff` cru dá diferença sem nada ter mudado.
 5. **Cama (SEMPRE)**: `python3 .claude/skills/bed-check/bbox.py` em cada
    STL e na chapa. ok ≤210; 210–220 justo (avisar); >220 reprova →
    redesenhar a disposição ou dividir em jobs.

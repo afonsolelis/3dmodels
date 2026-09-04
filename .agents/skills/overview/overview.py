@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Monta um 3MF de visualização com várias peças numa grade.
 
-uso: overview.py saida.3mf peca1.stl peca2.stl ... [--cell 180] [--cols 4]
+uso: overview.py saida.3mf peca1.stl peca2.stl ... [--cell 220] [--cols 4]
 
 Cada STL vira um OBJETO SEPARADO no 3MF (o Flash Studio abre já dividido e
 consegue distribuir nas plates sozinho), posicionado numa grade em que cada
@@ -58,7 +58,7 @@ def read_stl(path):
 
 def main():
     args = [a for a in sys.argv[1:]]
-    cell, cols = 180.0, 4
+    cell, cols = 220.0, 4
     for flag, cast in (("--cell", float), ("--cols", int)):
         if flag in args:
             i = args.index(flag)

@@ -37,8 +37,8 @@ absolutos; cuidado com `Can't open input file`, que não contém "error").
 **Dimensões**
 - Refaça os derivados e confira contra o propósito: o conteúdo cabe? com
   que folga REAL por lado?
-- Footprint de cada peça/chapa vs cama: ok ≤ 170; justo 170–180; > 180
-  reprova.
+- Footprint de cada peça/chapa vs cama da AD5X (220): ok ≤ 210; justo
+  210–220 (avisar, sem margem de brim); > 220 reprova.
 - Os parâmetros de entrada vêm de medida real? Sinalize estimativas não
   confirmadas com o usuário.
 

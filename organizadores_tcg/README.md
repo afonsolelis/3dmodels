@@ -13,6 +13,15 @@ FlashForge AD5X.
 | [penny-holder-01](./penny-holder-01/) | 🚧 em andamento | caixa de cartas com **penny sleeve deitadas na aresta longa, em 2 camadas** (~300 cartas), derivada do `PennySleeveHolder_Stackable_Colmeia_80mm.3mf` (Sazabi) — mesma pegada de 74.2 × 102.7, mas **150mm de altura** em vez de 80. Gaveta de fichário em pé: boca aberta em cima e **janela de vão contínuo na frente, do piso ao alto, sem travessa no meio**; quem amarra os lados é a **cinta de 8mm** que fecha a volta no topo, o piso em colmeia de 10mm e os dois montantes de 8mm que viram flange de canto em L. Empilhável (ressalto de 3mm + chaveta que só deixa encaixar numa orientação). Colmeia passante nas laterais e no fundo (47 furos) com **bico de 45°**, colmeia regular de 24mm no piso. ~97g, sem suporte. ⚠️ A medida da carta (66 × 91) é **catálogo, não régua** — ver o bloco abaixo. ⚠️ Com 2 camadas e sem prateleira, **a camada de baixo é arquivo, não é a de giro** (ver README do modelo) |
 | [bgs-stand-01](./bgs-stand-01/) | 🚧 em andamento | suporte de mesa pra UMA slab **Beckett (BGS)**, inclinada 12°, em **duas peças (suporte + tampa que encaixa)**, ambas **sem suporte de impressão**. **Primeiro modelo do repo com medida real de PAQUÍMETRO** (82.5 × 130.2 × 8.5, medida em 2026-08-11). A slab fica presa nos quatro lados e só sai por cima — puxa a tampa e ela desliza pra fora. Como a tampa é removível, a slab não precisa bascular pra entrar: isso libera os trilhos a terem aba (captura de verdade) e deixa a **tampa fechar ACIMA da aresta da slab, sem cobrir nada da face — a etiqueta de nota fica 100% visível**. Encaixe por ranhura sobre o painel + batente nos topos dos trilhos, 0.25mm/lado. Chapa 56.8 × 87.3 × 142.6mm, 0.0mm² de balanço nas duas peças |
 
+## A subpasta `display-box-graded/`
+
+`display-box-graded/psa/my_psa_slab.3mf` é **arquivo de terceiro**
+(Functional3D, MakerWorld), guardado numa subpasta só porque veio assim do
+download. É a fonte de medidas de referência do
+[`bgs-stand-01`](./bgs-stand-01/) — inclinação 11,9°, canal de 81,0mm, painel
+de ~3mm — e está catalogado no `third_party` do `index.json` como todo o
+resto. Não é modelo paramétrico do repo.
+
 ## Os `.3mf` soltos na raiz desta pasta
 
 Todos os `.3mf` que estão direto nesta pasta (sem subpasta de modelo) são
@@ -61,7 +70,8 @@ embutido).
 >   slab não entrar, o conserto é trocar `slab_w`/`slab_h`/`slab_t` e re-exportar.
 >
 > Os dois arquivos de terceiro que servem de base são **outliers pequenos**, e do
-> mesmo jeito: o `Main.3mf` (medindo a malha do `Frame PSA - Small.obj` dele) tem
+> mesmo jeito: o `bumper_main.3mf` (ex-`cardholders/Main.3mf`, hoje em
+> [`bumpers/`](../bumpers/); medindo a malha do `Frame PSA - Small.obj` dele) tem
 > bolso de **81.0 × ~133.5 × 6.0mm** e o `Trading_card_bumper_-_PSA(2).3mf` tem
 > **80.27 × 135.37 × 5.83mm**. As descrições são fiéis à geometria *deles* — mas
 > as outras 5 fontes indicam variante de slab menor, não a medida geral. (No
