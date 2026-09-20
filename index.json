@@ -1,8 +1,149 @@
 {
   "_readme": "Catálogo machine-readable do repo, pra consulta rápida por IA. Medidas em mm, footprints como [x, y, z] na orientação de impressão. DOIS acervos: `projects` = modelos PARAMÉTRICOS do repo (OpenSCAD, fonte .scad versionada) — SEMPRE atualizar junto com qualquer mudança de modelo, regra do CLAUDE.md, o agente devops confere antes de commitar. `third_party` = arquivos BAIXADOS de terceiros (3MF/STL), que não têm fonte no repo e não se editam aqui: catalogados por autor, licença, footprint da maior peça e perfil de fatiador embutido. Campos: `fits_ad5x` = a maior peça cabe nos 220 da cama (substituiu o `fits_a1_mini` legado em 2026-08-28, quando a A1 mini saiu do repo); `needs_profile_swap` = o perfil embutido não é de AD5X e precisa ser trocado ao abrir no Flash Studio — hoje vale pra TODOS os 72 arquivos que trazem perfil: 71 foram fatiados em Bambu/Anycubic e o único FlashForge traz perfil de Adventurer 5M, que é a máquina sem IFS. Os 7 restantes são STL puro, sem perfil nenhum. ATENÇÃO DE LICENÇA: a maioria dos arquivos de `third_party` é Standard Digital File License / MakerWorld Exclusive / BY-NC-SA, que NÃO permitem redistribuição — o repositório foi tornado PRIVADO em 2026-08-09 por causa disso. Não republicar.",
-  "updated": "2026-08-30",
+  "updated": "2026-09-20",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
+    {
+      "id": "vinyl-now-playing-01",
+      "category": "organizadores",
+      "path": "organizadores/vinyl-now-playing-01",
+      "scad": "organizadores/vinyl-now-playing-01/vinyl-now-playing-01.scad",
+      "status": "em-andamento",
+      "derived_from": "organizadores/organizador_vinis.3mf (Vinyl_Holder_Remix v10, remix do 'Modular Vinyl Holder' de vblack) — TODAS as medidas por engenharia reversa da malha (cortes YZ/XZ com raio, bbox 160 x 127.02 x 44.45); geometria refeita do zero em OpenSCAD, nenhum triângulo copiado",
+      "description": "Porta-vinis de mesa NOW PLAYING: 2 blocos de 4 aletas inclinadas 9 graus (8 slots pra folhear LPs em pé, vão de 10mm por slot), canal central de 34mm, e na frente o berço do disco que está tocando — barra de 13mm com gravação 'NOW PLAYING' na face inclinada + encosto de 20mm. Dois pés traseiros de 18 x 44mm são lastro anti-tombamento. Peça única, sem montagem, sem suporte.",
+      "parts": { "stand": 1 },
+      "print_jobs": [
+        { "file": "3mf/vinyl-now-playing-01.3mf", "contents": "1 peça única na orientação de uso (base na mesa, aletas pra cima), sem suporte, sem brim", "footprint_mm": [160.0, 127.0, 44.5] }
+      ],
+      "assembled_closed_mm": [160.0, 127.0, 44.45],
+      "capacity": "8 LPs em pé nos slots (capa ~315x315, lombada 3-8mm entra folgada no vão de 10mm) + 1 capa no berço NOW PLAYING da frente",
+      "key_measures": {
+        "envelope_mm": [160.0, 127.0, 44.45],
+        "base_mm": 5.0,
+        "blocos_de_aletas_mm": [63.0, 63.0],
+        "canal_central_mm": 34.0,
+        "aletas": { "por_bloco": 4, "passo_mm": 18.0, "espessura_horizontal_mm": 8.0, "espessura_perpendicular_mm": 7.9, "inclinacao_graus": 9, "altura_mm": 44.45, "raio_quinas_mm": 1.5, "frente_da_primeira_y_mm": 20.5 },
+        "slot_vao_na_base_mm": 10.0,
+        "janela_da_base_mm": { "x": [64.5, 95.5], "y": [20.0, 72.0], "tamanho_mm": [31.0, 52.0] },
+        "ponte_entre_blocos_mm": 11.0,
+        "pes_traseiros_mm": { "quantidade": 2, "largura": 18.0, "comprimento_atras_da_base": 44.0, "funcao": "lastro anti-tombamento: 8 LPs de ~180g inclinados pra trás" },
+        "berco_now_playing": { "barra_altura_mm": 13.0, "barra_face_inclinacao_graus": 10, "barra_pe_y_mm": 1.0, "encosto_mm": [6.0, 19.75], "encosto_y_mm": [5.5, 11.5] },
+        "texto": { "conteudo": "NOW PLAYING", "tamanho_mm": 8.0, "profundidade_gravacao_mm": 1.2, "centro_z_mm": 7.0 },
+        "origem_das_medidas": "Engenharia reversa inequívoca da malha de referência (raio-laser em cortes): envelope 160 x 127.02 x 44.45, base 4.94, aletas passo 18 / espessura 8 / lean 9 graus, canal x 63-97, janela x 64.5-96.5 y 20-72, pés 18mm nas bordas até y=127. Não foram usadas dimensões de catálogo."
+      },
+      "hardware": "nenhum",
+      "notes": "SEM COLMEIA (exceção consciente à regra 5): as faces visíveis são as faces de 8mm das aletas, sem painel contínuo onde furar; fiel à referência maciça. ARMADILHA EVITADA: quinas arredondadas com offset(delta=-r)+offset(r=r) — com offset(r) puro o fundo das aletas descia 1.5mm ABAIXO da base (z=-1.5) e a peça sentava nas pontas das aletas; pego no bed-check (bbox saía 127.2 x 47.5 em vez de 127.0 x 44.5). Envelope final medido no STL: exatamente 160.0 x 127.0 x 44.5. Ainda NÃO validado no teste físico."
+    },
+    {
+      "id": "card-mailer-01",
+      "category": "deckboxes",
+      "path": "deckboxes/card-mailer-01",
+      "scad": "deckboxes/card-mailer-01/card-mailer-01.scad",
+      "status": "aguardando-teste-fisico",
+      "description": "Três estojos internos de transporte: 3 cards com sleeves, 10 cards com sleeves e uma slab Beckett BGS. Base e tampa sobreposta sólidas, interiores lisos, lacre obrigatório com fita. Acondicionar dentro de embalagem externa de papelão com amortecimento.",
+      "parts": {
+        "cards3-base": 1,
+        "cards3-lid": 1,
+        "cards10-base": 1,
+        "cards10-lid": 1,
+        "bgs-base": 1,
+        "bgs-lid": 1
+      },
+      "print_jobs": [
+        {
+          "file": "3mf/cards3.3mf",
+          "contents": "cards3: base boca para cima + tampa teto na mesa, vão 6mm, sem suporte; geometria sem perfil embutido",
+          "footprint_mm": [
+            160.6,
+            104.8,
+            7.65
+          ]
+        },
+        {
+          "file": "3mf/cards10.3mf",
+          "contents": "cards10: base boca para cima + tampa teto na mesa, vão 6mm, sem suporte; geometria sem perfil embutido",
+          "footprint_mm": [
+            160.6,
+            104.8,
+            12.9
+          ]
+        },
+        {
+          "file": "3mf/bgs.3mf",
+          "contents": "bgs: base boca para cima + tampa teto na mesa, vão 6mm, sem suporte; geometria sem perfil embutido",
+          "footprint_mm": [
+            189.6,
+            142,
+            13.9
+          ]
+        }
+      ],
+      "assembled_closed_mm": {
+        "cards3": [
+          79.8,
+          104.8,
+          10.05
+        ],
+        "cards10": [
+          79.8,
+          104.8,
+          15.3
+        ],
+        "bgs": [
+          94.3,
+          142,
+          16.3
+        ]
+      },
+      "key_measures": {
+        "sleeve_mm": [
+          68,
+          93
+        ],
+        "stack_estimate_mm": {
+          "cards3": 2.25,
+          "cards10": 7.5
+        },
+        "slab_bgs_mm": [
+          82.5,
+          130.2,
+          8.5
+        ],
+        "sources": "Usuário autorizou reutilização. deckbox-03: deck real60 cards68x93x45, pilhas pequenas ESTIMADAS proporcionalmente0.75/card. bgs-stand-01: BGS real de paquímetro. Não universal PSA/CGC.",
+        "cavity_mm": {
+          "cards3": [
+            70,
+            95,
+            5.25
+          ],
+          "cards10": [
+            70,
+            95,
+            10.5
+          ],
+          "bgs": [
+            84.5,
+            132.2,
+            11.5
+          ]
+        },
+        "wall_floor_roof_mm": 2.4,
+        "lid_skirt_mm": 2,
+        "fit_per_side_mm": 0.5,
+        "mouth_chamfer_mm": 0.6,
+        "content_xy_clearance_per_side_mm": 1,
+        "soft_padding_per_face_mm": 1,
+        "extra_vertical_clearance_mm": 1,
+        "base_grip_exposed_mm": 3,
+        "opening_stroke_mm": {
+          "cards3": 4.65,
+          "cards10": 9.9,
+          "bgs": 10.9
+        }
+      },
+      "hardware": "Duas folhas macias não abrasivas1mm + fita macia de retirada10mm larga, até0.2mm espessa (180mm sleeves/210mm BGS), fita adesiva para lacrar exterior em dois sentidos; papelão e amortecimento externos.",
+      "notes": "Ainda sem teste físico de encaixe/transporte. Pilhas pequenas estimadas podem exigir ajuste de forro sem compressão. Tampa solta não trava: fita obrigatória. Retirada erguendo ambas pontas de fita U para manter cards planos. Faces sólidas lisas para proteção e adesão do lacre. Não estanque. Review funcional aplicado: reserva Z1mm, pega3mm. Seis previews vistos; STLs fechados e volumes positivos, CGAL2 por peça/3 por job; cama e3MF verificados. validation/mesh-check.json contém medidas de malhas e arquivos."
+    },
     {
       "id": "snap-organizer-01",
       "category": "organizadores",
@@ -1016,6 +1157,21 @@
     }
   ],
   "third_party": [
+    {
+      "file": "organizadores/organizador_vinis.3mf",
+      "category": "organizadores",
+      "format": "3mf",
+      "title": "Vinyl_Holder_Remix v10 (remix do 'Modular Vinyl Holder - Ultimate LP Records Storage')",
+      "designer": "vblack (original); remix a confirmar",
+      "license": "Standard Digital File License",
+      "modified": "2026-09-20",
+      "largest_part_mm": [160.0, 127.02, 44.45],
+      "fits_ad5x": true,
+      "embedded_profile": { "printer_model": "Flashforge Adventurer 5M", "print_settings_id": "0.20mm Standard @Flashforge AD5M 0.4 Nozzle", "enable_support": "0" },
+      "needs_profile_swap": false,
+      "rebuilt_as": "organizadores/vinyl-now-playing-01 (reconstrução paramétrica própria por engenharia reversa; este arquivo é a referência de medidas)",
+      "description": "Porta-vinis de mesa NOW PLAYING baixado pronto: rack com 2 blocos de 4 aletas a 9 graus (8 slots pra LPs), canal central vazado, barra frontal com NOW PLAYING em relevo e 2 pés traseiros anti-tombamento."
+    },
     {
       "file": "bumpers/CGC_BUMPER_TACB.3mf",
       "category": "bumpers",
