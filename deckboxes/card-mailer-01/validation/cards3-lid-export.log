@@ -1,0 +1,14 @@
+ECHO: variant = "cards3", content = [68, 93, 2.25], cavity = [70, 95, 5.25], base = [74.8, 99.8, 7.65], lid = [79.8, 104.8, 7.05], assembled = [79.8, 104.8, 10.05], opening_stroke = 4.65, plate = [160.6, 104.8, 7.65], fit_per_side = 0.5
+Geometries in cache: 15
+Geometry cache size in bytes: 131824
+CGAL Polyhedrons in cache: 1
+CGAL cache size in bytes: 410672
+Total rendering time: 0:00:00.339
+   Top level object is a 3D object:
+   Simple:        yes
+   Vertices:      260
+   Halfedges:     928
+   Edges:         464
+   Halffacets:    414
+   Facets:        207
+   Volumes:         2

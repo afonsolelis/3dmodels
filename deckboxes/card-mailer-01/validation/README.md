@@ -1,0 +1,1 @@
+Evidências de validação: previews finais v2 (perspectiva e topo), logs CGAL, STLs auxiliares das chapas para bed-check e mesh-check.json com fechamento e dimensões. O preview v1 é anterior à revisão de folga vertical e pega; usar v2.

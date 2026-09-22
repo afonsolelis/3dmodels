@@ -1,0 +1,95 @@
+{
+  "bgs-base.stl": {
+    "triangles": 412,
+    "watertight_edges": true,
+    "volume_mm3": 41459.215,
+    "bbox_mm": [
+      89.3,
+      137.0,
+      13.9
+    ],
+    "bytes": 66345
+  },
+  "bgs-lid.stl": {
+    "triangles": 516,
+    "watertight_edges": true,
+    "volume_mm3": 41926.796,
+    "bbox_mm": [
+      94.3,
+      142.0,
+      13.3
+    ],
+    "bytes": 85219
+  },
+  "cards10-base.stl": {
+    "triangles": 412,
+    "watertight_edges": true,
+    "volume_mm3": 26353.768,
+    "bbox_mm": [
+      74.8,
+      99.8,
+      12.9
+    ],
+    "bytes": 66211
+  },
+  "cards10-lid.stl": {
+    "triangles": 516,
+    "watertight_edges": true,
+    "volume_mm3": 26919.73,
+    "bbox_mm": [
+      79.8,
+      104.8,
+      12.3
+    ],
+    "bytes": 85263
+  },
+  "cards3-base.stl": {
+    "triangles": 412,
+    "watertight_edges": true,
+    "volume_mm3": 22122.899,
+    "bbox_mm": [
+      74.8,
+      99.8,
+      7.65
+    ],
+    "bytes": 66211
+  },
+  "cards3-lid.stl": {
+    "triangles": 516,
+    "watertight_edges": true,
+    "volume_mm3": 23216.37,
+    "bbox_mm": [
+      79.8,
+      104.8,
+      7.05
+    ],
+    "bytes": 85263
+  },
+  "bgs.3mf": {
+    "bbox_mm": [
+      189.6,
+      142.0,
+      13.9
+    ],
+    "objects": 1,
+    "bytes": 12304
+  },
+  "cards10.3mf": {
+    "bbox_mm": [
+      160.6,
+      104.8,
+      12.9
+    ],
+    "objects": 1,
+    "bytes": 12224
+  },
+  "cards3.3mf": {
+    "bbox_mm": [
+      160.6,
+      104.8,
+      7.65
+    ],
+    "objects": 1,
+    "bytes": 12215
+  }
+}

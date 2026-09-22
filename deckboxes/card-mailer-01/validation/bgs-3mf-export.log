@@ -1,0 +1,14 @@
+ECHO: variant = "bgs", content = [82.5, 130.2, 8.5], cavity = [84.5, 132.2, 11.5], base = [89.3, 137, 13.9], lid = [94.3, 142, 13.3], assembled = [94.3, 142, 16.3], opening_stroke = 10.9, plate = [189.6, 142, 13.9], fit_per_side = 0.5
+Geometries in cache: 22
+Geometry cache size in bytes: 179992
+CGAL Polyhedrons in cache: 4
+CGAL cache size in bytes: 1792720
+Total rendering time: 0:00:00.484
+   Top level object is a 3D object:
+   Simple:        yes
+   Vertices:      468
+   Halfedges:    1552
+   Edges:         776
+   Halffacets:    628
+   Facets:        314
+   Volumes:         3
