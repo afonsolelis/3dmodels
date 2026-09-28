@@ -348,7 +348,7 @@ da faixa.
 
 ## De onde vieram os números — e a licença
 
-O conceito é o `../../diversos/Xbox_Controller_Stand_lines_by_Pork3D.3mf`
+O conceito é o `../../suportes/terceiros/xbox-controller-stand-lines-by-pork3d-com/xbox-controller-stand-lines-by-pork3d.3mf`
 (autor **Pork3D**, *Standard Digital File License* — **não redistribuível**, e é
 por essa família de licenças que este repositório é privado).
 

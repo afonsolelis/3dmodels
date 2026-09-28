@@ -122,7 +122,7 @@ encaixe.
 
 ## Origem
 
-Conceito medido na malha de `../display-box-graded/psa/my_psa_slab.3mf`
+Conceito medido na malha do [suporte de slab PSA/CGC de terceiro](../terceiros/display-stand-for-psa-cgc-slab/README.md)
 (Functional3D, MakerWorld, Standard Digital File License — arquivo de terceiro,
 **não redistribuir**). De lá vieram só os números de referência: inclinação
 11,9°, canal de 81,0 mm, painel de ~3 mm. A geometria daqui é toda nova.

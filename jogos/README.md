@@ -14,3 +14,7 @@ Cada modelo tem `<modelo>.scad` como fonte paramétrica, `3mf/` com a placa
 pronta para o fatiador e `stl/` com os corpos de cor e as peças individuais de
 reposição. As medidas e notas principais também ficam no
 [`index.json`](../index.json).
+
+## Downloads de terceiros
+
+Veja o [catálogo visual dos 2 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.

@@ -40,7 +40,7 @@
 // deformar e ABRAÇAR o punho. Ver o README do modelo.
 //
 // DE ONDE VIERAM OS NÚMEROS (licença!). O conceito é o
-// ../../diversos/Xbox_Controller_Stand_lines_by_Pork3D.3mf (autor Pork3D,
+// ../../suportes/terceiros/xbox-controller-stand-lines-by-pork3d-com/xbox-controller-stand-lines-by-pork3d.3mf (autor Pork3D,
 // Standard Digital File License — NÃO redistribuível, e é por essa família
 // de licenças que este repo é privado). Daquele arquivo NADA foi copiado,
 // importado ou convertido: saíram só NÚMEROS DE REFERÊNCIA medidos na malha

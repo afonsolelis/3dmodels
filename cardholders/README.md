@@ -15,12 +15,9 @@ organização de sleeve/toploader, [`organizadores_tcg/`](../organizadores_tcg/)
 | [cardholder-01](./cardholder-01/) | 🚧 em andamento | 4 cantoneiras em L + **duas cintas de travamento** (meio e topo) e cinta de pé integrada; bolso 66×90 (carta nua), 70×94×62mm, peça única |
 | [sleeve-tower-01](./sleeve-tower-01/) | 🚧 em andamento | Torre de **penny sleeves deitados**, 75×102.5×**150**mm: três paredes **maciças** de 3mm, **sulco de 50mm** do piso ao topo entre duas abas em L de 9.5 de retorno, piso-lastro de 10mm e ressalto de empilhamento (passo 147). Cavidade 69×99.5, curso de pilha 140mm |
 
-## Arquivos de terceiros nesta pasta
+## Downloads de terceiros
 
-| Arquivo | Autor | Licença | Nota |
-|---|---|---|---|
-| `PennySleeveHolderStacking_V2_kobra3.3mf` | Sazabi (MakerWorld) | MakerWorld Exclusive License | variante Kobra 3 do *Stackable Penny Sleeve Holder*. Não redistribuir. |
-| `PennySleeveHolderStacking_V2_kobra3_15cm.3mf` | Sazabi (MakerWorld) | MakerWorld Exclusive License | mesma peça, versão de 15cm. Não redistribuir. |
+Veja o [catálogo visual dos 2 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.
 
 **Os dois originais de referência saíram do repo em 2026-08-28** — o
 `card_holder_with_feet.3mf` (Don Julio, MakerWorld; impresso e **reprovado no

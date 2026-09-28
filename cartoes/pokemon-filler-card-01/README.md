@@ -52,7 +52,7 @@ gastar um 5º slot do IFS.
 
 Isso é um desvio consciente da regra do `plates.py`, que manda **não** escrever
 `project_settings.config`. Aquela regra existe para não arrastar o perfil de
-impressora de outra pessoa junto (o `Jabonera.3mf` do repo, por exemplo, vem
+impressora de outra pessoa junto (o `../../casa/terceiros/self-draining-soap-dish/jabonera.3mf` do repo, por exemplo, vem
 com uma Anycubic Kobra 3 e camada de 0,1mm). Aqui o arquivo tem **só seis
 chaves, todas de filamento** — cor, tipo, diâmetro, densidade e índice. Nenhuma
 chave de impressora, de processo ou de altura de camada, então o seu perfil

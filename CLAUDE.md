@@ -20,6 +20,23 @@ TESTE FÍSICO da peça na mão.
   qualquer mudança de modelo — o agente devops recusa commit sem isso.
 - O cabeçalho de cada `.scad` documenta os comandos de export canônicos
 
+Downloads de terceiros seguem outro contrato:
+
+- `<categoria>/terceiros/<item>/` — pasta por item, com arquivo(s) 3MF/STL
+  baixados, `README.md` e `preview.png`
+- `<categoria>/terceiros/README.md` — catálogo visual da categoria
+- `index.json` > `third_party` — um registro por arquivo, com caminho atual
+  em `file`, nome/caminho anterior em `original_file`, resumo em
+  `summary_pt` e imagem em `preview`; autor, licença e perfil ficam
+  registrados quando conhecidos; `largest_part_mm` mede a peça imprimível
+  de maior volume na orientação salva e `fits_ad5x` verifica as peças
+  individualmente, sem validar a disposição conjunta das plates
+- Após adicionar ou alterar metadados de um download, executar
+  `python3 scripts/build_download_docs.py` e conferir com `--check`.
+  Conferir as medidas das malhas com
+  `python3 scripts/measure_download_bounds.py --check`.
+  Arquivos de terceiros não viram projetos paramétricos sem fonte própria.
+
 ## Regras de qualidade (aprendidas em iterações reais)
 
 1. **3MF sempre em dia**: qualquer mudança de geometria re-exporta os `.3mf`

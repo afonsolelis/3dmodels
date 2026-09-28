@@ -10,7 +10,7 @@ Capacidade estimada: **~300 cartas** (2 camadas de ~153 nos 69mm de pilha).
 
 ## De onde veio
 
-Derivado do `../PennySleeveHolder_Stackable_Colmeia_80mm.3mf` — *Stackable
+Derivado do `../terceiros/stackable-penny-sleeve-holder-colmeia-80mm/pennysleeveholder-stackable-colmeia-80mm.3mf` — *Stackable
 Penny Sleeve Holder*, de **Sazabi** (MakerWorld), **MakerWorld Exclusive
 License**, que por sua vez já é o derivado de alguém com o piso em colmeia.
 

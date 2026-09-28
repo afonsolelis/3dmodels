@@ -14,3 +14,7 @@ a FlashForge AD5X.
 Cada modelo tem `<modelo>.scad` (fonte paramétrica), `3mf/` (jobs de
 impressão na orientação correta) e `stl/` (malha individual de referência).
 As medidas e notas principais também ficam no [`index.json`](../index.json).
+
+## Downloads de terceiros
+
+Veja o [catálogo visual dos 19 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.

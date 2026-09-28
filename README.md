@@ -1,87 +1,85 @@
-# 3D Models
+# Modelos 3D para a FlashForge AD5X
 
-Base de modelagem 3D para impressão — projetos parametrizados para a
-**FlashForge AD5X** (cama 220x220x220, bico 0.4, IFS de 4 cores), com export
-final em **3MF** e STLs individuais de referência.
+Este repositório reúne **projetos paramétricos próprios** em [OpenSCAD](https://openscad.org/) e **arquivos baixados de terceiros**. Os projetos próprios têm fonte editável e jobs de impressão organizados. Os 110 downloads ficam em pastas individuais, classificados por função, com prévia e origem documentada.
 
-## Ferramenta de modelagem
+A impressora do projeto é a **FlashForge AD5X**: volume de 220 × 220 × 220 mm, bico de 0,4 mm, mesa PEI flexível e IFS de 4 cores. Os projetos próprios miram uma área de até 210 × 210 mm na mesa, deixando margem para brim quando necessário. Peças maiores são divididas em jobs.
 
-Os modelos são feitos em **[OpenSCAD](https://openscad.org/)** (`.scad`):
-código em vez de clique-clique, fácil de versionar no git, fácil de ajustar
-dimensões/parâmetros depois (largura, tolerância de encaixe, altura etc).
+## Quero imprimir um projeto próprio
 
-Cada modelo gera os `.3mf` de impressão (chapas já na orientação certa, que
-vão direto pro Flash Studio) e `.stl` individuais de cada peça, de referência.
+1. Escolha um modelo na lista abaixo e leia o README da pasta dele. Ali estão as medidas, o estado do projeto, as peças, a montagem e as orientações específicas de impressão.
+2. Abra os arquivos da pasta `3mf/` no **Flash Studio Desktop**. Cada arquivo é um job de impressão; um modelo pode exigir vários jobs. Confira material, cores, suportes e perfil indicados no README do modelo antes de fatiar.
+3. Use `stl/` para obter uma peça isolada ou montar outro arranjo de impressão. O `.scad` é a fonte para alterar dimensões e gerar novos exports.
 
-## Estrutura
+Os modelos são iterativos. `em-andamento` indica que o projeto ainda pode mudar; `aguardando-teste-fisico` indica que o próximo passo é conferir a peça impressa na mão. Um arquivo exportado e verificado digitalmente ainda precisa de teste físico para confirmar encaixes e uso.
 
-```
-3dmodels/
-├── README.md
-├── index.json           # catálogo machine-readable de todos os projetos
-├── cardholders/         # porta-cartas abertos e torres de sleeve (pilha à vista)
-│   └── README.md
-├── cartoes/             # cartões utilitários finos (emergência, NFC, identificação)
-│   └── README.md
-├── coin_holders/        # inserts de moeda para páginas de fichário (+ STL de terceiros)
-│   └── README.md
-├── deckboxes/           # caixas para decks de cartas (TCG/LCG/board games)
-│   └── README.md
-├── ferramentas/         # caixas e organizadores de ferramenta de bancada
-│   └── README.md
-├── figures/             # figuras decorativas e miniaturas
-│   └── README.md
-├── jogos/               # jogos de mesa completos e componentes jogáveis
-│   └── README.md
-├── organizadores/       # organizadores de bancada/escritório (modulares, canetas, peças)
-│   └── README.md
-├── organizadores_tcg/   # organizadores de cartas soltas, sleeved e slabs graduadas
-│   └── README.md
-├── playmats/            # campos de jogo em placas encaixáveis
-│   └── README.md
-├── rings/               # anéis (tapete de jogo, organização, etc.)
-│   └── README.md
-├── suportes/            # suportes e apoios de mesa (controle de videogame, etc.)
-│   └── README.md
-├── bumpers/             # (só .3mf de terceiros — bumpers de slab graduado)
-│   └── README.md
-├── diversos/            # downloads avulsos + projetos paramétricos diversos
-│   └── README.md
-├── logistica_pokemon/   # (só .3mf de terceiros)
-│   └── README.md
-└── manutencao_impressoras/ # (só arquivos de terceiros)
-    └── README.md
-```
+## Projetos paramétricos próprios
 
-Cada categoria de objeto (deckboxes, suportes, organizadores, etc.) vive na
-sua própria pasta, com subpastas por modelo específico. As pastas marcadas
-como "só .3mf de terceiros" guardam downloads usados como referência — não
-têm `.scad` e não entram no `index.json` como projeto.
+O [index.json](index.json) é o catálogo completo: reúne estado, descrição, peças, jobs, área ocupada na mesa e medidas-chave de cada projeto. A lista abaixo ajuda a encontrar o modelo; o README de cada categoria traz mais contexto.
 
-## Estrutura de um modelo
+| Categoria | Projetos | Para quê |
+| --- | --- | --- |
+| [Porta-cartas](cardholders/README.md) | [cardholder-01](cardholders/cardholder-01/README.md), [sleeve-tower-01](cardholders/sleeve-tower-01/README.md) | Pilhas de cartas ou penny sleeves à vista |
+| [Cartões](cartoes/README.md) | [emergency-nfc-card-01](cartoes/emergency-nfc-card-01/README.md), [pokemon-filler-card-01](cartoes/pokemon-filler-card-01/README.md), [armarouge-card-2cores-01](cartoes/armarouge-card-2cores-01/README.md) | Cartão de emergência e cards para álbum, inclusive com IFS |
+| [Moedas](coin_holders/README.md) | [pokemon-coin-binder-01](coin_holders/pokemon-coin-binder-01/README.md) | Insert de moeda Pokémon para bolso de fichário |
+| [Deckboxes e estojos](deckboxes/README.md) | [deckbox-01](deckboxes/deckbox-01/README.md), [deckbox-02](deckboxes/deckbox-02/README.md), [deckbox-03](deckboxes/deckbox-03/README.md), [card-mailer-01](deckboxes/card-mailer-01/README.md) | Guardar decks e transportar cartas ou slabs; o card-mailer aguarda teste físico |
+| [Ferramentas](ferramentas/README.md) | [toolbox-snap-01](ferramentas/toolbox-snap-01/README.md) | Caixa de ferramentas com tampa deslizante |
+| [Figuras](figures/README.md) | [dragon-01](figures/dragon-01/README.md) | Dragão decorativo em peça única |
+| [Jogos](jogos/README.md) | [xadrez-01](jogos/xadrez-01/README.md) | Tabuleiro e peças de xadrez |
+| [Organizadores](organizadores/README.md) | [snap-organizer-01](organizadores/snap-organizer-01/README.md), [vinyl-now-playing-01](organizadores/vinyl-now-playing-01/README.md), [switch-case-organizer-01](organizadores/switch-case-organizer-01/README.md) | Módulos de bancada, suporte para LPs e organizador de jogos Switch |
+| [Organizadores TCG](organizadores_tcg/README.md) | [bgs-stand-01](organizadores_tcg/bgs-stand-01/README.md), [penny-holder-01](organizadores_tcg/penny-holder-01/README.md), [psa-box-01](organizadores_tcg/psa-box-01/README.md), [slab-tile-01](organizadores_tcg/slab-tile-01/README.md), [toploader-holder-01](organizadores_tcg/toploader-holder-01/README.md) | Cartas com sleeve, top loaders e slabs graduadas |
+| [Playmats](playmats/README.md) | [pokemon-game](playmats/pokemon-game/README.md) | Campo de Pokémon TCG em placas encaixáveis |
+| [Anéis](rings/README.md) | [ring-01](rings/ring-01/README.md), [ring-02](rings/ring-02/README.md) | Anéis para enrolar playmat |
+| [Suportes](suportes/README.md) | [xbox-stand-01](suportes/xbox-stand-01/README.md) | Apoio de mesa para controle Xbox |
 
-```
-<categoria>/<nome-do-modelo>/
-├── <nome-do-modelo>.scad   # fonte paramétrico
-├── 3mf/                     # SÓ os jobs de impressão (abrir no Flash Studio)
-├── stl/                     # peças individuais, referência
-└── README.md                # medidas, notas de impressão, tolerâncias
+## Arquivos baixados de terceiros
+
+Cada categoria com downloads tem um catálogo visual em `terceiros/README.md`. Cada item ocupa uma pasta com o arquivo de impressão, README próprio e prévia quando disponível. O README registra o nome original, autor e licença. Todos os arquivos também constam em `third_party` no [index.json](index.json). **Não presuma que um 3MF baixado já tenha o perfil da AD5X ou esteja pronto para imprimir:** confira a impressora, o material, a orientação e os suportes no Flash Studio.
+
+| Acervo de downloads | Categorias |
+| --- | --- |
+| Cartas e colecionáveis | [Bumpers](bumpers/terceiros/README.md), [Porta-cartas](cardholders/terceiros/README.md), [Porta-moedas](coin_holders/terceiros/README.md), [Deckboxes](deckboxes/terceiros/README.md), [Organizadores TCG](organizadores_tcg/terceiros/README.md), [Logística Pokémon](logistica_pokemon/terceiros/README.md) |
+| Casa e organização | [Casa](casa/terceiros/README.md), [Organizadores](organizadores/terceiros/README.md), [Caixas de remédio](saude/terceiros/README.md), [Suportes](suportes/terceiros/README.md) |
+| Lazer e outros | [Figuras](figures/terceiros/README.md), [Miniaturas](miniaturas/terceiros/README.md), [Jogos](jogos/terceiros/README.md), [Pets](pets/terceiros/README.md), [Manutenção de impressoras](manutencao_impressoras/terceiros/README.md) |
+
+As categorias Casa, Miniaturas, Pets, Caixas de remédio, Bumpers, Logística Pokémon e Manutenção de impressoras contêm apenas downloads. Outras misturam downloads e projetos próprios. Consulte autoria e licença no README do item antes de redistribuir um arquivo de terceiro.
+
+As medidas dos downloads foram extraídas das malhas na orientação salva. O indicador AD5X informa se **cada peça** cabe nos 220 × 220 × 220 mm; a disposição conjunta das plates ainda precisa ser conferida no Flash Studio.
+
+Alguns projetos próprios nasceram do estudo de um arquivo baixado. Quando isso acontece, o README do modelo explica a referência e quais medidas foram reaproveitadas; a fonte OpenSCAD do projeto fica na pasta do modelo.
+
+Para atualizar as páginas dos downloads após editar o `index.json`, execute `python3 scripts/build_download_docs.py`. Os comandos `python3 scripts/build_download_docs.py --check` e `python3 scripts/measure_download_bounds.py --check` verificam as páginas e as medidas das malhas.
+
+## Estrutura dos projetos próprios
+
+```text
+<categoria>/
+├── README.md                   # índice da categoria
+└── <modelo>/
+    ├── README.md               # uso, medidas e estado do modelo
+    ├── <modelo>.scad            # fonte paramétrica e comandos de export
+    ├── 3mf/                    # jobs para abrir no Flash Studio
+    └── stl/                    # peças individuais de referência
 ```
 
-## Impressão
+Essa árvore descreve os projetos próprios, não os downloads. O [pokemon-game](playmats/pokemon-game/README.md) usa mais de uma fonte `.scad`; seus arquivos e jobs estão descritos no README dele. Pastas como `art/` ou `validation/` guardam material de apoio de alguns projetos.
 
-- Impressora-alvo padrão: FlashForge AD5X (cama 220x220x220); projetos com
-  outra máquina declaram isso no próprio README e no `index.json`
-- Fatiador padrão: Flash Studio; projetos específicos podem trazer 3MF para o
-  fatiador da impressora-alvo
-- Formato de export: 3MF (jobs de impressão) + STL (peças individuais)
+Os downloads seguem outra estrutura:
 
-## Requisitos
+```text
+<categoria>/terceiros/<item>/
+├── README.md       # o que é, origem, licença e nome original
+├── preview.png     # prévia do 3MF ou render da malha, quando disponível
+└── <arquivo>.3mf   # ou .stl; nome legível, conteúdo original preservado
+```
 
-- [OpenSCAD](https://openscad.org/downloads.html) instalado para editar/renderizar os `.scad`
-  (nesta máquina, instalado via Flatpak: `flatpak install flathub org.openscad.OpenSCAD`,
-  chamado como `flatpak run org.openscad.OpenSCAD ...`)
-- Flash Studio para fatiar os `.3mf`
+## Editar e exportar
 
-> Sistema Fedora Atomic (imutável): `dnf install` direto no sistema base não
-> funciona. Use Flatpak (apps) ou Distrobox (ferramentas de linha de comando).
+Nesta máquina, o OpenSCAD é executado pelo Flatpak:
+
+```sh
+flatpak run org.openscad.OpenSCAD /caminho/absoluto/para/o/modelo.scad
+```
+
+O cabeçalho de cada `.scad` traz os comandos de export daquele modelo. Após mudar a geometria, gere uma nova prévia visual, exporte novamente STL e 3MF, confira as dimensões e a área de cada job na mesa, e atualize a entrada correspondente no `index.json`. Os 3MF de `3mf/` devem sempre corresponder à versão atual da fonte. A orientação de impressão e eventuais testes de encaixe estão no README de cada modelo.
+
+Para editar, instale o [OpenSCAD](https://openscad.org/downloads.html). Para fatiar os jobs, use o **Flash Studio Desktop**. Nesta instalação, o OpenSCAD pode ser instalado com `flatpak install flathub org.openscad.OpenSCAD`.

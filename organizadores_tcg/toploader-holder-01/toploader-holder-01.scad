@@ -8,7 +8,7 @@
 // bolso. Sem divisoria, sem ponte, sem peca movel — quem separa e a gravidade.
 //
 // DE ONDE VEIO
-// O ponto de partida e o `../2-in-1_Top_Loader___Sleeve_Holder.3mf` ("2-in-1
+// O ponto de partida e o `../terceiros/2-in-1-top-loader-sleeve-holder/2-in-1-top-loader-sleeve-holder.3mf` ("2-in-1
 // Top Loader & Sleeve Holder" / "Deck Daddy", HeyHalo, MakerWorld, 2025-06-23,
 // licenca CC0 declarada no proprio 3mf). Este .scad e RECONSTRUCAO PARAMETRICA
 // propria: nada da malha de origem foi copiado, so medidas de engenharia

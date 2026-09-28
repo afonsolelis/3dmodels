@@ -8,7 +8,7 @@
 // CGC), medir de novo e mexer só em slab_w/slab_h/slab_t — a peça inteira é
 // derivada desses três números.
 //
-// DE ONDE VEIO: ../display-box-graded/psa/my_psa_slab.3mf (Functional3D,
+// DE ONDE VEIO: ../terceiros/display-stand-for-psa-cgc-slab/my-psa-slab.3mf (Functional3D,
 // MakerWorld, Standard Digital File License) — arquivo de terceiro, sem fonte.
 // Dele veio só o CONCEITO, medido na malha: painel inclinado 11.9°, canal na
 // base, canal de slab de 81.0mm. A geometria aqui é toda nova.

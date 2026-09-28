@@ -32,14 +32,13 @@ o que se quer de um "3mf colorido".
 
 Isso e' um desvio consciente da regra do plates.py, que manda NAO escrever
 project_settings.config. A razao daquela regra era nao arrastar o perfil de
-impressora/processo de outra pessoa (o Jabonera.3mf, por exemplo, vem com o
+impressora/processo de outra pessoa (o ../../casa/terceiros/self-draining-soap-dish/jabonera.3mf, por exemplo, vem com o
 perfil de uma Anycubic Kobra 3 e camada de 0.1mm). Aqui nao escrevemos
 NENHUMA chave de impressora, de processo ou de altura de camada: so cor e
 material de filamento. O perfil de impressora que o usuario ja tem
 selecionado continua valendo.
 
-Conferido em projetos reais de 4 filamentos deste repo (diversos/
-4floral_travel_pill_box_single_colour.3mf e Jabonera.3mf): o 3dmodel.model
+Conferido em projetos reais de 4 filamentos deste repo (../../saude/terceiros/floral-travel-pill-box-secure-snap-click-lock/4floral-travel-pill-box-single-colour.3mf e ../../casa/terceiros/self-draining-soap-dish/jabonera.3mf): o 3dmodel.model
 deles NAO usa <basematerials> nem grupo de cor -- a cor vem so daquelas chaves.
 
 CONFERIR NO FLASH STUDIO depois de gerar: o objeto tem que aparecer como um so,

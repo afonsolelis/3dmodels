@@ -4,7 +4,7 @@
 // frente, uma barra baixa com a gravação "NOW PLAYING" + encosto mais alto
 // formando o berço do disco que está tocando. Peça ÚNICA, sem montagem.
 //
-// DERIVED FROM: organizadores/organizador_vinis.3mf ("Vinyl_Holder_Remix
+// DERIVED FROM: organizadores/terceiros/vinyl-holder-remix-v10-remix-do-modular-vinyl-holder-ultimate/organizador-vinis.3mf ("Vinyl_Holder_Remix
 // v10", arquivo de terceiro) — TODAS as medidas por engenharia reversa da
 // malha (bbox 160 x 127.02 x 44.45, raio-laser em cortes YZ/XZ); geometria
 // refeita do zero em OpenSCAD, nenhum triângulo copiado.

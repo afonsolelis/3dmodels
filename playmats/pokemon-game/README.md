@@ -143,7 +143,7 @@ Abrir 15 arquivos na mão é chato, então tem também
 **`3mf/pokemon-game-todas-as-plates.3mf`**: um **projeto do Flash Studio com
 as 15 plates dentro**, nomeadas na ordem de impressão. Abre uma vez, as
 plates aparecem na barra de baixo e você imprime uma de cada vez. É o mesmo
-formato do `diversos/Jabonera.3mf`.
+formato do `casa/terceiros/self-draining-soap-dish/jabonera.3mf`.
 
 Ele não traz perfil de impressora/filamento embutido de propósito — vale o
 perfil que você já tem selecionado no Flash Studio. Os 15 arquivos avulsos

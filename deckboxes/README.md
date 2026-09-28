@@ -24,3 +24,7 @@ Ao começar um modelo novo, vale decidir:
 - **Extras** (compartimento pra dados, divisórias, texto/logo em relevo)
 
 Essas decisões ficam registradas no README de cada modelo específico.
+
+## Downloads de terceiros
+
+Veja o [catálogo visual dos 2 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.

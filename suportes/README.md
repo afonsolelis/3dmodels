@@ -17,3 +17,7 @@ OpenSCAD e impressos na FlashForge AD5X.
 Cada modelo tem `<modelo>.scad` (fonte paramétrico), `3mf/` (só os jobs de
 impressão, já na orientação certa) e `stl/` (peças individuais, referência).
 Os números-chave de cada um estão no [`index.json`](../index.json) da raiz.
+
+## Downloads de terceiros
+
+Veja o [catálogo visual dos 17 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.

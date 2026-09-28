@@ -55,9 +55,9 @@ altura são as incógnitas:
 
 | Fonte | O que diz |
 |---|---|
-| `Porta_carte_PSA_x10.3mf` (origem do projeto) | canaleta de **85.0** de largura; vaga 7.5, divisória 1.5, passo 9.0; base 95 × 98.5 × 105.5 com 102 de fundo |
-| `my_psa_slab.3mf` | silhueta de **85.00 × 138.52** |
-| `Slab_Protectors.3mf` | peças de **85.40 × 140.00** e **86.20 × 140.70** |
+| `../terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf` (origem do projeto) | canaleta de **85.0** de largura; vaga 7.5, divisória 1.5, passo 9.0; base 95 × 98.5 × 105.5 com 102 de fundo |
+| `../terceiros/display-stand-for-psa-cgc-slab/my-psa-slab.3mf` | silhueta de **85.00 × 138.52** |
+| `../terceiros/pokemon-psa-cgc-ace-slab-protector-stand/slab-protectors.3mf` | peças de **85.40 × 140.00** e **86.20 × 140.70** |
 | nominal PSA documentado | 3.29" × 5.29" = **83.6 × 134.4** |
 
 **Adotado: 83.6 × 139 × 7.1.** A largura é o nominal documentado; a altura é

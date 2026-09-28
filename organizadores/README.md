@@ -12,4 +12,9 @@ impressos na FlashForge AD5X.
 | Modelo | Status | Descrição |
 |---|---|---|
 | [snap-organizer-01](./snap-organizer-01/) | 🚧 em andamento | sistema modular 50x50 de bancada com 3 módulos de alturas diferentes (canetas 80mm, pen drives 45mm, parafusos 30mm) que se unem por ímãs 5x1mm nas 4 paredes, todos com a fileira universal de ímãs a 12mm do piso |
-| [vinyl-now-playing-01](./vinyl-now-playing-01/) | 🚧 em andamento | porta-vinis de mesa "NOW PLAYING" (160x127x44,5mm): 2 blocos de 4 aletas a 9° = 8 slots pra LPs em pé + berço frontal com gravação "NOW PLAYING"; peça única, sem suporte; reconstrução paramétrica do `organizador_vinis.3mf` por engenharia reversa |
+| [vinyl-now-playing-01](./vinyl-now-playing-01/) | 🚧 em andamento | porta-vinis de mesa "NOW PLAYING" (160x127x44,5mm): 2 blocos de 4 aletas a 9° = 8 slots pra LPs em pé + berço frontal com gravação "NOW PLAYING"; peça única, sem suporte; reconstrução paramétrica do `terceiros/vinyl-holder-remix-v10-remix-do-modular-vinyl-holder-ultimate/organizador-vinis.3mf` por engenharia reversa |
+| [switch-case-organizer-01](./switch-case-organizer-01/) | 🚧 em andamento | organizador modular para 12 caixas físicas de jogos Nintendo Switch / Switch 2, com divisórias e encaixes laterais |
+
+## Downloads de terceiros
+
+Veja o [catálogo visual dos 13 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.

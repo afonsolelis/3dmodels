@@ -57,9 +57,9 @@ part = "both"; // "base" | "lid" | "test" (gabarito de 3 vagas) | "plate" (job 1
 // NENHUMA destas três veio da régua do usuário. Só a ESPESSURA (7.1) é
 // consenso: a vaga de 7.5 do original fecha com ela e todas as fontes batem.
 // Largura e altura são as duas incógnitas, e as fontes DIVERGEM:
-//   Porta_carte_PSA_x10.3mf ... canaleta de 85.0 de largura, base 102 fundo
-//   my_psa_slab.3mf .......... silhueta de 85.00 x 138.52
-//   Slab_Protectors.3mf ...... peças de 85.40 x 140.00 e 86.20 x 140.70
+//   ../terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf ... canaleta de 85.0 de largura, base 102 fundo
+//   ../terceiros/display-stand-for-psa-cgc-slab/my-psa-slab.3mf .......... silhueta de 85.00 x 138.52
+//   ../terceiros/pokemon-psa-cgc-ace-slab-protector-stand/slab-protectors.3mf ...... peças de 85.40 x 140.00 e 86.20 x 140.70
 //   nominal PSA documentado .. 3.29" x 5.29" = 83.6 x 134.4
 // Adotado 83.6 x 139: a largura é o nominal documentado (a canaleta ainda
 // aceita até 84.4) e a altura é o TETO das fontes, porque altura sobrando é

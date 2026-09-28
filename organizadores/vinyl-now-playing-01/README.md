@@ -8,7 +8,7 @@ gravação "NOW PLAYING" + encosto de 20 mm. Peça **única**, sem montagem,
 
 ![visão geral](./vinyl-now-playing-01-render.png)
 
-Reconstrução paramétrica do `../organizador_vinis.3mf` ("Vinyl_Holder_Remix
+Reconstrução paramétrica do `../terceiros/vinyl-holder-remix-v10-remix-do-modular-vinyl-holder-ultimate/organizador-vinis.3mf` ("Vinyl_Holder_Remix
 v10", remix do "Modular Vinyl Holder" do vblack): **todas as medidas por
 engenharia reversa da malha** (cortes YZ/XZ com raio-laser, bbox
 160 × 127,02 × 44,45 mm), geometria refeita do zero em OpenSCAD — nenhum

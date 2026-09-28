@@ -39,7 +39,7 @@ face que assenta na cama. Imprime **em pé, boca pra cima, sem suporte nenhum**.
 
 ## De onde veio
 
-Derivado do [`../2-in-1_Top_Loader___Sleeve_Holder.3mf`](../2-in-1_Top_Loader___Sleeve_Holder.3mf)
+Derivado do [`../terceiros/2-in-1-top-loader-sleeve-holder/2-in-1-top-loader-sleeve-holder.3mf`](../terceiros/2-in-1-top-loader-sleeve-holder/2-in-1-top-loader-sleeve-holder.3mf)
 — *2-in-1 Top Loader & Sleeve Holder* ("Deck Daddy"), de **HeyHalo**
 (MakerWorld, 2025-06-23), **licença CC0** declarada no próprio 3MF.
 

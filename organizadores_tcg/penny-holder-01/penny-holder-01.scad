@@ -6,7 +6,7 @@
 // frente com VÃO CONTÍNUO do piso ao alto e uma CINTA fechando a volta no topo.
 //
 // DE ONDE VEIO, E POR QUE NÃO É O ARQUIVO DE ORIGEM
-// O ponto de partida é o `../PennySleeveHolder_Stackable_Colmeia_80mm.3mf`
+// O ponto de partida é o `../terceiros/stackable-penny-sleeve-holder-colmeia-80mm/pennysleeveholder-stackable-colmeia-80mm.3mf`
 // ("Stackable Penny Sleeve Holder", Sazabi, MakerWorld, MakerWorld Exclusive
 // License — já um derivado de terceiro, com o piso em colmeia). Aquele arquivo
 // NÃO é redistribuível e é por causa dessa família de licenças que o repo virou
