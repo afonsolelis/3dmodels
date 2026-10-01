@@ -22,6 +22,7 @@ O [index.json](index.json) é o catálogo completo: reúne estado, descrição, 
 | [Cartões](cartoes/README.md) | [emergency-nfc-card-01](cartoes/emergency-nfc-card-01/README.md), [pokemon-filler-card-01](cartoes/pokemon-filler-card-01/README.md), [armarouge-card-2cores-01](cartoes/armarouge-card-2cores-01/README.md) | Cartão de emergência e cards para álbum, inclusive com IFS |
 | [Moedas](coin_holders/README.md) | [pokemon-coin-binder-01](coin_holders/pokemon-coin-binder-01/README.md) | Insert de moeda Pokémon para bolso de fichário |
 | [Deckboxes e estojos](deckboxes/README.md) | [deckbox-01](deckboxes/deckbox-01/README.md), [deckbox-02](deckboxes/deckbox-02/README.md), [deckbox-03](deckboxes/deckbox-03/README.md), [card-mailer-01](deckboxes/card-mailer-01/README.md) | Guardar decks e transportar cartas ou slabs; o card-mailer aguarda teste físico |
+| [Ferragens](ferragens/README.md) | [parafuso-porca-01](ferragens/parafuso-porca-01/README.md) | Parafusos e porcas impressos |
 | [Ferramentas](ferramentas/README.md) | [toolbox-snap-01](ferramentas/toolbox-snap-01/README.md) | Caixa de ferramentas com tampa deslizante |
 | [Figuras](figures/README.md) | [dragon-01](figures/dragon-01/README.md) | Dragão decorativo em peça única |
 | [Jogos](jogos/README.md) | [xadrez-01](jogos/xadrez-01/README.md) | Tabuleiro e peças de xadrez |

@@ -308,6 +308,78 @@
       "notes": "REPROVADO PELO PRINT-REVIEW NA v1 E CORRIGIDO: (a) o porta-bits estava na coluna da BOCA, que so aparecia com 199.7 dos 202.7mm de curso - foi para a coluna do FUNDO, que a tampa descobre com 65mm de abertura; (b) o snap nao tinha MEMBRO FLEXIVEL: a interferencia de 0.3mm caia numa chapa macica de 3mm que nao flete, entao a quina viva se aplainaria na primeira montagem e a retencao viraria o peso da tampa. Agora ha duas LINGUETAS de 8 x 24.5mm recortadas em U na propria tampa, com o bolso na ponta e 20mm de braco (k ~16.9 N/mm, ~5N por lado, ~10N para abrir), mais um ALIVIO LOCAL DE TETO de 1.2mm sobre a saliencia que da curso a elas - provado com intersecao VAZIA levantando a tampa 1.0mm inteiro dentro da janela x 1..23. FOLGA DE TRILHO 0.7/LADO, acima dos 0.5 padrao: o curso de 202.7mm e o encaixe deslizante mais longo do repo e a tampa e uma chapa de 206 x 202.6 x 3mm que imprime deitada e empena (regra 6 do CLAUDE.md, deckbox-02 IMPRESSO travou no meio do curso). Alem da folga: teto do rasgo a 45 graus; funil na boca; chanfro de 45 x 1mm no topo das divisorias na aresta virada para a boca (o piso do funil passava a 67 um da aresta viva); APOIO CENTRAL com as duas travessas em X parando 0.4mm sob a tampa, derrubando o maior vao sem apoio de 196 para 70.5mm; engate de 3.3mm por lado. PE DE ELEFANTE: nao existe no trilho da CAIXA (nasce em z=50), mas existe na TAMPA, cujas duas arestas longas da primeira camada SAO as pontas das linguetas do trilho - por isso o perimetro da face de cima leva chanfro MODELADO de 0.4 x 45 graus, sem depender do fatiador. PROVAS RODADAS NA GEOMETRIA: intersecao caixa x tampa VAZIA em slide 0, 0.25, 0.28, 0.30, 11, 12, 20, 60, 120, 190 e 200mm (191.7 dos 202.7mm de curso sao livres) e NAO VAZIA de 0.32 a 10.5mm, com pico de 12.934mm3 em 6mm, toda em x 9-15 e z 50-51 (as duas saliencias) - e a zona em que as linguetas estao fletidas. FOLGA LONGITUDINAL REAL DO BOLSO medida na malha: livre em 0.30mm de deslocamento, colide em 0.32 - sao 0.30/lado de verdade, contra os 0.11 nominais-mas-falsos da v1 (o poligono do bolso comecava 0.1mm abaixo do plano do piso e as paredes a 45 graus comiam a abertura). RETENCAO: abrir 2mm sem levantar da 7.875mm3. CAPTURA: levantar 0.7mm e livre, 0.8mm bate no teto a 45 graus (1.392mm3), 4.0mm da 1504mm3. CUPOM: mesma secao, comportamento identico (VAZIA em 0, 15, 40 e 56mm; 12.934mm3 em 6mm, o mesmo numero da caixa grande). Volumes 2 em cada peca e tambem nas chapas com mouse ears, provando que os discos estao FUNDIDOS. SEM BRIM: 5mm de brim dariam 216 x 218, fora do alvo de 210; as chapas grandes saem em 211 x 213 e 211 x 207.6 com mouse ears, dentro dos 220 fisicos - o excesso sobre 210 e deliberado, e o preco de cama cheia. PENDENCIAS: nada foi impresso (comecar pelo CUPOM); largura e espessura do alicate seguem sem medida de regua; a forca do snap so se calibra na mao, via bump_h; os rasgos em U de 1.6mm deixam duas frestas junto a quina do fundo por onde peca miuda pode cair na canaleta; o conteudo dos outros 5 compartimentos nao foi definido."
     },
     {
+      "id": "parafuso-porca-01",
+      "category": "ferragens",
+      "path": "ferragens/parafuso-porca-01",
+      "scad": "ferragens/parafuso-porca-01/parafuso-porca-01.scad",
+      "status": "em-andamento",
+      "description": "Jogo de 4 PARAFUSOS COM PORCA impressos. Rosca metrica ISO (V de 60 graus), 1 entrada, mao direita: Ø3.7 nominal x 14mm de ROSCA TOTAL (nasce colada na cabeca, sem haste lisa), passo 1.25. Cabeca CHATA cilindrica Ø7.4 x 2.0 (assenta em cima da superficie, nao escareada) com serrilha de 12 canais - e SEM FENDA DE CHAVE DE FENDA, deliberadamente: o nucleo rompe em 25-55 N.mm e uma chave de fenda entrega 300-1000, entao o unico acionamento e o dedo na serrilha (20-30 N.mm). Porca sextavada 9.0 entre faces x 5.0 de altura, engrossada pra FDM (a M4 de catalogo tem 7.0 x 3.2), chanfro nas duas faces e funil de entrada nas duas bocas. Ponta com chanfro de 45 que apaga a rosca ate o nucleo.",
+      "parts": {
+        "screw": 4,
+        "nut": 4
+      },
+      "print_jobs": [
+        {
+          "file": "3mf/parafuso-porca-01-plate.3mf",
+          "contents": "4 parafusos em pe (cabeca na cama, ponta pra cima) + 4 porcas deitadas (furo em Z), 30mm entre centros, sem suporte",
+          "footprint_mm": [
+            100.4,
+            38.1,
+            16.0
+          ]
+        },
+        {
+          "file": "3mf/parafuso-porca-01-cupom.3mf",
+          "contents": "CUPOM DE FOLGA DE ROSCA: 1 parafuso de rosca curta (10mm, da 5mm de CURSO da porca - com 6mm dava so 1mm e testava a entrada, nao o corrimento) + 1 porca, na MESMA orientacao de impressao do jogo. ~10 min. IMPRIMIR ANTES do jogo, e rodar o PRIMEIRO em thread_clearance=0.5",
+          "footprint_mm": [
+            23.8,
+            9.0,
+            12.0
+          ]
+        }
+      ],
+      "assembled_closed_mm": [
+        10.4,
+        9.0,
+        16.0
+      ],
+      "key_measures": {
+        "thread_nominal_d_mm": 3.7,
+        "thread_pitch_mm": 1.25,
+        "thread_len_mm": 14,
+        "thread_profile": "ISO metrico, V de 60 graus, 1 entrada, mao direita, 11.2 voltas",
+        "thread_clearance_mm": 0.4,
+        "male_major_d_mm": 3.7,
+        "male_effective_d_mm": 2.888,
+        "male_minor_d_mm": 2.347,
+        "female_major_d_mm": 4.1,
+        "female_effective_d_mm": 3.288,
+        "female_minor_d_mm": 2.747,
+        "tooth_height_mm": 0.677,
+        "radial_engagement_mm": 0.477,
+        "backlash_deg": 66.5,
+        "nut_tilt_deg": 4.57,
+        "head_d_mm": 7.4,
+        "head_h_mm": 2.0,
+        "head_slot": "nenhuma - decisao de projeto, ver notes",
+        "first_layer_area_mm2": 35.34,
+        "knurl_grooves": 12,
+        "nut_across_flats_mm": 9.0,
+        "nut_across_corners_mm": 10.392,
+        "nut_h_mm": 5.0,
+        "nut_threaded_h_mm": 3.8,
+        "nut_engaged_turns": 3.04,
+        "thread_shear_area_mm2": 16.4,
+        "screw_total_h_mm": 16.0,
+        "max_grip_thickness_mm": 9.0,
+        "recommended_hole_d_mm": 4.4,
+        "core_area_mm2": 4.33,
+        "core_torsion_wt_mm3": 2.54,
+        "breaking_torque_Nmm": "25 a 55 (torcao pura 63; com pre-carga 46; com entalhe Kt2-Kt3 32-21)"
+      },
+      "notes": "SEM FENDA DE CHAVE DE FENDA, E ISSO E O PROJETO: a fenda existiu na v1 e foi REPROVADA pelo print-review. O nucleo rompe entre 25 e 55 N.mm e uma chave de fenda pequena entrega 300-1000 N.mm, ou seja a fenda era um convite desenhado na peca pra destruir a peca; alem disso o corte de lado a lado partia a primeira camada em DUAS ILHAS de 13.5mm2 que so se uniam 5 camadas acima. Sem ela a primeira camada volta a ser disco inteiro de 35.34mm2 (integral numerica no .scad, ja descontando as mordidas da serrilha) e o unico acionamento e o dedo na serrilha, que entrega 20-30 N.mm - o unico patamar dentro do envelope. PASSO BAIXADO DE 1.5 (pedido) PRA 1.25: a rosca come o nucleo pelos dois lados (d_nucleo = 3.7 - 1.0825*passo), entao 1.5 em Ø3.7 - o passo de um M10 comercial - deixaria nucleo de Ø2.08; 1.25 devolve Ø2.35, +44% de modulo de torcao, sem cair abaixo de 6.2 camadas por passo na camada de 0.2mm. thread_pitch=1.0, 1.25 e 1.5 foram TESTADOS POR CLI e os tres compilam (na v1 o 1.0 quebrava: tip_chamfer era a constante magica 0.68, casada com o passo 1.25, e estourava o assert do chanfro - agora e derivado de thread_dep). TORQUE EM TRES PATAMARES, ecoados: torcao pura 63.4 N.mm; com a tracao da pre-carga de aperto (von Mises, F~T/(K*d), K~0.25 -> 0.7266*T) 46.1; com o entalhe da raiz do filete (chato de p/4 com canto vivo, Kt 2-3) 31.7-21.1. Faixa de trabalho citada: 25-55 N.mm. FOLGA DE ROSCA 0.4 NO DIAMETRO (0.2/lado) e caso proprio, nao segue os 0.5/lado de deslize nem os 0.3/lado de peca solta do CLAUDE.md: aquelas sao pra encaixe deslizante LONGO, onde o inimigo e o empeno; rosca e encaixe curto e helicoidal e folga demais vira folga ANGULAR. MAS ESPERAR QUE ENTRE DURA: as duas pecas tem o perfil em XY, o macho e contorno CONVEXO (sai superdimensionado) e a femea e CONCAVO (sai subdimensionado) - os erros SOMAM e podem comer os 0.2/lado inteiros. Por isso o primeiro CUPOM deve ser rodado em thread_clearance=0.5 (63% de dente, passa os asserts) mesmo com 0.4 sendo o default do modelo; a cadeia perigosa e 'porca dura -> forcar -> torque -> nucleo quebrado'. FOLGA ANGULAR ESPERADA: backlash axial 0.231mm = 66.5 graus de giro livre e 4.57 graus de inclinacao da porca. E geometria, nao defeito - descer de 0.3 e que emperra. ROSCADO UTIL DA PORCA e 3.8mm e nao 5.0: os dois funis de 0.6 comem rosca nas bocas, entao sao 3.04 voltas e 16.4mm2 de cisalhamento (a v1 dizia 4 voltas e 21.6mm2, 24% inflado). Ainda assim 3.8x a area do nucleo: o parafuso TORCE antes de a rosca espanar, modo de falha desejado. ORIENTACAO: parafuso EM PE com a CABECA NA CAMA - ponta na cama apoiaria uma torre de 16mm num pe de Ø2.3. Porca deitada, furo em Z: o flanco de baixo da rosca interna e balanco de 60 graus DA VERTICAL e funciona nao por 'apoiar na volta anterior' (no mesmo angulo o raio anda 0.347mm por camada contra 0.42 de cordao = 17% de sobreposicao) e sim porque o VAO E CURTO: o flanco tem 5p/16 = 0.39mm axiais, DUAS camadas de balanco antes de virar pra raiz. FATIAMENTO: 0.2mm, 3+ perimetros, 100% de preenchimento, BRIM OBRIGATORIO (35mm2 de apoio pra 16mm de altura) e MIN LAYER TIME >= 8-10s com VENTOINHA 100% - acima de z=5 sobram so as 4 hastes, ~11mm2 de secao somada, ~2.6s por camada a 40mm/s, e sem freio a crista sai quente e a folga some. IMPLEMENTACAO DA ROSCA: mesmo idioma do deckbox-03 - perfil 2D cujo raio varia com o angulo (crista p/8, flanco 5p/16, raiz p/4, flanco 5p/16) extrudado com twist = -360*h/passo; thread_field(z0,h) compensa a fase que o translate introduz, entao macho e porca modelados em z diferentes ENGRENAM sem catar fase na mao. PROVAS: part=section da Volumes 3 = 2 solidos + exterior (macho e femea NAO se interpenetram); a chapa da Volumes 9 e 169720 triangulos = exatamente 4x(30846+11584), nada se fundiu; bbox do 3MF confere com o ECHO ate a terceira casa (100.392 x 38.145) depois de o envelope em Y passar a varrer o contorno real da cabeca de 0.1 em 0.1 grau - head_d/2 mentia porque ha um canal de serrilha exatamente em 90 graus. TESSELACAO 10/10 (era 6/6): 0.007mm de erro de faceta no raio de 1.85 e perfil axial amostrado a cada 0.035mm, 6x abaixo da camada de 0.2, e a chapa cai de 438k pra 170k triangulos. PENDENCIAS: nada foi impresso - COMECAR PELO CUPOM em 0.5 de folga e so depois a chapa dos 8; faltam duas medidas de regua do usuario, a ESPESSURA da peca que o parafuso vai atravessar (o modelo aperta no maximo 9.0mm) e o DIAMETRO DO FURO dela (recomendado Ø4.4, nao 4.2: a crista impressa sai em ~3.80-3.85 por droop de flanco e superextrusao)."
+    },
+    {
       "id": "switch-case-organizer-01",
       "category": "diversos",
       "path": "organizadores/switch-case-organizer-01",
