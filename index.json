@@ -1226,6 +1226,172 @@
       },
       "hardware": "nenhum",
       "notes": "Feito em 2026-08-30 a pedido do usuario ('tire o nome e numero, duas cores, preto e cinza claro'). Reaproveita integralmente o svg2relief.py e o multicolor3mf.py do pokemon-filler-card-01 — as armadilhas de escala, o contrato de cinza, o bug de offset() da moldura e a razao do project_settings.config estao documentados LA e valem aqui igual. Diferenca de pipeline, e a licao do projeto: `svg2relief.py --colors 2` NAO SERVE em duas cores. Os grupos dele saem de k-means em RGB, que num trace do Armarouge separa AMARELO de VERMELHO — duas cores igualmente claras; testado e renderizado, a figura virou uma mancha chapada unica e sumiu. O que da leitura em dois tons e' separar CLARO de ESCURO, e a luminancia ja esta codificada no heightmap, porque o svg2relief converteu luminancia em ALTURA: o NIVEL do relevo E' o tom. Por isso este projeto tem o art2parts.py, que corta o heightmap por nivel reusando o blocky_mesh/write_binary_stl do svg2relief (mesma malha de caixas fundidas, parede vertical na fronteira de cor). Corte em 1x3 e nao 2x2: com os niveis 1-2 juntos no escuro quase metade da figura ia pro preto e a silhueta se partia — conferido em render. ORIENTACAO DE COR conferida em render lado a lado: fundo CLARO com figura PRETA le muito melhor que o contrario, porque num card preto os vazios escuros da arte se fundem com o corpo e a silhueta se parte; por isso o job padrao e' cinza/preto e o fundo preto ficou como variante. Conferido no STL exportado que a arte ocupa x 11.38..55.62 e y 8.32..81.68, dentro da janela de 51.8 x 74.8 centrada em [33.5, 45], e que ela nao encosta na moldura (face interna em x = 5.1). PENDENTE: nao impresso, e o 3MF ainda nao foi aberto no Flash Studio pra confirmar as 4 pecas nos 2 filamentos (o fatiador nao roda headless nesta maquina). RESSALVA DE ARTE: o trace e' automatico a 0.36mm/px e em dois tons chapados le como silhueta com sombreado, nao como o Armarouge desenhado; se o teste fisico decepcionar, o caminho e' limpar o SVG a mao (fechar contorno, engrossar linha fina) e regerar o heightmap, nao mexer em fatiador nem em altura de camada."
+    },
+    {
+      "id": "prateleira-modular-01",
+      "category": "prateleiras",
+      "path": "prateleiras/prateleira-modular-01",
+      "scad": "prateleiras/prateleira-modular-01/prateleira-modular-01.scad",
+      "status": "em-andamento",
+      "description": "Prateleira modular 'infinita' de parede com MAO FRANCESA integrada, feita de UMA peca so repetivel: N copias identicas se emendam lado a lado, sem peca de canto, de ponta nem de emenda. Passo de 200mm em X, prato de 200 x 100 x 6mm, aba de parede de 100mm de altura (68 abaixo do prato + 6 do prato + 26 acima) e duas mãos francesas a 45 graus em x=50 e x=150, com alcance de 68mm (68% da profundidade) e um hexagono vazado de 26mm em cada. A emenda entre modulos e um TRILHO EM T de secao constante que corre os 100mm de profundidade: face direita com trilho (pescoco 3 x 2mm + cabeca 4 x 5mm, 7mm de saliencia), face esquerda com o rasgo. Monta-se EMPURRANDO o modulo novo pra tras contra a parede; sai puxando pra frente, inclusive um modulo do meio da fileira. Fixacao por 2 parafusos Ø4 obrigatorios em cima (x=50 e 150, z=88, alinhados com as mãos francesas) e 1 recomendado embaixo (x=100, z=12), todos em ressalto hexagonal que engrossa a aba pra 6mm com rebaixo conico de 90 graus. Colmeia hexagonal passante no prato com faixa macica na borda, na emenda e sobre cada mao francesa. Impressa DE COSTAS (a face de parede na cama, a profundidade virando os 100mm de altura), sem uma unica superficie voltada pra baixo — nada de suporte.",
+      "parts": {
+        "modulo": 1
+      },
+      "print_jobs": [
+        {
+          "file": "3mf/prateleira-modular-01-x1.3mf",
+          "contents": "1 modulo, job de PRIMEIRA IMPRESSAO: e o unico jeito de testar a emenda (precisa de 2), a pega do parafuso e o encaixe na parede antes de queimar filamento em duas pecas. De costas, aba na cama, sem suporte",
+          "footprint_mm": [
+            207.0,
+            100.0,
+            100.0
+          ]
+        },
+        {
+          "file": "3mf/prateleira-modular-01-x2.3mf",
+          "contents": "2 modulos lado a lado com vao de 6mm, ambos de costas com a aba na cama, sem suporte. E a chapa que fecha a cama: 207 x 206mm, nao cabe um terceiro modulo — fileira maior vira job repetido",
+          "footprint_mm": [
+            207.0,
+            206.0,
+            100.0
+          ]
+        }
+      ],
+      "part_footprints_mm": {
+        "modulo": [
+          207.0,
+          100.0,
+          100.0
+        ]
+      },
+      "assembled_closed_mm": [
+        200.0,
+        100.0,
+        100.0
+      ],
+      "capacity": "modular: cada modulo entrega 200 x 100mm de prateleira e ocupa 200mm de parede; 2 modulos = 400mm de vao util, e assim por diante, sempre com 2 parafusos por modulo",
+      "key_measures": {
+        "passo_do_modulo_mm": 200.0,
+        "prato_mm": [
+          200.0,
+          100.0,
+          6.0
+        ],
+        "profundidade_mm": 100.0,
+        "aba_altura_total_mm": 100.0,
+        "aba_abaixo_do_prato_mm": 68.0,
+        "aba_acima_do_prato_mm": 26.0,
+        "aba_espessura_mm": 3.0,
+        "prato_barriga_z_mm": 68.0,
+        "prato_topo_z_mm": 74.0,
+        "mao_francesa": {
+          "quantidade": 2,
+          "posicao_x_mm": [
+            50.0,
+            150.0
+          ],
+          "espessura_mm": 5.0,
+          "alcance_mm": 68.0,
+          "alcance_pct_da_profundidade": 68.0,
+          "angulo_graus": 45.0,
+          "hexagono_vazado_entre_faces_mm": 26.0,
+          "raio_inscrito_do_triangulo_mm": 19.92
+        },
+        "parafuso": {
+          "haste_mm": 4.0,
+          "furo_mm": 4.6,
+          "folga_por_lado_mm": 0.3,
+          "cone_90_boca_mm": 9.0,
+          "cone_profundidade_mm": 2.2,
+          "material_no_furo_mm": 6.0,
+          "ressalto_hexagonal_entre_faces_mm": 13.0,
+          "furos_de_cima": {
+            "x_mm": [
+              50.0,
+              150.0
+            ],
+            "z_mm": 88.0,
+            "obrigatorios": true
+          },
+          "furo_de_baixo": {
+            "x_mm": 100.0,
+            "z_mm": 12.0,
+            "obrigatorio": false
+          }
+        },
+        "encaixe_trilho_em_T": {
+          "corre_ao_longo_de": "profundidade (100mm), que e a direcao VERTICAL na impressao",
+          "saliencia_mm": 7.0,
+          "pescoco_mm": [
+            3.0,
+            2.0
+          ],
+          "cabeca_mm": [
+            4.0,
+            5.0
+          ],
+          "raio_de_canto_mm": 0.5,
+          "folga_por_lado_mm": 0.35,
+          "batente_de_arranque_por_lado_mm": 1.15,
+          "degrau_maximo_em_z_entre_modulos_mm": 0.7,
+          "chanfro_de_entrada_mm": 5.0,
+          "afinamento_da_ponta_mm": 0.6,
+          "banda_reforcada_da_emenda_mm": [
+            14.0,
+            10.0
+          ],
+          "parede_acima_da_cabeca_mm": 2.15,
+          "parede_abaixo_da_cabeca_mm": 2.15
+        },
+        "alivio_pe_de_elefante_nas_arestas_de_emenda_mm": 0.6,
+        "colmeia": {
+          "hexagonos": 35,
+          "entre_faces_mm": 11.0,
+          "teia_mm": 4.0,
+          "raio_de_canto_mm": 1.2,
+          "grade": [
+            10,
+            5
+          ],
+          "faixa_macica_lateral_mm": 16.0,
+          "faixa_macica_junto_a_parede_mm": 14.0,
+          "faixa_macica_na_frente_mm": 10.0,
+          "folga_ao_eixo_da_mao_francesa_mm": 6.0,
+          "area_vazada_mm2": 3667.6,
+          "area_vazada_pct": 18.3,
+          "orientacao": "ponta pra +Y (pra frente no uso), que na orientacao de impressao vira ponta PRA CIMA num furo horizontal em parede vertical — a regra de identidade do repo aqui e o que faz o furo imprimir sem suporte"
+        },
+        "volume_solido_por_modulo_cm3": 182.71,
+        "malha_do_modulo": {
+          "facets": 9550,
+          "bbox_mm": [
+            207.0,
+            100.0,
+            100.0
+          ],
+          "volumes_cgal": 2,
+          "solidos": 1
+        },
+        "alavanca": {
+          "tracao_no_par_de_parafusos_de_cima": "1.14 x a carga aplicada na borda da frente (braco de 88mm sobre profundidade de 100mm)",
+          "sem_mao_francesa_seria": "4.76 x a carga (aba de 30mm com parafuso a 21mm) — a mao francesa alivia o arranque em 4.2 vezes"
+        },
+        "prova_de_encaixe_mm3": {
+          "montado_dy_0": 0.0,
+          "meio_do_curso_dy_25": 0.0,
+          "meio_do_curso_dy_50": 0.0,
+          "quase_fora_dy_99": 0.0,
+          "dentro_da_folga_dz_0_3": 0.0,
+          "dentro_da_folga_dx_0_3": 0.0,
+          "degrau_dz_0_4": 28.34,
+          "degrau_dz_0_5": 89.64,
+          "arrancar_dx_1": 139.19,
+          "empurrar_dx_menos_1": 1280.56
+        },
+        "origem_das_medidas": "Passo de 200mm, parafuso de haste 4mm e o pedido de encaixe macho/femea lateral foram DADOS PELO USUARIO. A profundidade de 100mm e ASSUNCAO nao medida. O tipo de cabeca do parafuso nao foi informado — dai o rebaixo conico generoso que aceita chata e panela."
+      },
+      "hardware": "2 parafusos de haste Ø4 por modulo (obrigatorios) + 1 opcional embaixo, com a bucha/ancora adequada a parede do usuario — NAO definida ainda, e quase sempre e ela, nao o PLA, o elo fraco",
+      "notes": "Projeto novo de 2026-09-09, categoria nova `prateleiras/`. O pedido comecou como 'so a base, parafuso de 4mm' + 'base de 200mm com encaixe macho e femea dos lados' e mudou no meio do trabalho: o usuario reprovou o encaixe da v1 e pediu a MAO FRANCESA ('nao vai aguentar muito peso'). A v1 (chapa deitada, aba de 30mm, rabo de andorinha em planta de descer) foi DESCARTADA inteira e esta registrada so aqui: ela punha todo o momento na juncao prato/aba, exigia 4.76 x a carga de arranque no parafuso e, pior, a lingua rente a face de cima do prato ficava a 2mm da mesa ancorada so na raiz — imprimia caida. A v2 muda a ORIENTACAO DE IMPRESSAO junto com a geometria: a peca deita DE COSTAS, a face de parede vai na cama (primeira camada de 200 x 100mm, adesao otima) e a profundidade vira os 100mm de altura. Nessa orientacao NAO EXISTE uma unica superficie voltada pra baixo: a diagonal da mao francesa aponta pra cima, os furos de parafuso e os cones de 90 graus ficam VERTICAIS (furo redondo perfeito, sem barriga de ponte), o perfil do encaixe e extrusao vertical (por isso um rebaixo de 90 graus como o T e de graca aqui, seria impensavel deitado) e os hexagonos da colmeia sao furos horizontais ponta-pra-cima em parede vertical. O encaixe tambem mudou de conceito: rabo de andorinha curto tem a folga de flanco amplificada pelo seno do angulo e so encostava num pedaco do vao; o trilho em T trava X com batente de 90 graus (1.15mm de mordida por lado, sem amplificacao) e alinha a emenda INTEIRA ao longo dos 100mm. PROVA DE GEOMETRIA, nao deducao: part='fit' faz a intersecao de dois modulos vizinhos e o volume foi MEDIDO com .claude/skills/bed-check/stlinfo.py — 0.000mm3 montado e em tres pontos do curso (dy = 25, 50 e 99), 0.000 dentro da folga (dz = 0.3; em dx = 0.3 o OpenSCAD nem escreve arquivo, 'top level object is empty'), e interferencia MEDIDA nos casos de erro proposital: 28.3mm3 com degrau de 0.4, 89.6mm3 com 0.5, 139.2mm3 puxando 1mm pra fora (e o T travando) e 1280.6mm3 empurrando 1mm pra dentro (as faces se comendo). O ponto fraco declarado da orientacao e a interface de camada na base do prato e das nervuras, que e justamente o que a mao francesa alivia. PENDENTE: profundidade nao medida com regua, cabeca do parafuso e bucha de parede nao definidas, e a peca NAO foi impressa nem testada na mao."
     }
   ],
   "third_party": [

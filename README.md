@@ -29,6 +29,7 @@ O [index.json](index.json) é o catálogo completo: reúne estado, descrição, 
 | [Organizadores](organizadores/README.md) | [snap-organizer-01](organizadores/snap-organizer-01/README.md), [vinyl-now-playing-01](organizadores/vinyl-now-playing-01/README.md), [switch-case-organizer-01](organizadores/switch-case-organizer-01/README.md) | Módulos de bancada, suporte para LPs e organizador de jogos Switch |
 | [Organizadores TCG](organizadores_tcg/README.md) | [bgs-stand-01](organizadores_tcg/bgs-stand-01/README.md), [penny-holder-01](organizadores_tcg/penny-holder-01/README.md), [psa-box-01](organizadores_tcg/psa-box-01/README.md), [slab-tile-01](organizadores_tcg/slab-tile-01/README.md), [toploader-holder-01](organizadores_tcg/toploader-holder-01/README.md) | Cartas com sleeve, top loaders e slabs graduadas |
 | [Playmats](playmats/README.md) | [pokemon-game](playmats/pokemon-game/README.md) | Campo de Pokémon TCG em placas encaixáveis |
+| [Prateleiras](prateleiras/README.md) | [prateleira-modular-01](prateleiras/prateleira-modular-01/README.md) | Prateleira de parede modular com mão francesa integrada |
 | [Anéis](rings/README.md) | [ring-01](rings/ring-01/README.md), [ring-02](rings/ring-02/README.md) | Anéis para enrolar playmat |
 | [Suportes](suportes/README.md) | [xbox-stand-01](suportes/xbox-stand-01/README.md) | Apoio de mesa para controle Xbox |
 
