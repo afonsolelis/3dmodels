@@ -1392,6 +1392,184 @@
       },
       "hardware": "2 parafusos de haste Ø4 por modulo (obrigatorios) + 1 opcional embaixo, com a bucha/ancora adequada a parede do usuario — NAO definida ainda, e quase sempre e ela, nao o PLA, o elo fraco",
       "notes": "Projeto novo de 2026-09-09, categoria nova `prateleiras/`. O pedido comecou como 'so a base, parafuso de 4mm' + 'base de 200mm com encaixe macho e femea dos lados' e mudou no meio do trabalho: o usuario reprovou o encaixe da v1 e pediu a MAO FRANCESA ('nao vai aguentar muito peso'). A v1 (chapa deitada, aba de 30mm, rabo de andorinha em planta de descer) foi DESCARTADA inteira e esta registrada so aqui: ela punha todo o momento na juncao prato/aba, exigia 4.76 x a carga de arranque no parafuso e, pior, a lingua rente a face de cima do prato ficava a 2mm da mesa ancorada so na raiz — imprimia caida. A v2 muda a ORIENTACAO DE IMPRESSAO junto com a geometria: a peca deita DE COSTAS, a face de parede vai na cama (primeira camada de 200 x 100mm, adesao otima) e a profundidade vira os 100mm de altura. Nessa orientacao NAO EXISTE uma unica superficie voltada pra baixo: a diagonal da mao francesa aponta pra cima, os furos de parafuso e os cones de 90 graus ficam VERTICAIS (furo redondo perfeito, sem barriga de ponte), o perfil do encaixe e extrusao vertical (por isso um rebaixo de 90 graus como o T e de graca aqui, seria impensavel deitado) e os hexagonos da colmeia sao furos horizontais ponta-pra-cima em parede vertical. O encaixe tambem mudou de conceito: rabo de andorinha curto tem a folga de flanco amplificada pelo seno do angulo e so encostava num pedaco do vao; o trilho em T trava X com batente de 90 graus (1.15mm de mordida por lado, sem amplificacao) e alinha a emenda INTEIRA ao longo dos 100mm. PROVA DE GEOMETRIA, nao deducao: part='fit' faz a intersecao de dois modulos vizinhos e o volume foi MEDIDO com .claude/skills/bed-check/stlinfo.py — 0.000mm3 montado e em tres pontos do curso (dy = 25, 50 e 99), 0.000 dentro da folga (dz = 0.3; em dx = 0.3 o OpenSCAD nem escreve arquivo, 'top level object is empty'), e interferencia MEDIDA nos casos de erro proposital: 28.3mm3 com degrau de 0.4, 89.6mm3 com 0.5, 139.2mm3 puxando 1mm pra fora (e o T travando) e 1280.6mm3 empurrando 1mm pra dentro (as faces se comendo). O ponto fraco declarado da orientacao e a interface de camada na base do prato e das nervuras, que e justamente o que a mao francesa alivia. PENDENTE: profundidade nao medida com regua, cabeca do parafuso e bucha de parede nao definidas, e a peca NAO foi impressa nem testada na mao."
+    },
+    {
+      "id": "switch-lite-stand-01",
+      "category": "suportes",
+      "path": "suportes/switch-lite-stand-01",
+      "scad": "suportes/switch-lite-stand-01/switch-lite-stand-01.scad",
+      "status": "em-andamento",
+      "derived_from": "suportes/terceiros/nintendo-switch-lite-sleeve/nintendo-switch-lite-sleeve.3mf (autor e licença desconhecidos; Bambu Studio 1.10, perfil P1S, TPU) — somente medidas extraídas da malha por fatiamento (bloco 220 x 54 x 95, piso 5, slot 210 x 16 x 90, rebaixo de dedo R12 até z+23, bolsos de trás 30 x 22 x ~22, bolsos da frente 20 x 9 x 47-52, paredes 5 / 12.2 / 25.8); geometria refeita do zero em OpenSCAD, nenhum triângulo copiado. A referência tem slot plano de 16 e o console SENTA no stick — defeito corrigido aqui com slot de 32 + nervuras",
+      "description": "Suporte de mesa tipo BAINHA pra Nintendo Switch Lite COM capa: bloco maciço de 220 x 78.2 x 97 em pé, cantos verticais R3, slot central de 212 x 35 x 92 de fundo onde o CORPO do console (16) é guiado por 8 NERVURAS verticais de 8 x 8 (x = ±20 e ±40, nas duas paredes, rampa de entrada a 45°) que deixam um canal de 19 (1.5mm/lado); fora das nervuras a face do console centrado fica a 9.5mm da parede — no PIOR caso (corpo encostado na nervura do lado da tela) sobra 1.0mm pros analógicos (~7mm acima da capa) e 4.5 pros ZL/ZR (~4mm), em QUALQUER das 4 orientações de entrada (tela frente/trás x borda de cima/baixo primeiro) — simulado no pior caso e ecoado como 'CURSO OK' no .scad. Orientação principal: borda de BAIXO primeiro (só USB-C/P2 rebaixados); borda de cima primeiro tolerada (apoia em power/volume/L/R). O console sobra 1mm acima do topo; rebaixo pra dedo em U de 26 x 26 no centro (27mm de console à mostra). 2 bolsos de cartucho na parede de trás (22 x 20.2 x 17 de fundo, a 8mm da ponta, rebaixo de pinça R8 nas duas paredes X; 6 cartuchos de 31 x 21 x 3.2 DE PÉ por bolso, 14mm pra fora) e 2 bolsos estreitos na frente (20 x 12 x 50: caneta, ponta de cabo, fone pequeno). Colmeia hexagonal (8 entre faces, nervura 2, ponta pra cima) em baixo-relevo de 1mm nas 4 faces verticais, faixa sólida de 3mm, nas pontas só abaixo de z=44; parede mínima atrás de hexágono 3mm. Peça única, sem suporte, PLA, SEM BRIM. ⚠️ console-com-capa 210 x 93 x 16 ASSUMIDO; stick 7mm / ZL-ZR 4mm / posições ESTIMADOS.",
+      "parts": {
+        "stand": 1
+      },
+      "print_jobs": [
+        {
+          "file": "3mf/switch-lite-stand-01-plate.3mf",
+          "contents": "1 peça única na orientação de uso (fundo em z=0; slot, bolsos, rebaixos e nervuras abrem/sobem pra cima), GIRADA 45° em Z porque os 220mm de comprimento não cabem retos na cama de 220 — não girar de volta no fatiador. PLA, 0.2mm, ~15% de infill (~377 g; 1161 g se maciça), 3 paredes, SEM SUPORTE, SEM BRIM (pedido do usuário): mesa 60 °C, PEI limpo, 1ª camada lenta; base plana de 172 cm² com cantos R3; se um canto soltar, brim EXTERNO de 5mm",
+          "footprint_mm": [
+            208.4,
+            208.4,
+            97.0
+          ]
+        }
+      ],
+      "assembled_closed_mm": [
+        220.0,
+        78.2,
+        97.0
+      ],
+      "capacity": "1 Switch Lite com capa (210 x 93 x 16 assumido), em qualquer das 4 orientações de entrada + 12 cartuchos de Switch de pé (6 por bolso) + 2 copos de 20 x 12 x 50 pra caneta, ponta de cabo ou fone pequeno",
+      "key_measures": {
+        "bloco_mm": [
+          220.0,
+          78.2,
+          97.0
+        ],
+        "raio_arestas_verticais_mm": 3.0,
+        "piso_mm": 5.0,
+        "console_com_capa_assumido_mm": [
+          210,
+          93,
+          16
+        ],
+        "saliencias_estimadas_mm": {
+          "stick_acima_da_capa": 7,
+          "stick_cap_diametro": 18,
+          "stick_centro_x": 82,
+          "stick_esq_da_borda_de_cima": 27,
+          "stick_dir_da_borda_de_baixo": 30,
+          "zl_zr_saliencia_face_de_tras": 4,
+          "zl_zr_faixa_x": [
+            69,
+            104
+          ],
+          "zl_zr_faixa_junto_a_borda_de_cima": 10,
+          "botoes_saliencia": 1,
+          "botoes_faixa_x": [
+            62,
+            90
+          ]
+        },
+        "slot_mm": [
+          212.0,
+          35.0,
+          92.0
+        ],
+        "canal_entre_nervuras_mm": 19.0,
+        "folga_corpo_por_lado_mm": 1.5,
+        "face_do_console_ate_parede_fora_da_nervura_mm": 9.5,
+        "folga_do_stick_mm": {
+          "nominal_corpo_centrado": 2.5,
+          "pior_caso_corpo_encostado_na_nervura": 1.0
+        },
+        "nervuras": {
+          "quantidade": 8,
+          "altura_mm": 8.0,
+          "largura_mm": 8.0,
+          "centros_x_mm": [
+            -40,
+            -20,
+            20,
+            40
+          ],
+          "zona_permitida_abs_x_mm": 50,
+          "rampa_de_entrada": "45°, 8mm, logo abaixo do chanfro da boca",
+          "nas_pontas": false
+        },
+        "console_acima_do_topo_mm": 1.0,
+        "chanfro_boca_slot_mm": 1.2,
+        "paredes_mm": {
+          "ponta": 4.0,
+          "frente_total": 17.5,
+          "frente_composicao": "3 (slot) + 12 (bolso estreito) + 2.5 (face)",
+          "tras_total": 25.7,
+          "tras_composicao": "3 (slot) + 20.2 (bolso de cartucho) + 2.5 (face)",
+          "faixa_plana_no_topo_entre_chanfros_mm": 1.2
+        },
+        "rebaixo_dedo_mm": {
+          "largura": 26,
+          "profundidade": 26,
+          "fundo": "semicírculo R13",
+          "console_a_mostra_no_centro": 27
+        },
+        "bolso_cartucho": {
+          "quantidade": 2,
+          "boca_mm": [
+            22.0,
+            20.2
+          ],
+          "fundo_mm": 17.0,
+          "afastamento_da_ponta_mm": 8.0,
+          "pinca_semicircular_r_mm": 8.0,
+          "parede_do_fundo_da_pinca_ate_a_ponta_mm": 4.0,
+          "chanfro_mm": 0.6,
+          "cartucho_mm": [
+            31,
+            21,
+            3.2
+          ],
+          "cartuchos_por_bolso": 6,
+          "orientacao": "de pé, eixo de 21 ao longo do comprimento do bloco, espessura ao longo da profundidade",
+          "folga_por_lado_mm": 0.5,
+          "cartucho_pra_fora_mm": 14.0
+        },
+        "bolso_estreito": {
+          "quantidade": 2,
+          "boca_mm": [
+            20.0,
+            12.0
+          ],
+          "fundo_mm": 50.0,
+          "chanfro_mm": 0.6
+        },
+        "colmeia": {
+          "faces": "frente, trás e as duas pontas (pontas só até z = 44; topo e fundo lisos)",
+          "hex_entre_faces_mm": 8,
+          "nervura_mm": 2,
+          "faixa_solida_mm": 3,
+          "faixa_lateral_junto_ao_canto_mm": 6,
+          "relevo_mm": 1.0,
+          "parede_minima_atras_de_hexagono_mm": {
+            "ponta": 3.0,
+            "frente": 16.5,
+            "tras": 24.7
+          }
+        },
+        "massa_pla": {
+          "volume_da_malha_cm3": 936.1,
+          "macica_g": 1161,
+          "infill_15_g": 377,
+          "infill_20_g": 423,
+          "casca_assumida": "3 paredes de 0.4 (1.2mm) nas faces verticais, 1.0mm de topo/fundo",
+          "area_da_base_cm2": 172.0,
+          "obs": "o echo do .scad é estimativa analítica (~2% abaixo); estes números vêm do volume da malha exportada"
+        },
+        "chapa": {
+          "giro_graus": 45,
+          "footprint_mm": [
+            208.4,
+            208.4,
+            97.0
+          ],
+          "peca_reta_mm": [
+            220.0,
+            78.2,
+            97.0
+          ],
+          "formula": "(L - 2r)·cos45 + (D - 2r)·sin45 + 2r, r = 3 (bate com o bbox do STL: 208.37)"
+        },
+        "origem_das_medidas": "⚠️ Console-com-capa 210 x 93 x 16 ASSUMIDO pelo usuário (+2mm no total por eixo sobre o Switch Lite nu de 208 x 91 x 14), NÃO medido. MEDIR COM PAQUÍMETRO a espessura total com capa no CENTRO do console (sobre o lábio da capa em volta da tela e nas costas), não no vidro — esse valor vira content_t; a capa NÃO pode ter kickstand/grip na faixa central de 88mm (|x| <= 44), senão não passa no canal das nervuras. Stick (7mm acima da capa, cap Ø18 a x=±82, 27mm da borda de cima / 30mm da de baixo), ZL/ZR (4mm, |x| 69-104 nos 10mm da borda de cima) e botões (1mm, |x| 62-90) são ESTIMATIVAS. FALTAM 3 MEDIDAS: (1) espessura TOTAL no stick com a capa (define stick_h); (2) distância das bordas até o centro dos caps (define a zona livre de nervura); (3) saliência real dos ZL/ZR. Cartucho 31 x 21 x 3 é cota de catálogo (3.2 com etiqueta). Forma do bloco, slot, rebaixo e posição dos bolsos vêm das medidas por fatiamento da malha do 3MF de referência.",
+        "orientacao_de_entrada": {
+          "principal": "borda de BAIXO primeiro (só USB-C e P2, rebaixados)",
+          "tolerada": "borda de cima primeiro (apoia em power/volume/L/R)",
+          "tela": "frente ou trás, tanto faz",
+          "simulacao": "cobre as 4 combinações no pior caso de folga"
+        }
+      },
+      "hardware": "nenhum",
+      "notes": "Projeto novo de 2026-10-02; 2ª rodada no mesmo dia depois do print-review REPROVAR a 1ª por função: slot plano de 18 não acomoda os analógicos (~7mm acima da capa) — o console desceria ~20mm e sentaria num stick (a referência de terceiro tem o mesmo defeito). Usuário: manter altura, resolver a espessura, posição dos sticks por estimativa, aceitar entrada pelos dois lados. Correção: slot 35 com 8 nervuras de guia de 8mm nas DUAS paredes em |x| <= 50 (canal 19 pro corpo; 9.5mm livres pro stick fora da nervura, 8 no pior caso). Nervura de 3.5 (slot 25) NÃO bastaria: com nervura dos dois lados o corpo fica centrado a 4.5 da parede e o stick de 7 bateria igual — por isso cada parede leva stick_h + folga. Junto: bolsos de cartucho mais rasos (17, 14mm expostos), afastados 8 da ponta e com pinça R8 nos dois lados; bolsos estreitos 20 x 12; cantos verticais R3; colmeia das pontas só abaixo de z=44; outer_wall 2.5 (era 3) pra chapa a 45° ficar < 210. 3ª rodada (print-review 2 aprovou com ressalvas): slot_gap_t 1.5 + stick_gap 2.5 porque o pior caso (corpo encostado na nervura do lado da tela) dava folga ZERO pro stick — agora 1.0; pinça R8 a 8 da ponta; fórmula do footprint girado passou a considerar os cantos R3 (echo = bbox do STL). Bed-check: reta 220 x 78.2 = 'justo', chapa a 45° 208.4 x 208.4 = ok. inner_wall 4 / chanfro 2 (sugestão opcional) NÃO aplicados: estourariam 210 na diagonal. Se precisar de mais margem na cama: cart_count=5 tira 3.2 de D. Se a capa real for mais gorda que 16, mexer em content_t; se o stick for mais alto que 7, em stick_h — o slot e as nervuras recalculam."
     }
   ],
   "third_party": [

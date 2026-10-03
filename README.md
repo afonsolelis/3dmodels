@@ -31,7 +31,7 @@ O [index.json](index.json) é o catálogo completo: reúne estado, descrição, 
 | [Playmats](playmats/README.md) | [pokemon-game](playmats/pokemon-game/README.md) | Campo de Pokémon TCG em placas encaixáveis |
 | [Prateleiras](prateleiras/README.md) | [prateleira-modular-01](prateleiras/prateleira-modular-01/README.md) | Prateleira de parede modular com mão francesa integrada |
 | [Anéis](rings/README.md) | [ring-01](rings/ring-01/README.md), [ring-02](rings/ring-02/README.md) | Anéis para enrolar playmat |
-| [Suportes](suportes/README.md) | [xbox-stand-01](suportes/xbox-stand-01/README.md) | Apoio de mesa para controle Xbox |
+| [Suportes](suportes/README.md) | [xbox-stand-01](suportes/xbox-stand-01/README.md), [switch-lite-stand-01](suportes/switch-lite-stand-01/README.md) | Apoio de mesa para controle Xbox e bainha de mesa para Switch Lite com capa |
 
 ## Arquivos baixados de terceiros
 
