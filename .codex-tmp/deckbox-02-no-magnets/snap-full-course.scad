@@ -1,3 +1,24 @@
+// deckbox-02.scad
+// Um deck medido (93 x 68 x 45mm) e compartimento de dados de 64mm.
+// Bandeja deslizante: empurrar pelo furo de 18mm no fundo da capa;
+// cestinha sai empurrando pelo furo sob ela. Alojamentos de ímãs preenchidos
+// na bandeja e na capa. Duas linguetas laterais retêm a bandeja fechada;
+// abrir pelo próprio puxão (ou iniciar pelo furo de dedo), sem botão.
+// Geometria compartilhada com deckbox-01; folgas e dimensões preservadas.
+// Chapa única: 169.6 x 162.6 x 173.6mm, capa em pé na ponta fechada.
+// Exports canônicos (caminhos absolutos nesta máquina):
+// flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-plate.3mf -D 'part="plate"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+// flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/stl/deckbox-02-tray.stl -D 'part="tray"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+// flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/stl/deckbox-02-sleeve.stl -D 'part="sleeve"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+// flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/stl/deckbox-02-basket.stl -D 'part="basket"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+
+/* [Variante de um deck sem ímãs] */
+snap_override = true; // retenção passiva: duas linguetas e ressaltos rampados
+magnets_override = false; // preenche os quatro alojamentos de cada ponta
+deck_lanes = 1;
+dice_depth = 64; // mm, profundidade do compartimento de dados (deckbox-01 usa 30)
+sleeve_tray_reveal = 0; // deixa a traseira da bandeja alinhada com a boca da capa quando fechada
+sleeve_finger_hole_d = 18; // mm, furo maior no fundo da capa pra passar um dedo
 // deckbox-01.scad
 // Deckbox estilo caixa de fósforo (matchbox), com 3 compartimentos na
 // bandeja: dois lado a lado pra decks de 60 cartas (sleeved) DEITADAS
@@ -403,51 +424,21 @@ module u_cutout(cx, y0) {
 }
 
 // ---------------------------------------------------------------------
-// Render
-// ---------------------------------------------------------------------
-if (part == "tray") {
-    tray();
-} else if (part == "sleeve") {
-    sleeve();
-} else if (part == "basket") {
-    basket();
-} else if (part == "plate") {
-    // chapa pra cama 220x220 (AD5X), já na orientação de impressão. A
-    // capa fica EM PÉ, apoiada na ponta fechada — o tubo imprime sem
-    // suporte. Com 1 deck (deckbox-02) o conjunto INTEIRO cabe numa chapa
-    // só (~161x162mm); com 2 decks a bandeja não cabe junto e imprime à
-    // parte (part="tray").
-    plate_gap = 6;
 
-    if (lanes == 1) {
-        // job único: bandeja + cestinha + capa em pé
-        tray();
-        translate([0, tray_outer_w + plate_gap, 0]) {
-            basket();
-            translate([basket_outer_l + plate_gap + sleeve_outer_h, 0, 0])
-                rotate([0, -90, 0])
-                    sleeve();
-        }
-    } else {
-        // capa em pé, deitada como uma faixa ao longo do fundo da chapa
-        translate([0, sleeve_outer_h, 0])
-            rotate([0, 0, -90])
-                translate([sleeve_outer_h, 0, 0])
-                    rotate([0, -90, 0])
-                        sleeve();
-
-        // cestinhas lado a lado, giradas pra caber na largura
-        for (i = [0 : lanes - 1])
-            translate([basket_outer_w + i * (basket_outer_w + plate_gap),
-                       sleeve_outer_h + plate_gap, 0])
-                rotate([0, 0, 90])
-                    basket();
-    }
-} else {
-    // preview lado a lado (não montado), só pra visualizar as três peças
-    tray();
-    translate([0, tray_outer_w + 20, 0])
-        sleeve();
-    translate([0, tray_outer_w + sleeve_outer_w + 40, 0])
-        basket();
+module flex_envelopes() {
+ for(y0=[-2,sleeve_outer_w-wall-0.01])
+  translate([snap_root_x,y0,snap_sleeve_z-snap_band/2])
+   cube([snap_arm+1,wall+2.02,snap_band]);
+}
+difference() {
+ intersection() {
+  sleeve();
+  union() {
+   translate([end_wall+0.001,wall+fit_tolerance,wall+fit_tolerance])
+    cube([2*tray_outer_l,tray_outer_w,tray_outer_h]);
+   hull() for(s=[0.001,tray_outer_l])
+    translate([end_wall+s,wall+fit_tolerance,wall+fit_tolerance]) snap_tray_bumps();
+  }
+ }
+ flex_envelopes();
 }

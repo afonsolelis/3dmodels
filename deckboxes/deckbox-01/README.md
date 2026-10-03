@@ -80,7 +80,11 @@ Deckbox estilo **caixa de fósforo (matchbox)** com fechamento magnético e
   2 cestinhas, ~155 × 161mm) e `deckbox-01-tray.3mf` (a bandeja, 136 × 151mm
   — não cabe junto)
 - A variante de **um deck só** é a [`deckbox-02`](../deckbox-02/), que inclui
-  este arquivo com `deck_lanes = 1` e `dice_depth = 64`
+  este arquivo com `deck_lanes = 1` e `dice_depth = 64`, e desliga os ímãs
+  (`magnets_override = false`) em troca da trava por ressaltos
+  (`snap_override = true`). Aqui o padrão das duas chaves é o comportamento
+  antigo (ímãs ligados, ressaltos desligados): a geometria da deckbox-01 não
+  muda
 
 ## Como gerar os STL
 
