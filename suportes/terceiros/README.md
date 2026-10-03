@@ -1,6 +1,6 @@
 # Downloads: Suportes
 
-17 arquivo(s) de terceiros em 15 item(ns). Cada item tem pasta própria, função resumida, nome anterior, autoria e licença.
+18 arquivo(s) de terceiros em 16 item(ns). Cada item tem pasta própria, função resumida, nome anterior, autoria e licença.
 
 A prévia ajuda a reconhecer o modelo; para imprimir, abra o item e confira as plates e o perfil no Flash Studio.
 
@@ -14,6 +14,7 @@ A prévia ajuda a reconhecer o modelo; para imprimir, abra o item e confira as p
 | ![Headphone side desk stand](headphone-side-desk-stand/preview.png) | [Headphone side desk stand](headphone-side-desk-stand/README.md) | Suporte lateral de mesa para fone de ouvido. | 99.99 × 69.92 × 30.0 | peças cabem |
 | ![Laptopständer](laptopstander/preview.png) | [Laptopständer](laptopstander/README.md) | Suporte de mesa para notebook. | 25.0 × 64.99 × 19.5 | peças cabem |
 | ![Minimalist Laptop Stand / Ergonomic Laptop Risers](minimalist-laptop-stand-ergonomic-laptop-risers/preview.png) | [Minimalist Laptop Stand / Ergonomic Laptop Risers](minimalist-laptop-stand-ergonomic-laptop-risers/README.md) | Apoios ergonômicos para elevar notebook. | 207.18 × 69.08 × 30.0 | peças cabem |
+| ![Nintendo Switch Lite Sleeve](nintendo-switch-lite-sleeve/preview.png) | [Nintendo Switch Lite Sleeve](nintendo-switch-lite-sleeve/README.md) | Bainha de mesa pra Switch Lite sem capa; referência do projeto próprio switch-lite-stand-01. | 201.07 × 185.58 × 95.0 | peças cabem |
 | ![Suporte de controle Xbox (duas peças STL)](suporte-controle-xbox-stl/preview.png) | [Suporte de controle Xbox (duas peças STL)](suporte-controle-xbox-stl/README.md) | Duas peças STL de um suporte de controle Xbox; montagem e origem a confirmar. | 211.08 × 108.47 × 47.67 | cabe; margem curta |
 | ![Suporte de fixação (função a confirmar)](soportenootbook/preview.png) | [Suporte de fixação (função a confirmar)](soportenootbook/README.md) | Peça de apoio ou fixação; a aplicação exata não está documentada no arquivo. | 82.0 × 20.0 × 74.0 | peças cabem |
 | ![Suporte dobrável para notebook](suporte-dobravel-para-notebook/preview.png) | [Suporte dobrável para notebook](suporte-dobravel-para-notebook/README.md) | Suporte dobrável para notebook, versão 2.5. | 157.77 × 149.79 × 120.0 | peças cabem |

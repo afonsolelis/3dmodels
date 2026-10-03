@@ -1,6 +1,6 @@
 {
   "_readme": "Catálogo dos dois acervos do repo. projects: modelos paramétricos próprios com fonte OpenSCAD, peças, jobs e medidas; atualizar quando um modelo mudar. third_party: arquivos baixados organizados por categoria em terceiros/<item>/; file é o caminho atual, original_file conserva o caminho e nome anteriores, preview aponta para a imagem do item e summary_pt resume a função. Autor, licença e perfil constam quando conhecidos. largest_part_mm é a caixa exata da peça imprimível de maior volume, em mm e na orientação salva do 3MF/STL; fits_ad5x indica se TODAS as peças imprimíveis cabem individualmente nos 220 × 220 × 220 mm da AD5X. Esses campos foram medidos da malha com as transformações do 3MF em 2026-09-28. A avaliação individual não verifica a disposição conjunta de cada plate nem substitui a conferência no Flash Studio. Consulte a licença antes de redistribuir.",
-  "updated": "2026-09-28",
+  "updated": "2026-10-02",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
     {
@@ -4313,6 +4313,37 @@
         50.0,
         170.0,
         25.0
+      ],
+      "fits_ad5x": true
+    },
+    {
+      "file": "suportes/terceiros/nintendo-switch-lite-sleeve/nintendo-switch-lite-sleeve.3mf",
+      "category": "suportes",
+      "format": "3mf",
+      "title": "Nintendo Switch Lite Sleeve",
+      "designer": "desconhecido",
+      "license": "desconhecida",
+      "modified": "2025-07-27",
+      "objects": 1,
+      "plates": 1,
+      "embedded_profile": {
+        "printer_model": "Bambu Lab P1S",
+        "print_settings_id": "0.20mm Standard @BBL X1C",
+        "printable_height": "250",
+        "enable_support": "0",
+        "filament_type": "TPU"
+      },
+      "needs_profile_swap": true,
+      "notes": "Arquivo encontrado solto na raiz do repo, fora do contrato de pastas. O 3MF não traz autor, título nem licença (só DesignerUserId 1968188830; Bambu Studio 1.10.02, 2025-07-27). Fatiado pra P1S em TPU, 0.2mm, 15% de infill, sem suporte, brim automático. Bloco maciço de 220 x 54 x 95 com slot de 210 x 16 x 90 pro Switch Lite SEM capa, rebaixo pra dedo R12, 2 bolsos de 30 x 22 atrás e 2 de 20 x 9 na frente.",
+      "original_file": "Nintendo Switch Lite Sleeve.3mf",
+      "summary_pt": "Bainha de mesa pra Switch Lite sem capa; referência do projeto próprio switch-lite-stand-01.",
+      "preview": "suportes/terceiros/nintendo-switch-lite-sleeve/preview.png",
+      "rebuilt_as": "suportes/switch-lite-stand-01 (refeito do zero a partir das medidas da malha, dimensionado pra console COM capa)",
+      "measurement_note": "A malha é um bloco de 220 x 54 x 95, mas o 3MF salva o objeto girado ~41° na plate; a caixa medida na orientação salva é 201.07 x 185.58 x 95. Reto, os 220 ocupam a cama inteira da AD5X.",
+      "largest_part_mm": [
+        201.07,
+        185.58,
+        95.0
       ],
       "fits_ad5x": true
     }

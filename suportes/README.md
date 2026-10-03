@@ -20,4 +20,4 @@ Os números-chave de cada um estão no [`index.json`](../index.json) da raiz.
 
 ## Downloads de terceiros
 
-Veja o [catálogo visual dos 17 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.
+Veja o [catálogo visual dos 18 arquivos](terceiros/README.md). Cada item registra origem, licença, nome anterior e prévia quando disponível.
