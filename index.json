@@ -1,6 +1,6 @@
 {
   "_readme": "Catálogo dos dois acervos do repo. projects: modelos paramétricos próprios com fonte OpenSCAD, peças, jobs e medidas; atualizar quando um modelo mudar. third_party: arquivos baixados organizados por categoria em terceiros/<item>/; file é o caminho atual, original_file conserva o caminho e nome anteriores, preview aponta para a imagem do item e summary_pt resume a função. Autor, licença e perfil constam quando conhecidos. largest_part_mm é a caixa exata da peça imprimível de maior volume, em mm e na orientação salva do 3MF/STL; fits_ad5x indica se TODAS as peças imprimíveis cabem individualmente nos 220 × 220 × 220 mm da AD5X. Esses campos foram medidos da malha com as transformações do 3MF em 2026-09-28. A avaliação individual não verifica a disposição conjunta de cada plate nem substitui a conferência no Flash Studio. Consulte a licença antes de redistribuir.",
-  "updated": "2026-10-02",
+  "updated": "2026-10-03",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
     {
@@ -853,6 +853,42 @@
       "material_estimado": { "test_cm3": 36.0, "base_cm3": 344.0, "lid_cm3": 133.3, "caixa_total_cm3": 477.3, "caixa_total_g_pla": 592, "obs": "era 385.1 cm3 / 478 g na versao vazada; fechar contra luz custou +114 g (base +59, tampa +56)" },
       "notes": "FECHADA CONTRA LUZ por requisito do usuario (slab graduada desbota com UV): NENHUMA abertura passante da pro lado de fora. A colmeia virou BAIXO RELEVO gravado na face externa (modulo hex_relief, mesmo padrao do pokemon-game-case): 0.9 de relevo na base (parede 2.8 -> sobra 1.9) e 0.6 na tampa (parede e teto 2.4 -> sobra 1.8). O teto da tampa subiu de 2.0 pra 2.4 justamente pra sobrar 1.8 atras do relevo. Unico vazado do projeto: as fendas dos ESPINHOS, que sao internas (separam as duas filas) e nao enxergam o lado de fora. VERIFICADO por ray-casting nas malhas exportadas com a tampa encaixada: ~104 mil raios nos 3 eixos, ZERO vazamentos; menor secao atravessada = 2.60mm (faixa de 0.6mm logo acima do ressalto, onde so a saia cobre, 1.3 de cada lado). A junta base/tampa nao e fresta: 20mm de saia sobre o ressalto com 0.2 de folga. Nao existe furo de dedo nem rasgo em nenhuma das pecas. Pra valer na pratica, imprimir em filamento OPACO (escuro) — PLA claro passa luz mesmo com 1.9mm. IMPRIMIR O GABARITO PRIMEIRO (3mf/psa-box-01-test.3mf, ~45g, ~1h): as medidas da slab nao vieram de regua e a base e um print de ~427g/25-35h. A slab tem que descer sozinha ate o chao no gabarito; se nao entrar, ajustar slot_gap_w/slot_gap_t e repetir. CAMA JUSTA E DE PROPOSITO: 176.4 x 175.1 estoura o alvo de conforto de 170 (o usuario foi avisado e mandou seguir) — o relevo NAO mexeu no footprint. Sobram 1.8mm/lado em X e 2.45 em Y — DESLIGAR brim e skirt no Flash Studio, centralizar a chapa e conferir a linha de purga da AD5X. Duas filas sao 168.8mm so de canaleta, entao 170 e impossivel; se a slab real medir 85 de largura duas filas ficam geometricamente impossiveis e o caminho e rows_override=1. Pra encolher: cada 0.1mm a menos de slot_gap_w tira 0.4mm do X; slots_override=18 tira 9.0mm do Y (e 2 slabs). O chao da base e MACICO (2.4): carrega ~1.2kg de slabs, e a aderencia de 1a camada sem brim e a barreira de luz por baixo. Nervuras so ate 80mm dos 139 da slab: os ~59mm de cima ficam soltos pras slabs abrirem em leque — sem isso nao sai slab do meio da fila (entre vizinhas sobram 1.9mm, nao entra dedo). Topo da nervura em telhado (1.5 -> 0.6mm) faz funil de entrada e imprime sem ponte. Encaixe da tampa conferido na malha: ressalto da base em x=1.5..2.8, saia da tampa em x=0..1.3, folga 0.2/lado, boca de 1.3 apoiando num ombro de 1.5 — as duas pecas tem o MESMO footprint e o conjunto fica liso por fora. Parede de 2.8 e o MINIMO que hospeda ressalto+saia+folga, e cada 1mm dela custa 2mm de cama. Fendas hexagonais ALONGADAS nas paredes ±X e nos espinhos porque hexagono redondo nao cabe nos 7.5mm entre duas nervuras; pontas em bico, imprimem sem ponte. Primeira e ultima vaga de cada fila ficam sem fenda (gravacao colada no canto vira lasca). Base e tampa sao um job cada — nada mais cabe junto.",
       "reference_photos": "Auxiliaries/Model Pictures/ dentro do Porta_carte_PSA_x10.3mf mostram o original impresso e o leque de slabs — e a prova de que o manuseio e por leque, nao por pinca entre vizinhas"
+    },
+    {
+      "id": "psa-box-02",
+      "category": "organizadores_tcg",
+      "path": "organizadores_tcg/psa-box-02",
+      "scad": "organizadores_tcg/psa-box-02/psa-box-02.scad",
+      "status": "em-andamento",
+      "derived_from": "organizadores_tcg/terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf (DAMA_Lab, Standard Digital File License) — só medidas de engenharia reversa da malha (canaleta 85.0 x 88.5, vaga 7.5, divisória 1.5, nervura 7.0, chão da vaga ao ombro 72, gargalo 91.0 x 94.5 x 30, chão da vaga ao teto 140); geometria refeita do zero em OpenSCAD, nenhum triângulo copiado",
+      "description": "Caixa de 10 slabs PSA com Pokébola gravada na tampa — versão RÍGIDA do 'Porta carte PSA x10', que foi impresso e voltou com a tampa molenga (parede 1.9, teto 1.0 embaixo da gravação) e prendendo (0.1mm/lado de folga em 30mm de encaixe). Mesmo interior testado do original; tampa com parede 3.0 e teto 3.0, folga 0.5/lado com chanfro de entrada nas duas bocas, base com parede 6.5. A tampa nova também serve na base original já impressa.",
+      "parts": {"base": 1, "lid": 1},
+      "print_jobs": [
+        {"file": "3mf/psa-box-02-plate.3mf", "contents": "base + tampa lado a lado (base com o chão na cama, tampa com a Pokébola na cama; sem suporte)", "footprint_mm": [204.0, 101.5, 106.0]},
+        {"file": "3mf/psa-box-02-lid.3mf", "contents": "só a tampa — pra quem já tem a base (nova ou a original do DAMA_Lab)", "footprint_mm": [98.0, 101.5, 71.0]}
+      ],
+      "assembled_closed_mm": [98.0, 101.5, 147.0],
+      "capacity": 10,
+      "key_measures": {
+        "canaleta_mm": [85.0, 88.5],
+        "vaga_mm": 7.5,
+        "divisoria_mm": 1.5,
+        "passo_mm": 9.0,
+        "nervura_mm": 7.0,
+        "gargalo_mm": [91.0, 94.5, 30.0],
+        "vao_da_tampa_mm": [92.0, 95.5],
+        "folga_tampa_por_lado_mm": 0.5,
+        "parede_tampa_mm": 3.0,
+        "teto_tampa_mm": 3.0,
+        "gravacao_pokebola_mm": 1.0,
+        "parede_base_mm": 6.5,
+        "chao_mm": 4.0,
+        "chao_da_vaga_ao_teto_mm": 140,
+        "ombro_z_mm": 76.0,
+        "original_medido": {"parede_tampa": 1.9, "teto_tampa": 2.0, "teto_sob_gravacao": 1.0, "folga_por_lado": 0.1, "parede_base": 5.0, "externo": [95.0, 98.5]}
+      },
+      "material_estimado": "base 262.7cm³ e tampa 105.1cm³ de sólido (o peso real depende de perímetros/preenchimento)",
+      "notes": "Feedback do teste físico do original (2026-10): tampa molenga e difícil de abrir porque prende. Causas medidas na malha: parede da tampa 1.9 em 70mm de altura, teto de 2.0 com a Pokébola gravada 1.0 (sobrava 1.0) e folga de 0.1/lado entre o vão da tampa (91.2 x 94.7) e o gargalo (91.0 x 94.5) num encaixe de 30mm. Correções: parede da tampa 3.0 (~3.9x mais rígida, cresce com o cubo da espessura), teto 3.0 (2.0 sob a gravação, 8x), folga 0.5/lado (regra 6), chanfro de entrada de 1.0 na boca da tampa e no topo do gargalo, base com parede 6.5 e chão 4.0. Encaixe conferido por booleana na malha exportada: tampa fechada sem interferência, deslocada 0.45 em X ainda livre, 0.55 já interfere. Gargalo e altura do ombro iguais ao original de propósito, então psa-box-02-lid.3mf também fecha a base original (sobra 1.5mm de beiral por lado, porque ela tem 95 x 98.5). Pokébola é desenho próprio (anel 6, faixa 5, botão 7.3 com anel gravado de 4.7), gravada 1.0 na face que vai na cama. Fatiador sugerido: 4 perímetros, 20% gyroid; o perfil do original vinha com 2 perímetros e 15% grid."
     },
     {
       "id": "dragon-01",
@@ -3537,6 +3573,8 @@
         98.5,
         105.5
       ],
+      "rebuilt_as": "organizadores_tcg/psa-box-02 (refeito do zero a partir das medidas da malha: mesmo interior, tampa rígida e folga de 0.5/lado)",
+      "notes": "Teste físico 2026-10: a tampa saiu molenga (parede 1.9mm, só 1.0mm de teto embaixo da Pokébola) e prende ao abrir (0.1mm/lado de folga em 30mm de encaixe). Use o psa-box-02; a tampa dele também fecha esta base.",
       "fits_ad5x": true
     },
     {
