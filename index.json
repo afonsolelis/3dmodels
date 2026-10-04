@@ -861,7 +861,7 @@
       "scad": "organizadores_tcg/psa-box-02/psa-box-02.scad",
       "status": "em-andamento",
       "derived_from": "organizadores_tcg/terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf (DAMA_Lab, Standard Digital File License) — só medidas de engenharia reversa da malha (canaleta 85.0 x 88.5, vaga 7.5, divisória 1.5, nervura 7.0, chão da vaga ao ombro 72, gargalo 91.0 x 94.5 x 30, chão da vaga ao teto 140); geometria refeita do zero em OpenSCAD, nenhum triângulo copiado",
-      "description": "Caixa de 10 slabs PSA com Pokébola gravada na tampa — versão RÍGIDA do 'Porta carte PSA x10', que foi impresso e voltou com a tampa molenga (parede 1.9, teto 1.0 embaixo da gravação) e prendendo (0.1mm/lado de folga em 30mm de encaixe). Mesmo interior testado do original; tampa com parede 3.0 e teto 3.0, folga 0.5/lado com chanfro de entrada nas duas bocas, base com parede 6.5. A tampa nova também serve na base original já impressa.",
+      "description": "Caixa de 10 slabs PSA com Pokébola gravada na tampa — versão RÍGIDA do 'Porta carte PSA x10', que foi impresso e voltou com a tampa molenga (parede 1.9, teto 1.0 embaixo da gravação) e prendendo (0.1mm/lado de folga em 30mm de encaixe). Mesmo interior testado do original; tampa com parede 3.0 e teto 3.0, folga 0.5/lado com chanfro de entrada nas duas bocas, base com parede 6.5. A tampa nova também serve na base original já impressa (canto interno r0.5 por causa da quina viva do gargalo original).",
       "parts": {"base": 1, "lid": 1},
       "print_jobs": [
         {"file": "3mf/psa-box-02-plate.3mf", "contents": "base + tampa lado a lado (base com o chão na cama, tampa com a Pokébola na cama; sem suporte)", "footprint_mm": [204.0, 101.5, 106.0]},
@@ -878,6 +878,9 @@
         "gargalo_mm": [91.0, 94.5, 30.0],
         "vao_da_tampa_mm": [92.0, 95.5],
         "folga_tampa_por_lado_mm": 0.5,
+        "canto_interno_tampa_r_mm": 0.5,
+        "chanfro_boca_tampa_mm": 0.5,
+        "chanfro_gargalo_mm": 1.0,
         "parede_tampa_mm": 3.0,
         "teto_tampa_mm": 3.0,
         "gravacao_pokebola_mm": 1.0,
@@ -888,7 +891,7 @@
         "original_medido": {"parede_tampa": 1.9, "teto_tampa": 2.0, "teto_sob_gravacao": 1.0, "folga_por_lado": 0.1, "parede_base": 5.0, "externo": [95.0, 98.5]}
       },
       "material_estimado": "base 262.7cm³ e tampa 105.1cm³ de sólido (o peso real depende de perímetros/preenchimento)",
-      "notes": "Feedback do teste físico do original (2026-10): tampa molenga e difícil de abrir porque prende. Causas medidas na malha: parede da tampa 1.9 em 70mm de altura, teto de 2.0 com a Pokébola gravada 1.0 (sobrava 1.0) e folga de 0.1/lado entre o vão da tampa (91.2 x 94.7) e o gargalo (91.0 x 94.5) num encaixe de 30mm. Correções: parede da tampa 3.0 (~3.9x mais rígida, cresce com o cubo da espessura), teto 3.0 (2.0 sob a gravação, 8x), folga 0.5/lado (regra 6), chanfro de entrada de 1.0 na boca da tampa e no topo do gargalo, base com parede 6.5 e chão 4.0. Encaixe conferido por booleana na malha exportada: tampa fechada sem interferência, deslocada 0.45 em X ainda livre, 0.55 já interfere. Gargalo e altura do ombro iguais ao original de propósito, então psa-box-02-lid.3mf também fecha a base original (sobra 1.5mm de beiral por lado, porque ela tem 95 x 98.5). Pokébola é desenho próprio (anel 6, faixa 5, botão 7.3 com anel gravado de 4.7), gravada 1.0 na face que vai na cama. Fatiador sugerido: 4 perímetros, 20% gyroid; o perfil do original vinha com 2 perímetros e 15% grid."
+      "notes": "Feedback do teste físico do original (2026-10): tampa molenga e difícil de abrir porque prende. Causas medidas na malha: parede da tampa 1.9 em 70mm de altura, teto de 2.0 com a Pokébola gravada 1.0 (sobrava 1.0) e folga de 0.1/lado entre o vão da tampa (91.2 x 94.7) e o gargalo (91.0 x 94.5) num encaixe de 30mm. Correções: parede da tampa 3.0 (~3.9x mais rígida, cresce com o cubo da espessura), teto 3.0 (2.0 sob a gravação, 8x), folga 0.5/lado (regra 6), chanfro de entrada de 1.0 no topo do gargalo e 0.5 na boca da tampa, base com parede 6.5 e chão 4.0. Encaixe conferido por booleana na malha exportada: tampa fechada sem interferência, deslocada 0.45 em X ainda livre, 0.55 já interfere. Gargalo e altura do ombro iguais ao original de propósito, então psa-box-02-lid.3mf também fecha a base original. Revisão (print-review): o gargalo original tem QUINA VIVA, e com o vão da tampa em r2.0 os 4 cantos interferiam 0.12mm; o canto interno virou r0.5 e a booleana contra a base original dá zero fechada, livre a 0.45 em X e a (0.3, 0.3) na diagonal. O chanfro da boca da tampa caiu pra 0.5 pra sobrar 1.0mm de apoio no ombro original (que tem 2.0); sobra 1.5mm de beiral por lado, porque ela tem 95 x 98.5. Nervura refeita com o pé de reforço separado do corpo: 7.0 constante de z=6 ao topo reto, como no original. O fundo da gravação da Pokébola é ponte (até ~40mm no anel), estético; com o IFS dá pra preencher com outra cor. Pokébola é desenho próprio (anel 6, faixa 5, botão 7.3 com anel gravado de 4.7), gravada 1.0 na face que vai na cama. Fatiador sugerido: 4 perímetros, 20% gyroid; o perfil do original vinha com 2 perímetros e 15% grid."
     },
     {
       "id": "dragon-01",

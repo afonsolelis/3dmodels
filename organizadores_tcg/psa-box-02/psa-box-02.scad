@@ -23,19 +23,23 @@
 //
 // COMPATIBILIDADE: o gargalo continua 91.0 x 94.5 e o ombro continua a 72mm
 // do chão da vaga, então a tampa NOVA também serve na base ORIGINAL já
-// impressa (folga 0.5/lado, 140mm até o teto). Só sobra 1.5mm de beiral por
-// lado, porque a base original tem 95 x 98.5 e a tampa nova 98 x 101.5.
+// impressa (folga 0.5/lado inclusive na diagonal da quina viva do gargalo
+// original, por isso o vão da tampa tem canto r0.5; 140mm até o teto). Na
+// base original a tampa apoia em 1.0mm do ombro (que lá tem só 2.0) e sobra
+// 1.5mm de beiral por lado, porque ela tem 95 x 98.5 e a tampa 98 x 101.5.
 //
 // COMO SE MANUSEIA:
-//   Slabs entram em pé, de cima, uma por vaga; sobram ~34mm pra fora da boca
+//   Slabs entram em pé, de cima, uma por vaga; sobram ~37mm pra fora da boca
 //   do gargalo pra pegar. A tampa desce por cima do gargalo e assenta no
 //   ombro; fechada, a lateral fica lisa e contínua. Pra abrir, segura a base
 //   e puxa a tampa — com 0.5/lado ela sai sem trancar no meio do curso.
 //
 // Peças: "base" e "lid". Juntas cabem numa chapa só da AD5X (~204 x 101.5).
 // As duas imprimem SEM SUPORTE na orientação exportada: base com o chão na
-// cama, tampa com a Pokébola na cama (a gravação fica na 1a camada e as
-// linhas de 5-6mm fecham em ponte curta).
+// cama, tampa com a Pokébola na cama. O fundo da gravação é PONTE: no anel,
+// onde a linha corre paralela à direção da ponte, o vão chega a ~40mm e o
+// fundo pode sair meio caído (estético; o original tinha o mesmo). Com o IFS
+// dá pra trocar de cor nas camadas 0-1mm e preencher a gravação.
 //   openscad -o stl/psa-box-02-base.stl -D 'part="base"' psa-box-02.scad
 //   openscad -o stl/psa-box-02-lid.stl  -D 'part="lid"'  psa-box-02.scad
 //   openscad -o 3mf/psa-box-02-plate.3mf -D 'part="plate"' psa-box-02.scad
@@ -57,7 +61,7 @@ divider  = 1.5;  // mm, nervura entre vagas
 slots    = 10;   // nº de slabs
 rib_len  = 7.0;  // mm, quanto cada nervura avança a partir da parede lateral
 rib_fil  = 3.0;  // mm, reforço em rampa 45° no pé da nervura
-rib_h    = 80.5; // mm, altura da nervura a partir do chão da vaga (sobe 4.5 pra dentro do gargalo)
+rib_h    = 80.5; // mm, altura da nervura a partir do chão da vaga (topo reto a 76.5, ponta da rampa 8.5 acima do ombro)
 rib_lead = 4.0;  // mm, rampa no topo da nervura (funil de entrada da slab)
 head_in  = 140;  // mm, do chão da vaga ao teto da tampa fechada (slab 139 + 1)
 
@@ -70,7 +74,8 @@ body_in_h = 72;  // mm, do chão da vaga ao ombro (igual ao original)
 lid_fit   = 0.5; // mm por lado, folga tampa/gargalo (padrão de deslize do repo; era 0.1)
 lid_wall  = 3.0; // mm, parede da tampa (era 1.9)
 lid_top   = 3.0; // mm, teto da tampa (era 2.0)
-lead      = 1.0; // mm, chanfro 45° de entrada: boca da tampa e topo do gargalo
+lead      = 1.0; // mm, chanfro 45° de entrada no topo do gargalo
+lid_lead  = 0.5; // mm, chanfro 45° na boca da tampa (pequeno pra sobrar apoio no ombro da base ORIGINAL, que só tem 2.0)
 
 /* [Acabamento] */
 corner_r   = 5.0; // mm, raio dos cantos verticais externos
@@ -105,7 +110,8 @@ lid_in_h = head_in - body_in_h;                    // 68.0
 lid_h    = lid_in_h + lid_top;                     // 71.0
 closed_h = shoulder + lid_h;                       // 147.0
 neck_r   = 1.5;                                    // canto externo do gargalo
-lid_in_r = neck_r + lid_fit;                       // canto do vão da tampa
+lid_in_r = 0.5;                                    // canto do vão da tampa: o gargalo ORIGINAL tem quina VIVA,
+                                                   // e com r maior a diagonal interfere (r=2.0 dava -0.12)
 plate_gap = 8;                                     // mm entre as peças na chapa
 
 assert(box_x - 2 * body_wall > inner_x - 0.01, "parede da base invadiu a canaleta");
@@ -147,10 +153,15 @@ module rbox(x, y, h, r, c0 = 0, c1 = 0) {
 module rib() {
     // nervura de rib_len saindo da parede, com rampa 45° no pé (reforço) e
     // no topo (funil) — nada horizontal em balanço
+    // corpo: rib_len constante até rib_h - rib_lead, depois rampa até a parede
+    hull() {
+        translate([0, -divider / 2, 0]) cube([rib_len, divider, rib_h - rib_lead]);
+        translate([0, -divider / 2, rib_h - 0.01]) cube([0.6, divider, 0.01]);
+    }
+    // pé: reforço 45° só nos primeiros rib_fil mm
     hull() {
         translate([0, -divider / 2, 0]) cube([rib_len + rib_fil, divider, 0.01]);
-        translate([0, -divider / 2, rib_fil]) cube([rib_len, divider, rib_h - rib_fil - rib_lead]);
-        translate([0, -divider / 2, rib_h - 0.01]) cube([0.6, divider, 0.01]);
+        translate([0, -divider / 2, 0]) cube([rib_len, divider, rib_fil]);
     }
 }
 
@@ -193,12 +204,11 @@ module lid() {
         rbox(box_x, box_y, lid_h, corner_r, c0 = top_cham);
         // vão interno + chanfro de entrada na boca
         translate([0, 0, lid_top]) linear_extrude(lid_h) rrect(lid_in_x, lid_in_y, lid_in_r);
-        translate([0, 0, lid_h - lead])
+        translate([0, 0, lid_h - lid_lead])
             hull() {
                 linear_extrude(0.01) rrect(lid_in_x, lid_in_y, lid_in_r);
-                translate([0, 0, lead]) linear_extrude(0.01)
-                    rrect(lid_in_x + 2 * lead, lid_in_y + 2 * lead, lid_in_r + lead);
-                translate([0, 0, lead]) linear_extrude(0.02) rrect(lid_in_x + 2 * lead, lid_in_y + 2 * lead, lid_in_r + lead);
+                translate([0, 0, lid_lead]) linear_extrude(0.02)
+                    rrect(lid_in_x + 2 * lid_lead, lid_in_y + 2 * lid_lead, lid_in_r + lid_lead);
             }
         // Pokébola gravada na face que vai na cama (a de fora quando fechada).
         // Espelhada pra ficar certa vista de fora.

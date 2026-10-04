@@ -15,7 +15,7 @@ O original foi impresso e voltou com dois defeitos, os dois medidos na malha:
 | Parede da tampa | 1.9mm | **3.0mm** (~3.9× mais rígida) |
 | Teto da tampa / sob a Pokébola | 2.0 / **1.0mm** | 3.0 / **2.0mm** (8× sob o desenho) |
 | Folga tampa ↔ gargalo | **0.1mm/lado** em 30mm de encaixe | **0.5/lado** (padrão de deslize do repo) |
-| Chanfro de entrada | ~0.15mm | 1.0mm na boca da tampa e no topo do gargalo |
+| Chanfro de entrada | ~0.15mm | 1.0mm no topo do gargalo, 0.5mm na boca da tampa |
 | Parede da base / chão | 5.0 / 3.5mm | 6.5 / 4.0mm |
 | Externo | 95.0 × 98.5mm | 98.0 × 101.5mm |
 
@@ -40,8 +40,12 @@ primeiras camadas e fecha em pontes curtas de 5–6mm).
 
 **Só reimprimir a tampa:** o gargalo (91.0 × 94.5 × 30) e a altura do ombro
 são iguais aos do original de propósito. Então o `psa-box-02-lid.3mf` também
-fecha a **base original já impressa**, com a mesma folga de 0.5/lado. A única
-diferença visual é 1.5mm de beiral por lado, porque a base original é menor.
+fecha a **base original já impressa**, com a mesma folga de 0.5/lado —
+inclusive na diagonal: o gargalo original tem quina VIVA, por isso o vão da
+tampa tem canto de r0.5 (com r2.0 os quatro cantos interferiam 0.12mm). Duas
+limitações nessa combinação: a tampa apoia em só **1.0mm** do ombro original
+(que lá tem 2.0 de largura, contra 2.0 de apoio na base nova) e sobra **1.5mm
+de beiral** por lado, porque a base original é menor.
 
 ## Fatiador
 
@@ -53,4 +57,14 @@ que vinha no 3MF original usava 2 perímetros e 15% de grid.
 
 Booleana na malha exportada: com a tampa fechada não há interferência;
 deslocada 0.45mm em X continua livre e com 0.55mm já encosta, ou seja, a
-folga é de 0.5mm/lado mesmo.
+folga é de 0.5mm/lado mesmo. O mesmo teste contra a base ORIGINAL dá o mesmo
+resultado em X e Y, e na diagonal livre até (0.3, 0.3). 10 slabs de
+83.6 × 7.1 × 139 nas vagas com a tampa fechada: interferência zero (1.0mm
+entre o topo da slab e o teto).
+
+## Pokébola
+
+A gravação (1mm) fica na face que vai na cama, então o fundo dela é ponte. No
+anel, onde a linha corre paralela à direção da ponte, o vão chega a ~40mm e o
+fundo pode sair meio caído — é estético e o original tinha o mesmo. Com o IFS
+da AD5X dá pra pôr uma troca de cor no primeiro 1mm e preencher a gravação.
