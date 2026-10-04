@@ -17,3 +17,6 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# Rascunhos de sessoes de agente (Codex/Claude)
+.codex-tmp/
