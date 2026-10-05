@@ -519,29 +519,35 @@
       "scad": "cardholders/sleeve-tower-01/sleeve-tower-01.scad",
       "status": "em-andamento",
       "derived_from": "cardholders/PennySleeveHolderStacking_V2.3mf (\"Stackable Penny Sleeve Holder\", Sazabi, MakerWorld, MakerWorld Exclusive License - arquivo de TERCEIRO, NAO redistribuivel, REMOVIDO do repo em 2026-08-28; ficaram as variantes _kobra3 e as medidas abaixo). RECONSTRUCAO PARAMETRICA propria: nada da malha foi copiado, so medidas de engenharia reversa da variante Stackable (3D/Objects/object_1.model, 296 vertices): externo 73.0 x 101.5 x 45.0, parede 2.0, cavidade 69.0 x 99.5, piso 10.0, ressalto z 0..3 de 68.6 x 99.3 (0.2/lado), abas em L de 3.5 de fundura com aresta interna em x +-25.0 na face da frente, quinas r ~1.0",
-      "description": "Torre de PENNY SLEEVES DEITADOS: bandeja aberta em cima, 75 x 102.5 x 150mm, tres paredes MACICAS de 3.0mm (duas laterais + fundo) e a frente aberta num SULCO vertical de 50mm que vai do piso ao topo, ladeado por DUAS ABAS EM L de 9.5mm de retorno que seguram a pilha. O sleeve entra deitado (66 no X, 91 no Y) e a pilha cresce em Z: 140mm de curso. Piso de 10mm que e lastro contra tombamento e, embaixo dele, ressalto de empilhamento de 3mm (passo 147, duas torres = 297mm). Variante ALTA da referencia de 45mm. PAREDE MACICA E PEDIDO LITERAL DO USUARIO e SOBREPOE a regra 5 (identidade visual em colmeia) do CLAUDE.md - decisao consciente, nao esquecimento. Peca unica, imprime em pe na orientacao de uso, sem suporte.",
-      "parts": { "tower": 1 },
+      "description": "Torre de CARTAS/PENNY SLEEVES DEITADOS com TAMPA DESLIZANTE SEM TRAVA: 78 x 102.5 x 150mm (75 de corpo + cinta de 1.5 por lado no topo), tres paredes MACICAS de 3.0mm (duas laterais + fundo) e a frente aberta num SULCO vertical de 50mm que fecha em ARCO DE 45 (ponta pra cima) numa TRAVESSA logo abaixo da boca, ladeado por DUAS ABAS EM L (retorno 9.5, fundura 3.5). Piso de 10mm que e lastro e ressalto de empilhamento de 3mm (passo 147, duas torres = 297mm). A tampa e uma chapa retangular LISA de 2.6 (73.0 x 99.0, sem puxador) que corre em CANALETAS nas laterais (teto a 45, folga 0.5/lado), entra pela frente e bate no fundo; o trilho segura pra cima, mas pra frente so o atrito segura. Empilhavel com a tampa fechada. Curso util 133.9mm. PAREDE MACICA E PEDIDO LITERAL DO USUARIO e SOBREPOE a regra 5 (colmeia) do CLAUDE.md. Torre imprime em pe, tampa de cabeca pra baixo, sem suporte.",
+      "parts": { "tower": 1, "lid": 1 },
       "print_jobs": [
-        { "file": "3mf/sleeve-tower-01-plate.3mf", "contents": "JOB PRINCIPAL: 1 torre em pe, boca pra cima, ressalto na mesa, SEM SUPORTE e SEM BRIM (1a camada e o ressalto inteiro, ~6.7 mil mm2 macicos). Os 102.5 vao no eixo Y, que e o que a cama da AD5X balanca", "footprint_mm": [75.0, 102.5, 150.0] },
-        { "file": "3mf/sleeve-tower-01-par.3mf", "contents": "2 torres lado a lado, vao de 6mm. Mesma orientacao e mesmas notas do job de 1; dobra o tempo e o material e poe duas torres de 150mm balancando no eixo Y - e conveniencia pra quem ja vai empilhar, nao substitui o job de 1", "footprint_mm": [156.0, 102.5, 150.0] }
+        { "file": "3mf/sleeve-tower-01-plate.3mf", "contents": "JOB PRINCIPAL: 1 torre em pe (boca pra cima, ressalto na mesa) + 1 tampa de cabeca pra baixo (topo liso na cama), vao de 6mm. SEM SUPORTE e SEM BRIM. Tampa com 100% de preenchimento (ou 5 camadas de topo e de fundo)", "footprint_mm": [157.0, 102.5, 150.0] },
+        { "file": "3mf/sleeve-tower-01-par.3mf", "contents": "2 torres numa fileira + 2 tampas na outra, vao de 6mm. Sem o puxador a tampa tem 99.0 em Y: 102.5 + 6 + 99.0 = 207.5, cabe no alvo de 210 - o par completo num job so", "footprint_mm": [162.0, 207.5, 150.0] },
+        { "file": "3mf/sleeve-tower-01-tampa.3mf", "contents": "1 tampa de cabeca pra baixo (topo liso na cama), sem suporte, 100% de preenchimento. Pra fechar uma coluna empilhada (so a torre de cima usa tampa)", "footprint_mm": [73.0, 99.0, 2.6] },
+        { "file": "3mf/sleeve-tower-01-tampa-par.3mf", "contents": "2 tampas de cabeca pra baixo, vao de 6mm, 100% de preenchimento - pra reimprimir so tampa", "footprint_mm": [152.0, 99.0, 2.6] }
       ],
-      "assembled_closed_mm": [75.0, 102.5, 150.0],
-      "capacity": "~1750 penny sleeves VAZIOS (curso 140mm a 0.08mm cada); ~1710 com torre empilhada em cima (o ressalto dela come 3mm). ESTIMATIVA GROSSA: a espessura do sleeve NAO foi medida e varia muito entre marcas. Com carta ja enseleevada (~0.35mm), ~400",
+      "assembled_closed_mm": [78.0, 102.5, 150.0],
+      "capacity": "Curso util 133.9mm (piso z=10 ate o fundo da tampa z=143.9), com ou sem torre empilhada: ~380 cartas ensleevadas a ~0.35mm ou ~1670 penny sleeves vazios a 0.08mm. ESTIMATIVA GROSSA: a espessura NAO foi medida",
       "key_measures": {
-        "externo_mm": [75.0, 102.5, 150.0],
+        "externo_mm": [78.0, 102.5, 150.0],
         "cavidade_mm": [69.0, 99.5, 140.0],
         "cavidade_origem": "ENGENHARIA REVERSA da malha da referencia (peca impressa e aprovada por terceiros), NAO E MEDIDA DE REGUA do sleeve do usuario. Mesma ressalva que o README de organizadores_tcg faz pro penny-holder-01. Parametrizado em cav_w/cav_d: quando a regua chegar, um include com cav_w_override/cav_d_override refaz o modelo inteiro",
-        "curso_de_pilha_mm": 140.0,
-        "curso_de_pilha_com_torre_empilhada_mm": 137.0,
+        "curso_de_pilha_mm": 133.9,
         "parede_mm": 3.0,
         "parede_nota": "3.0 e nao os 2.0 da referencia: a 150mm de altura 2mm empena. Cresceu PRA FORA (73->75 em X, 101.5->102.5 em Y), nunca comendo a cavidade - com 3mm pra dentro o vao cairia pra 67.0 e um penny sleeve de ~66.7 nao entraria",
         "parede_macica": true,
         "piso_mm": 10.0,
         "piso_composicao_mm": { "ressalto": 3.0, "laje_cheia": 7.0 },
-        "sulco_mm": { "largura": 50.0, "fracao_do_externo": 0.6667, "altura": "do piso (z=10) ao topo (z=150), sem travessa nenhuma" },
-        "aba_em_L_mm": { "fundura_em_Y": 3.5, "retorno_pra_dentro": 9.5, "largura_total_em_X": 12.5, "z": [10.0, 146.6], "mordida_sobre_o_sleeve_por_lado": 8.35 },
-        "aba_topo_cortado_mm": 3.4,
-        "aba_topo_cortado_motivo": "boss_h + stack_clear. Se o retorno subisse ate a boca, o ressalto teria que ser recortado em volta dele e sobrariam dois trechos de 12.9 x 3.9mm de laje horizontal boiando no ar em z=3 (e o que a referencia faz, e o perfil dela vem com suporte LIGADO). Cortando so o RETORNO (a parede lateral sobe inteira ate 150) o ressalto vira prisma limpo",
+        "sulco_mm": { "largura": 50.0, "fracao_do_externo": 0.6667, "altura": "de z=10 a 115.3 com 50 de largura, depois ARCO DE 45 ate a ponta em z=140.3 (sem ponte)" },
+        "aba_em_L_mm": {
+          "fundura_em_Y": 3.5,
+          "retorno_pra_dentro": 9.5,
+          "largura_total_em_X": 12.5,
+          "z": [10.0, 143.9],
+          "mordida_sobre_a_carta_por_lado": 8.35,
+          "fundura_nota": "3.5 = referencia. Foi 5.0 so enquanto a travessa levava o rebaixo do clique; sem clique voltou, a carta tem 96.0 em Y atras da aba"
+        },
         "ressalto_mm": [68.2, 99.1, 3.0],
         "ressalto_folga_por_lado_mm": 0.4,
         "ressalto_folga_motivo": "0.4 e nao os 0.2 medidos na referencia: regra 6 do CLAUDE.md, licao do deckbox-02 IMPRESSO que travou no meio do curso. Peca de 150mm em pe faz mais barriga que uma de 45",
@@ -553,18 +559,56 @@
         "passo_do_empilhamento_mm": 147.0,
         "coluna_de_duas_torres_mm": 297.0,
         "quinas_r_mm": 1.0,
-        "primeira_camada_mm2": 6757,
-        "volume_solido_cm3": 197.3,
-        "centro_de_massa_mm": [0.0, 4.85, 52.11],
+        "volume_solido_cm3": 201.2,
+        "centro_de_massa_mm": [0.0, 4.11, 53.8],
         "angulo_de_tombamento_graus": {
-          "uma_torre": { "lado": 35.7, "frente": 47.1, "tras": 41.7 },
-          "duas_empilhadas": { "lado": 16.6, "frente": 24.1, "tras": 20.3 }
+          "uma_torre": { "lado": 34.9, "frente": 45.8, "tras": 41.2 },
+          "duas_empilhadas": { "lado": 16.4, "frente": 23.5, "tras": 20.3 }
         },
-        "AVISO": "cavidade e capacidade nao vem de regua - ver cavidade_origem e capacity"
+        "AVISO": "cavidade e capacidade nao vem de regua - ver cavidade_origem e capacity",
+        "externo_corpo_mm": [75.0, 102.5, 150.0],
+        "curso_de_pilha_nota": "do piso (z=10) ao fundo da tampa (z=143.9), igual com ou sem torre empilhada. Era 140 solta / 137 empilhada antes da tampa deslizante; os 3.1 a menos sao o preco de manter a tampa ABAIXO da zona do ressalto (z 147..150) e continuar empilhavel com ela fechada",
+        "travessa_frente_mm": {
+          "y": [-51.25, -47.75],
+          "topo_z": 143.9,
+          "arco_45_z": [115.3, 140.3],
+          "material_acima_da_ponta": 3.6,
+          "apoio_da_frente_da_tampa": 3.2,
+          "funcao": "amarra as duas laterais na boca (o U vira quadro fechado contra a barriga do topo) e apoia a frente da tampa; fica inteira na faixa das abas, as cartas ficam atras dela"
+        },
+        "cinta_mm": { "largura_por_lado": 1.5, "z": [142.9, 150.0], "chanfro_45_desde_z": 141.4, "parede_atras_da_canaleta": 2.0, "raio_das_quinas": 0.3, "parede_na_cara_da_frente_ao_lado_da_boca": 1.1 },
+        "tampa_mm": {
+          "chapa": [73.0, 99.0, 2.6],
+          "z_em_uso": [143.9, 146.5],
+          "folga_ate_o_ressalto_de_cima": 0.5,
+          "lingueta": { "entra_na_parede": 2.0, "ponta_altura": 1.0, "chanfro_topo": "45 de x=34.9 ate a ponta" },
+          "canaleta": { "piso_z": 143.9, "fundo_x": 37.0, "teto": "45 descendo pra dentro da parede, z=147.4 na boca a 144.9 no fundo", "chanfro_de_entrada": 0.6 },
+          "folga_deslize_por_lado": 0.5,
+          "folga_vertical": 0.5,
+          "engate_minimo": 1.5,
+          "curso_de_deslize": 99.3,
+          "entra_por": "frente; o fundo e o batente (tampa fechada a 0.2 dele)",
+          "empilhada": "tampa de baixo fica 0.5 abaixo do ressalto de cima, nao encosta",
+          "volume_solido_cm3": 18.5,
+          "massa_g_aprox": 23,
+          "borda_de_ataque_chanfro_embaixo": 0.5,
+          "acoplamento_folgas": "teto a 45: folga lateral e vertical sao a mesma; centrada sobe 0.5, encostada num lado nao sobe. 0.5 de jogo: pode fazer leve barulho",
+          "trava": "NENHUMA (clique removido depois do teste fisico: 'ficou ruim, nao precisa dessa trava'). Pra cima e de cabeca pra baixo o teto a 45 segura; pra frente so o atrito - inclinar a torre pra frente ou virar de cabeca pra baixo faz a tampa escorregar pra fora",
+          "impressao": "de cabeca pra baixo, topo na cama, 2.6 de altura; 100% de preenchimento (ou 5 camadas de topo e de fundo)",
+          "trilho_aprovado": "trilho aprovado na mao pela peca de teste (2026-10-04); depois de tirar o clique, os recortes do trilho na torre (z>=143.95; paredes+cinta |x|>=34.6) e nas linguetas da tampa tem o MESMO no de triangulos, bbox e hash de vertices ordenados",
+          "frente": "y=-50.95, 0.3 atras da cara da frente (onde o trilho ja definia); chapa retangular lisa, nada projetando pra fora",
+          "puxador": "NENHUM - pedido do usuario ('nao precisa de puxador nao'). Abre arrastando com a ponta do dedo em cima da tampa, perto da frente (ela fica 3.5 abaixo do aro)"
+        }
       },
       "hardware": "nenhum",
-      "material_estimado": { "torre_cm3": 197.3, "torre_g_pla_solido": 245, "torre_estimativa_fatiada": "~120cm3 / ~150g / ~7h com 2 perimetros e 15% de grade - ESTIMATIVA, o numero real quem da e o fatiador", "par_cm3": 394.6, "so_as_paredes_cm3": 115.0, "obs": "volume de SOLIDO medido na malha exportada. As tres paredes macicas sao 115cm3 = 3.0 x 150 x (2 x 102.5 + 69) e sao o preco do pedido de parede macica. Pra comparar: o penny-holder-01 tem o mesmo envelope de 150mm e 78cm3, porque e todo em colmeia" },
-      "notes": "PAREDE MACICA SOBREPOE A REGRA 5 do CLAUDE.md por pedido literal do usuario (sem colmeia, sem furo, sem baixo relevo) - esta registrado como decisao consciente no cabecalho do .scad, no README do modelo e aqui. SLEEVE VAZIO x CARTA ENSELEEVADA, e a cinematica de tirar, com numero: o sulco tem 50.0 e o conteudo ~66.7 de largura, 8.35 de mordida em cada aba. Sleeve VAZIO (filme mole) sai pelo sulco arqueando entre as abas, que e pra isso que a peca existe e e o que a referencia faz; carta JA ENSELEEVADA (rigida) NAO passa pelo sulco e sai pela BOCA, por cima - o sulco vira janela de ver o nivel da pilha. Nenhuma das duas e defeito, mas muda o que a peca e. Quem quiser carta enseleevada saindo pela frente precisa de open_frac_override = 0.93 e ai perde a aba. PROVAS NA GEOMETRIA (rodadas, nao deduzidas): part=\"fit\" no passo real de 147 sai VAZIO; com passo 146 (1mm fundo demais) da 382mm3 de interferencia em z 146..150, que e o assento parando a descida - o teste tem dente; virada 180 graus da 589mm3 em y 48.05..51.25, z 147..150, o ressalto batendo no FUNDO com 3mm de mordida na largura inteira. Nao foi desenhada chaveta, mas o contorno assimetrico do ressalto (rente na frente, recuado 0.4 atras) ja e uma: empilhar virado nao entra nem 'quase', fica 3mm alta. SOLIDO UNICO: Volumes 2 no sumario CGAL. O ressalto e o corpo se encostavam so na face e saiam como DOIS volumes - foi preciso 0.02mm de sobreposicao (que entra por dentro do corpo, 68.2 contra os 70.6 do assento, e nao muda nada por fora). SECOES DO STL conferidas ao centesimo nos niveis 0.05 / 0.79 / 0.85 / 2.99 / 3.01 / 5.19 / 5.25 / 10 / 146.5 / 146.7 / 149.9: z=0.05 da 66.70 x 97.60 (base chanfrada do ressalto), z=2.99 da 68.20 x 99.10 (ressalto reto), z=3.01 da 70.62 x 100.31 (o ledge), z=5.25 da 75.00 x 102.50 (externo cheio). RAY-CAST na malha: aba presente em z=20 e z=146 (solido de x=25.0 a 37.5) e AUSENTE em z=147 e 149 (so a parede, 34.5 a 37.5) - o corte do retorno existe de fato. BALANCO: o UNICO balanco plano da peca e o ledge de 1.2mm em z=3; todo o resto e vertical ou 45, e NAO EXISTE UMA UNICA PONTE (a frente e aberta do piso ao topo, sem travessa). Se o fatiador estiver com suporte LIGADO, conferir que ele nao enfia nada embaixo do ledge de z=3: e a superficie de assento do empilhamento e resto de suporte ali deixa a torre de cima bamba. SEM BRIM: 1a camada macica de ~6757mm2 (o ressalto inteiro). ESTABILIDADE: uma torre e estavel de verdade (tomba so a 35.7 graus pro lado), mas DUAS EMPILHADAS sao 297mm de coluna com centro de massa em z=125.6 e tombam a 16.6 graus pro lado - e isso VAZIAS. Usar encostada na parede ou na prateleira, nao solta no meio da mesa. Foi escolha do usuario, que pediu explicitamente a variante empilhavel. PENDENCIAS: (1) a cavidade 69.0 x 99.5 NAO e medida de regua, e engenharia reversa de malha de terceiro - o conserto e um include com cav_w_override/cav_d_override; (2) a espessura do sleeve nao foi medida, entao a capacidade e ordem de grandeza; (3) nao foi impressa nem testada na mao."
+      "material_estimado": {
+        "torre_cm3": 201.2,
+        "tampa_cm3": 18.5,
+        "torre_estimativa_fatiada": "~125cm3 / ~155g / ~7h com 2 perimetros e 15% de grade - ESTIMATIVA, o numero real quem da e o fatiador",
+        "par_cm3": 402.4,
+        "obs": "volume de SOLIDO medido na malha exportada"
+      },
+      "notes": "PAREDE MACICA SOBREPOE A REGRA 5 do CLAUDE.md por pedido literal do usuario; o unico aceno a colmeia e o arco de 45 de ponta pra cima que fecha o sulco sem ponte. TAMPA DESLIZANTE (2026-10-04) substitui uma tampa de encaixe por cima que o usuario REPROVOU ('ela nao segura nada, fica solta'). A 1a versao deslizante tinha trava de CLIQUE (lingueta-mola + dente num rebaixo da travessa); a peca de teste impressa APROVOU o trilho e REPROVOU o clique ('ficou ruim, nao precisa dessa trava, apenas o deslizar ja esta ok'). O clique saiu (lingueta, fendas, dente, rebaixo, part=test e o job teste), o trilho ficou EXATAMENTE igual (provado por hash de vertices ordenados em tres recortes), depois o puxador tambem saiu ('nao precisa de puxador nao') e a tampa virou chapa retangular lisa de 73.0 x 99.0 x 2.6, frente 0.3 atras da cara (sem nada projetando), e as abas voltaram de 5.0 pra 3.5 (o 5.0 so existia pro rebaixo; a tampa ainda apoia 3.2 na travessa e o arco nao mudou). SEM TRAVA: a tampa e presa pra cima pelo trilho, mas pode DESLIZAR PRA FORA PELA FRENTE se a torre for inclinada pra frente ou ficar de cabeca pra baixo. ENTRA PELA FRENTE, fundo e o batente. FICA ABAIXO DA ZONA DO RESSALTO (z 143.9..146.5) pra continuar empilhavel com a tampa fechada; custo: curso util 137 -> 133.9. TETO DA CANALETA A 45 descendo pra dentro da parede: imprime em pe sem suporte. SEM O PUXADOR a tampa tem 99.0 em Y e o job par passou a levar 2 torres + 2 tampas (162.0 x 207.5). PROVAS: lid_fit com o curso inteiro (dy 0..-99) em repouso e levantada 0.5 VAZIO em todos; fechada dz+0.7 67mm3 (nao sai pra cima), dx0.6 27mm3, dy+0.4 31mm3; fit e stack_fit VAZIOS, stack_fit dz+0.7 1305mm3. Carta do fundo da pilha sai virando a torre. Tampa com 100% de preenchimento. ESTABILIDADE: duas empilhadas tombam a 16.4 graus pro lado, vazias; usar encostada. PENDENCIAS: (1) cavidade 69.0 x 99.5 NAO e medida de regua - medir a carta ja ensleevada (largura x comprimento x espessura); (2) so a peca de teste do trilho foi impressa; a torre inteira e a tampa sem trava ainda nao."
     },
     {
       "id": "deckbox-01",

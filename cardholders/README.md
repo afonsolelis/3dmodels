@@ -13,7 +13,7 @@ organização de sleeve/toploader, [`organizadores_tcg/`](../organizadores_tcg/)
 | Modelo | Status | Descrição |
 |---|---|---|
 | [cardholder-01](./cardholder-01/) | 🚧 em andamento | 4 cantoneiras em L + **duas cintas de travamento** (meio e topo) e cinta de pé integrada; bolso 66×90 (carta nua), 70×94×62mm, peça única |
-| [sleeve-tower-01](./sleeve-tower-01/) | 🚧 em andamento | Torre de **penny sleeves deitados**, 75×102.5×**150**mm: três paredes **maciças** de 3mm, **sulco de 50mm** do piso ao topo entre duas abas em L de 9.5 de retorno, piso-lastro de 10mm e ressalto de empilhamento (passo 147). Cavidade 69×99.5, curso de pilha 140mm |
+| [sleeve-tower-01](./sleeve-tower-01/) | 🚧 em andamento | Torre de **cartas/penny sleeves deitados**, 78×102.5×**150**mm: três paredes **maciças** de 3mm, **sulco de 50mm** fechando em arco de 45° numa travessa, abas em L de 3.5, piso-lastro de 10mm e ressalto de empilhamento (passo 147). **Tampa deslizante** sem trava em canaletas com teto a 45° (folga 0.5/lado, trilho aprovado no teste físico), chapa lisa sem puxador; empilhável com a tampa fechada. Cavidade 69×99.5, curso útil 133.9mm |
 
 ## Downloads de terceiros
 

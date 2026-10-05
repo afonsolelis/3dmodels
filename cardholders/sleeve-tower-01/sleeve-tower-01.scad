@@ -1,218 +1,216 @@
 // sleeve-tower-01.scad
 //
-// TORRE de penny sleeves DEITADOS: bandeja aberta em cima, 75 x 102.5 x 150mm,
-// com três paredes maciças (duas laterais + fundo), a frente aberta num SULCO
-// vertical que vai do piso ao topo e duas ABAS EM L nos cantos da frente que
-// seguram a pilha. Piso de 10mm que é lastro e, embaixo dele, um RESSALTO de
-// empilhamento — a torre de cima senta na boca da de baixo.
+// TORRE de cartas/penny sleeves DEITADOS com TAMPA DESLIZANTE: 78 x 102.5 x
+// 150mm (75 de corpo + cinta de 1.5 por lado no topo), três paredes maciças
+// (duas laterais + fundo), a frente aberta num SULCO vertical de 50mm que
+// fecha em ARCO DE 45 (ponta pra cima) numa TRAVESSA logo abaixo da boca, duas
+// ABAS EM L nos cantos da frente que seguram a pilha, piso de 10mm que é
+// lastro e, embaixo dele, um RESSALTO de empilhamento. A tampa é uma chapa
+// inteira de 2.6 que corre em CANALETAS nas laterais, estilo estojo: entra
+// pela frente e bate no fundo. SEM TRAVA (ver TAMPA DESLIZANTE).
 //
 // COMO SE MANUSEIA (é uma torre de bancada, não uma caixa de deck):
-//   1. A torre fica DE PÉ na mesa, com o sulco virado pra você. O sleeve entra
-//      DEITADO (os 66 no eixo X, os 91 no eixo Y) e a pilha cresce em Z: são
-//      140mm de curso, do piso (z=10) até a boca (z=150).
-//   2. ABASTECER: pela BOCA, que é aberta e livre nos 69.0 x 99.5 inteiros —
-//      nada estrangula a entrada, você despeja o maço de sleeves de cima.
-//   3. TIRAR: pelo SULCO da frente. Você enfia dois dedos nos 50mm de vão, na
-//      altura do topo da pilha, pinça o sleeve e puxa pra frente. O sleeve tem
-//      66.7 de largura e o sulco tem 50, então ele NÃO sai reto: ele passa
-//      arqueando entre as duas abas — que é exatamente o que impede a pilha
-//      inteira de escorregar pra fora quando você puxa um. Ver a nota
-//      "SLEEVE VAZIO x CARTA ENSLEEVADA" mais abaixo, porque isso muda tudo.
-//   4. EMPILHAR: a torre de cima desce na boca da de baixo. O ressalto de 3mm
-//      entra na boca com 0.4/lado e a torre assenta no aro. Sulco com sulco:
-//      não foi desenhada chaveta nenhuma, mas o ressalto é assimétrico em Y
-//      (rente na frente, recuado 0.4 atrás) e isso já trava — virada 180 graus
-//      ela bate no fundo e fica boiando 3mm alta, óbvio na mão. Duas empilhadas
-//      dão 297mm de coluna, não 300: a de cima afunda os 3mm do ressalto.
+//   1. A torre fica DE PÉ na mesa, sulco virado pra você. A carta entra
+//      DEITADA (66.7 no X, ~91 no Y) e a pilha cresce em Z: 133.9mm de curso
+//      útil, do piso (z=10) até o fundo da tampa (z=143.9).
+//   2. ABRIR: ponta do dedo em cima da tampa, perto da frente (ela fica 3.5
+//      abaixo do aro), e arrasta pra você. A tampa desliza 99.3mm até sair.
+//      Não tem puxador: pedido do usuário ("não precisa de puxador").
+//   3. ABASTECER / TIRAR: pela BOCA, aberta nos 69.0 x 99.5 inteiros. Carta já
+//      ensleevada é rígida e NÃO passa pelo sulco (66.7 de carta contra 50 de
+//      vão): a boca é a única saída, e é por isso que existe a tampa. O sulco
+//      é janela de ver o nível da pilha (e, com sleeve VAZIO, filme mole, dá
+//      pra tirar arqueando entre as abas como na referência). A carta do FUNDO
+//      da pilha só sai virando a torre (com a tampa aberta, mão na boca).
+//   4. FECHAR: encosta a tampa (chanfro de baixo pra trás e pra baixo) na boca das
+//      canaletas na cara da frente e empurra até bater no fundo.
+//   5. EMPILHAR (com a tampa fechada ou não): a torre de cima desce na boca da
+//      de baixo. O ressalto de 3mm entra com 0.4/lado e assenta no aro; a tampa
+//      de baixo fica 0.5 abaixo do ressalto e não encosta. Assimétrico em Y
+//      (rente na frente, recuado atrás): virada 180 graus ela bate no fundo e
+//      fica 3mm alta. Duas empilhadas dão 297mm de coluna (passo 147).
+//   ATENÇÃO, SEM TRAVA: a tampa é presa PRA CIMA pelo trilho, mas pode
+//   DESLIZAR PRA FORA PELA FRENTE se a torre for inclinada pra frente ou
+//   ficar de cabeça pra baixo. Carregar de pé, ou com a mão sobre a frente.
 //
 // DE ONDE VEIO, E POR QUE ESTE ARQUIVO NÃO É O ORIGINAL
 // Referência de geometria: `../PennySleeveHolderStacking_V2.3mf`
 // ("Stackable Penny Sleeve Holder", Sazabi, MakerWorld, MakerWorld Exclusive
-// License — arquivo de TERCEIRO, NÃO redistribuível; é por essa família de
-// licenças que o repo virou privado em 2026-08-09). Este .scad é reconstrução
-// paramétrica própria: nada da malha foi copiado, só medidas de engenharia
-// reversa. Medido na malha da variante Stackable (3D/Objects/object_1.model,
-// 296 vértices, origem no centro do bbox):
-//   envelope 73.00 x 101.50 x 45.00  (x ±36.50, y ±50.75, z ±22.50)
-//   parede 2.00 nas laterais (face interna x ±34.50 -> vão 69.00)
-//   parede 2.00 no fundo (face interna y = 48.75 -> vão 99.50)
-//   piso: topo da cavidade em z = 10.00 (níveis de z: 0, 3, 10, ...)
-//   ressalto de empilhamento z 0..3, contorno 68.6 x 99.3 (0.2/lado de folga)
-//   abas em L: y -50.75..-47.25 (3.5 de profundidade), aresta interna em
-//     x = ±25.00 na FACE DA FRENTE, abrindo em filete até ±28.83 no fundo da
-//     aba -> o vão do sulco na cara da peça é 50.00 = 68.5% dos 73.0
-//   quinas verticais externas e arestas do sulco arredondadas em r ≈ 1.0
+// License — arquivo de TERCEIRO, NÃO redistribuível, removido do repo em
+// 2026-08-28). Este .scad é reconstrução paramétrica própria: nada da malha foi
+// copiado, só medidas de engenharia reversa (object_1.model, 296 vértices):
+//   envelope 73.00 x 101.50 x 45.00, parede 2.00, cavidade 69.00 x 99.50,
+//   piso 10.00, ressalto z 0..3 de 68.6 x 99.3 (0.2/lado), abas em L de 3.5
+//   de fundura com aresta interna em x ±25.00, quinas r ≈ 1.0.
 //
-// O QUE MUDA NESTA VARIANTE (tudo decidido com o usuário)
-//   1. ALTURA 45 -> 150. O piso segue com 10.0, então a cavidade vai de 35 pra
-//      140mm de curso de pilha. Piso pesado é bem-vindo: é o lastro que segura
-//      uma peça de 150mm de pé (ver ESTABILIDADE).
-//   2. PAREDE 2.0 -> 3.0, CRESCENDO PRA FORA. A 150mm de altura uma parede de
-//      2mm empena e é mole. Os 3mm saem do envelope externo (73.0 -> 75.0 em X
-//      e 101.5 -> 102.5 em Y), NUNCA da cavidade: com 3mm pra dentro o vão
-//      cairia pra 67.0 e um penny sleeve de ~66.7 não entraria mais.
-//   3. PAREDE MACIÇA — PEDIDO LITERAL DO USUÁRIO. Sem colmeia, sem furo, sem
-//      baixo relevo. Isto SOBREPÕE a regra 5 (identidade visual hexagonal) do
-//      CLAUDE.md, de propósito e por escrito, não é esquecimento. O preço está
-//      medido e declarado embaixo, em MATERIAL E TEMPO.
-//   4. SULCO = 2/3 DA LARGURA, do piso ao topo, sem travessa nenhuma. Com o
-//      externo de 75.0 dá 50.0mm exatos — que por coincidência é o mesmo vão
-//      que a referência tem na cara da peça.
-//   5. ABAS MAIORES: retorno de 9.5mm pra dentro da face interna da lateral,
-//      contra os 7.25 da referência. Não é número escolhido, é consequência do
-//      item 4: sulco de 50 (x ±25) com a face interna da lateral em x ±34.5 dá
-//      34.5 - 25.0 = 9.5 de retorno. Mais aba = pilha mais presa.
-//   6. FOLGA DO RESSALTO 0.2 -> 0.4/LADO, com chanfro de entrada de 0.8. Regra
-//      6 do CLAUDE.md, aprendida no deckbox-02 impresso, que TRAVOU no meio do
-//      curso: peça alta impressa em pé faz barriga pra dentro, a boca sai
-//      subdimensionada, o sólido sai superdimensionado e ainda tem pé de
-//      elefante. Aos 150mm isso é pior que aos 45 da referência.
-//   7. ABA CORTADA NO TOPO. O retorno da aba em L para 3.4mm abaixo da boca
-//      (z=146.6) — ver ABA CORTADA NO TOPO, é o que deixa o ressalto ser um
-//      prisma limpo e mata o pior balanço da peça.
+// O QUE MUDA EM RELAÇÃO À REFERÊNCIA (tudo decidido com o usuário)
+//   1. ALTURA 45 -> 150. Piso segue com 10.0 (é o lastro).
+//   2. PAREDE 2.0 -> 3.0, CRESCENDO PRA FORA (73 -> 75 em X, 101.5 -> 102.5 em
+//      Y). Pra dentro, a cavidade cairia pra 67.0 e a carta de 66.7 não entraria.
+//   3. PAREDE MACIÇA — PEDIDO LITERAL DO USUÁRIO. Sem colmeia, sem furo. Isto
+//      SOBREPÕE a regra 5 do CLAUDE.md de propósito. A tampa segue igual: lisa.
+//      O único aceno à identidade é o ARCO DE 45 de ponta pra cima no topo do
+//      sulco — e ele está lá porque é o jeito de fechar o sulco SEM PONTE.
+//   4. SULCO = 2/3 DO EXTERNO DO CORPO = 50.0mm, do piso até z=115.3, e daí
+//      fecha em arco de 45 até a ponta em z=140.3.
+//   5. ABAS com retorno de 9.5 (consequência do sulco de 50) e fundura 3.5,
+//      a da referência. Atrás da aba sobram 96.0 de vão em Y pra carta.
+//   6. FOLGA DO RESSALTO 0.2 -> 0.4/LADO, com chanfro de entrada de 0.8 (regra
+//      6, lição do deckbox-02 que travou).
+//   7. TAMPA DESLIZANTE (2026-10-04) — substitui uma tampa de encaixe por cima
+//      que o usuário reprovou na mão: "ela não segura nada, fica solta". Ele
+//      escolheu deslizante, e isso exigiu mexer na torre: CANALETAS, CINTA e
+//      TRAVESSA (abaixo). A 1ª versão tinha uma trava de CLIQUE (lingueta-mola
+//      com dente num rebaixo da travessa); a peça de teste impressa aprovou o
+//      trilho e REPROVOU o clique ("ficou ruim, não precisa dessa trava,
+//      apenas o deslizar já está ok") — o clique saiu, o trilho ficou
+//      EXATAMENTE como estava, e as abas voltaram de 5.0 (fundura que só
+//      existia pra caber o rebaixo) pra 3.5. Depois o puxador também saiu
+//      ("não precisa de puxador não"): a tampa é uma chapa retangular lisa.
 //
-// ATENÇÃO — A MEDIDA DO SLEEVE NÃO É DE RÉGUA
-// A cavidade 69.0 x 99.5 NÃO foi medida no sleeve do usuário: ela veio da
-// malha da referência, que é peça impressa e aprovada por terceiros. É a mesma
-// ressalva que o README de organizadores_tcg faz pro penny-holder-01. Vale
-// como ponto de partida (peça impressa que funciona > catálogo), mas o dia em
-// que o sleeve for medido com régua, a correção é um include de 3 linhas:
-//   cav_w_override = <largura + 2>; cav_d_override = <altura + 2>;
+// ATENÇÃO — A MEDIDA DA CARTA NÃO É DE RÉGUA
+// A cavidade 69.0 x 99.5 veio da malha da referência, não da carta do usuário.
+// Quando a régua chegar, a correção é um include de 3 linhas:
+//   cav_w_override = <largura + 2>; cav_d_override = <comprimento + 2>;
 //   include <sleeve-tower-01.scad>
-// e o modelo inteiro se refaz — externo, sulco, abas e ressalto são todos
-// derivados desses dois números.
+// e o modelo inteiro se refaz — sulco, abas, ressalto, canaletas e tampa.
 //
-// SLEEVE VAZIO x CARTA ENSLEEVADA (a cinemática de tirar, com número)
-// O sulco tem 50.0mm e o conteúdo tem ~66.7 de largura: 16.7mm a menos, 8.35
-// de mordida em cada aba. Isso quer dizer que:
-//   - SLEEVE VAZIO (filme mole): sai pelo sulco arqueando, sem esforço. É pra
-//     isso que a peça existe e é o que a referência faz.
-//   - CARTA JÁ ENSLEEVADA (rígida, a carta não dobra): NÃO passa pelo sulco.
-//     Sai pela BOCA, por cima — que é aberta e livre. O sulco vira janela de
-//     ver o nível da pilha e de empurrar a pilha pra cima com o dedo.
-// Nenhuma das duas é defeito, mas é bom saber qual das duas você comprou antes
-// de encher a torre. Quem quiser a carta enseleevada saindo pela frente tem que
-// abrir o sulco pra ~70 (open_frac_override = 0.93) e aí perde a aba.
+// TAMPA DESLIZANTE — POR QUE ASSIM (trilho APROVADO no teste físico)
+//   POR ONDE ENTRA: PELA FRENTE. A frente já é a face aberta (não há parede
+//   pra furar), o FUNDO vira batente de graça (a canaleta termina na face
+//   interna dele) e o lado de abrir é o que você olha.
+//   ONDE FICA EM Z: ABAIXO DA ZONA DO RESSALTO, pra continuar empilhável com
+//   a tampa fechada. O ressalto da torre de cima desce até z=147; a tampa vai
+//   de 143.9 a 146.5 (0.5 de folga). Preço: o curso útil cai de 137 (o que a
+//   torre empilhada já tinha) pra 133.9 — 3.1mm, ~9 cartas ensleevadas.
+//   PERFIL DO TRILHO (corte XZ, lado +x; o -x é espelho):
+//     tampa ......... chapa retangular LISA de 2.6 (z 143.9..146.5), 73.0 x
+//                     99.0, frente em y=-50.95 (0.3 atrás da cara da frente,
+//                     onde o trilho já definia), sem nada projetando pra fora
+//     lingueta ...... entra 2.0 na parede além da face interna (x 34.5..36.5).
+//                     Fundo PLANO (apoia no piso da canaleta) e topo com
+//                     CHANFRO DE 45 de x=34.9 até a ponta, que tem 1.0 de
+//                     altura (z 143.9..144.9)
+//     canaleta ...... piso plano em z=143.9, fundo vertical em x=37.0 (1.0 de
+//                     altura), TETO A 45 descendo pra dentro da parede, de
+//                     z=147.4 na boca a 144.9 no fundo. O teto é a lingueta
+//                     crescida 0.5 em X e 0.5 em Z.
+//     folgas ........ 0.5/lado em X (regra 6, deslize de ~100mm), 0.5 vertical.
+//                     Engate mínimo da lingueta com a tampa encostada num lado:
+//                     1.5mm.
+//     boca .......... chanfro de entrada de 0.6 na frente da canaleta (com a
+//                     quina da cinta em r=0.3 sobram 1.1 de parede na cara da
+//                     frente — regra 4). A tampa tem os cantos de trás
+//                     chanfrados em 0.8 e a aresta de BAIXO da borda de ataque
+//                     (a de trás, que entra primeiro) chanfrada em 0.5: passa
+//                     POR CIMA de uma carta empenada em vez de empurrá-la.
+//     ACOPLAMENTO ... por causa do teto a 45, folga lateral e folga vertical
+//                     são a MESMA folga: tampa centrada sobe 0.5; encostada
+//                     num lado não sobe. A tampa tem 0.5 de jogo e pode fazer
+//                     um leve barulho chacoalhando.
+//   POR QUE TETO A 45 E NÃO RETO: a torre imprime em pé, e uma canaleta
+//   horizontal numa parede vertical tem teto voltado pra baixo. Teto reto
+//   seria balanço de 2.5mm em cada camada da canaleta. A 45 descendo PRA DENTRO
+//   da parede, cada camada acima do teto avança 1 camada sobre a de baixo,
+//   presa na parede — imprime sem suporte.
+//   CINTA: com a canaleta indo até x=37.0, uma parede de 3.0 deixaria 0.5mm
+//   atrás dela. As laterais engrossam 1.5 pra FORA só no topo (x até 39.0,
+//   cheia de z=142.9 a 150, com chanfro de 45 embaixo, de 141.4 a 142.9 —
+//   cresce subindo, imprime). Sobra 2.0 de parede atrás da canaleta. Quinas
+//   verticais da cinta em r=0.3 pra não comer a parede ao lado da boca.
+//   TRAVESSA DA FRENTE (y -51.25..-47.75, mesma fundura das abas, até z=143.9):
+//   amarra as duas laterais na boca — o U, que era aberto em cima na frente,
+//   vira um quadro fechado (o topo de uma torre de 150 impressa em pé faz
+//   barriga; com as pontas soltas a tampa travaria ou soltaria). É também o
+//   APOIO DA FRENTE DA TAMPA: com a tampa fechada (frente em y=-50.95) são
+//   3.2mm de chapa apoiados na travessa na largura toda, além dos pisos das
+//   canaletas. Fica INTEIRA na faixa das abas: as cartas ficam atrás dela
+//   (y > -47.75) e saem pela boca sem encostar. Embaixo fecha o sulco em ARCO
+//   DE 45, sem ponte, com 3.6 de travessa acima da ponta (o arco ficou no mesmo
+//   lugar de quando ela levava o rebaixo do clique).
+//   O QUE SEGURA A TAMPA (SEM TRAVA): pra cima, o teto da canaleta (sobe no
+//   máximo 0.5; fit_dz=+0.7 já interfere) — de cabeça pra baixo ela fica
+//   pendurada nos tetos, não cai pra baixo. Pros lados, 0.5. Pra trás, o
+//   batente. PRA FRENTE, NADA: só o atrito. Inclinar a torre pra frente ou
+//   virar de cabeça pra baixo faz a tampa ESCORREGAR PRA FORA pela frente.
+//   Decisão do usuário depois do teste físico (o clique "ficou ruim").
 //
-// ABA CORTADA NO TOPO (por que o retorno para em z=146.6)
-// O ressalto da torre de cima ocupa os 3mm de cima da cavidade da torre de
-// baixo. Se a aba em L subisse até a boca, o ressalto teria que ser recortado
-// em volta dela — e esse recorte deixaria, na cara da frente, dois trechos de
-// 12.9 x 3.9mm de laje horizontal boiando no ar em z=3 (é o que a referência
-// faz; o perfil dela vem com suporte LIGADO). Cortar 3.4mm do RETORNO da aba
-// (só do retorno: a parede lateral sobe inteira até 150) resolve os dois lados:
-//   - o ressalto vira um prisma retangular limpo, rente à frente, sem recorte;
-//   - o único balanço que sobra na peça é o degrau de 1.2mm do assento.
-// O que se perde: os 3.4mm de cima da pilha ficam sem aba na frente. Não custa
-// nada — com uma torre empilhada em cima, esses 3mm estão ocupados pelo
-// ressalto dela, e sem torre em cima a pilha nunca chega rente à boca.
+// CURSO COMPLETO DA TAMPA (simulado; regra 3, lição do elevador do deckbox-01):
+//   part="lid_fit" com dy = 0, -1, -2, -3, -5, -10, -25, -50, -75, -95, -99 em
+//   repouso (dz=0.01) e dy = 0, -2, -50, -99 levantada até o teto (dz=0.5):
+//   VAZIO em TODOS. Nada pega no curso inteiro.
+//   PROVAS NA POSIÇÃO FECHADA: dz=+0.7 67mm³ (não sai pra cima); dx=0.6 27mm³;
+//   dy=+0.4 31mm³ (batente).
+//   EMPILHAMENTO: part="fit" (duas torres, passo 147) VAZIO; part="stack_fit"
+//   (tampa fechada x torre de cima) VAZIO, dz=+0.7 1305mm³.
+//   TRILHO INALTERADO desde o teste físico: o recorte da torre acima do piso
+//   da canaleta (z >= 143.95), o recorte das paredes/cinta (|x| >= 34.6,
+//   z 140..150) e o recorte das linguetas da tampa (|x| 33..37, y -45..47) têm
+//   o MESMO nº de triângulos, bbox e hash de vértices ordenados antes e
+//   depois de tirar o clique.
 //
-// ASSENTO DO EMPILHAMENTO — O PROBLEMA DA SAIA, E COMO FOI RESOLVIDO
-// Parede 3.0 + folga 0.4 = 3.4mm de saia em volta do ressalto, a 3mm da mesa
-// (na referência eram 2.2). 3.4mm de laje horizontal saindo do nada é balanço
-// puro: a camada de z=3 avançaria 3.4mm de uma vez sobre o vazio e a superfície
-// que pende é justamente a que faz o assento do empilhamento. Foram avaliadas
-// três saídas:
-//   (a) degrau reto de 3.4 ....... assento perfeito, superfície pendurada feia
-//                                  e ondulada — e ondulação no assento é torre
-//                                  balançando.
-//   (b) chanfro de 45 puro ....... imprime lindo e NÃO TEM ASSENTO: a torre de
-//                                  cima escorregaria na rampa até cunhar na
-//                                  aresta interna do aro, abrindo a parede.
-//   (c) ADOTADA: 1.2mm de ledge plano + 2.2mm a 45. O ledge dá um assento
-//                                  definido e o resto sobe em rampa. O balanço
-//                                  cai de 3.4 pra 1.2mm — quase metade do que
-//                                  a referência já imprime hoje.
-// O aro da torre de baixo tem 3.0 de largura (x 34.5..37.5); o ledge da de cima
-// pousa em x 34.1..35.3. Sobreposição REAL de contato = 0.8mm num anel contínuo
-// em U de ~276mm de perímetro = ~220mm² de apoio. Pra uma torre cheia (~2.5N)
-// dá ~0.011MPa: o assento é geométrico, não estrutural, e 0.8mm contínuo é
-// assento de sobra. Por isso também NÃO existe funil na boca: um funil de 0.6
-// comeria justo esses 0.8 e o assento sumiria. Quem guia o encaixe é o chanfro
-// de 0.8 embaixo do ressalto, sozinho.
+// ASSENTO DO EMPILHAMENTO (inalterado)
+// Parede 3.0 + folga 0.4 = 3.4mm de saia em volta do ressalto, a 3mm da mesa.
+// Solução: 1.2mm de LEDGE plano (assento definido) + 2.2mm de RAMPA A 45. O
+// balanço plano cai de 3.4 pra 1.2mm. Contato real do ledge sobre o aro: 0.8mm
+// num anel em U de ~276mm. Sem funil na boca (comeria o assento): quem guia é
+// o chanfro de 0.8 do ressalto, que aceita 1.2mm de erro de mão.
 //
-// CURSO COMPLETO DO EMPILHAMENTO (simulado com número antes de dar por bom —
-// lição do elevador do deckbox-01, que tinha 10mm de vão pra 48mm de curso):
-//   separação 3.00mm .. a base do ressalto (66.6 x 97.5, já descontado o
-//                       chanfro) procura a boca (69.0 x 99.5). Aceita 1.2mm de
-//                       erro lateral de mão em X — é a folga de 0.4 mais o
-//                       chanfro de 0.8.
-//   separação 2.20mm .. o chanfro de 45 termina e entra o RETO. Daqui pra baixo
-//                       são 2.2mm de engate reto com 0.4/lado: a torre já está
-//                       alinhada e só desce.
-//   separação 0.00mm .. assenta. O batente é o LEDGE de 1.2mm da torre de cima
-//                       contra o ARO de 3.0 da de baixo (0.8mm de contato real),
-//                       nunca o fundo do ressalto contra sleeve.
-//   com a torre cheia . o ressalto desce até z=147 da torre de baixo, ou seja
-//                       come os 3mm de cima da cavidade: o curso útil vira 137
-//                       (e não 140) quando há torre empilhada em cima. Encher
-//                       além disso não trava nada — só levanta a torre de cima.
-//   PROVAS NA GEOMETRIA (rodadas, não deduzidas):
-//     part="fit" (passo 147) ....... VAZIO. Encaixa sem tocar em nada.
-//     passo 146 (1mm fundo demais) . 382mm³ de interferência em z 146..150. É
-//                                    o assento parando a descida — o teste tem
-//                                    dente, não é vazio por acidente.
-//     virada 180 graus ............. 589mm³ em y 48.05..51.25, z 147..150: o
-//                                    ressalto bate no FUNDO, 3mm de mordida na
-//                                    largura inteira. Não existe chaveta neste
-//                                    modelo, mas o contorno assimétrico do
-//                                    ressalto (rente na frente, recuado atrás)
-//                                    já é uma: empilhar virado não entra nem
-//                                    "quase", a torre fica boiando 3mm alta.
+// ESTABILIDADE (o preço de 150mm, aceito pelo usuário)
+// Centro de massa MEDIDO na malha: (0, 4.11, 53.80). Uma torre tomba com
+//   34.9 graus pro lado | 45.8 pra frente | 41.2 pra trás.
+// DUAS EMPILHADAS (297mm, centro de massa em z=127.3):
+//   16.4 graus pro lado | 23.5 pra frente | 20.3 pra trás.
+// Vazias — cheias, pior. Coluna de duas: encostada na parede/prateleira.
 //
-// ESTABILIDADE (é o preço de 150mm, e o usuário aceitou de olho aberto)
-// Centro de massa MEDIDO na malha exportada: (0, 4.85, 52.11) — o piso de 10mm
-// é 37% do material e puxa tudo pra baixo. Uma torre sozinha tomba com
-//   35.7 graus pro lado | 47.1 pra frente | 41.7 pra trás — estável de verdade.
-// DUAS EMPILHADAS: 297mm de coluna (o passo é 147, não 150 — a de cima afunda
-// os 3mm do ressalto), centro de massa em z=125.6, e o ângulo despenca pra
-//   16.6 graus pro lado | 24.1 pra frente | 20.3 pra trás.
-// E isso VAZIA: cheia, o conteúdo sobe o centro de massa mais ainda. Duas
-// empilhadas é uma coluna que um esbarrão derruba — usar encostada na parede ou
-// na prateleira, não solta no meio da mesa.
+// MATERIAL E TEMPO
+// Torre 201.2cm³ de SÓLIDO, tampa 18.5cm³ (medidos na malha). Fatiada com 2
+// perímetros e 15% de grade a torre fica na casa de ~125cm³ / ~155g / ~7h — o
+// número real é do fatiador. Botões honestos se incomodar: wall_override =
+// 2.6; altura menor (total_h_override). NÃO baixar o infill do piso: ali o
+// peso é o lastro.
 //
-// MATERIAL E TEMPO (o preço da parede maciça, item 3)
-// 197.3cm³ de SÓLIDO, medido na malha exportada. Só as três paredes são 115cm³:
-// 3.0 x 150 x (2 x 102.5 + 69). Fatiado com 2 perímetros e 15% de grade a
-// estimativa é ~120cm³ de filamento (~150g) e ~7h — é peça grande, não é
-// impressão de tarde, e o número real quem dá é o fatiador. Pra comparar: o
-// penny-holder-01, mesmo envelope de 150mm mas todo em colmeia, tem 78cm³.
-// Se incomodar, os botões honestos são, nesta ordem:
-//   - baixar wall pra 2.6 (o mesmo do penny-holder-01) -> ~-20cm³;
-//   - baixar a altura (total_h_override = 100) -> a peça inteira encolhe;
-//   - NÃO mexer no infill do piso pra baixo: ali o peso é feature, é o lastro.
-// Colmeia resolveria de verdade, e é justamente o que o usuário não quer.
+// IMPRESSÃO, SEM SUPORTE
+//   TORRE: em pé, na orientação de uso. Inventário de balanço:
+//     ressalto (z 0..3) ...... prisma na mesa, ~6.7 mil mm² de 1ª camada
+//     chanfro do ressalto .... 45, crescendo pra fora
+//     ledge do assento (z=3) . 1.2mm — o ÚNICO balanço plano da peça
+//     saia, cinta ............ rampas de 45 crescendo pra fora
+//     arco do sulco .......... 45 dos dois lados, fechando na ponta: sem ponte
+//     teto das canaletas ..... 45 descendo pra dentro da parede
+//     piso das canaletas, topo da travessa ... faces pra cima
+//   TAMPA: DE CABEÇA PRA BAIXO, o topo liso na cama (é como part="lid" sai),
+//     2.6mm de altura. O chanfro de 45 das linguetas vira balanço de 45 pra
+//     fora, que imprime; a face que fica à vista sai com o acabamento do PEI.
+//     Preenchimento 100% (ou no mínimo 5 camadas de topo e de fundo): chapa
+//     de 2.6 com grade fica mole e empena.
 //
-// IMPRIME EM PÉ, NA ORIENTAÇÃO DE USO, SEM SUPORTE. Inventário de balanço:
-//   ressalto (z 0..3) .......... prisma vertical na mesa, 6.7 mil mm² de 1ª
-//                                camada maciça. Não precisa de brim.
-//   chanfro do ressalto ........ 45 graus com o material CRESCENDO pra fora
-//                                subindo: cada camada apoia na de baixo.
-//   ledge do assento (z=3) ..... 1.2mm de laje horizontal em anel — ÚNICO
-//                                balanço plano da peça. Fica a 3mm da mesa.
-//   saia (z 3..5.2) ............ 45 graus.
-//   paredes .................... verticais, maciças, dos 3mm de espessura.
-//   abas em L .................. prismas verticais, arrancam do piso em z=10.
-//   topo das abas (z=146.6) .... face horizontal virada pra CIMA, não é balanço.
-//   piso da cavidade (z=10) .... face horizontal virada pra cima.
-//   NENHUMA PONTE em lugar nenhum: a frente é aberta do piso ao topo e não há
-//   uma única travessa horizontal na peça.
-//
-// EXPORTS CANÔNICOS (caminhos absolutos, flatpak — ver CLAUDE.md):
-//   flatpak run org.openscad.OpenSCAD -o stl/sleeve-tower-01.stl        -D 'part="tower"' sleeve-tower-01.scad
-//   flatpak run org.openscad.OpenSCAD -o 3mf/sleeve-tower-01-plate.3mf  -D 'part="plate"' sleeve-tower-01.scad
-//   flatpak run org.openscad.OpenSCAD -o 3mf/sleeve-tower-01-par.3mf    -D 'part="par"'   sleeve-tower-01.scad
+// EXPORTS CANÔNICOS (caminhos ABSOLUTOS na hora de rodar; aqui abreviados)
+//   flatpak run org.openscad.OpenSCAD -o stl/sleeve-tower-01.stl           -D 'part="tower"'   sleeve-tower-01.scad
+//   flatpak run org.openscad.OpenSCAD -o stl/sleeve-tower-01-tampa.stl     -D 'part="lid"'     sleeve-tower-01.scad
+//   flatpak run org.openscad.OpenSCAD -o 3mf/sleeve-tower-01-plate.3mf     -D 'part="plate"'   sleeve-tower-01.scad
+//   flatpak run org.openscad.OpenSCAD -o 3mf/sleeve-tower-01-par.3mf       -D 'part="par"'     sleeve-tower-01.scad
+//   flatpak run org.openscad.OpenSCAD -o 3mf/sleeve-tower-01-tampa.3mf     -D 'part="lid"'     sleeve-tower-01.scad
+//   flatpak run org.openscad.OpenSCAD -o 3mf/sleeve-tower-01-tampa-par.3mf -D 'part="lid_par"' sleeve-tower-01.scad
+//   JOBS: plate = 1 torre + 1 tampa lado a lado (157.0 x 102.5 x 150) | par =
+//   2 torres numa fileira + 2 tampas na outra (162.0 x 207.5 x 150: sem a pega
+//   a tampa tem 99.0 em Y e 102.5 + 6 + 99.0 = 207.5 cabe no alvo de 210) |
+//   tampa = 1 tampa (73.0 x 99.0 x 2.6) | tampa-par = 2 tampas (152.0 x 99.0
+//   x 2.6), pra reimprimir só tampa.
 //   DIAGNÓSTICO (não vai pra 3mf/):
-//     part="fit"    -> as duas torres empilhadas: TEM QUE SAIR VAZIO
-//     part="stack2" -> as duas empilhadas em união, só pra render
+//     part="fit"       -> duas torres empilhadas: TEM QUE SAIR VAZIO
+//     part="lid_fit"   -> tampa x torre (com fit_dx/dy/dz): VAZIO com
+//                         fit_dz=0.01 (em 0 é contato de face: a tampa apoia)
+//     part="stack_fit" -> tampa fechada x torre empilhada em cima: VAZIO
+//     part="stack2", part="with_lid" -> só pra render
+//   Os fit_* são variáveis FINAIS, então -D funciona com eles (ao contrário dos
+//   *_override, que só valem por include).
 //
-// VARIANTE: por INCLUDE, nunca por -D (os *_override só existem via -D e o
-// ternário is_undef() é avaliado antes). Ex.: um arquivo com
+// VARIANTE: por INCLUDE, nunca por -D nos *_override. Ex.:
 //   total_h_override = 100; include <sleeve-tower-01.scad>
-// dá a torre de 100mm com todo o resto igual.
 
 /* [Peça] */
-// tower | plate | par | fit | stack2
+// tower | lid | plate | par | lid_par | fit | lid_fit | stack_fit | stack2 | with_lid
 part = "tower";
 
 /* [Cavidade — o que a torre guarda] */
@@ -231,11 +229,13 @@ wall = is_undef(wall_override) ? 3.0 : wall_override;
 // mm — piso total, do chão ao fundo da cavidade (inclui o ressalto). É o lastro que segura a torre em pé
 floor_h = 10.0;
 
-/* [Frente — o sulco e as abas em L] */
-// fração da largura EXTERNA que o sulco ocupa. 2/3 = pedido do usuário; com o externo de 75.0 dá 50.0mm de vão
+/* [Frente — o sulco, as abas em L e a travessa] */
+// fração da largura EXTERNA (do corpo, sem a cinta) que o sulco ocupa. 2/3 = pedido do usuário; com o externo de 75.0 dá 50.0mm de vão
 open_frac = is_undef(open_frac_override) ? 2 / 3 : open_frac_override;
-// mm — profundidade da aba em L no eixo Y (medida na referência)
+// mm — profundidade da aba em L (e da travessa) no eixo Y. 3.5 = a medida da referência. (Foi 5.0 só enquanto a travessa levava o rebaixo do clique; sem clique, voltou: a carta ganha 1.5 em Y, 96.0 atrás da aba)
 tab_depth = is_undef(tab_depth_override) ? 3.5 : tab_depth_override;
+// mm — material da travessa acima da ponta do arco. 3.6 mantém o arco onde estava (z 115.3..140.3)
+beam_min = 3.6;
 
 /* [Empilhamento] */
 // mm — altura do ressalto que entra na boca da torre de baixo (medida na referência)
@@ -247,6 +247,38 @@ boss_lead = 0.8;
 // mm — largura do LEDGE plano do assento, em volta do ressalto. O resto da saia sobe em rampa de 45. Tem que ser MENOR que wall + stack_clear, senão a rampa fura a face externa
 seat_ledge = 1.2;
 
+/* [Tampa deslizante — trilho] */
+// mm — espessura da tampa (chapa maciça)
+lid_t = 2.6;
+// mm — espessura da PONTA da lingueta que corre na canaleta (o topo dela desce a 45 da face de cima até aqui)
+lid_tip_t = 1.0;
+// mm — quanto a lingueta entra na parede, além da face interna
+lid_tongue = 2.0;
+// mm — folga de deslize POR LADO (ponta da lingueta x fundo da canaleta) e folga vertical (lingueta x teto). Regra 6: 0.5
+slide_clear = 0.5;
+// mm — folga entre o topo da tampa e o fundo do ressalto de uma torre empilhada em cima (z = 147)
+lid_gap_top = 0.5;
+// mm — chanfro de entrada na boca da canaleta (frente da parede) e nos cantos de trás da tampa
+slot_lead = 0.8;
+// mm — chanfro de entrada na BOCA da canaleta (frente da parede). 0.6 e não 0.8: com 0.8 sobrava 0.2 de parede contra a quina da cinta em y=-51.25 (lasca, regra 4)
+slot_mouth = 0.6;
+// mm — chanfro na aresta de BAIXO da borda de ataque da tampa (a de trás, que entra primeiro): passa por cima de carta empenada em vez de empurrar
+lid_lead_z = 0.5;
+// mm — CINTA: engrossa as laterais pra fora só no topo, pra sobrar parede atrás da canaleta
+collar_w = 1.5;
+// mm — raio das quinas verticais da CINTA. 0.3 e não o corner_r de 1.0: com r=1 a quina da frente comia a parede ao lado da boca da canaleta
+collar_r = 0.3;
+
+
+// mm — folga entre o fundo da tampa fechada e a face interna do fundo
+lid_back_gap = 0.2;
+
+/* [Diagnóstico de encaixe da tampa] */
+// mm — desloca a tampa em part="lid_fit" (dy<0 = puxada pra FRENTE, abrindo; dz>0 = levantada). Valores != 0 são TESTE, nunca exportar
+fit_dx = 0;
+fit_dy = 0;
+fit_dz = 0;
+
 /* [Acabamento] */
 // mm — raio das quinas verticais externas e das arestas do sulco (medido na referência; é o que a mão pega)
 corner_r = 1.0;
@@ -254,16 +286,16 @@ corner_r = 1.0;
 inner_r = 1.0;
 
 /* [Chapa] */
-// mm — vão entre peças em part="par"
+// mm — vão entre peças nas chapas
 plate_gap = 6.0;
 
 /* [Oculto] */
 $fn = 48;
 
 // ---------------------------------------------------------------- Derivados
-ext_w      = cav_w + 2 * wall;              // 75.0  — externo em X (parede dos DOIS lados)
+ext_w      = cav_w + 2 * wall;              // 75.0  — externo do CORPO em X
 ext_d      = cav_d + wall;                  // 102.5 — externo em Y (parede só no fundo, a frente é aberta)
-cav_h      = total_h - floor_h;             // 140.0 — curso da pilha, do piso à boca
+cav_h      = total_h - floor_h;             // 140.0 — altura da cavidade, do piso à boca
 slab_h     = floor_h - boss_h;              // 7.0   — laje cheia acima do ressalto
 
 y_front    = -ext_d / 2;                    // -51.25 — plano da frente
@@ -275,95 +307,130 @@ open_w     = ext_w * open_frac;             // 50.0  — vão do sulco
 x_open     = open_w / 2;                    // 25.0  — aresta interna da aba
 tab_return = x_wall_in - x_open;            // 9.5   — quanto a aba avança pra dentro da lateral
 tab_x_out  = ext_w / 2 - corner_r;          // 36.5  — a aba morre dentro da parede lateral
-tab_top    = total_h - boss_h - stack_clear;// 146.6 — o retorno da aba para aqui (ver ABA CORTADA NO TOPO)
 
 boss_w     = cav_w - 2 * stack_clear;       // 68.2  — ressalto em X
 boss_yb    = y_cav_back - stack_clear;      // 47.85 — fundo do ressalto (a frente é rente ao plano da frente)
 boss_d     = boss_yb - y_front;             // 99.1  — ressalto em Y
-boss_cy    = (y_front + boss_yb) / 2;       // -1.70 — centro do ressalto em Y
+boss_cy    = (y_front + boss_yb) / 2;       // -1.70
 boss_grip  = boss_h - boss_lead;            // 2.2   — engate RETO do empilhamento
 boss_catch = stack_clear + boss_lead;       // 1.2   — erro lateral de mão aceito na hora de empilhar
-stack_pitch= total_h - boss_h;              // 147.0 — passo do empilhamento: a torre de cima
-                                            //         AFUNDA boss_h na de baixo, então duas
-                                            //         empilhadas dão 297 e não 300
+stack_pitch= total_h - boss_h;              // 147.0 — passo do empilhamento (duas torres = 297)
 
-seat_w     = boss_w + 2 * seat_ledge;       // 70.6  — contorno do assento em X
-seat_yb    = boss_yb + seat_ledge;          // 49.05 — contorno do assento no fundo
+seat_w     = boss_w + 2 * seat_ledge;       // 70.6
+seat_yb    = boss_yb + seat_ledge;          // 49.05
 seat_d     = seat_yb - y_front;             // 100.3
 seat_cy    = (y_front + seat_yb) / 2;       // -1.10
-skirt_ramp = wall + stack_clear - seat_ledge; // 2.2 — rampa de 45 da saia (igual em X e Y por construção)
-skirt_top  = boss_h + skirt_ramp;           // 5.2   — onde o externo cheio começa
-// o aro da torre de baixo vai de x_wall_in a ext_w/2 (largura wall) e o ledge
-// da de cima de boss_w/2 a seat_w/2: a sobreposição real é seat_ledge - stack_clear
-seat_grip  = seat_ledge - stack_clear;      // 0.8   — largura de contato REAL do ledge sobre o aro
+skirt_ramp = wall + stack_clear - seat_ledge; // 2.2
+skirt_top  = boss_h + skirt_ramp;           // 5.2
+seat_grip  = seat_ledge - stack_clear;      // 0.8   — contato REAL do ledge sobre o aro
 
-cav_h_stacked = cav_h - boss_h;             // 137.0 — curso útil com torre empilhada em cima
-cap_loose  = floor(cav_h / sleeve_t);       // ~1750 — ESTIMATIVA, sleeve_t não é régua
-cap_stacked= floor(cav_h_stacked / sleeve_t);
+// TRILHO DA TAMPA (perfil da canaleta no plano XZ, lado +x; o -x é espelho)
+z_lt       = stack_pitch - lid_gap_top;     // 146.5 — topo da tampa
+z_lb       = z_lt - lid_t;                  // 143.9 — fundo da tampa = piso da canaleta = topo da travessa
+x_tt       = x_wall_in + lid_tongue;        // 36.5  — ponta da lingueta
+x_sb       = x_tt + slide_clear;            // 37.0  — fundo da canaleta
+z_tip_top  = z_lb + lid_tip_t;              // 144.9 — topo da ponta da lingueta
+x_bev0     = x_tt - (lid_t - lid_tip_t);    // 34.9  — onde o chanfro de 45 da lingueta começa
+function z_ceil(x) = z_tip_top + (x_tt - x) + slide_clear;   // teto da canaleta, 45 descendo pra dentro da parede
+z_ceil_in  = z_ceil(x_wall_in);             // 147.4 — teto na boca da canaleta (face interna)
+z_ceil_sb  = z_ceil(x_sb);                  // 144.9 — teto no fundo da canaleta
+slot_back_h= z_ceil_sb - z_lb;              // 1.0   — altura da canaleta no fundo
+ext_w_top  = ext_w + 2 * collar_w;          // 78.0  — externo em X na CINTA
+web        = ext_w_top / 2 - x_sb;          // 2.0   — parede que sobra atrás da canaleta
+z_col0     = z_lb - 1.0;                    // 142.9 — cinta cheia daqui pra cima
+z_col_ch   = z_col0 - collar_w;             // 141.4 — começo do chanfro de 45 da cinta
+tongue_eng = lid_tongue - slide_clear;      // 1.5   — lingueta dentro da parede no pior caso lateral
+
+lid_w      = 2 * x_tt;                      // 73.0  — tampa em X (ponta a ponta)
+lid_yb     = y_cav_back - lid_back_gap;     // 48.05 — fundo da tampa fechada
+lid_yf     = y_front + 0.3;                 // -50.95 — frente da tampa (0.3 pra dentro da cara)
+lid_len    = lid_yb - lid_yf;               // 99.0
+lid_travel = lid_yb - y_front;              // 99.3  — curso de deslize até a tampa sair da torre
+lid_play_z = slide_clear;                   // 0.5   — folga vertical da tampa
+
+// TRAVESSA DA FRENTE
+y_beam_b   = y_front + tab_depth;           // -47.75 — face de trás da travessa (= das abas)
+z_apex     = z_lb - beam_min;               // 140.3 — ponta do arco do sulco
+z_arch0    = z_apex - x_open;               // 115.3 — onde o sulco começa a fechar em arco de 45
+lid_on_beam= y_beam_b - lid_yf;             // 3.2   — quanto a frente da tampa fechada apoia na travessa
+card_y     = y_cav_back - y_beam_b;         // 96.0  — vão em Y pra carta atrás da aba
+
+cav_h_useful = z_lb - floor_h;              // 133.9 — curso útil da pilha (até o fundo da tampa)
+cap_useful = floor(cav_h_useful / sleeve_t);
 
 assert(total_h <= 220, "ALTURA ESTOURA A AD5X (220)");
-assert(ext_w <= 170 && ext_d <= 170, "FOOTPRINT ESTOURA O ALVO DE 170 DA AD5X");
+assert(ext_w_top <= 170 && ext_d <= 170, "FOOTPRINT ESTOURA");
 assert(seat_ledge < wall + stack_clear, "seat_ledge grande demais: a rampa da saia fura a face externa");
-assert(seat_grip > 0.4, "assento de menos: o ledge nao pousa no aro da torre de baixo");
-assert(boss_grip > 1.0, "engate reto de menos: baixe boss_lead ou suba boss_h");
-assert(tab_return > 4.0, "aba curta demais pra segurar a pilha: baixe open_frac");
-assert(open_w > 40.0, "sulco estreito demais pra entrar dois dedos: suba open_frac");
-assert(skirt_top < floor_h, "a rampa da saia invade a cavidade: baixe wall ou suba floor_h");
+assert(seat_grip > 0.4, "assento de menos");
+assert(boss_grip > 1.0, "engate reto de menos");
+assert(tab_return > 4.0, "aba curta demais pra segurar a pilha");
+assert(open_w > 40.0, "sulco estreito demais pra entrar dois dedos");
+assert(skirt_top < floor_h, "a rampa da saia invade a cavidade");
 assert(tab_depth > 2 * corner_r, "aba mais rasa que os dois raios de canto");
+assert(x_bev0 >= x_wall_in, "o chanfro da lingueta começa dentro da cavidade: o teto da canaleta ficaria com degrau");
+assert(web >= 1.6, "parede de menos atrás da canaleta: suba collar_w");
+assert(z_arch0 > floor_h + 20, "arco do sulco baixo demais");
+assert(lid_on_beam >= 2.0, "a frente da tampa quase nao apoia na travessa");
+assert(x_sb + slot_mouth <= ext_w_top / 2 - collar_r - 0.7, "boca da canaleta lasca a quina da cinta");
 
-echo(str("sleeve-tower-01  externo ", ext_w, " x ", ext_d, " x ", total_h, " mm"));
-echo(str("  cavidade ", cav_w, " x ", cav_d, " x ", cav_h,
-         "   piso ", floor_h, " (ressalto ", boss_h, " + laje ", slab_h, ")"));
-echo(str("  sulco ", open_w, " mm (", open_frac * 100, "% do externo) do piso ao topo",
-         "   aba ", tab_depth, " de fundura, retorno ", tab_return,
-         ", topo em z=", tab_top));
-echo(str("  ressalto ", boss_w, " x ", boss_d, " x ", boss_h,
-         "  folga ", stack_clear, "/lado  chanfro ", boss_lead,
-         "  engate reto ", boss_grip, "  aceita ", boss_catch, " de erro de mao"));
-echo(str("  assento: ledge ", seat_ledge, " + rampa ", skirt_ramp,
-         " a 45 (externo cheio a partir de z=", skirt_top, ")",
-         "  contato real sobre o aro ", seat_grip, " mm"));
-echo(str("  passo do empilhamento ", stack_pitch,
-         " mm -> duas torres = ", 2 * stack_pitch + boss_h, " mm de coluna"));
-echo(str("  curso de pilha ", cav_h, " mm solta / ", cav_h_stacked,
-         " com torre empilhada  -> ~", cap_loose, " / ~", cap_stacked,
-         " sleeves vazios a ", sleeve_t, "mm — ESTIMATIVA, nao e regua"));
+echo(str("sleeve-tower-01  corpo ", ext_w, " x ", ext_d, " x ", total_h, " mm, cinta no topo ", ext_w_top));
+echo(str("  cavidade ", cav_w, " x ", cav_d, " x ", cav_h, "  curso util ", cav_h_useful,
+         " (piso ", floor_h, " ate o fundo da tampa ", z_lb, ")"));
+echo(str("  sulco ", open_w, " fecha em arco de 45 de z=", z_arch0, " a ", z_apex,
+         "  travessa ate z=", z_lb, "  aba ", tab_depth, " fundura, retorno ", tab_return));
+echo(str("  ressalto ", boss_w, " x ", boss_d, " x ", boss_h, " folga ", stack_clear,
+         "  passo ", stack_pitch));
+echo(str("  CANALETA: piso z=", z_lb, "  fundo x=", x_sb, " (altura ", slot_back_h,
+         ")  teto 45 de ", z_ceil_in, " na boca a ", z_ceil_sb, " no fundo  parede atras ", web,
+         "  cinta z>=", z_col0));
+echo(str("  TAMPA ", lid_w, " x ", lid_len, " x ", lid_t, " (chapa lisa, sem pega, frente 0.3 atras da cara)",
+         "  lingueta ", lid_tongue, " (engate min ", tongue_eng, ")  folga ", slide_clear,
+         "/lado e ", lid_play_z, " vertical  curso ", lid_travel));
+echo(str("  tampa apoia ", lid_on_beam, " na travessa  carta tem ", card_y, " em Y atras da aba"));
 
 // -------------------------------------------------------------------- Peças
-if      (part == "tower")  tower();
-else if (part == "plate")  tower();
-else if (part == "par")    for (s = [-1, 1]) translate([s * (ext_w + plate_gap) / 2, 0, 0]) tower();
-else if (part == "fit")    fit_check();
-else if (part == "stack2") { tower(); translate([0, 0, stack_pitch]) tower(); }
-else                       assert(false, "part desconhecido");
+if      (part == "tower")    tower();
+else if (part == "lid")      lid_print();
+else if (part == "plate")    { translate([-(ext_w_top + plate_gap) / 2, 0, 0]) tower();
+                               translate([ (lid_w + plate_gap) / 2, 0, 0]) lid_print(); }
+else if (part == "par")      for (s = [-1, 1]) {   // 2 torres numa fileira + 2 tampas na outra
+                                 translate([s * (ext_w_top + plate_gap) / 2, -(lid_len + plate_gap) / 2, 0]) tower();
+                                 translate([s * (lid_w + plate_gap) / 2, (ext_d + plate_gap) / 2, 0]) lid_print(); }
+else if (part == "lid_par")  for (s = [-1, 1]) translate([s * (lid_w + plate_gap) / 2, 0, 0]) lid_print();
+else if (part == "fit")      fit_check();
+else if (part == "lid_fit")  intersection() { tower(); lid_placed(); }
+else if (part == "stack_fit")intersection() { lid_placed(); translate([0, 0, stack_pitch]) tower(); }
+else if (part == "stack2")   { tower(); translate([0, 0, stack_pitch]) tower(); }
+else if (part == "with_lid") { tower(); lid_placed(); }
+else                         assert(false, "part desconhecido");
 
 // ------------------------------------------------------------------ Módulos
 
-// A torre inteira, apoiada em z=0 pelo ressalto e centrada em X.
-// As abas entram DEPOIS do corte da cavidade — elas moram dentro do vão dela.
 module tower() {
-    union() {
-        difference() {
-            union() { stack_boss(); body_shell(); }
-            cavity();
+    difference() {
+        union() {
+            difference() {
+                union() { stack_boss(); body_shell(); }
+                cavity();
+            }
+            front_tabs();
+            front_beam();
         }
-        front_tabs();
+        for (s = [-1, 1]) scale([s, 1, 1]) lid_slot();
     }
 }
 
-// Prisma de canto arredondado, centrado em XY, nascendo em z=0.
 module rrect(w, d, r, h) {
     hull() for (sx = [-1, 1], sy = [-1, 1])
         translate([sx * (w / 2 - r), sy * (d / 2 - r), 0])
             cylinder(h = h, r = r);
 }
 
-// Ressalto de empilhamento (z 0..boss_h): prisma reto com chanfro de 45 na
-// aresta de baixo. Rente ao plano da frente, recuado stack_clear no fundo e
-// nos dois lados. É também a 1ª camada da impressão — maciça, sem brim.
-// Os 0.02 a mais no topo entram POR DENTRO do corpo (68.2 contra os 70.6 do
-// assento): não mudam nada por fora e são o que faz o CGAL fundir ressalto e
-// corpo num sólido só — encostados só na face, saíam como dois volumes.
+// 2D no plano (x, z) extrudado em Y de y0 a y1.
+module xz_extrude(y0, y1) {
+    translate([0, y1, 0]) rotate([90, 0, 0]) linear_extrude(y1 - y0) children();
+}
+
 module stack_boss() {
     c = boss_lead;
     hull() {
@@ -374,32 +441,33 @@ module stack_boss() {
     }
 }
 
-// Corpo maciço (z boss_h..total_h), ainda sem cavidade: o assento (ledge plano
-// de seat_ledge) em z=boss_h, a rampa de 45 subindo até skirt_top e daí pra
-// cima o prisma externo cheio. Na FRENTE não há rampa nenhuma — o ressalto é
-// rente ao plano da frente, então ali não existe saia pra pender.
+// Corpo cheio: assento + saia, prisma externo e a CINTA no topo (laterais
+// engrossadas collar_w pra fora, com chanfro de 45 embaixo — cresce subindo).
 module body_shell() {
+    seat_skirt();
+    translate([0, 0, skirt_top]) rrect(ext_w, ext_d, corner_r, total_h - skirt_top);
+    hull() {
+        translate([0, 0, z_col_ch]) rrect(ext_w, ext_d, corner_r, 0.01);
+        translate([0, 0, z_col0])   rrect(ext_w_top, ext_d, collar_r, 0.01);
+    }
+    translate([0, 0, z_col0]) rrect(ext_w_top, ext_d, collar_r, total_h - z_col0);
+}
+
+module seat_skirt() {
     hull() {
         translate([0, seat_cy, boss_h])   rrect(seat_w, seat_d, corner_r, 0.01);
         translate([0, 0,      skirt_top]) rrect(ext_w,  ext_d,  corner_r, 0.01);
     }
-    translate([0, 0, skirt_top]) rrect(ext_w, ext_d, corner_r, total_h - skirt_top);
 }
 
-// Cavidade: do topo do piso (z=floor_h) até acima da boca, saindo pela FRENTE.
-// É o mesmo corte que abre o sulco — a frente não tem parede nenhuma pra furar.
 module cavity() {
-    over = 20;                                   // avanço pra fora da frente
+    over = 20;
     d    = (y_cav_back - (y_front - over));
     translate([0, y_cav_back - d / 2, floor_h])
         rrect(cav_w, d, inner_r, cav_h + 1);
 }
 
-// As duas abas em L da frente. Cada uma é o RETORNO da lateral pra dentro:
-// nasce no piso (z=floor_h) e para em tab_top, 3.4mm abaixo da boca, pra deixar
-// passar o ressalto da torre empilhada (ver ABA CORTADA NO TOPO no cabeçalho).
-// A aresta interna, que é a que a mão encosta ao puxar o sleeve, sai com
-// corner_r de raio.
+// Abas em L: do piso até o topo da travessa (z_lb), onde se fundem nela.
 module front_tabs() {
     for (s = [-1, 1]) scale([s, 1, 1]) tab();
 }
@@ -407,14 +475,71 @@ module front_tabs() {
 module tab() {
     w = tab_x_out - x_open;
     translate([(x_open + tab_x_out) / 2, y_front + tab_depth / 2, floor_h])
-        rrect(w, tab_depth, corner_r, tab_top - floor_h);
+        rrect(w, tab_depth, corner_r, z_lb - floor_h);
 }
 
-// PROVA DE ENCAIXE: as duas torres empilhadas na orientação de uso, com o passo
-// REAL (stack_pitch = 147), que é o que enfia o ressalto da de cima nos 3mm de
-// cima da cavidade da de baixo. TEM QUE SAIR VAZIO — se sair sólido, o ressalto
-// está batendo em alguma coisa (o suspeito nº1 é o retorno da aba em L, que é
-// justamente por isso que ele para em tab_top).
+// TRAVESSA DA FRENTE: amarra as duas laterais na boca (o U deixa de ser
+// aberto em cima) e é o apoio da frente da tampa.
+// Embaixo, o sulco fecha num ARCO DE 45 (ponta pra cima): sem ponte.
+module front_beam() {
+    xz_extrude(y_front, y_beam_b)
+        difference() {
+            translate([-x_wall_in - 0.5, z_arch0]) square([cav_w + 1, z_lb - z_arch0]);
+            polygon([[-x_open, z_arch0 - 1], [x_open, z_arch0 - 1], [x_open, z_arch0],
+                     [0, z_apex], [-x_open, z_arch0]]);
+        }
+}
+
+// Perfil da canaleta (lado +x) no plano XZ.
+module slot_profile() {
+    polygon([[x_wall_in - 1, z_lb], [x_sb, z_lb], [x_sb, z_ceil_sb],
+             [x_wall_in - 1, z_ceil(x_wall_in - 1)]]);
+}
+
+// Canaleta: da frente até a face interna do fundo (o fundo é o BATENTE), com
+// boca alargada em slot_lead na frente (chanfro de entrada de 45).
+module lid_slot() {
+    xz_extrude(y_front - 1, y_cav_back) slot_profile();
+    hull() {
+        xz_extrude(y_front - 1, y_front) offset(delta = slot_mouth) slot_profile();
+        xz_extrude(y_front + slot_mouth, y_front + slot_mouth + 0.01) slot_profile();
+    }
+}
+
+// TAMPA na posição FECHADA, em coordenadas da torre. Chapa retangular lisa:
+// sem pega (pedido do usuário), frente onde o trilho já define (0.3 atrás da cara).
+module lid() {
+    difference() {
+        union() {
+            // chapa com as linguetas (perfil XZ extrudado em Y)
+            intersection() {
+                xz_extrude(lid_yf, lid_yb)
+                    polygon([[-x_tt, z_lb], [x_tt, z_lb], [x_tt, z_tip_top], [x_bev0, z_lt],
+                             [-x_bev0, z_lt], [-x_tt, z_tip_top]]);
+                // cantos de trás chanfrados (entrada na canaleta)
+                linear_extrude(200) polygon([[-x_tt, lid_yf - 1], [x_tt, lid_yf - 1],
+                    [x_tt, lid_yb - slot_lead], [x_tt - slot_lead, lid_yb],
+                    [-x_tt + slot_lead, lid_yb], [-x_tt, lid_yb - slot_lead]]);
+            }
+        }
+        // chanfro de 45 na aresta de baixo da borda de ataque (a de trás)
+        translate([0, lid_yb, z_lb]) rotate([45, 0, 0])
+            cube([lid_w + 2, lid_lead_z * sqrt(2), lid_lead_z * sqrt(2)], center = true);
+    }
+}
+
+// Tampa com os deslocamentos de teste. dy<0 abre (puxa pra frente).
+module lid_placed() {
+    translate([fit_dx, fit_dy, fit_dz]) lid();
+}
+
+// Tampa na orientação de IMPRESSÃO: de cabeça pra baixo, o topo liso na cama,
+// centrada em X e em Y. Gira em Y (espelha X, simétrico): a frente
+// continua em -y.
+module lid_print() {
+    translate([0, -(lid_yb + lid_yf) / 2, z_lt]) rotate([0, 180, 0]) lid();
+}
+
 module fit_check() {
     intersection() {
         tower();
