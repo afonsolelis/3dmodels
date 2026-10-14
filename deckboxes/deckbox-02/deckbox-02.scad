@@ -7,61 +7,80 @@
 // Histórico da trava (teste físico):
 //  - v1: ressaltos + LINGUETAS soltas por dois rasgos compridos (1.2mm x
 //    32mm) em cada parede da capa -> ABRIA SOZINHA (~4N pra abrir).
-//  - v2 (esta): mesmos ressaltos/pockets, parede lateral CONTÍNUA (sem
-//    rasgos), reforço EXTERNO de 0.6mm/lado nos 36mm junto da boca (parede
-//    1.6 -> 2.2mm; pele atrás do pocket 1.4mm). A parede inteira flexiona
-//    0.5mm pro ressalto passar, mas só na ABA de 1.8mm logo depois do pocket:
-//    dali até a boca um CANAL raso (0.4mm) deixa só 0.1mm de interferência.
-//    Estimativa (placa Ritz e viga do print-review, PLA E=3GPa, k~26-30N/mm
-//    por lado): abrir 14-23N com atrito 0.3, 20-33N com atrito 0.5; empeno
-//    da capa pra dentro soma, até ~40N no pior caso. Fechar ~16-25N (rampa
-//    da aba). Tensão <=~18MPa (PLA ~50MPa).
+//  - v2 (aprovada 2026-09-30): mesmos ressaltos/pockets (saliência 1.0,
+//    pega 0.5 no pocket), parede lateral CONTÍNUA (sem rasgos), reforço
+//    EXTERNO de 0.6mm/lado nos 36mm junto da boca (parede 1.6 -> 2.2mm).
+//    A parede inteira flexiona 0.5mm pro ressalto passar, mas só na ABA de
+//    1.8mm logo depois do pocket: dali até a boca um CANAL raso deixa só
+//    0.1mm de interferência. Abrir 14-23N (atrito 0.3).
+//  - v3 (2026-10-11, esta): o usuário pediu "pinguelo um pouco maior, uns
+//    2mm, pra travar melhor". Saliência 2.0 exigiria 1.5mm de flexão da
+//    parede contínua (~3x a força, abrir 40-70N, tensão ~54MPa > PLA): NÃO.
+//    Ficou: saliência 1.0 -> 1.5 (pega 1.0mm no pocket, o DOBRO; flexão
+//    1.0), base do ressalto 5 -> 7mm (rampa de fechar segue ~26.6 graus,
+//    run 3 / rise 1.5) e 6 -> 7mm de altura (chanfro em Z segue 45 graus,
+//    sem suporte na bandeja deitada), pocket 0.8 -> 1.2 de fundo (pele
+//    atrás 1.0mm, parede vertical em pé com 2 perímetros), canal 0.4 -> 0.9
+//    (residual 0.1 igual à v2; parede atrás do canal 1.3). Reforço segue
+//    0.6 (0.8 engrossa e multiplica a força). Conta direta (viga/placa,
+//    k=26-30N/mm por lado, flexão 1.0, rampa do pocket 21.8 graus +
+//    atrito; conferida pelo print-review): abrir ~41-48N (atrito 0.3) /
+//    ~58-67N (0.5), ~58N com empeno pra dentro de 0.3/lado, até ~80N no
+//    pior caso; fechar ~49-56N (0.3) / ~69-80N (0.5), com a palma. Firme
+//    pro indicador, ok pro polegar. Tensão de pico 13-26MPa (viga apoiada/
+//    engastada) a ~36MPa (Ritz), abaixo dos ~50 do PLA mas perto da fadiga
+//    (20-25MPa); se trincar no pocket com o uso, ou se ficar duro no cupom,
+//    fallback: snap_projection=1.3, snap_pocket_depth=1.0,
+//    snap_channel_depth=0.7 (abrir ~33-38N). BANDEJA E CAPA MUDAM JUNTAS: bandeja v2
+//    (ressalto 1.0) na capa v3 pega só 0.5 e folga no pocket; bandeja v3 na
+//    capa v2 não entra no pocket (1.0 > 0.8). Imprimir o PAR novo (ou o
+//    cupom antes, pra sentir o clique).
+//
+// Indicador de orientação (2026-10-11): a capa é simétrica em cima/embaixo
+// e o usuário já abriu várias vezes com o deck de cabeça pra baixo (empurra
+// pelo furo sem olhar) e as cartas caíram. A face de CIMA da capa (z =
+// sleeve_outer_h, a que cobre o topo aberto da bandeja na posição de uso)
+// leva uma SETA grande REBAIXADA (0.6mm; parede 1.6, sobra 1.0) apontando
+// pra BOCA (+X). Segurando a capa com a seta pra cima e empurrando o furo do
+// fundo, a bandeja sai com as cartas pra cima. O rebaixo também serve pra
+// pintar em outra cor no IFS. (Sem texto "CIMA": text() não renderiza no
+// OpenSCAD 2021.01 do flatpak, sem fontes.)
 //
 // Manuseio: fechar empurrando a traseira da bandeja com a palma até o
 // "clique" (os ressaltos caem nos pockets nos últimos ~5mm do curso).
-// Abrir: segurar a capa e empurrar a bandeja pelo furo de 22mm do fundo por
-// ~5mm (clique + aba, dedo ~10mm dentro do furo). A partir daí a parede
-// devolve a bandeja pela rampa e sobra um arrasto leve (~2-3N) até a boca,
-// com a traseira da bandeja ~5mm pra fora pra puxar com os dedos.
-//
-// Só a CAPA mudou da trava v1 pra v2: cavidade, pockets, boca e posição
-// dos ressaltos são os mesmos; a bandeja da v1 continua valendo.
+// Abrir: seta pra CIMA, segurar a capa e empurrar a bandeja pelo furo de
+// 22mm do fundo por ~5mm (clique + aba, dedo ~10mm dentro do furo). A partir
+// daí a parede devolve a bandeja pela rampa e sobra um arrasto leve (~2-3N)
+// até a boca, com a traseira da bandeja ~5mm pra fora pra puxar com os dedos.
 // Recomendado brim de 3-5mm no job da capa (tubo alto em pé).
 //
 // Histórico da cestinha (teste físico):
 //  - v1 (= deckbox-01): 97.4x72.4, 0.3/lado no compartimento de 98x73,
 //    cantos vivos, sem chanfro, hex 8mm/web 2 nas paredes (~60% de furo),
 //    U de 40mm -> ruim de entrar/sair (deslize vertical de ~50mm) e molenga.
-//  - v2 (2026-09-30, esta; capa v2 e trava aprovadas no mesmo teste):
-//    97.0x72.0x49.6 (0.5/lado no MESMO compartimento - bandeja e capa
-//    idênticas), parede 1.6 (4 voltas de bico, engrossada pra DENTRO a
-//    pedido do usuário), chanfro 1mm/45 graus na borda de baixo, cantos r=2
-//    por fora com filete interno r=1 (canto 1.85mm na diagonal; passa a
-//    0.15mm de um canto vivo 93x68), paredes com hex 6mm/web 3 e faixa
-//    sólida ~5mm em cima e embaixo, U 32mm até o chão. Deck 93x68 fica
-//    JUSTO: 0.4/lado dentro (93.8x68.8). Manuseio igual: o dedo
+//  - v2 de paredes (2026-09-30): 97.0x72.0x49.6 (0.5/lado no MESMO
+//    compartimento), parede 1.6, chanfro 1mm, cantos r=2, hex 6mm/web 3
+//    com faixas sólidas, U 32mm. DESCARTADA em 2026-10-11 a pedido do
+//    usuário: ficou só a de pilares.
+//  - pilares (2026-09-30; A cestinha do projeto desde 2026-10-11): mesmo
+//    externo/chão/chanfro/cantos da v2, SEM paredes - 4 pilares em L de 1.6
+//    nos cantos, pernas afuniladas de 20 (base) a 10mm (topo), miolo do
+//    canto com filete r=2.5, pé com concordância r=4, chanfro de entrada no
+//    topo, chão com quadro sólido de 6mm. Lados abertos do chão ao topo: vão
+//    57->77 (comprido), 32->52mm (curto). 5N na ponta: flexão ~0.08mm
+//    (X/Y), ~0.11 (diagonal), contra ~10mm de uma perna isolada; torção pior
+//    caso ~0.55mm (dedo na borda da perna; pra dentro o deck segura a 0.4).
+//    Deck 93x68 fica JUSTO: 0.4/lado dentro (93.8x68.8). Manuseio: o dedo
 //    empurra o chão pelo furo de 16mm da bandeja, pega pela borda e tira.
-//  - pilares (variante, 2026-09-30): mesmo externo/chão/chanfro/cantos da
-//    v2, SEM paredes - 4 pilares em L de 1.6 nos cantos, pernas afuniladas
-//    de 20 (base) a 10mm (topo), miolo do canto com filete r=2.5, pé com
-//    concordância r=4, chanfro de entrada no topo, chão com quadro sólido de
-//    6mm. Lados abertos do chão ao topo: vão 57->77 (comprido), 32->52mm
-//    (curto). 5N na ponta: flexão ~0.08mm (X/Y), ~0.11 (diagonal), contra
-//    ~10mm de uma perna isolada; torção pior caso ~0.55mm (dedo na borda da
-//    perna; pra dentro o deck segura a 0.4). (Uma variante com aro
-//    e janelas foi feita e recusada pelo usuário no mesmo dia.)
 //
 // Exports canônicos (flatpak, caminhos ABSOLUTOS; -D só em variável final):
-// Job da capa - em pé sobre a ponta fechada (capa v2 já impressa e aprovada):
-//   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-sleeve.3mf -D 'part="sleeve"' -D 'sleeve_print=true' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
-// Job da cestinha v2 - chão na mesa, boca pra cima (o que reimprimir agora):
-//   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-basket.3mf -D 'part="basket"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
-// Job da cestinha de PILARES (variante: só pilares em L nos cantos) - chão na mesa:
-//   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-basket-pillars.3mf -D 'part="basket"' -D 'basket_style="pillars"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
-//   (STL: mesmo comando com -o .../stl/deckbox-02-basket-pillars.stl)
-// Job completo - bandeja + cestinha + capa em pé numa chapa:
+// Job completo - bandeja + cestinha + capa em pé numa chapa (trava v3: imprimir o par):
 //   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-plate.3mf -D 'part="plate"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
-// Cupom de teste do clique - os 45mm da boca, de boca pra cima:
+// Job da capa - em pé sobre a ponta fechada, seta numa parede vertical:
+//   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-sleeve.3mf -D 'part="sleeve"' -D 'sleeve_print=true' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+// Job da cestinha (pilares em L nos cantos) - chão na mesa, boca pra cima:
+//   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-basket.3mf -D 'part="basket"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+// Cupom de teste do clique v3 - os 45mm da boca, de boca pra cima:
 //   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-coupon.3mf -D 'part="sleeve"' -D 'sleeve_coupon=true' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
 // STLs de referência (posição de uso), <part> = tray | sleeve | basket:
 //   flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/stl/deckbox-02-<part>.stl -D 'part="<part>"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
@@ -75,8 +94,18 @@ sleeve_tray_reveal = 0;   // mm, traseira da bandeja alinhada com a boca da capa
 sleeve_finger_hole_d = 22; // mm, furo no fundo da capa pra empurrar a bandeja com o dedo (fundo 58 alto, cavidade 54.8)
 include <../deckbox-01/deckbox-01.scad>
 
+/* [Trava v3 - ressalto maior (sobrescreve o deckbox-01 DEPOIS do include)] */
+// A última atribuição vale pro arquivo inteiro, inclusive pros derivados do
+// deckbox-01 (snap_deflection, snap_ridge, snap_pocket): conferido em
+// 2026-10-11 no OpenSCAD 2021.01 (ECHO required_deflection_mm = 1.0, sem
+// warning). O deckbox-01 em si continua com 1.0/5/6/0.8 e NÃO muda.
+snap_projection = 1.5;   // mm, saliência do ressalto (era 1.0); pega no pocket = isto - fit_tolerance = 1.0
+snap_length = 7;         // mm, base do ressalto em X (era 5); rampas de (7-1)/2 = 3 por 1.5 = 26.6 graus
+snap_height = 7;         // mm, altura da base em Z (era 6); com patamar 4, chanfro (7-4)/2 = 1.5 por 1.5 = 45 graus (sem suporte)
+snap_pocket_depth = 1.2; // mm, fundo do pocket (era 0.8): 1.0 de pega + 0.2 de folga no fundo
+
 /* [Reforço externo da capa - exclusivo do deckbox-02] */
-sleeve_reinforce = 0.6;        // mm/lado, acréscimo EXTERNO nas paredes laterais (cavidade intacta); 0.8 passava de ~40N com atrito alto
+sleeve_reinforce = 0.6;        // mm/lado, acréscimo EXTERNO nas paredes laterais (cavidade intacta); 0.8 engrossa e multiplica a força
 sleeve_reinforce_length = 36;  // mm, faixa a partir da boca; o ressalto trabalha só nos 10.6mm finais
 sleeve_reinforce_ramp = 4;     // mm, transição em X (em pé: 11 graus da vertical, sem suporte)
 sleeve_print = false;          // true = capa em pé sobre a ponta fechada (job da capa)
@@ -86,9 +115,17 @@ sleeve_print = false;          // true = capa em pé sobre a ponta fechada (job 
 // aba que dá o clique, com a flexão total); daí uma rampa leva a um canal
 // raso até a boca, onde o ressalto passa só com a interferência residual.
 snap_tab = 1.8;              // mm, aba cheia entre a borda do pocket e o início da rampa
-snap_channel_lead = 1.6;     // mm, rampa aba -> canal (inclinação 0.4/1.6 = rampa de fechar)
-snap_channel_depth = 0.4;    // mm, profundidade do canal na face interna; residual = 0.5 - isto
-snap_channel_band = 6.6;     // mm, largura do canal em Z (= base do ressalto 6 + 2x0.3 do pocket)
+snap_channel_lead = 1.6;     // mm, rampa aba -> canal (0.9/1.6 = 29 graus, mais íngreme que a rampa do ressalto: quem desliza é a quina da aba na rampa do ressalto, 26.6 graus)
+snap_channel_depth = 0.9;    // mm, profundidade do canal na face interna (era 0.4); residual = 1.0 - isto = 0.1
+snap_channel_band = snap_height + 2 * snap_pocket_clear; // mm, largura do canal em Z = base do ressalto + folga do pocket (7.6)
+
+/* [Seta de orientação na face de cima da capa] */
+arrow_depth   = 0.6;  // mm, rebaixo na face externa de cima (parede 1.6 -> sobra 1.0)
+arrow_length  = 36;   // mm, ponta a ponta, ao longo de X (aponta pra boca, +X)
+arrow_head_l  = 13;   // mm, comprimento da cabeça
+arrow_head_w  = 18;   // mm, largura da cabeça
+arrow_shaft_w = 8;    // mm, largura da haste
+arrow_x       = sleeve_outer_l / 2; // mm, centro da seta em X (meio do comprimento da capa)
 
 /* [Cupom de teste do clique] */
 sleeve_coupon = false;       // true (com part="sleeve") = só a ponta da boca, de boca pra cima
@@ -107,19 +144,38 @@ channel_x0 = pocket_rim_x + snap_tab;                       // mm, fim da aba ch
 channel_x1 = channel_x0 + snap_channel_lead;                // mm, canal na profundidade total daqui até a boca
 channel_residual = snap_deflection - snap_channel_depth;    // mm/lado, interferência no canal
 channel_skin = reinforced_wall - snap_channel_depth;        // mm, parede atrás do canal
+snap_ramp_deg = atan(snap_projection / ((snap_length - snap_tip_length) / 2)); // graus, rampa do ressalto em X
+snap_z_chamfer_deg = atan(snap_projection / ((snap_height - snap_tip_height) / 2)); // graus da horizontal, chanfro em Z (bandeja deitada: <= 45 imprime sem suporte)
+pocket_ramp_deg = atan(snap_pocket_depth / ((snap_length - snap_tip_length) / 2)); // graus, rampa do pocket (em pé: da vertical)
+// jogo do ressalto dentro do pocket, bandeja fechada e centrada (rampa do
+// pocket 1.2/3 mais suave que a do ressalto 1.5/3: o mínimo é no patamar)
+pocket_play_x = (snap_length/2 + snap_pocket_clear - snap_deflection * ((snap_length - snap_tip_length)/2) / snap_pocket_depth)
+              - snap_tip_length/2; // mm/lado, no topo do ressalto (a rampa do pocket perde 3/1.2 = 2.5mm de meia-base por mm de profundidade)
+pocket_play_y = snap_pocket_depth - snap_deflection; // mm, fundo do pocket -> topo do ressalto
+mouth_interference = snap_deflection - max(snap_channel_depth, mouth_grow); // mm/lado, ao entrar na boca
+arrow_wall_left = wall - arrow_depth;                       // mm, parede que sobra sob a seta
 assert(sleeve_reinforce >= 0 && fit_tolerance >= 0.5);
 assert(ramp_clear > 0, "o pocket tem que ficar inteiro na faixa reforçada");
-assert(reinforced_pocket_skin >= 1.2);
+assert(reinforced_pocket_skin >= 1.0, "pele atrás do pocket: 1.0 = 2 perímetros em parede vertical (era 1.2 na v2)");
 assert(channel_residual >= 0 && channel_residual <= 0.2, "canal: residual entre 0 e 0.2");
 assert(snap_tab >= 1.5 && channel_x1 < sleeve_outer_l - mouth_lead, "aba e rampa antes do chanfro da boca");
 assert(sleeve_coupon_length > sleeve_reinforce_length, "cupom tem que incluir a rampa do reforço");
+assert(snap_z_chamfer_deg <= 45.01, "chanfro em Z do ressalto > 45 graus: balanço na bandeja deitada");
+assert(pocket_play_x > 0 && pocket_play_y > 0, "ressalto não cabe no pocket");
+assert(mouth_interference <= 0.2, "ressalto não entra na boca");
+assert(arrow_wall_left >= 1.0 && arrow_head_w > arrow_shaft_w && arrow_length > arrow_head_l);
+assert(arrow_x - arrow_length/2 > end_wall && arrow_x + arrow_length/2 < reinforce_start);
 echo(magnet_enabled=magnet_enabled, snap_enabled=snap_enabled, fit_per_side=fit_tolerance,
      long_slots=false, reinforced_wall_mm=reinforced_wall,
+     snap_v3=[snap_projection, snap_length, snap_height, snap_pocket_depth],
      pocket_skin_mm=reinforced_pocket_skin, required_deflection_mm=snap_deflection,
+     snap_ramp_deg=snap_ramp_deg, snap_z_chamfer_deg=snap_z_chamfer_deg, pocket_ramp_deg=pocket_ramp_deg,
+     pocket_play_mm=[pocket_play_x, pocket_play_y], mouth_interference_mm=mouth_interference,
      snap_travel_mm=snap_travel, pocket_to_ramp_mm=ramp_clear, sleeve_print=sleeve_print,
      sleeve_coupon=sleeve_coupon, finger_hole_mm=finger_hole_d_eff, tab_mm=snap_tab,
      channel_x_mm=[channel_x0, channel_x1, sleeve_outer_l], channel_residual_mm=channel_residual,
-     channel_skin_mm=channel_skin,
+     channel_skin_mm=channel_skin, channel_band_mm=snap_channel_band,
+     arrow_mm=[arrow_length, arrow_head_w, arrow_depth], arrow_center_x=arrow_x, arrow_wall_left_mm=arrow_wall_left,
      tray_mm=[tray_outer_l, tray_outer_w + 2*snap_projection, tray_outer_h],
      sleeve_mm=[sleeve_outer_l, sleeve_outer_w + 2*sleeve_reinforce, sleeve_outer_h],
      basket_mm=[bk_l, bk_w, basket_h], basket_wall_mm=basket_wall_v2);
@@ -169,13 +225,15 @@ module reinforced_sleeve() {
         translate([snap_sleeve_x, sleeve_outer_w - wall, snap_sleeve_z]) snap_pocket();
         translate([0, wall, snap_sleeve_z]) mirror([0, 1, 0]) snap_channel();
         translate([0, sleeve_outer_w - wall, snap_sleeve_z]) snap_channel();
+        top_arrow();
     }
 }
 
 // Canal raso na face interna (lado +Y a partir do plano da cavidade), na
 // faixa Z do ressalto, da aba até além da boca. Rampa na ponta da aba. Em pé
 // as paredes do canal ficam verticais e a rampa só afina a parede conforme
-// sobe: sem balanço. Na boca ele some dentro do chanfro de entrada (0.8 > 0.4).
+// sobe: sem balanço. Na boca ele passa 0.1 além do chanfro de entrada (0.9 > 0.8)
+// e chega aberto na borda.
 module snap_channel() {
     hull() {
         translate([channel_x0, -0.1, -snap_channel_band/2]) cube([0.01, 0.11, snap_channel_band]);
@@ -184,146 +242,37 @@ module snap_channel() {
     }
 }
 
+// Seta rebaixada na face de CIMA da capa (z = sleeve_outer_h), apontando pra
+// boca (+X), centrada em Y. É a face que cobre o topo aberto da bandeja na
+// posição de uso: seta pra cima = cartas pra cima. No job da capa (em pé) essa
+// face é parede vertical e a seta aponta pra cima; as únicas bordas do rebaixo
+// que ficam "penduradas" são as duas da cabeça (34 graus da vertical) e a
+// ponta, com 0.6mm de balanço: desprezível. Haste e cabeça sem reentrância
+// fina (sem lascas, regra 4).
+module top_arrow() {
+    tail = arrow_x - arrow_length / 2;
+    neck = arrow_x + arrow_length / 2 - arrow_head_l;
+    tip  = arrow_x + arrow_length / 2;
+    translate([0, sleeve_outer_w / 2, sleeve_outer_h - arrow_depth])
+        linear_extrude(arrow_depth + 0.1)
+            polygon([[tail, -arrow_shaft_w/2], [neck, -arrow_shaft_w/2], [neck, -arrow_head_w/2],
+                     [tip, 0], [neck, arrow_head_w/2], [neck, arrow_shaft_w/2], [tail, arrow_shaft_w/2]]);
+}
+
 // ---------------------------------------------------------------------
-// Cestinha v2 - exclusiva do deckbox-02 (sobrescreve basket() do include)
+// Cestinha de PILARES - exclusiva do deckbox-02 (sobrescreve basket() do include)
 // ---------------------------------------------------------------------
 // Teste físico da v1: ruim de entrar/sair do compartimento (0.3/lado, 50mm
-// de deslize vertical, sem chanfro, cantos vivos) e molenga (parede 1.2 com
-// ~60% de furo, U de 40mm, topo sem reforço). O COMPARTIMENTO da bandeja
-// (lane_inner_l/w, que vem do basket_clear=0.3 do deckbox-01) NÃO muda: só a
-// cestinha encolhe por fora. NUNCA reatribuir basket_clear aqui - a última
-// atribuição vale pro arquivo todo e mudaria a bandeja e a capa.
-
-/* [Cestinha v2 - encaixe no compartimento] */
-basket_clear_v2  = 0.5; // mm/lado, folga cestinha <-> compartimento (era 0.3; deslize de ~50mm)
-basket_chamfer   = 1.0; // mm, chanfro 45 graus na borda de baixo por fora (pé de elefante + guia de entrada)
-basket_corner_r  = 2.0; // mm, raio dos cantos verticais por fora
-basket_fillet_r  = 1.0; // mm, raio dos cantos verticais por dentro (canto mais grosso que a parede); <=1.36 pra não invadir o deck 93x68 com 0.4/lado
-
-/* [Cestinha v2 - paredes] */
-basket_wall_v2 = 1.6; // mm, parede (4 voltas de bico 0.4); engrossa pra DENTRO, externo fixo. NÃO é o basket_wall do deckbox-01 (1.2), que define o compartimento da bandeja
-wall_hex_d     = 6;   // mm, furo hexagonal das paredes, entre faces (chão segue com hex_d = 8)
-wall_hex_web   = 3;   // mm, material entre furos vizinhos da parede
-wall_band      = 4.9; // mm, faixa sólida mínima no topo e na base (acima do chão) de cada parede; ~5 (com 4.9 entram 5 fileiras)
-wall_corner_m  = 4.5; // mm, faixa sólida vertical junto de cada canto, medida da face externa
-wall_u_m       = 3;   // mm, faixa sólida mínima entre o furo e a borda do U (sem lascas, regra 4)
-cutout_w_v2    = 32;  // mm, largura do recorte em U (era 40), desce até o chão
-cutout_r_v2    = 6;   // mm, raio dos cantos de baixo do U
-
-// Derivados
-bk_l   = lane_inner_l - 2 * basket_clear_v2;  // mm, comprimento externo (X)
-bk_w   = lane_inner_w - 2 * basket_clear_v2;  // mm, largura externa (Y)
-bk_in_l = bk_l - 2 * basket_wall_v2;             // mm, cavidade X
-bk_in_w = bk_w - 2 * basket_wall_v2;             // mm, cavidade Y
-bk_deck_side = (bk_in_l - deck_length) / 2;   // mm/lado, folga do deck no comprimento
-bk_deck_side_w = (bk_in_w - deck_width) / 2;  // mm/lado, folga do deck na largura
-// canto: espessura na diagonal (arco externo r_o -> arco interno r_i)
-bk_corner_diag = (basket_wall_v2 + basket_fillet_r * (1 - 1/sqrt(2))
-                  - basket_corner_r * (1 - 1/sqrt(2))) * sqrt(2);
-// folga do canto VIVO do deck (pior caso, carta sem canto arredondado) até o filete
-bk_fillet_deck_gap = basket_fillet_r - sqrt(2) * (basket_fillet_r - min(bk_deck_side, bk_deck_side_w));
-wh_R  = wall_hex_d / sqrt(3);            // mm, circunraio do furo da parede
-wh_sx = wall_hex_d + wall_hex_web;       // mm, passo horizontal
-wh_sy = wh_sx * sqrt(3) / 2;             // mm, passo entre fileiras
-wh_z0 = basket_floor + wall_band;        // mm, início da zona furada
-wh_z1 = basket_h - wall_band;            // mm, fim da zona furada
-wh_rows = floor((wh_z1 - wh_z0 - 2 * wh_R) / wh_sy) + 1;
-wh_band_real = (wh_z1 - wh_z0 - (2 * wh_R + (wh_rows - 1) * wh_sy)) / 2 + wall_band; // mm, faixa real
-u_x0 = bk_l / 2 - cutout_w_v2 / 2;       // mm, borda esquerda do U
-u_x1 = bk_l / 2 + cutout_w_v2 / 2;       // mm, borda direita do U
-long_segs  = [[wall_corner_m, u_x0 - wall_u_m], [u_x1 + wall_u_m, bk_l - wall_corner_m]];
-short_segs = [[wall_corner_m, bk_w - wall_corner_m]];
-plate_basket_shift = basket_clear_v2 - basket_clear; // mm, centra a cestinha menor no lugar da v1 na chapa
-assert(bk_fillet_deck_gap > 0, "filete interno invade o deck");
-assert(min(bk_deck_side, bk_deck_side_w) >= 0.3, "deck justo demais");
-assert(bk_corner_diag >= basket_wall_v2, "canto tem que ser mais grosso que a parede");
-assert(basket_chamfer < basket_floor && basket_chamfer < basket_corner_r);
-assert(cutout_w_v2 >= 2 * cutout_r_v2);
-echo(basket_v2_mm=[bk_l, bk_w, basket_h], lane_mm=[lane_inner_l, lane_inner_w],
-     basket_clear_per_side=basket_clear_v2, basket_cavity_mm=[bk_in_l, bk_in_w],
-     deck_per_side_mm=[bk_deck_side, bk_deck_side_w], corner_diag_mm=bk_corner_diag,
-     fillet_to_deck_corner_mm=bk_fillet_deck_gap, wall_hex_rows=wh_rows,
-     wall_band_real_mm=wh_band_real, u_mm=[u_x0, u_x1], long_segs=long_segs,
-     lane_depth_mm=tray_outer_h - wall, basket_top_below_rim_mm=tray_outer_h - wall - basket_h);
-
-module rrect(l, w, r) {
-    translate([r, r]) offset(r = r) square([l - 2 * r, w - 2 * r]);
-}
-
-module basket() {
-    if (basket_style == "pillars")
-        basket_pillars();
-    else
-        translate(part == "plate" ? [plate_basket_shift, plate_basket_shift, 0] : [0, 0, 0])
-            basket_v2();
-}
-
-module basket_v2() {
-    c = basket_chamfer;
-    difference() {
-        // casca externa: cantos r=2, chanfro 45 graus embaixo
-        hull() {
-            translate([c, c, 0]) linear_extrude(0.01) rrect(bk_l - 2 * c, bk_w - 2 * c, basket_corner_r - c);
-            translate([0, 0, c]) linear_extrude(basket_h - c) rrect(bk_l, bk_w, basket_corner_r);
-        }
-        // cavidade com filete interno nos cantos
-        translate([basket_wall_v2, basket_wall_v2, basket_floor])
-            linear_extrude(basket_h) rrect(bk_in_l, bk_in_w, basket_fillet_r);
-        // recortes em U nas laterais compridas
-        u_cutout_v2(0);
-        u_cutout_v2(bk_w - basket_wall_v2);
-        // chão: colmeia de 8mm do deckbox-01
-        translate([basket_wall_v2, basket_wall_v2, 0])
-            hex_panel(bk_in_l, bk_in_w, basket_floor);
-        // paredes compridas
-        for (y = [basket_wall_v2, bk_w])
-            translate([0, y, 0]) rotate([90, 0, 0]) wall_hexes(long_segs, basket_wall_v2);
-        // paredes curtas
-        for (x = [0, bk_l - basket_wall_v2])
-            translate([x, 0, 0]) rotate([90, 0, 90]) wall_hexes(short_segs, basket_wall_v2);
-    }
-}
-
-// Furos hexagonais (ponta pra cima) no plano XY local (x = ao longo da
-// parede, y = altura), atravessando t em Z. Em cada segmento [x0, x1] a
-// colmeia é centrada; fileiras centradas entre wh_z0 e wh_z1. Só entra furo
-// inteiro dentro do segmento.
-module wall_hexes(segs, t) {
-    ztop = wh_z0 + wh_band_real - wall_band; // centra as fileiras na zona
-    for (s = segs) {
-        c = (s[0] + s[1]) / 2;
-        half = (s[1] - s[0]) / 2;
-        for (j = [0 : wh_rows - 1], i = [-ceil(half / wh_sx) - 1 : ceil(half / wh_sx) + 1]) {
-            cx = c + (i + (j % 2) * 0.5) * wh_sx;
-            cy = ztop + wh_R + j * wh_sy;
-            if (abs(cx - c) + wall_hex_d / 2 <= half + 1e-6)
-                translate([cx, cy, -0.1]) rotate([0, 0, 30])
-                    cylinder(h = t + 0.2, r = wh_R, $fn = 6);
-        }
-    }
-}
-
-// U de cantos redondos aberto no topo, atravessando a parede comprida que
-// começa em y0; desce até o chão da cestinha (pinçar a última carta).
-module u_cutout_v2(y0) {
-    r = cutout_r_v2;
-    translate([0, y0 - 0.1, 0]) {
-        hull()
-            for (xx = [u_x0 + r, u_x1 - r])
-                translate([xx, 0, basket_floor + r]) rotate([-90, 0, 0])
-                    cylinder(h = basket_wall_v2 + 0.2, r = r);
-        translate([u_x0, 0, basket_floor + r]) cube([cutout_w_v2, basket_wall_v2 + 0.2, basket_h]);
-    }
-}
-
-// ---------------------------------------------------------------------
-// Cestinha de PILARES - variante da v2 (basket_style = "pillars", com part="basket")
-// ---------------------------------------------------------------------
-// Mesmo externo, folga, chão de colmeia, chanfro e cantos da v2, mas SEM
-// paredes: só 4 pilares em L nos cantos, da altura toda, e os 4 lados
-// abertos do chão ao topo (pinçar até a última carta). A perna tem 1.6 de
-// espessura e não dá pra engrossar (externo limitado pela bandeja, interno
-// pelo deck a 0.4/lado), então a rigidez vem da GEOMETRIA:
+// de deslize vertical, sem chanfro, cantos vivos) e molenga. O COMPARTIMENTO
+// da bandeja (lane_inner_l/w, que vem do basket_clear=0.3 do deckbox-01) NÃO
+// muda: só a cestinha encolhe por fora. NUNCA reatribuir basket_clear aqui -
+// a última atribuição vale pro arquivo todo e mudaria a bandeja e a capa.
+//
+// Mesmo externo, folga, chão de colmeia, chanfro e cantos da v2 de paredes
+// (descartada), mas SEM paredes: só 4 pilares em L nos cantos, da altura
+// toda, e os 4 lados abertos do chão ao topo (pinçar até a última carta). A
+// perna tem 1.6 de espessura e não dá pra engrossar (externo limitado pela
+// bandeja, interno pelo deck a 0.4/lado), então a rigidez vem da GEOMETRIA:
 //  - seção em L com pernas longas: em flexão a L é ~100x mais rígida que
 //    uma perna isolada de 1.6;
 //  - pernas AFUNILADAS (20 na base -> 10 no topo): o ponto fraco de uma L
@@ -334,15 +283,17 @@ module u_cutout_v2(y0) {
 //    concordância r=4 no chão, por fora;
 //  - chão com quadro perimetral SÓLIDO de 6mm (segura os pilares entre si).
 // Ponta de cada pilar com chanfro de entrada por dentro pra guiar o deck.
-// Por que basket_style e não uma part nova: o render do deckbox-01 manda
-// qualquer part desconhecida pro preview "both" (bandeja + capa + cestinha),
-// e o deckbox-01 não pode mudar.
 
-/* [Cestinha de pilares - variante] */
-basket_style     = "v2"; // "v2" (colmeia, a padrão) | "pillars" (só pilares em L nos cantos)
+/* [Cestinha - encaixe no compartimento] */
+basket_clear_v2  = 0.5; // mm/lado, folga cestinha <-> compartimento (era 0.3; deslize de ~50mm)
+basket_chamfer   = 1.0; // mm, chanfro 45 graus na borda de baixo por fora (pé de elefante + guia de entrada)
+basket_corner_r  = 2.0; // mm, raio dos cantos verticais por fora
+basket_wall_v2   = 1.6; // mm, espessura das pernas dos pilares (4 voltas de bico 0.4); pra DENTRO, externo fixo. NÃO é o basket_wall do deckbox-01 (1.2), que define o compartimento da bandeja
+
+/* [Cestinha - pilares em L] */
 pillar_leg_base  = 20;   // mm, perna da L no chão, medida pela face externa (lado curto fica com 72-2x20 = 32 aberto)
 pillar_leg_top   = 10;   // mm, perna da L no topo (afunila: corta a torção na ponta)
-pillar_fillet_r  = 2.5;  // mm, preenchimento interno do canto (filete vertical); ver pillar_sleeve_r_min
+pillar_fillet_r  = 2.5;  // mm, preenchimento interno do canto (filete vertical); ver pl_sleeve_r_min
 pillar_foot_r    = 4;    // mm, concordância pilar <-> chão, na face externa (sem canto vivo)
 pillar_lead_w    = 0.8;  // mm, chanfro de entrada na ponta do pilar, por dentro (horizontal)
 pillar_lead_h    = 2.5;  // mm, altura desse chanfro
@@ -353,6 +304,13 @@ pla_G = 1100;            // MPa, módulo de cisalhamento do PLA
 sleeve_r_conservative = 2; // mm, raio de canto da sleeve assumido (carta ~3; conservador)
 
 // Derivados
+bk_l   = lane_inner_l - 2 * basket_clear_v2;  // mm, comprimento externo (X)
+bk_w   = lane_inner_w - 2 * basket_clear_v2;  // mm, largura externa (Y)
+bk_in_l = bk_l - 2 * basket_wall_v2;          // mm, cavidade X
+bk_in_w = bk_w - 2 * basket_wall_v2;          // mm, cavidade Y
+bk_deck_side = (bk_in_l - deck_length) / 2;   // mm/lado, folga do deck no comprimento
+bk_deck_side_w = (bk_in_w - deck_width) / 2;  // mm/lado, folga do deck na largura
+plate_basket_shift = basket_clear_v2 - basket_clear; // mm, centra a cestinha menor no lugar da v1 na chapa
 pl_H  = basket_h - basket_floor;                         // mm, balanço do pilar acima do chão
 pl_leg = function (z) pillar_leg_base + (pillar_leg_top - pillar_leg_base) * z / pl_H;
 pl_span_long  = [bk_l - 2 * pillar_leg_base, bk_l - 2 * pillar_leg_top]; // mm, vão aberto [base, topo]
@@ -396,19 +354,36 @@ pl_twist_straight = let(a = pillar_leg_base - basket_wall_v2 / 2)
 function sum_v(v, i = 0) = i >= len(v) ? 0 : v[i] + sum_v(v, i + 1);
 function sum_col(m, c) = sum_v([for (r = m) r[c]]);
 pl_hex_off = floor_frame_w - hex_margin; // mm, recuo da colmeia do chão (hex_panel tem hex_margin interno)
+assert(min(bk_deck_side, bk_deck_side_w) >= 0.3, "deck justo demais");
+assert(basket_chamfer < basket_floor && basket_chamfer < basket_corner_r);
 assert(pl_span_short[0] >= 30, "vão do lado curto < 30mm: não cabem os dedos");
 assert(pl_sleeve_r_min <= 1.5, "filete exige sleeve com canto redondo demais");
 assert(pl_corner_gap > 0.1);
+assert(pl_corner_diag >= basket_wall_v2, "canto tem que ser mais grosso que a perna");
 assert(pl_defl_xy <= 0.5 && pl_defl_diag <= 0.5, "pilar mole em flexão");
 assert(pillar_leg_top > basket_wall_v2 + pillar_fillet_r + 2);
 assert(floor_frame_w >= basket_wall_v2 + pillar_fillet_r + 1, "quadro do chão tem que cobrir o pé do pilar");
-echo(basket_style=basket_style, pillars_mm=[bk_l, bk_w, basket_h], pillar_leg_mm=[pillar_leg_base, pillar_leg_top],
+echo(pillars_mm=[bk_l, bk_w, basket_h], lane_mm=[lane_inner_l, lane_inner_w],
+     basket_clear_per_side=basket_clear_v2, basket_cavity_mm=[bk_in_l, bk_in_w],
+     pillar_leg_mm=[pillar_leg_base, pillar_leg_top],
      open_span_long_mm=pl_span_long, open_span_short_mm=pl_span_short,
      deck_per_side_mm=[bk_deck_side, bk_deck_side_w], sleeve_corner_r_min_mm=pl_sleeve_r_min,
      corner_gap_mm_at_sleeve_r2=pl_corner_gap, corner_diag_mm=pl_corner_diag,
      defl_5N_xy_mm=pl_defl_xy, defl_5N_diag_mm=pl_defl_diag, defl_5N_single_leg_mm=pl_defl_plate,
      twist_5N_leg_edge_worst_mm=pl_twist_worst, twist_5N_straight_leg_mm=pl_twist_straight,
-     floor_frame_mm=floor_frame_w);
+     floor_frame_mm=floor_frame_w, plate_basket_shift_mm=plate_basket_shift,
+     lane_depth_mm=tray_outer_h - wall, basket_top_below_rim_mm=tray_outer_h - wall - basket_h);
+
+module rrect(l, w, r) {
+    translate([r, r]) offset(r = r) square([l - 2 * r, w - 2 * r]);
+}
+
+// Na chapa (part="plate") a chapa do deckbox-01 posiciona a cestinha pelo
+// tamanho da v1 (97.4x72.4); o deslocamento centra esta (97x72) no mesmo lugar.
+module basket() {
+    translate(part == "plate" ? [plate_basket_shift, plate_basket_shift, 0] : [0, 0, 0])
+        basket_pillars();
+}
 
 // Perfil de uma lateral no plano da parede (u ao longo, v = altura):
 // chão + dois pilares afunilados, concordância r=pillar_foot_r no pé.
