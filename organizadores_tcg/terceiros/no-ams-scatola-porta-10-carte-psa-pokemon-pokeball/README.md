@@ -15,6 +15,6 @@ Caixa para dez slabs PSA com tema Pokébola.
 **Peças cabem individualmente na AD5X:** sim
 **Projeto próprio relacionado:** [organizadores_tcg/psa-box-02](../../../organizadores_tcg/psa-box-02/README.md)
 
-**Nota:** Teste físico 2026-10: a tampa saiu molenga (parede 1.9mm, só 1.0mm de teto embaixo da Pokébola) e prende ao abrir (0.1mm/lado de folga em 30mm de encaixe). Use o psa-box-02; a tampa dele também fecha esta base.
+**Nota:** Teste físico 2026-10-13: o usuário aprovou o encaixe desta original (0.1mm/lado em 30mm de gargalo). Uma versão engrossada com folga de 0.5/lado (psa-box-02 antigo) ficou com a capa solta e foi desfeita; o psa-box-02 agora reproduz estes números em OpenSCAD.
 
 Este item é um download de terceiro. A prévia pode mostrar uma foto promocional, uma renderização da malha ou só uma das plates. As medidas consideram cada peça separadamente; confira a disposição das plates e o perfil no Flash Studio antes de imprimir.

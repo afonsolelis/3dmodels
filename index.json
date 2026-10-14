@@ -1,6 +1,6 @@
 {
   "_readme": "Catálogo dos dois acervos do repo. projects: modelos paramétricos próprios com fonte OpenSCAD, peças, jobs e medidas; atualizar quando um modelo mudar. third_party: arquivos baixados organizados por categoria em terceiros/<item>/; file é o caminho atual, original_file conserva o caminho e nome anteriores, preview aponta para a imagem do item e summary_pt resume a função. Autor, licença e perfil constam quando conhecidos. largest_part_mm é a caixa exata da peça imprimível de maior volume, em mm e na orientação salva do 3MF/STL; fits_ad5x indica se TODAS as peças imprimíveis cabem individualmente nos 220 × 220 × 220 mm da AD5X. Esses campos foram medidos da malha com as transformações do 3MF em 2026-09-28. A avaliação individual não verifica a disposição conjunta de cada plate nem substitui a conferência no Flash Studio. Consulte a licença antes de redistribuir.",
-  "updated": "2026-10-03",
+  "updated": "2026-10-13",
   "printer": { "model": "FlashForge AD5X", "slicer": "Flash Studio Desktop (ex-Orca-Flashforge)", "bed_mm": [220, 220, 220], "comfort_limit_mm": 210, "nozzle_mm": 0.4, "multicolor": "IFS 4 cores" },
   "projects": [
     {
@@ -447,39 +447,262 @@
       "notes": "A tag foi medida em diametro pelo usuario em 2026-08-23; a espessura nao foi medida, entao tag_recess_depth=0.30mm e um primeiro ajuste parametrico. Imprimir com a frente na placa lisa e o rebaixo NFC para cima. Os textos sao gravados, nao aumentam a espessura. Ainda nao validado no teste fisico nem na carteira. Dados pessoais deliberadamente presentes no .scad por pedido do usuario; nao duplicados aqui alem da descricao funcional."
     },
     {
+      "id": "ars-stand-01",
+      "category": "organizadores_tcg",
+      "path": "organizadores_tcg/ars-stand-01",
+      "scad": "organizadores_tcg/ars-stand-01/ars-stand-01.scad",
+      "status": "em-andamento",
+      "derived_from": "organizadores_tcg/bgs-stand-01 — mesmo desenho (uma peça, aberto em cima, 12°, folga 0.5/lado, chanfro 1mm, aba 1.5mm), só com a medida da slab ARS",
+      "description": "Suporte de mesa pra UMA slab graduada ARS, inclinada 12° pra trás. UMA peça só, ABERTA EM CIMA, imprime sem suporte. A slab desce por cima entre os dois trilhos e escorrega até o fundo do canal; pra tirar, pinça os 14.5mm de slab que ficam acima dos trilhos e puxa pra cima. O que segura: o painel atrás (a inclinação joga o peso da slab contra ele — o centro de massa dela fica 18.4mm atrás da aresta de baixo/frente, então não tomba pra frente), a aba dos trilhos na frente das bordas laterais (1.0 a 2.0mm por lado conforme a posição lateral, 1.5 centrada), as paredes dos trilhos dos lados e o piso do canal + lábio da base embaixo (cobre ~7.1mm da parte de baixo da face).",
+      "parts": {
+        "stand": 1
+      },
+      "print_jobs": [
+        {
+          "file": "3mf/ars-stand-01.3mf",
+          "contents": "job único: suporte em pé (base na mesa, painel pra cima), sem suporte",
+          "footprint_mm": [
+            40.2,
+            89.0,
+            119.7
+          ]
+        }
+      ],
+      "assembled_with_slab_mm": [
+        40.2,
+        89.0,
+        133.2
+      ],
+      "capacity": "1 slab ARS",
+      "key_measures": {
+        "slab_ars_mm": [
+          84,
+          131,
+          9.8
+        ],
+        "slab_origem": "MEDIDA REAL do usuário em 2026-10-13 (largura x altura x espessura). Não é estimativa nem catálogo.",
+        "vao_mm": [
+          85.0,
+          131.5,
+          10.8
+        ],
+        "folgas_mm": {
+          "largura_por_lado": 0.5,
+          "espessura_por_lado": 0.5,
+          "comprimento": 0.5,
+          "chanfro_de_entrada": 1.0
+        },
+        "inclinacao_graus": 12,
+        "base_apoio_mm": [
+          33.44,
+          89.0
+        ],
+        "panel_t_mm": 3,
+        "suporte_mm": [
+          40.2,
+          89.0,
+          119.7
+        ],
+        "trilho": {
+          "parede_mm": 2,
+          "aba_mm": 2.5,
+          "aba_cobre_borda_da_slab_mm": {"centrada": 1.5, "min": 1.0, "max": 2.0},
+          "sobe_ao_longo_da_slab_mm": 116.5
+        },
+        "slab_livre_acima_dos_trilhos_mm": 14.5,
+        "curso_de_insercao_mm": 116.5,
+        "face_da_slab_visivel_mm": 81.0,
+        "labio_da_base_cobre_face_mm": 7.1,
+        "cg_da_slab_atras_do_pivo_frontal_mm": 18.4,
+        "area_1a_camada_mm2": 2976,
+        "balanco_real_mm2": 0,
+        "centro_de_massa_x_mm": {
+          "suporte": 9.7,
+          "slab": 8.8
+        },
+        "margem_de_tombamento_mm": {
+          "tras": 10.8,
+          "frente": 21.8
+        }
+      },
+      "notes": "2026-10-13: projeto novo, cópia paramétrica do bgs-stand-01 com a medida da ARS (84x131x9.8). Verificado com a slab CENTRADA no vão (0.5 de folga em cada face): slab x suporte = interseção VAZIA; a partir do centro, 0.3mm mais baixo, 0.6mm pra frente ou 0.6mm pro lado já colide (piso, aba e parede seguram). Assentada contra o painel (posição do slab_ghost), a folga até a aba é 1.0mm. Aba cobre de 1.0 a 2.0mm de cada borda conforme a posição lateral da slab (1.5 centrada). Canal prismático: vazio numa posição = vazio no curso inteiro de 116.5mm. Balanço real 0mm² (só os 2976mm² de apoio na cama). Volumes 2. Bed-check AD5X 40.2x89.0x119.7 ok. Impressão: brim opcional recomendado (119.7 de altura em base de 33.4). Lábio da base cobre ~7.1mm da parte de baixo da face da slab: conferir na slab real que não esconde nada importante. Ainda NÃO validado no teste físico."
+    },
+    {
+      "id": "psa-stand-01",
+      "category": "organizadores_tcg",
+      "path": "organizadores_tcg/psa-stand-01",
+      "scad": "organizadores_tcg/psa-stand-01/psa-stand-01.scad",
+      "status": "em-andamento",
+      "derived_from": "organizadores_tcg/ars-stand-01 e organizadores_tcg/bgs-stand-01 — mesmo desenho, aprovados no print-review, ainda sem teste físico (uma peça, aberto em cima, 12°, folga 0.5/lado, chanfro 1mm, aba 1.5mm centrada, 14.5mm livres em cima), só com a medida da slab PSA",
+      "description": "Suporte de mesa pra UMA slab graduada PSA, inclinada 12° pra trás. UMA peça só, ABERTA EM CIMA, imprime sem suporte. A slab desce por cima entre os dois trilhos e escorrega até o fundo do canal; pra tirar, pinça os 14.5mm de slab que ficam acima dos trilhos e puxa pra cima. A etiqueta da PSA fica no topo: os 14.5mm de cima saem inteiros acima dos trilhos, e abaixo disso a aba só toca 1.0–2.0mm das bordas laterais (moldura). O que segura: o painel atrás (com a slab assentada, o CG dela fica 17.0mm atrás da aresta de baixo/frente, então não tomba pra frente), a aba dos trilhos na frente das bordas laterais (1.0 a 2.0mm por lado conforme a posição lateral, 1.5 centrada), as paredes dos trilhos dos lados e o piso do canal + lábio da base embaixo (cobre ~7.9mm da parte de baixo da face).",
+      "parts": {
+        "stand": 1
+      },
+      "print_jobs": [
+        {
+          "file": "3mf/psa-stand-01.3mf",
+          "contents": "job único: suporte em pé (base na mesa, painel pra cima), sem suporte",
+          "footprint_mm": [
+            37.4,
+            85.1,
+            123.0
+          ]
+        }
+      ],
+      "assembled_with_slab_mm": [
+        37.4,
+        85.1,
+        136.4
+      ],
+      "capacity": "1 slab PSA",
+      "key_measures": {
+        "slab_psa_mm": [
+          80.1,
+          135.1,
+          6.1
+        ],
+        "slab_origem": "MEDIDA REAL do usuário, confirmada e remedida em 2026-10-13 (largura x altura x espessura). Não é estimativa nem catálogo — a largura 80.1 é menor que as estimativas antigas do repo (83.6–85.4) e prevalece sobre elas.",
+        "vao_mm": [
+          81.1,
+          135.6,
+          7.1
+        ],
+        "folgas_mm": {
+          "largura_por_lado": 0.5,
+          "espessura_por_lado": 0.5,
+          "comprimento": 0.5,
+          "chanfro_de_entrada": 1.0
+        },
+        "inclinacao_graus": 12,
+        "base_apoio_mm": [
+          29.82,
+          85.1
+        ],
+        "panel_t_mm": 3,
+        "suporte_mm": [
+          37.4,
+          85.1,
+          123.0
+        ],
+        "trilho": {
+          "parede_mm": 2,
+          "aba_mm": 2.5,
+          "profundidade_mm": 9.6,
+          "aba_cobre_borda_da_slab_mm": {
+            "centrada": 1.5,
+            "min": 1.0,
+            "max": 2.0
+          },
+          "sobe_ao_longo_da_slab_mm": 120.6
+        },
+        "slab_livre_acima_dos_trilhos_mm": 14.5,
+        "curso_de_insercao_mm": 120.6,
+        "face_da_slab_visivel_mm": 77.1,
+        "labio_da_base_cobre_face_mm": 7.9,
+        "cg_da_slab_atras_do_pivo_frontal_mm": 17.0,
+        "area_1a_camada_mm2": 2538,
+        "balanco_real_mm2": 0,
+        "centro_de_massa_x_mm": {
+          "suporte": 10.9,
+          "slab": 11.1
+        },
+        "base_x_mm": [
+          -9.4,
+          28.0
+        ],
+        "margem_de_tombamento_mm": {
+          "tras": 16.9,
+          "frente": 20.3
+        },
+        "rigidez_secao_U_mm4": {
+          "psa": 2604,
+          "ars_stand_01": 5379,
+          "nota": "flexão frente/trás ~48% do ars (trilho mais raso), flecha ~0.1mm com 2N no topo; parede do trilho abrindo pro lado ~2.7x mais rígida que no ars (balanço 9.6 vs 13.3mm)"
+        },
+        "massa_pla_100pct_g": 73.6
+      },
+      "notes": "2026-10-13: projeto novo, cópia paramétrica do ars-stand-01 (que deriva do bgs-stand-01) com a medida da PSA (80.1x135.1x6.1). Interferência testada em DUAS posições: (1) slab CENTRADA no vão (0.5 de folga em cada face, 0.25 no comprimento) = interseção VAZIA, e a partir do centro 0.3mm pra baixo, 0.6mm pra frente/trás ou 0.6mm pra qualquer lado já colide; (2) slab ASSENTADA (no piso, contra o painel — posição do slab_ghost/part=check) = VAZIA; no teste ela ficou afastada 0.001mm do piso, do painel e da parede lateral, porque encostada exatamente a face fica coplanar com a do painel e o CGAL gera um sólido degenerado de volume zero; folga até a aba 1.0mm (0.95 passa, 1.05 colide). Puxada 100mm pra cima: vazia (canal prismático, sai livre). Balanço real 0mm² (só 2538mm² de apoio na cama; resíduo numérico de 8e-5mm² no pé do trilho). Volumes 2. Bed-check AD5X 37.4x85.1x123.0 ok. Etiqueta no topo: 14.5mm livres acima dos trilhos; abaixo, aba só nas bordas (≤2.0mm) — livre se a etiqueta estiver a >2mm das laterais (não medido). Lábio da base cobre ~7.9mm da parte de baixo da face: conferir na slab real. Impressão: brim opcional recomendado (123 de altura em base de 29.8). Ainda NÃO validado no teste físico."
+    },
+    {
       "id": "bgs-stand-01",
       "category": "organizadores_tcg",
       "path": "organizadores_tcg/bgs-stand-01",
       "scad": "organizadores_tcg/bgs-stand-01/bgs-stand-01.scad",
       "status": "em-andamento",
       "derived_from": "organizadores_tcg/terceiros/display-stand-for-psa-cgc-slab/my-psa-slab.3mf (Functional3D, MakerWorld) — só os números de referência medidos na malha (inclinação 11.9°, canal 81.0, painel ~3mm); geometria remodelada do zero",
-      "description": "Suporte de mesa pra UMA slab graduada Beckett (BGS), inclinada 12° pra trás. DUAS peças: suporte + TAMPA que encaixa por cima, nenhuma precisando de suporte de impressão. A slab fica presa nos quatro lados (aba dos trilhos na frente, lábio da base embaixo, painel atrás, tampa em cima) e só sai por cima — puxa a tampa e ela desliza pra fora. A ETIQUETA FICA 100% LIVRE: a tampa fecha ACIMA da aresta de cima da slab, não encosta na face (interseção tampa x slab verificada como vazia). O gancho fixo do modelo de referência cobria ~5.6mm da face bem em cima da tag, e obrigava a slab a bascular pra entrar — o que fazia dele um balanço de ~11mm quase horizontal, daí o 3MF original vir com suporte ligado.",
-      "parts": { "stand": 1, "cap": 1 },
+      "description": "Suporte de mesa pra UMA slab graduada Beckett (BGS), inclinada 12° pra trás. UMA peça só, ABERTA EM CIMA, imprime sem suporte. A slab desce por cima entre os dois trilhos e escorrega até o fundo do canal; pra tirar, pinça os 14.5mm de slab que ficam acima dos trilhos e puxa pra cima. O que segura: o painel atrás (a inclinação joga o peso da slab contra ele — o centro de massa dela fica 17.8mm atrás da aresta de baixo/frente, então não tomba pra frente), a aba dos trilhos na frente das bordas laterais, as paredes dos trilhos dos lados e o piso do canal + lábio da base embaixo. A face fica quase toda à vista (79.8 de 82.8mm de largura) e a etiqueta de cima fica livre.",
+      "parts": {
+        "stand": 1
+      },
       "print_jobs": [
-        { "file": "3mf/bgs-stand-01.3mf", "contents": "job único: suporte em pé + tampa deitada (teto na mesa), ambos já na orientação de impressão, sem suporte", "footprint_mm": [56.8, 87.3, 142.6] }
+        {
+          "file": "3mf/bgs-stand-01.3mf",
+          "contents": "job único: suporte em pé (base na mesa, painel pra cima), sem suporte",
+          "footprint_mm": [
+            39.0,
+            87.8,
+            118.8
+          ]
+        }
       ],
-      "assembled_closed_mm": [46.8, 87.3, 148.0],
+      "assembled_with_slab_mm": [
+        39.0,
+        87.8,
+        132.3
+      ],
       "capacity": "1 slab Beckett (BGS)",
       "key_measures": {
-        "slab_bgs_mm": [82.5, 130.2, 8.5],
-        "slab_origem": "MEDIDA REAL DE PAQUÍMETRO pelo usuário em 2026-08-11 — não é estimativa nem catálogo. Primeira medida de slab confiável do repo; as entradas psa-* usam estimativas.",
-        "vao_mm": [83.3, 130.7, 9.3],
-        "folgas_mm": { "largura_por_lado": 0.4, "espessura_por_lado": 0.4, "comprimento": 0.5 },
+        "slab_bgs_mm": [
+          82.8,
+          130.3,
+          8.8
+        ],
+        "slab_origem": "MEDIDA REAL remedida pelo usuário em 2026-10-13: 82.8 x 130.3 x 8.8. Histórico: 82.5 x 130.2 x 8.5 de paquímetro em 2026-08-11 (primeira medida de slab confiável do repo). Não é estimativa nem catálogo; as entradas psa-* usam estimativas.",
+        "vao_mm": [
+          83.8,
+          130.8,
+          9.8
+        ],
+        "folgas_mm": {
+          "largura_por_lado": 0.5,
+          "espessura_por_lado": 0.5,
+          "comprimento": 0.5,
+          "chanfro_de_entrada": 1.0
+        },
         "inclinacao_graus": 12,
-        "base_apoio_mm": [31.97, 87.3],
+        "base_apoio_mm": [
+          32.46,
+          87.8
+        ],
         "panel_t_mm": 3,
-        "suporte_mm": [44.1, 87.3, 142.6],
-        "tampa_mm": [16.9, 87.3, 15.0],
-        "trilho": { "parede_mm": 2, "aba_mm": 2.5, "avanco_sobre_a_slab_mm": 2, "sobe_mm": 130.7 },
-        "tampa_encaixe": { "ranhura_mm": 3.5, "desce_mm": 12, "folga_por_lado_mm": 0.25, "parede_mm": 1.8, "teto_mm": 3, "apoios": "ranhura sobre o painel + face de baixo sentando nos topos dos dois trilhos" },
-        "face_da_slab_visivel_mm": 79.3,
-        "moldura_no_topo": "a TAMPA, fechando acima da aresta de cima da slab — nao cobre nada da face",
-        "area_1a_camada_mm2": { "suporte": 2791, "tampa": 1471 },
-        "balanco_real_mm2": { "suporte": 0, "tampa": 0 },
-        "centro_de_massa_x_mm": 9.9,
-        "margem_de_tombamento_mm": { "tras": 10.5, "frente": 21.4 }
+        "suporte_mm": [
+          39.0,
+          87.8,
+          118.8
+        ],
+        "trilho": {
+          "parede_mm": 2,
+          "aba_mm": 2.5,
+          "aba_cobre_borda_da_slab_mm": {"centrada": 1.5, "min": 1.0, "max": 2.0},
+          "sobe_ao_longo_da_slab_mm": 115.8
+        },
+        "slab_livre_acima_dos_trilhos_mm": 14.5,
+        "curso_de_insercao_mm": 115.8,
+        "face_da_slab_visivel_mm": 79.8,
+        "labio_da_base_cobre_face_mm": 7.3,
+        "cg_da_slab_atras_do_pivo_frontal_mm": 17.8,
+        "area_1a_camada_mm2": 2850,
+        "balanco_real_mm2": 0,
+        "centro_de_massa_x_mm": {
+          "suporte": 9.9,
+          "slab": 8.8
+        },
+        "margem_de_tombamento_mm": {
+          "tras": 11.1,
+          "frente": 21.3
+        }
       },
-      "notes": "Verificado: interseção aos pares VAZIA nas três combinações (tampa x suporte, tampa x slab, suporte x slab) — nenhuma peça invade outra e a tampa não encosta na face da slab. A tampa ASSENTA de verdade: na posição de projeto a interseção com o suporte é vazia, mas 0.1mm mais baixo já colide. Balanço real 0.0mm² nas DUAS peças (as áreas viradas pra baixo são só o apoio na cama: 2791mm² do suporte e 1471mm² do teto da tampa) — não precisa de suporte, ao contrário do 3MF de referência. Volumes 2 por peça, 3 na chapa. ATENÇÃO ao ler o Volumes do montado: dá 4 mesmo com a tampa encostada, porque o CGAL conta sólidos que se tocam só por face como separados — quem prova o assentamento é o teste do 0.1mm. Se a tampa ficar dura ou frouxa no teste físico, ajustar cap_fit. Pra outra marca de slab (PSA, CGC), medir com paquímetro e trocar só slab_w/slab_h/slab_t. Ainda NÃO validado no teste físico."
+      "notes": "2026-10-13: medida nova da slab (82.8x130.3x8.8) e projeto virou UMA peça aberta em cima (sem a peça de cima e sem o encaixe dela, a pedido do usuário). Folga do canal subiu de 0.4 pra 0.5/lado (padrão de deslize longo do repo) e entrou chanfro de 1mm na boca. Trilhos e painel param 15mm abaixo do fim do canal; com a slab assentada no piso sobram 14.5mm dela livres pra pegar. Lábio da base cobre ~7.3mm da parte de baixo da face. Impressão: brim opcional recomendado (118.8 de altura em base de 32.5). Pé dos trilhos afundado 1mm na base pra fundir (com o pé no plano do piso sobrava lasca de 1e-5mm). Verificado com a slab CENTRADA no vão (0.5 de folga em cada face): slab x suporte = interseção VAZIA; a partir do centro, 0.3mm mais baixo, 0.6mm pra frente ou 0.6mm pro lado já colide (piso, aba e parede seguram). Assentada contra o painel (posição do slab_ghost), a folga até a aba é 1.0mm. Aba cobre de 1.0 a 2.0mm de cada borda conforme a posição lateral da slab (1.5 centrada). Canal prismático: vazio numa posição = vazio no curso inteiro de 115.8mm. Balanço real 0mm² (só os 2850mm² de apoio na cama). Volumes 2. Bed-check AD5X 39.0x87.8x118.8 ok. Pra outra marca de slab, medir e trocar só slab_w/slab_h/slab_t. Ainda NÃO validado no teste físico."
     },
     {
       "id": "cardholder-01",
@@ -991,14 +1214,14 @@
       "path": "organizadores_tcg/psa-box-02",
       "scad": "organizadores_tcg/psa-box-02/psa-box-02.scad",
       "status": "em-andamento",
-      "derived_from": "organizadores_tcg/terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf (DAMA_Lab, Standard Digital File License) — só medidas de engenharia reversa da malha (canaleta 85.0 x 88.5, vaga 7.5, divisória 1.5, nervura 7.0, chão da vaga ao ombro 72, gargalo 91.0 x 94.5 x 30, chão da vaga ao teto 140); geometria refeita do zero em OpenSCAD, nenhum triângulo copiado",
-      "description": "Caixa de 10 slabs PSA com Pokébola gravada na tampa — versão RÍGIDA do 'Porta carte PSA x10', que foi impresso e voltou com a tampa molenga (parede 1.9, teto 1.0 embaixo da gravação) e prendendo (0.1mm/lado de folga em 30mm de encaixe). Mesmo interior testado do original; tampa com parede 3.0 e teto 3.0, folga 0.5/lado com chanfro de entrada nas duas bocas, base com parede 6.5. A tampa nova também serve na base original já impressa (canto interno r0.5 por causa da quina viva do gargalo original).",
+      "derived_from": "organizadores_tcg/terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf (DAMA_Lab, Standard Digital File License) — só medidas de engenharia reversa da malha; geometria refeita do zero em OpenSCAD, nenhum triângulo copiado. Desde 2026-10-13 todos os números externos, folgas e raios são os da original",
+      "description": "Caixa de 10 slabs PSA com Pokébola gravada na tampa — fonte paramétrica própria do 'Porta carte PSA x10' (DAMA_Lab), dimensionalmente igual à original: base 95 x 98.5 x 105.5, tampa 95 x 98.5 x 70, parede da tampa 1.9, teto 1.9, folga tampa/gargalo 0.1/lado com quinas vivas, raio r1.0 de entrada nas duas bocas. A versão 'engrossada' (parede 3.0, folga 0.5/lado) foi impressa e reprovada no teste físico (capa solta) e foi desfeita em 2026-10-13 por escolha do usuário.",
       "parts": {"base": 1, "lid": 1},
       "print_jobs": [
-        {"file": "3mf/psa-box-02-plate.3mf", "contents": "base + tampa lado a lado (base com o chão na cama, tampa com a Pokébola na cama; sem suporte)", "footprint_mm": [204.0, 101.5, 106.0]},
-        {"file": "3mf/psa-box-02-lid.3mf", "contents": "só a tampa — pra quem já tem a base (nova ou a original do DAMA_Lab)", "footprint_mm": [98.0, 101.5, 71.0]}
+        {"file": "3mf/psa-box-02-plate.3mf", "contents": "base + tampa lado a lado (base com o chão na cama, tampa com a Pokébola na cama; sem suporte)", "footprint_mm": [198.0, 98.5, 105.5]},
+        {"file": "3mf/psa-box-02-lid.3mf", "contents": "só a tampa — pra reimprimir a tampa (fecha esta base e a original do DAMA_Lab, que têm o mesmo gargalo)", "footprint_mm": [95.0, 98.5, 70.0]}
       ],
-      "assembled_closed_mm": [98.0, 101.5, 147.0],
+      "assembled_closed_mm": [95.0, 98.5, 145.5],
       "capacity": 10,
       "key_measures": {
         "canaleta_mm": [85.0, 88.5],
@@ -1007,22 +1230,26 @@
         "passo_mm": 9.0,
         "nervura_mm": 7.0,
         "gargalo_mm": [91.0, 94.5, 30.0],
-        "vao_da_tampa_mm": [92.0, 95.5],
-        "folga_tampa_por_lado_mm": 0.5,
-        "canto_interno_tampa_r_mm": 0.5,
-        "chanfro_boca_tampa_mm": 0.5,
-        "chanfro_gargalo_mm": 1.0,
-        "parede_tampa_mm": 3.0,
-        "teto_tampa_mm": 3.0,
+        "vao_da_tampa_mm": [91.2, 94.7],
+        "folga_tampa_por_lado_mm": 0.1,
+        "canto_vertical_externo_r_mm": 2.0,
+        "canto_gargalo_e_vao_da_tampa": "quina viva",
+        "raio_topo_gargalo_mm": 1.0,
+        "raio_boca_tampa_mm": 1.0,
+        "raio_pe_base_mm": 2.0,
+        "raio_teto_tampa_mm": 3.0,
+        "parede_tampa_mm": 1.9,
+        "teto_tampa_mm": 1.9,
         "gravacao_pokebola_mm": 1.0,
-        "parede_base_mm": 6.5,
-        "chao_mm": 4.0,
-        "chao_da_vaga_ao_teto_mm": 140,
-        "ombro_z_mm": 76.0,
-        "original_medido": {"parede_tampa": 1.9, "teto_tampa": 2.0, "teto_sob_gravacao": 1.0, "folga_por_lado": 0.1, "parede_base": 5.0, "externo": [95.0, 98.5]}
+        "parede_base_mm": 5.0,
+        "chao_mm": 3.5,
+        "chao_da_vaga_ao_teto_mm": 140.1,
+        "ombro_z_mm": 75.5,
+        "apoio_da_tampa_no_ombro_mm": 0.9,
+        "pokebola_mm": {"anel_r": 37.6, "anel_w": 6.0, "faixa": 5.1, "botao_r": 7.25, "anel_do_botao": 5.05}
       },
-      "material_estimado": "base 262.7cm³ e tampa 105.1cm³ de sólido (o peso real depende de perímetros/preenchimento)",
-      "notes": "Feedback do teste físico do original (2026-10): tampa molenga e difícil de abrir porque prende. Causas medidas na malha: parede da tampa 1.9 em 70mm de altura, teto de 2.0 com a Pokébola gravada 1.0 (sobrava 1.0) e folga de 0.1/lado entre o vão da tampa (91.2 x 94.7) e o gargalo (91.0 x 94.5) num encaixe de 30mm. Correções: parede da tampa 3.0 (~3.9x mais rígida, cresce com o cubo da espessura), teto 3.0 (2.0 sob a gravação, 8x), folga 0.5/lado (regra 6), chanfro de entrada de 1.0 no topo do gargalo e 0.5 na boca da tampa, base com parede 6.5 e chão 4.0. Encaixe conferido por booleana na malha exportada: tampa fechada sem interferência, deslocada 0.45 em X ainda livre, 0.55 já interfere. Gargalo e altura do ombro iguais ao original de propósito, então psa-box-02-lid.3mf também fecha a base original. Revisão (print-review): o gargalo original tem QUINA VIVA, e com o vão da tampa em r2.0 os 4 cantos interferiam 0.12mm; o canto interno virou r0.5 e a booleana contra a base original dá zero fechada, livre a 0.45 em X e a (0.3, 0.3) na diagonal. O chanfro da boca da tampa caiu pra 0.5 pra sobrar 1.0mm de apoio no ombro original (que tem 2.0); sobra 1.5mm de beiral por lado, porque ela tem 95 x 98.5. Nervura refeita com o pé de reforço separado do corpo: 7.0 constante de z=6 ao topo reto, como no original. O fundo da gravação da Pokébola é ponte (até ~40mm no anel), estético; com o IFS dá pra preencher com outra cor. Pokébola é desenho próprio (anel 6, faixa 5, botão 7.3 com anel gravado de 4.7), gravada 1.0 na face que vai na cama. Fatiador sugerido: 4 perímetros, 20% gyroid; o perfil do original vinha com 2 perímetros e 15% grid."
+      "material_estimado": "base 211.5cm³ e tampa 64.0cm³ de sólido (original medida: 211.6 e 64.0)",
+      "notes": "2026-10-13: TESTE FÍSICO da versão engrossada (parede da tampa 3.0, teto 3.0, base 6.5, externo 98 x 101.5, folga 0.5/lado com chanfros de 1.0 e 0.5) reprovou — a capa ficou um pouco solta, e a original, com 0.1/lado, estava muito boa. Decisão do usuário: voltar a todos os números da original, mantendo a fonte própria. A folga de 0.1/lado CONTRARIA a regra 6 do CLAUDE.md (deslize 0.5/lado) de propósito: neste encaixe de 30mm com tampa de parede fina, 0.5 foi testada e ficou solta — não 'corrigir' de volta. Medido na malha da original e reproduzido: base 95.0 x 98.5 x 105.5 (chão 3.5, parede 5.0, ombro a 75.5, gargalo 91.0 x 94.5 x 30 de parede 3.0 com quinas vivas e topo externo arredondado r1.0, aresta do chão r2.0), tampa 95.0 x 98.5 x 70.0 (parede 1.9, teto 1.9, vão 91.2 x 94.7 com quinas vivas, boca com raio interno r1.0, aresta do teto r3.0), cantos verticais externos r2.0, Pokébola gravada 1.0 (0.9 de teto embaixo). Conferido no STL exportado: cortes em várias alturas batem com a original em ~0.05mm e o volume dá 211.5/64.0cm³ contra 211.6/64.0. O interior (canaleta, vagas, nervuras) não mudou; diferenças de sub-milímetro que ficaram: topo da nervura reto até 76.5 + rampa até 80.5 acima do chão da vaga (na original é curvo, terminando a 80.0) e pé da nervura em rampa 45° de 3mm (na original é uma concordância curva que avança ~5mm no chão); a Pokébola da original está 0.28mm fora de centro em X, aqui ela é centrada. Apoio plano da tampa no ombro: 0.9mm (1.9 de parede menos o raio de 1.0 da boca), como na original. O fundo da gravação é ponte (até ~40mm no anel), estético; com o IFS dá pra preencher com outra cor. Perfil da original: 0.16mm, 2 paredes, 10% de preenchimento."
     },
     {
       "id": "dragon-01",
@@ -1083,6 +1310,141 @@
       "hardware": "pagina plastica 3x3 de fichario (nao inclusa); nenhum fixador",
       "material_estimado": { "holder_cm3": 6.81, "holder_g_pla_solido": 8.44, "plate3_cm3": 20.42, "plate3_g_pla_solido": 25.31 },
       "notes": "NAO E SNAP-FIT: fora da pagina a moeda passa livre pela abertura. Isso e intencional para nao marcar a borda nem depender de linguetas finas; a folha plastica faz a retencao. A moeda e o insert nao se empilham: ficam lado a lado no mesmo plano, portanto o conjunto continua com espessura maxima de 2.7mm. HOLDER VALIDADO NA MALHA: bbox 63x88x2, uma superficie conectada e todas as 3.096 arestas com incidencia exatamente 2. PLATE3 VALIDADO: bbox 153x128x2, 3 componentes separados, 6.192 triangulos; ambos os 3MF sao ZIP validos. Imprimir primeiro o job unitario, porque o tamanho interno do bolso da pagina do usuario ainda nao foi medido. Ainda NAO validado em teste fisico."
+    },
+    {
+      "id": "pokemon-coin-stack-01",
+      "category": "coin_holders",
+      "path": "coin_holders/pokemon-coin-stack-01",
+      "scad": "coin_holders/pokemon-coin-stack-01/pokemon-coin-stack-01.scad",
+      "status": "em-andamento",
+      "description": "Porta-moedas de mesa Pokemon em BLOCO UNICO de 70mm de altura: 9 tubos verticais onde as moedas ficam deitadas, empilhadas. 3 tubos pequenos (moeda Ø42, furo Ø44) no degrau da frente e 6 grandes (moeda Ø51.5, furo Ø53.5) em duas fileiras atras. Arranjo em ARQUIBANCADA de 2 degraus: o degrau da frente para em 36mm e os tubos grandes do meio comecam nesse nivel, de modo que a fenda de dedo deles abre pra frente POR CIMA do degrau; a fileira de tras e' de altura cheia com fenda pra tras. Todas as 9 fendas (20mm, fundo reto no nivel do fundo do tubo, bordas chanfradas) dao pra fora, e o piso de cada tubo tem um REBAIXO de dedo saindo da fenda (a ultima moeda fica em ponte e a ponta do dedo entra por baixo). Visual Pokebola em 3 cores POR ALTURA (branco <26, faixa preta 26-36.2 = topo do degrau, vermelho acima) — so 2 trocas de filamento no IFS —, medalhao com botao PRETO (dentro da faixa) nas laterais, colmeia hexagonal de ponta pra cima rebaixada 0.8mm nas paredes.",
+      "parts": {
+        "block": 1
+      },
+      "print_jobs": [
+        {
+          "file": "3mf/pokemon-coin-stack-01.3mf",
+          "contents": "bloco unico em pe de boca pra cima, sem suporte; 1 objeto com 3 pecas por altura: branco (filamento 1, z<26), faixa preta (filamento 2, z 26-36.2), vermelho (filamento 3, z>36.2); 1a camada 0.2 pros cortes de cor cairem em fronteira de camada; prime tower <=18mm num canto (ou desligada); infill 10-15%",
+          "footprint_mm": [
+            178.1,
+            166.0,
+            70.0
+          ]
+        }
+      ],
+      "assembled_closed_mm": [
+        178.1,
+        166.0,
+        70.0
+      ],
+      "capacity": "~141 moedas supondo 2.7mm de espessura: frente 3 x ~11 (Ø42), meio 3 x ~12 (Ø51.5), tras 3 x ~24 (Ø51.5)",
+      "key_measures": {
+        "moedas_usuario_mm": {
+          "grande_d": 51.5,
+          "pequena_d": 42.0,
+          "espessura_suposta": 2.7
+        },
+        "furos_mm": {
+          "grande": 53.5,
+          "pequeno": 44.0,
+          "folga_por_lado": 1.0
+        },
+        "corpo_mm": [
+          172.5,
+          166.0,
+          70.0
+        ],
+        "com_medalhoes_mm": [
+          178.1,
+          166.0,
+          70.0
+        ],
+        "degrau_frente_mm": 36.0,
+        "passo_x_mm": 56.5,
+        "profundidade_tubos_mm": {
+          "frente": 31.6,
+          "meio": 34.0,
+          "tras": 65.6
+        },
+        "fenda": {
+          "largura_mm": 20.0,
+          "chanfro_mm": 1.0,
+          "raio_fundo_mm": 3.0,
+          "moeda_recuada_da_face_mm": 4.0,
+          "parede_na_borda_da_fenda_mm": {
+            "grande": 4.94,
+            "pequeno": 5.4
+          }
+        },
+        "paredes_mm": {
+          "externa_min": 3.0,
+          "entre_tubos": 3.0,
+          "piso_frente_tras": 4.4,
+          "degrau_ate_boca_pequena": 3.0,
+          "topo_plano_divisoria": 1.0
+        },
+        "furo_do_fundo_mm": 20.0,
+        "chanfro_boca_mm": 1.0,
+        "chanfro_pe_mm": 0.6,
+        "faixas_z_mm": {
+          "branco": [
+            0,
+            26.0
+          ],
+          "preto": [
+            26.0,
+            36.2
+          ],
+          "vermelho": [
+            36.2,
+            70.0
+          ]
+        },
+        "colmeia": {
+          "circunraio_mm": 4.2,
+          "teia_mm": 1.8,
+          "profundidade_mm": 0.8
+        },
+        "malha": {
+          "block_tri": 25244,
+          "white_tri": 12238,
+          "black_tri": 10918,
+          "red_tri": 7440,
+          "arestas_nao_2": 0
+        },
+        "rebaixo_dedo": {
+          "largura_mm": 16.0,
+          "entra_no_tubo_mm": 12.0,
+          "profundidade_mm": 2.8,
+          "chanfro_mm": 0.8,
+          "sobra_embaixo_frente_tras_mm": 1.6,
+          "meio_z_mm": [
+            33.2,
+            36.0
+          ],
+          "pequenos": "canal de 20mm (largura do furo) fundido no furo Ø20, paredes tangentes, sem bico",
+          "grandes_piso_entre_ponta_e_furo_mm": 4.75
+        },
+        "botao_medalhao": {
+          "d_topo_mm": 7.0,
+          "altura_mm": 1.2,
+          "z_mm": [
+            26.4,
+            35.8
+          ],
+          "cor": "preto (dentro da faixa 26-36.2)"
+        },
+        "trocas_de_filamento": {
+          "job": 2,
+          "se_botao_branco": "~50-55 a mais (1 por camada de 0.2 na altura da faixa) — descartado"
+        }
+      },
+      "hardware": "nenhum",
+      "material_estimado": {
+        "volume_solido_cm3": 844.1,
+        "obs": "volume geometrico fechado (branco 473.4 + preto 168.1 + vermelho 202.7); bloco cheio sob os tubos do meio, usar infill 10-15%"
+      },
+      "notes": "BLOCO UNICO por pedido do usuario (substituiu a ideia de dois blocos). Por que arquibancada: com 3 fileiras de altura cheia a do meio fica sem face externa, e deixar os 9 tubos na borda de um bloco de altura cheia pede >210mm de cama (soma de passos ~480mm); entao os tubos do meio perdem metade da profundidade (34mm, ~12 moedas) pra ganhar acesso. Faixa preta termina 0.2mm ACIMA do topo do degrau de proposito: corte de cor coplanar com o degrau gerava folha degenerada (STL nao-manifold). Exports: Volumes=2 em block/white/black/red, todas as arestas com incidencia 2, soma dos volumes das cores = volume do bloco. 3MF montado com cartoes/armarouge-card-2cores-01/multicolor3mf.py (cores so de filamento, nenhuma chave de impressora) — CONFERIR no Flash Studio que abre como 1 objeto com 3 pecas nos filamentos 1/2/3. Mono: imprimir stl/pokemon-coin-stack-01.stl. ESPESSURA da moeda nao foi medida (2.7 e' suposicao vinda do coin-binder-01) — so afeta a capacidade ecoada. REVISAO print-review aplicada: rebaixo de dedo no piso dos 9 tubos (piso da frente/tras engrossado de 2.4 pra 4.4, -1 moeda nesses tubos), botao do medalhao reduzido pra caber inteiro na faixa preta (sumiram as lascas branca/vermelha de 0.8 no pe do cone; botao BRANCO como 4a parte foi avaliado e descartado: ~50 trocas de filamento a mais contra as 2 do job), chanfro da boca 1.5->1.0 (1mm de topo plano nas divisorias de 3mm). Ainda NAO validado em teste fisico."
     },
     {
       "id": "ring-01",
@@ -3707,8 +4069,8 @@
         98.5,
         105.5
       ],
-      "rebuilt_as": "organizadores_tcg/psa-box-02 (refeito do zero a partir das medidas da malha: mesmo interior, tampa rígida e folga de 0.5/lado)",
-      "notes": "Teste físico 2026-10: a tampa saiu molenga (parede 1.9mm, só 1.0mm de teto embaixo da Pokébola) e prende ao abrir (0.1mm/lado de folga em 30mm de encaixe). Use o psa-box-02; a tampa dele também fecha esta base.",
+      "rebuilt_as": "organizadores_tcg/psa-box-02 (fonte OpenSCAD própria, refeita do zero a partir das medidas da malha e dimensionalmente igual a esta)",
+      "notes": "Teste físico 2026-10-13: o usuário aprovou o encaixe desta original (0.1mm/lado em 30mm de gargalo). Uma versão engrossada com folga de 0.5/lado (psa-box-02 antigo) ficou com a capa solta e foi desfeita; o psa-box-02 agora reproduz estes números em OpenSCAD.",
       "fits_ad5x": true
     },
     {
