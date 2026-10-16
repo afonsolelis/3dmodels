@@ -9,7 +9,8 @@ FlashForge AD5X.
 | Modelo | Status | Descrição |
 |---|---|---|
 | [slab-tile-01](./slab-tile-01/) | 🚧 em andamento | sistema MODULAR: tile de UMA slab que encaixa por rabo-de-andorinha formando pagina de fichario 2x2/3x3/4x4, paginas empilham em torre. Aceita PSA/CGC/TAG/SGC (fora Beckett e ARS) com tres molas de lamina que autocentram a slab — sao 7mm entre a PSA e a SGC. 2 tiles por chapa (209.9 x 155.2mm) |
-| [psa-box-01](./psa-box-01/) | 🚧 em andamento | caixa de 38 slabs PSA nuas em duas filas de 19, base + tampa telescópica, **fechada contra luz** (colmeia em baixo relevo, nada passante); 176.4 × 175.1mm, 2 jobs + gabarito de teste (folgado na cama de 220 da AD5X) |
+| [psa-box-01](./psa-box-01/) | 🚧 em andamento | caixa de 38 slabs nuas (GRADD, GBA, PSA, CAPY) em duas filas de 19, base + tampa telescópica, **fechada contra luz** (colmeia em baixo relevo, nada passante). Slab **medida com paquímetro: 80.3 × 135.3 × 6.2** (espessura dimensionada em 6.3, a marca mais grossa); vaga 7.1 (0.4/lado), canaleta 81.3 (0.5/lado). **Vão de dedo de 20mm entre as filas** pra pinçar cada slab pelas duas bordas. Tampa **0.1/lado com entrada r1.0**, igual ao psa-box-02 (contraria a regra 6 de propósito). 189.4 × 168.7mm, 2 jobs + gabarito de teste |
+| [psa-box-fit](./psa-box-fit/) | 🚧 em andamento | o `psa-box-01` com **uma fila só, de 20 slabs** (include com `rows_override=1`, `slots_override=20`): caixa retangular de 88.1 × 177.3 × 143.1 fechada, mesmas folgas (tampa 0.1/lado, entrada r1.0) e barreira de luz, sem vazado nenhum. **Base + tampa num job só**, como dois objetos no 3MF (chapa 182.2 × 177.3); o gabarito é o do `psa-box-01` |
 | [psa-box-02](./psa-box-02/) | 🚧 em andamento | caixa de **10 slabs PSA com Pokébola gravada na tampa** — fonte OpenSCAD própria do `terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/` (DAMA_Lab), **dimensionalmente igual à original**: parede da tampa 1.9, teto 1.9, **folga 0.1/lado** com raio de entrada r1.0 nas duas bocas, base com parede 5.0. A versão engrossada (parede 3.0, folga 0.5/lado) ficou com a capa solta no teste físico e foi desfeita em 2026-10-13. 95 × 98.5 × 145.5 fechada; base + tampa numa chapa de 198 × 98.5
 | [penny-holder-01](./penny-holder-01/) | 🚧 em andamento | caixa de cartas com **penny sleeve deitadas na aresta longa, em 2 camadas** (~300 cartas), derivada do `terceiros/stackable-penny-sleeve-holder-colmeia-80mm/pennysleeveholder-stackable-colmeia-80mm.3mf` (Sazabi) — mesma pegada de 74.2 × 102.7, mas **150mm de altura** em vez de 80. Gaveta de fichário em pé: boca aberta em cima e **janela de vão contínuo na frente, do piso ao alto, sem travessa no meio**; quem amarra os lados é a **cinta de 8mm** que fecha a volta no topo, o piso em colmeia de 10mm e os dois montantes de 8mm que viram flange de canto em L. Empilhável (ressalto de 3mm + chaveta que só deixa encaixar numa orientação). Colmeia passante nas laterais e no fundo (47 furos) com **bico de 45°**, colmeia regular de 24mm no piso. ~97g, sem suporte. ⚠️ A medida da carta (66 × 91) é **catálogo, não régua** — ver o bloco abaixo. ⚠️ Com 2 camadas e sem prateleira, **a camada de baixo é arquivo, não é a de giro** (ver README do modelo) |
 | [toploader-holder-01](./toploader-holder-01/) | 🚧 em andamento | dispenser **2-em-1 de top loader (em cima) e penny sleeve (embaixo)**, 84 × 109 × **150mm**, derivado do `terceiros/2-in-1-top-loader-sleeve-holder/2-in-1-top-loader-sleeve-holder.3mf` (HeyHalo, **CC0**) — mesma ideia, mas 150mm em vez de 84, o que leva o curso de top loader de 50 pra **116mm (~40 → ~92 peças)**. **Quem separa os dois conteúdos é a gravidade**: um DEGRAU a 34mm do chão deixa o bolso de baixo com 71mm de vão, estreito demais pro top loader (76,2 → para no degrau com 2,6/lado de apoio) e folgado pro penny sleeve (66,7 → cai livre). Sem divisória, sem prateleira, sem ponte — e como o material RECUA subindo, o degrau tem **balanço zero**. Boca aberta em cima, janela de vão contínuo de 60 × 138 na frente e cinta de 8mm fechando a volta no topo. Colmeia passante de 18mm com bico de 45° nas laterais e no fundo, só **acima** do degrau (o bolso fica maciço: sleeve mole faz barriga pelo furo). ~197g, **sem suporte** — auditado, 100% da área virada pra baixo está a 45°. ⚠️ As medidas de top loader e sleeve são **catálogo/engenharia reversa, não régua** — ver o bloco abaixo |
@@ -48,7 +49,8 @@ Veja o [catálogo visual dos 22 arquivos](terceiros/README.md). Cada item regist
 > - `psa-bumper-01` usa **84.5 × 139.5 × 7.2mm**, um envelope conservador sobre
 >   o consenso de 5 fontes (85.0 / 85.0×138.5 / 85.4×140.0 / 86.2×140.7 e o
 >   nominal PSA 83.6×134.4 × 7.1);
-> - `psa-box-01` usa ~83.6–85 × 134–140 × 7.1mm, de engenharia reversa de malhas;
+> - `psa-box-01` usava ~83.6–85 × 134–140 × 7.1mm, de engenharia reversa de malhas
+>   (**superado em 2026-10-13**: paquímetro, 80.3 × 135.3 × 6.2 — ver abaixo);
 > - `psa-bumper-02` usa **80.27 × 135.37 × 5.83mm**, que é o bolso medido na
 >   malha do `../bumpers/terceiros/parametric-graded-card-bumper-generator-protect/trading-card-bumper-psa-2.3mf`. **É o menor de todos**, e a
 >   escolha de copiá-lo foi do usuário, avisado deste bloco. Risco assumido: se a
@@ -72,28 +74,30 @@ Veja o [catálogo visual dos 22 arquivos](terceiros/README.md). Cada item regist
 > mais de largura de carta cresce 2mm na altura da caixa**, e o teto de 180 da
 > AD5X só é atingido com `card_w = 81`.
 >
-> Uma medida de régua resolve o `psa-box-01` (e os outros modelos de slab PSA
-> que vierem a existir) de uma vez: é trocar os parâmetros de slab e re-exportar.
-> O `psa-box-01` já traz seu próprio **gabarito de teste** como job de medição.
+> **2026-10-13 — a medida de paquímetro da slab PSA chegou**: **80.3 × 135.3 ×
+> 6.2mm** (4 medições do usuário; slabs GRADD, GBA, PSA e CAPY variam só ~0.1mm
+> na espessura). Ela bate com os bolsos "outliers pequenos" acima, não com as
+> fontes grandes. `psa-box-01`, `psa-box-fit` e `psa-stand-01` já usam medida real.
 
-O `psa-box-01` nasceu de um deles: a geometria das vagas foi tirada por
-engenharia reversa da malha do `terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf`, e as medidas da
-slab foram cruzadas com `terceiros/display-stand-for-psa-cgc-slab/my-psa-slab.3mf` e `terceiros/pokemon-psa-cgc-ace-slab-protector-stand/slab-protectors.3mf` — que
-**divergem entre si**. Está tudo documentado no README do modelo; é o motivo
-de existir um job de gabarito antes da caixa grande.
+O `psa-box-01` nasceu de um deles: a ideia de pente + tampa telescópica veio
+do `terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf`.
+As medidas da slab hoje são de paquímetro; o job de gabarito continua sendo o
+primeiro print, porque prova as folgas com o empeno real da impressora.
 
 ## Parâmetros que costumam definir um organizador de slabs
 
-- **Medidas da slab** — a única medida de consenso entre as fontes é a
-  espessura (~7.1mm); largura e altura variam de 83.6 × 134 a 85 × 140
-  conforme a fonte, e é o que decide se o projeto cabe na cama
+- **Medidas da slab** — sempre de paquímetro: as fontes de terceiros
+  superestimavam (83.6–85 × 134–140 × 7.1 contra 80.3 × 135.3 × 6.2 reais)
 - **Passo da vaga** (espessura da slab + folga + divisória)
 - **Quanto a slab sobra pra fora** — é a pegada da mão; sem isso não se tira
   uma slab do meio de uma fila cheia
-- **Altura das nervuras** — se subirem demais, as slabs não abrem em leque
-- **Footprint × cama** — duas filas de slab já comem ~169mm dos 180 da A1
-  mini, então wall, espinho e folga disputam 11mm
+- **Acesso de dedo** — com a vaga justa a slab não inclina, então ela sai
+  pinçada pelas duas bordas estreitas; cada borda precisa de espaço livre
+  pro dedo (no `psa-box-01`, um vão de 20mm entre as filas)
+- **Footprint × cama** — duas filas de slab ocupam ~163mm de canaleta + 20 de vão de dedo; na
+  AD5X (conforto ≤210) cabem até 23 vagas por fila
 - **Luz** — carta graduada desbota com UV. Se a peça for de guardar (e não de
   expor), nada que dá pro lado de fora pode ser passante: a colmeia da
   identidade do repo entra como **baixo relevo**, não como furo. Custa peso
-  (no `psa-box-01` foram +114g), então é decisão de projeto, não default.
+  (no `psa-box-01` foram ~+114g na versão de 2026-08), então é decisão de
+  projeto, não default.

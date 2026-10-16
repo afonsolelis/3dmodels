@@ -1,211 +1,236 @@
 # psa-box-01
 
-Caixa **grande** para slabs PSA (cartas graduadas, lacradas no acrílico da
-PSA), em **duas filas de 19 vagas = 38 slabs**. Base alta + tampa
-telescópica, no mesmo espírito do modelo de terceiro que a originou.
-
-> **Nota de migração (AD5X).** Este modelo foi dimensionado para a cama
-> antiga de 180x180 e por isso encosta nos 176mm — na AD5X (220x220) ele
-> agora sobra folga em todos os lados. A geometria segue válida e imprime
-> igual; o que mudou é que **deixou de ser um print apertado**. Há espaço
-> para uma revisão futura (mais vagas por fila, ou brim liberado).
-
-É pra guardar a **slab PSA NUA** — sem bumper, sem capa, sem case extra.
+Caixa **grande** para slabs nuas (cartas graduadas, lacradas no acrílico), em
+**duas filas de 19 vagas = 38 slabs**. Base alta + tampa telescópica, no
+mesmo espírito do modelo de terceiro que a originou. Serve para slabs
+**GRADD, GBA, PSA e CAPY** — sem bumper, sem capa, sem case extra.
 
 **Caixa fechada, barreira de luz.** Carta graduada desbota com UV, então nada
 que dá pro lado de fora é passante: a colmeia da identidade do repo é gravada
 em **baixo relevo** na face externa e a parede continua inteira atrás. De fora
 o desenho é o mesmo de uma caixa vazada; de dentro não entra luz.
 
-## ⚠️ Antes de imprimir: rode o gabarito
+Versão de **uma fila só, de 20 slabs**: [`../psa-box-fit/`](../psa-box-fit/)
+(include deste `.scad`).
 
-As medidas da slab **não foram tiradas com régua** (ver a seção abaixo), e a
-base é um print de ~427g e ~25–35h. Existe um terceiro job só pra isso:
+## Medidas da slab
+
+**Paquímetro do usuário (4 medições, 2026-10-13): 80.3 × 135.3 × 6.2mm.**
+As quatro marcas que ele tem variam só na espessura (~0.1mm), então a caixa é
+dimensionada pela mais grossa: `slab_t = 6.3`. Daí sai todo o resto:
+
+| | Medida | Folga | Resultado |
+|---|---|---|---|
+| espessura | 6.3 | **0.4/lado** | vaga de **7.1**, passo **8.6** |
+| largura | 80.3 | **0.5/lado** | canaleta de **81.3** |
+| altura | 135.3 | — | 30mm pra fora da base, 3.0mm até o teto da tampa |
+
+> Histórico: até 2026-10 a slab era estimada por engenharia reversa de malhas
+> de terceiros (83.6 × 139 × 7.1). Todas as fontes superestimavam; a medida
+> real é menor nos três eixos.
+
+**Por que 0.4/lado na vaga, e não 0.3:** a slab desce 80mm entre nervuras de
+1.5mm em pé. O pé de elefante estreita justo o fundo, onde ela precisa
+assentar, e nervura fina e alta tende a sair gorda ou inclinada. A diferença
+custa 0.2mm de passo (1.9mm em 19 vagas). Mesmo com 0.4/lado a vaga é justa:
+a slab inclina no máximo ~1.3mm no topo.
+
+## Antes de imprimir: rode o gabarito
+
+A base é o print grande (~486g). O gabarito é um pedaço dela: uma fila,
+3 vagas, com a canaleta, a vaga e o pente reais.
 
 ```
-3mf/psa-box-01-test.3mf   90.0 × 31.1 × 45.0mm   ~45g, ~1h
+3mf/psa-box-01-test.3mf   88.1 × 31.1 × 45.0mm   ~51g
 ```
 
-É um pedaço da base — uma fila, 3 vagas — com a canaleta, a vaga e o pente
-reais. Imprima, pegue uma slab e confira: ela tem que **descer até o chão
-sozinha, sem forçar**, e não dançar mais que um chacoalho de folga. Se não
-entrar, ajuste `slot_gap_w` (largura) ou `slot_gap_t` (espessura) no `.scad`,
-re-exporte e repita o gabarito.
+Imprima, pegue uma slab de cada marca e confira: ela tem que **descer até o
+chão sozinha, sem forçar**, e não dançar mais que um chacoalho de folga. Se
+não entrar, suba `slot_gap_w` (largura) ou `slot_gap_t` (espessura) no
+`.scad`, re-exporte e repita. O mesmo gabarito vale pro `psa-box-fit`.
 
 ## Peças e jobs
 
-| Nome | No código | Job | Footprint (medido no STL) | Material |
+| Nome | No código | Job | Footprint (bbox.py) | Material |
 |---|---|---|---|---|
-| **gabarito** | `part="test"` | `3mf/psa-box-01-test.3mf` | 90.0 × 31.1 × 45.0mm | 36cm³ (~45g) |
-| **base** | `part="base"` / `part="plate"` | `3mf/psa-box-01-base.3mf` | 176.4 × 175.1 × 111.4mm | 344cm³ (~427g) |
-| **tampa** | `part="lid"` | `3mf/psa-box-01-lid.3mf` | 176.4 × 175.1 × 55.4mm | 133cm³ (~165g) |
+| **gabarito** | `part="test"` | `3mf/psa-box-01-test.3mf` | 88.1 × 31.1 × 45.0mm | 40.9cm³ (~51g) |
+| **base** | `part="base"` / `part="plate"` | `3mf/psa-box-01-base.3mf` | 189.4 × 168.7 × 107.7mm | 392.0cm³ (~486g) |
+| **tampa** | `part="lid"` | `3mf/psa-box-01-lid.3mf` | 189.4 × 168.7 × 55.4mm | 139.0cm³ (~172g) |
 
-Conjunto fechado: **176.4 × 175.1 × 146.8mm**. Caixa completa (base + tampa):
-**~477cm³ / ~592g de PLA**, algo como 25–35h + 10–14h de impressão.
-
-> O peso é o preço de fechar contra luz: a versão vazada dava ~478g. Fechar
-> devolveu **+114g** (base +59, tampa +56). O volume acima é o do sólido — o
-> fatiador ainda alivia um pouco o chão e o teto, que são chapas grossas.
-
-## De onde vieram as medidas — as fontes DIVERGEM
-
-Nenhuma das três medidas da slab veio da régua do usuário. Só a **espessura
-(7.1)** é consenso — a vaga de 7.5 do original fecha com ela. Largura e
-altura são as incógnitas:
-
-| Fonte | O que diz |
-|---|---|
-| `../terceiros/no-ams-scatola-porta-10-carte-psa-pokemon-pokeball/porta-carte-psa-x10.3mf` (origem do projeto) | canaleta de **85.0** de largura; vaga 7.5, divisória 1.5, passo 9.0; base 95 × 98.5 × 105.5 com 102 de fundo |
-| `../terceiros/display-stand-for-psa-cgc-slab/my-psa-slab.3mf` | silhueta de **85.00 × 138.52** |
-| `../terceiros/pokemon-psa-cgc-ace-slab-protector-stand/slab-protectors.3mf` | peças de **85.40 × 140.00** e **86.20 × 140.70** |
-| nominal PSA documentado | 3.29" × 5.29" = **83.6 × 134.4** |
-
-**Adotado: 83.6 × 139 × 7.1.** A largura é o nominal documentado; a altura é
-o **teto** das fontes, porque altura sobrando é barata (só encompre a base
-6mm) e altura faltando **trava a tampa**.
-
-### Envelope que esta caixa aceita
-
-| | Máximo | Se passar disso |
-|---|---|---|
-| largura | **84.4mm** | subir `slot_gap_w` custa **0.4mm de cama por 0.1mm de folga** — acima de ~84.4 a canaleta modelada não aceita mais a slab; na cama de 220 da AD5X ainda há folga de sobra para subir esse teto, basta re-exportar |
-| altura | **142mm** | subir `slab_h`; a tampa acompanha sozinha (é derivada) |
-| espessura | **7.5mm** | subir `slot_gap_t`; muda o passo e o comprimento da caixa |
-
-Se a slab real medir 85mm de largura, **duas filas são geometricamente
-impossíveis** na A1 mini antiga: 2 × 85 já eram 170 dos 180, e ainda faltavam paredes e
-espinho.
+Conjunto fechado: **189.4 × 168.7 × 143.1mm**. Caixa completa (base + tampa):
+**~531cm³ / ~658g de PLA** (volume do sólido; o fatiador alivia um
+pouco o chão e o teto, e o tempo de impressão sai dele).
 
 ## Como se manuseia
 
 1. As slabs entram **em pé, de cima**, uma por vaga.
-2. Elas sobram **30mm pra fora da boca da base** — é essa parte exposta que a
+2. Elas sobram **30mm pra fora da boca da base**. É essa parte exposta que a
    mão pega.
-3. As nervuras do pente só sobem **80mm dos 139** da slab. Os ~59mm de cima
-   (29 dentro da caixa + 30 fora) ficam soltos: dá pra **abrir as slabs em
-   leque com o dedo**, como pasta suspensa, inclinar a que você quer e
-   pinçar. Sem essa folga não sairia nenhuma slab do meio da fila — entre
-   duas vizinhas sobram só 1.9mm, não entra dedo. (É exatamente assim que o
-   original funciona nas fotos do autor, dentro do próprio `.3mf`.)
-4. A tampa desce por cima e encaixa num rebaixo de 20mm no topo da base.
-   Fechada, a lateral fica **lisa e contínua** — a tampa não sobressai. Pra
-   abrir, segura a caixa e puxa a tampa; o relevo da colmeia dá pegada.
+3. Pra tirar uma, **pinça a slab pelas duas bordas X** (as estreitas, de
+   6.3mm) e puxa reto pra cima:
+   - o **polegar** na borda de fora, nos 30mm acima da parede externa;
+   - o **indicador** na borda de dentro, descendo no **vão de dedo** entre as
+     duas filas.
+4. A vaga é justa, então a slab fica em pé e não inclina (no máximo ~1.3mm
+   no topo). Entre duas vizinhas sobram só 2.3mm, e por isso o acesso é
+   sempre pela **borda**, nunca pela face. A ponta do dedo (~16mm) é mais
+   larga que a borda de 6.3mm e encosta também nas bordas das duas vizinhas.
+   Pinçe firme na do meio e puxe reto.
+5. A tampa desce por cima, guiada pelas **entradas arredondadas** (r1.0), e
+   encaixa num rebaixo de 20mm no topo da base até apoiar no ombro. O encaixe
+   é justo (0.1/lado) e segura a tampa sem trava. Fechada, a lateral fica
+   **lisa e contínua**. Pra abrir, puxa a tampa **reto, pelos dois lados opostos ao mesmo tempo** (puxada por uma borda só ela inclina e calça, efeito gaveta); o
+   relevo da colmeia nas laterais da tampa ajuda a pegada.
+
+### Vão de dedo entre as filas
+
+| | Medida |
+|---|---|
+| vão entre as canaletas (`row_gap`) | **20mm** |
+| entre as bordas de dentro das slabs | **21mm** (cabe um indicador) |
+| paredes internas (`mid_wall`) | 2 × 2.0mm, até z=84.4 (2mm acima do topo das nervuras) |
+| poço entre elas | 16mm, com o chão maciço da caixa |
+| borda de **dentro** livre pro dedo | **53.3mm** de cima da slab: 30 fora da base + 23.3 dentro |
+| borda de **fora** livre pro polegar | **30mm**, acima da parede externa |
+
+As paredes do meio só sobem até 2mm acima das nervuras, o suficiente pra
+segurar as nervuras de dentro em toda a altura. Acima delas, o vão fica
+aberto de uma fila à outra, então o dedo desce ~23mm abaixo da boca da base
+e pega a borda de dentro bem mais embaixo que o polegar pega a de fora. O vão
+fica entre as paredes de ponta e embaixo da tampa: não abre pro lado de fora.
 
 ## Design
 
-- **Duas filas separadas por um espinho** de 2mm, cada uma com 19 vagas de
-  7.5mm num passo de 9.0mm (interior de 169.5mm em Y).
+- **Duas filas separadas por um vão de dedo** de 20mm, cada uma com 19 vagas
+  de 7.1mm num passo de 8.6mm (interior de 161.9mm em Y). Até 2026-10-13 as
+  filas eram separadas por um espinho de 2mm. Entre as slabs sobravam 3mm, não
+  entrava dedo, e nenhuma das 38 slabs dava pra pinçar pelos dois lados.
 - **Pente de nervuras nas pontas da canaleta**, não divisórias inteiras (é o
   truque do original): cada divisória são 2 nervuras de 9mm de avanço, uma em
-  cada ponta, seguindo as bordas da slab. O miolo da canaleta fica vazio —
-  são 72 nervuras em vez de 36 aletas de 84mm.
-- **Topo da nervura em telhado** (afina de 1.5 pra 0.6mm nos últimos 4mm):
-  funil de entrada pra slab e imprime sem ponte.
-- **Colmeia hexagonal em BAIXO RELEVO** (identidade do repo, hexágonos de
-  ponta pra cima), gravada na face externa — nunca passante:
-  - paredes de ponta (±Y) da base: hexágonos de 10mm, relevo de 0.9mm numa
-    parede de 2.8 → sobram **1.9mm** de material atrás;
+  cada ponta, seguindo as bordas da slab. As de dentro saem das paredes
+  internas do vão. O miolo da canaleta fica vazio.
+- **Topo da nervura em telhado** (afina de 1.5 pra 0.8mm nos últimos 4mm):
+  funil de entrada pra slab, imprime sem ponte, e 0.8 são duas linhas de bico
+  0.4.
+- **Encaixe da tampa, folga 0.1/lado, igual ao `psa-box-02`.** A parede tem
+  **3.4mm** = ressalto da base **1.8** + folga **0.1** + saia da tampa **1.5**,
+  com 20mm de altura. As duas entradas são **raio r1.0**: na quina externa do
+  topo do ressalto e na quina interna da boca da saia. Isso dá **2.1mm/lado de
+  entrada**, e as duas imprimem sem suporte. O topo do ressalto fica com
+  **0.8mm planos** depois do raio. A saia fica 0.6mm acima do topo do
+  ressalto, então quem apoia é a boca no ombro. As duas peças têm o **mesmo
+  footprint** e o conjunto fica liso por fora.
+
+  > **A folga de 0.1/lado contraria a regra 6 do CLAUDE.md de propósito.**
+  > No `psa-box-02` (mesmo tipo de encaixe: tampa telescópica de parede fina
+  > sobre um gargalo), a 0.5/lado foi impressa e testada na mão em
+  > 2026-10-13 e ficou **solta**. A original da DAMA_Lab, com 0.1/lado e
+  > entrada em raio r1.0, estava muito boa. O usuário decidiu usar o mesmo
+  > encaixe aqui. Não "corrigir" de volta.
+- **Colmeia hexagonal em BAIXO RELEVO** (hexágonos de ponta pra cima), nunca
+  passante:
+  - paredes de ponta (±Y) da base: hexágonos de 10mm, relevo de 0.9 numa
+    parede de 3.4, o que deixa **2.5mm** atrás;
   - paredes laterais (±X) da base: **fendas hexagonais alongadas** entre as
-    nervuras — hexágono redondo não cabe nos 7.5mm entre duas nervuras, o
-    esticado cabe e mantém as pontas em bico. Também 0.9 de relevo → 1.9mm
-    atrás. A primeira e a última vaga de cada fila ficam sem fenda: gravação
-    colada no canto vira lasca;
-  - tampa: hexágonos de 9mm nas 4 paredes **e no teto**, relevo de 0.6mm →
-    sobram **1.8mm** (parede 2.4, teto 2.4);
-  - **os espinhos continuam PASSANTES**: são internos, separam uma fila da
-    outra e não enxergam o lado de fora com a casca fechada — ali o vazado só
-    economiza material.
-- **Chão da base MACIÇO (2.4mm)**: carrega os ~1.2kg de 38 slabs quando a
-  caixa é levantada, é a aderência de primeira camada de uma peça de 176mm que
-  **não tem espaço pra brim**, e é a barreira de luz por baixo.
-- **Teto da tampa 2.4mm** (era 2.0 quando vazado): engrossou pra sobrar 1.8
-  atrás do relevo. O relevo raso vira um bridge curtinho por célula na
-  primeira camada — trivial pro fatiador — e a aderência passa a ser a chapa
-  inteira, não só a teia.
-- **Encaixe da tampa**: ressalto de 1.3mm × 20mm de altura na base; saia de
-  1.3mm na tampa, que engrossa pra 2.4mm acima do encaixe (transição em
-  chanfro de 45°, imprime sem suporte). Folga de 0.2mm por lado, conferida na
-  malha exportada. A boca da tampa apoia num ombro de 1.5mm — por isso as
-  duas peças têm o **mesmo footprint** e o conjunto fica liso por fora.
-- **Parede de 2.8mm** não é capricho nem sobra: é o mínimo que hospeda
-  ressalto (1.3) + saia (1.3) + folga (0.2), e cada 1mm dela custa 2mm de
-  cama.
+    nervuras (hexágono redondo não cabe entre duas nervuras), também 0.9 de
+    relevo, **2.5mm** atrás. A primeira e a última vaga de cada fila ficam sem
+    fenda, porque gravação colada no canto vira lasca;
+  - tampa: hexágonos de 9mm nas 4 paredes **e no teto**, relevo de 0.6, o que
+    deixa **1.8mm** atrás (parede 2.4, teto 2.4);
+  - **as paredes internas do vão continuam com fendas PASSANTES** (z 12–74,
+    10mm abaixo do topo delas): dão pro poço do meio, que é interno.
+- **Chão da base MACIÇO (2.4mm)**, inclusive embaixo do poço: carrega ~1.2kg
+  de slabs e é a barreira de luz por baixo.
+- **Teto da tampa 2.4mm, e o relevo dele começa na cama.** Ou seja, **só a
+  teia entre hexágonos e a borda lisa encostam na cama**; cada célula fecha
+  com uma ponte curta de 9mm a 0.6mm de altura. Área de contato medida na
+  malha: **16.652mm², ~52% do footprint**, o que é aderência de sobra
+  em PEI. Ficou assim de propósito: o teto é a cara da caixa fechada, e mover
+  a colmeia pra dentro tiraria o desenho de fora. O preço é que o fundo de
+  cada célula sai com acabamento de ponte, não de chapa.
 - **Cantos verticais arredondados** (r=3): melhor na mão e menos empeno numa
   peça grande e alta.
 
-## Cama da AD5X — ATENÇÃO
+## Cama da AD5X
 
 | Peça | Medido (bbox.py) | Veredito |
 |---|---|---|
-| base | 176.4 × 175.1 × 111.4 | ok |
-| tampa | 176.4 × 175.1 × 55.4 | ok |
-| gabarito | 90.0 × 31.1 × 45.0 | ok |
+| base | 189.4 × 168.7 × 107.7 | ok |
+| tampa | 189.4 × 168.7 × 55.4 | ok |
+| gabarito | 88.1 × 31.1 × 45.0 | ok |
 
-Na cama de 220x220 da AD5X as três peças passam **folgadas** — sobram ~21mm
-por lado em X e ~22mm em Y, espaço de sobra pra brim e skirt. (Na A1 mini
-antiga isto era um print apertado, com brim e skirt desligados na mão; não é
-mais o caso.) Ainda assim, confira no slicer se a peça não conflita com a
-linha de purga / área de limpeza. Se conflitar, dá pra ganhar footprint:
-  - **X**: cada 0.1mm a menos de `slot_gap_w` tira 0.4mm do X;
-  - **Y**: `slots_override = 18` tira 9.0mm do Y (e 2 slabs de capacidade).
-- a aderência vem do chão maciço da base e do teto maciço da tampa (as duas
-  peças apoiam uma chapa cheia na cama), não de brim.
+Todas dentro do alvo de 210, com espaço pra brim. Base e tampa são um job
+cada (duas peças de 189mm não cabem lado a lado).
 
-## Barreira de luz — o que foi conferido
+**Capacidade máxima em ≤210:** com o mesmo passo, cabem **até 23 vagas por
+fila** (46 slabs, Y = 203.1). 24 vagas dariam 211.7 (justo, 210–220). Pra
+mudar, `slots_override` por include ou `-D slots_per_row=N` por CLI. O X
+(189.4) não muda com o número de vagas.
 
-A caixa fechada foi varrida por ~104 mil raios nos três eixos (script de
-ray-casting sobre as malhas exportadas, com a tampa posicionada no encaixe):
+## Barreira de luz: o que foi conferido
 
-| Varredura | Raios | Vazamentos |
-|---|---|---|
-| vertical (Z), planta inteira | 27.888 | **0** |
-| horizontal (Y), paredes de ponta | 23.184 | **0** |
-| horizontal (X), laterais | 22.908 | **0** |
-| junta base/tampa, passo de 0.25mm | 30.498 | **0** |
+Checagem refeita em 2026-10-13 nas malhas exportadas desta versão (com o vão
+de dedo e o encaixe de 0.1/lado), com a tampa posicionada no encaixe. Para
+cada uma das 6 faces externas, a faixa de 5mm da parede (base + saia +
+ressalto) foi projetada no eixo normal e subtraída da silhueta da caixa.
+**Resultado: nenhuma área descoberta nas 6 faces**, ou seja, nenhum raio reto
+atravessa uma parede. Controle positivo: um furo de 3mm em cada face e uma
+fresta de 0.3mm na junta, plantados de propósito, foram detectados.
 
-A menor espessura de material que um raio atravessa no conjunto é **2.60mm**,
-numa faixa de 0.6mm de altura logo acima do topo do ressalto, onde só a saia
-da tampa cobre (1.3mm de cada lado). Fora dessa faixa é sempre ≥ 3.6mm.
+Menor espessura de parede que um raio horizontal atravessa: **1.5mm**, numa
+faixa de 0.6mm de altura logo acima do topo do ressalto, onde só a saia cobre.
+No raio do ressalto é 1.5 + parte do ressalto; na junta, 1.5 + 1.8 = 3.3;
+atrás de qualquer relevo, ≥1.8.
 
-A junta base/tampa não é fresta: a saia desce 20mm por cima do ressalto com
-0.2mm de folga — um labirinto de 20mm de comprimento por 0.2 de abertura.
-Não há furo de dedo, furo de empurrar nem rasgo em lugar nenhum das duas
-peças; o único vazado do projeto são as fendas dos espinhos, que são internas.
+A junta base/tampa não é fresta: é um labirinto de 20mm de comprimento por
+0.1 de abertura. O vão de dedo e o poço ficam entre as paredes de ponta,
+fechados por baixo pelo chão maciço e por cima pela tampa. Não há furo de
+dedo nem rasgo em nenhuma das duas peças; o único vazado são as fendas das
+paredes internas, que dão pro poço.
 
 ## Impressão
 
-- **Dois jobs grandes**, um por peça — nada mais cabe junto na cama. Mais o
-  gabarito, que é rápido e vem primeiro.
+- **Dois jobs grandes**, um por peça, e o gabarito antes.
 - Todas **sem suporte**, na orientação exportada:
-  - base e gabarito: chão na cama, boca pra cima;
-  - tampa: **teto na cama**, boca pra cima (é a face grande que segura a
-    peça; a saia fina fica no topo do print).
+  - base e gabarito: chão na cama, boca pra cima. As paredes internas do vão
+    são lâminas de 2mm × 82mm presas nas pontas, no chão e nas nervuras;
+  - tampa: **teto na cama**, boca pra cima (a saia fina e o raio da boca
+    ficam no topo do print).
 - Pra barreira de luz valer, imprimir em **filamento opaco** (preto ou cor
-  escura). PLA claro e translúcido passa luz mesmo com 1.9mm; e vale subir
-  as paredes/topo sólidos no fatiador pra não deixar infill ralo no teto.
+  escura). PLA claro e translúcido passa luz mesmo com 2mm; vale subir as
+  paredes/topo sólidos no fatiador pra não deixar infill ralo no teto.
+- Encaixe de 0.1/lado: se a tampa sair dura demais com o pé de elefante,
+  lixe de leve a base do ressalto ou ative a compensação de pé de elefante no
+  fatiador, em vez de abrir a folga no `.scad`.
 
 ## Variantes
 
-Por include, no padrão do repo:
+Por include, no padrão do repo (é o que o `psa-box-fit` faz):
 
 ```openscad
-slots_override = 18;  // 18 vagas por fila (36 slabs), tira 9mm do Y
-rows_override  = 1;   // uma fila só (19 slabs) — a saída se a slab for larga demais
+rows_override  = 1;   // uma fila só
+slots_override = 20;  // vagas por fila
 include <../psa-box-01/psa-box-01.scad>
 ```
+
+Com uma fila, `part="plate"` põe a tampa do lado da base (`plate_both`) e o
+`row_gap` não entra. Por CLI o `-D slots_override=...` **não pega** (OpenSCAD
+2021.01); use `-D slots_per_row=N` / `-D rows=N` / `-D row_gap=N`.
 
 ## Como gerar
 
 ```sh
 D=organizadores_tcg/psa-box-01
-flatpak run org.openscad.OpenSCAD -o $D/stl/psa-box-01-base.stl -D 'part="base"'  $D/psa-box-01.scad
-flatpak run org.openscad.OpenSCAD -o $D/stl/psa-box-01-lid.stl  -D 'part="lid"'   $D/psa-box-01.scad
-flatpak run org.openscad.OpenSCAD -o $D/stl/psa-box-01-test.stl -D 'part="test"'  $D/psa-box-01.scad
-flatpak run org.openscad.OpenSCAD -o $D/3mf/psa-box-01-test.3mf -D 'part="test"'  $D/psa-box-01.scad
-flatpak run org.openscad.OpenSCAD -o $D/3mf/psa-box-01-base.3mf -D 'part="plate"' $D/psa-box-01.scad
-flatpak run org.openscad.OpenSCAD -o $D/3mf/psa-box-01-lid.3mf  -D 'part="lid"'   $D/psa-box-01.scad
+openscad -o $D/stl/psa-box-01-base.stl -D 'part="base"'  $D/psa-box-01.scad
+openscad -o $D/stl/psa-box-01-lid.stl  -D 'part="lid"'   $D/psa-box-01.scad
+openscad -o $D/stl/psa-box-01-test.stl -D 'part="test"'  $D/psa-box-01.scad
+openscad -o $D/3mf/psa-box-01-test.3mf -D 'part="test"'  $D/psa-box-01.scad
+openscad -o $D/3mf/psa-box-01-base.3mf -D 'part="plate"' $D/psa-box-01.scad
+openscad -o $D/3mf/psa-box-01-lid.3mf  -D 'part="lid"'   $D/psa-box-01.scad
 ```
 
-`part="demo"` (base + slabs de mentira + tampa levantada) e `part="cut"`
-(corte no meio do conjunto fechado, pra conferir o encaixe) são só pra
-preview — nunca exportar.
+(`openscad` = `flatpak run org.openscad.OpenSCAD` no Linux, ou
+`"C:\Program Files\OpenSCAD\openscad.com"` no Windows; caminhos absolutos.)
+`part="demo"` (base + slabs de mentira, uma sendo puxada, + tampa levantada)
+e `part="cut"` (corte no meio do conjunto fechado, pra conferir o encaixe e o
+vão de dedo) são só pra preview, nunca exportar.

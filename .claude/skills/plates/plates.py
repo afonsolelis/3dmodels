@@ -174,7 +174,7 @@ def main():
             lo, _ = boxes[k]
             oid += 1
             name = src.split("/")[-1]
-            vx = "".join('<vertex x="%.5g" y="%.5g" z="%.5g"/>' % v
+            vx = "".join('<vertex x="%.6f" y="%.6f" z="%.6f"/>' % v
                          for v in verts)
             tx = "".join('<triangle v1="%d" v2="%d" v3="%d"/>' % tuple(f)
                          for f in faces)
