@@ -3,76 +3,70 @@
 Variante de **um deck só** da [`deckbox-01`](../deckbox-01/) (deck real com
 sleeve de **93 × 68 × 45 mm**, medido com régua), com compartimento de
 dados/moedas de **64 mm** (~244 cm³) e **sem ímãs**. Bandeja deslizante numa
-capa fechada numa ponta, com cestinha de colmeia empurrada por baixo pelo furo
-do chão. A fonte é um wrapper: define parâmetros, faz `include` do
-`deckbox-01.scad` e sobrescreve os módulos da capa e da cestinha.
+capa fechada numa ponta, presa por dois ressaltos que clicam em pockets da
+capa, com cestinha de pilares empurrada por baixo pelo furo do chão. A fonte
+é um wrapper: define parâmetros, faz `include` do `deckbox-01.scad` (que não
+muda) e sobrescreve a capa, a cestinha e os parâmetros da trava.
 
-## O que reimprimir
+## O que imprimir agora (2026-10-11: trava v3 + seta)
 
-**Só a cestinha v2:** [`3mf/deckbox-02-basket.3mf`](./3mf/deckbox-02-basket.3mf).
-Sai com o chão na mesa e a boca pra cima, sem suporte, e ocupa
-97,0 × 72,0 × 49,6 mm.
+**Bandeja e capa mudaram juntas.** A trava v3 tem o ressalto maior (saliência
+1,5 mm) e o pocket mais fundo (1,2 mm): a bandeja v3 **não entra** no pocket
+da capa v2 já impressa (1,0 > 0,8) e a bandeja v2 na capa v3 pega só 0,5 mm e
+fica bamba no pocket. Imprimir o **par novo**:
 
-A **capa v2 e a bandeja que você já imprimiu continuam valendo** (capa e trava
-aprovadas no teste físico). As duas são idênticas, conferidas por nº de
-triângulos, bbox e hash dos vértices ordenados, tanto no STL quanto dentro da
-chapa.
+- Tudo de uma vez: [`3mf/deckbox-02-plate.3mf`](./3mf/deckbox-02-plate.3mf)
+  (bandeja + cestinha de pilares + capa em pé, 169,6 × 166,8 × 173,6 mm). Ele
+  **abre no Flash Studio como um objeto único**: use "dividir em objetos"
+  antes de fatiar, pra pôr brim só na capa.
+- Ou, pra sentir o clique antes de gastar a capa inteira: o cupom
+  [`3mf/deckbox-02-coupon.3mf`](./3mf/deckbox-02-coupon.3mf) (os 45 mm da
+  boca) com a bandeja v3.
 
-O [`3mf/deckbox-02-plate.3mf`](./3mf/deckbox-02-plate.3mf) é o conjunto
-completo numa chapa (bandeja + cestinha v2 + capa em pé), pra quem imprimir do
-zero. Ele **abre no Flash Studio como um objeto único**: use "dividir em
-objetos" antes de fatiar, pra poder pôr brim só na capa e mexer em cada peça.
-A capa sozinha ([`3mf/deckbox-02-sleeve.3mf`](./3mf/deckbox-02-sleeve.3mf)) e
-o cupom do clique ([`3mf/deckbox-02-coupon.3mf`](./3mf/deckbox-02-coupon.3mf))
-continuam disponíveis.
+A cestinha de pilares que você já imprimiu **continua valendo** (geometria
+idêntica: 2412 triângulos, mesmo bbox e hash de vértices do antigo
+`-pillars`).
 
 | | |
 |---|---|
-| Reimpressão agora | `3mf/deckbox-02-basket.3mf`: **97,0 × 72,0 × 49,6 mm** |
-| Variante pilares | `3mf/deckbox-02-basket-pillars.3mf`: **97,0 × 72,0 × 49,6 mm** |
+| Conjunto completo | `3mf/deckbox-02-plate.3mf`: **169,6 × 166,8 × 173,6 mm**, job único |
 | Capa sozinha | `3mf/deckbox-02-sleeve.3mf`: **58,0 × 81,6 × 173,6 mm** (brim 3–5 mm) |
+| Cestinha | `3mf/deckbox-02-basket.3mf`: **97,0 × 72,0 × 49,6 mm** |
 | Cupom de teste | `3mf/deckbox-02-coupon.3mf`: **58,0 × 81,6 × 45,0 mm** |
-| Conjunto completo | `3mf/deckbox-02-plate.3mf`: **169,6 × 165,8 × 173,6 mm**, job único |
 | Conjunto fechado | **173,6 × 81,6 × 58,0 mm** (80,4 fora da faixa reforçada) |
-| Peças | bandeja 1, capa 1, cestinha 1 (v2 ou pilares) |
+| Bandeja com ressaltos | 169,6 × 79,2 × 53,8 mm |
+| Peças | bandeja 1, capa 1, cestinha 1 |
 | Hardware | nenhum |
 | Suportes | nenhum (brim de 3–5 mm na capa) |
 
-## Cestinha v2: entra e sai fácil, e mais firme
+## Seta de orientação na capa
 
-No teste físico a cestinha v1 era ruim de entrar e sair do compartimento e
-ficava molenga. O compartimento da bandeja (98 × 73 mm) **não mudou**: só a
-cestinha encolheu por fora.
+A capa era simétrica em cima e embaixo, e dava pra abrir com o deck virado
+pra baixo sem perceber (empurra pelo furo do fundo sem olhar) — as cartas
+caíam. Agora a **face de cima** da capa (a que cobre o topo aberto da
+bandeja na posição de uso) tem uma **seta rebaixada** de 0,6 mm, 36 mm de
+comprimento e 18 mm de largura na cabeça (haste de 8), no meio do
+comprimento, apontando pra **boca**.
 
-| | v1 | **v2** |
-|---|---|---|
-| Externo | 97,4 × 72,4 × 49,6 | **97,0 × 72,0 × 49,6** |
-| Folga no compartimento | 0,3 mm/lado | **0,5 mm/lado** (deslize vertical de ~50 mm) |
-| Borda de baixo | viva | **chanfro 1 mm a 45°** (anula o pé de elefante e guia a entrada) |
-| Parede | 1,2 mm | **1,6 mm** (4 voltas de bico), engrossada pra dentro |
-| Cantos verticais | vivos | **r = 2 por fora, filete r = 1 por dentro** (1,85 mm na diagonal) |
-| Furos das paredes | hex 8 mm, web 2 (~60% de furo) | **hex 6 mm, web 3**, faixa sólida de ~5 mm em cima e embaixo |
-| Recorte em U | 40 mm | **32 mm**, cantos r = 6, desce até o chão |
-| Chão | colmeia 8 mm | colmeia 8 mm |
+- **Uso:** seta pra cima, dedo no furo do fundo, empurra: a bandeja sai com as
+  cartas pra cima.
+- **Impressão:** no job da capa (em pé) essa face é parede vertical e a seta
+  aponta pra cima. As únicas bordas do rebaixo que ficam "penduradas" são as
+  duas da cabeça (34° da vertical) e a ponta, com 0,6 mm de balanço:
+  desprezível. Sobra 1,0 mm de parede sob a seta.
+- **Cor:** o rebaixo dá pra pintar em outra cor no Flash Studio (IFS).
+- Sem a palavra "CIMA": `text()` não renderiza no OpenSCAD 2021.01 do flatpak
+  (sem fontes, sai objeto vazio).
+- O cupom (45 mm da boca) não inclui a seta.
 
-- **Deck dentro, JUSTO:** cavidade de 93,8 × 68,8 mm, então o deck de 93 × 68
-  fica com só **0,4 mm/lado** (escolha do usuário, pela parede de 1,6 mm). O
-  filete interno r = 1 passa a 0,15 mm de um canto vivo de 93 × 68 (carta com
-  canto redondo tem mais folga). Se o deck não entrar, o ajuste é
-  `basket_wall_v2` (o externo fica fixo).
-- **Paredes:** 5 fileiras de hexágonos de ponta pra cima, faixas reais de
-  4,95 mm. Faixas sólidas de 4,5 mm junto de cada canto e de 3 mm junto do U.
-- **No compartimento:** a borda de cima fica 2,6 mm abaixo da borda da
-  bandeja; o uso é o mesmo (empurrar o chão pelo furo de 16 mm, pegar pela
-  borda e tirar com o deck).
+## Cestinha de pilares
 
-## Variante: cestinha de pilares
-
-[`3mf/deckbox-02-basket-pillars.3mf`](./3mf/deckbox-02-basket-pillars.3mf),
-com 97,0 × 72,0 × 49,6 mm, chão na mesa e sem suporte. Tem o mesmo externo, a
-mesma folga de 0,5 mm/lado e o mesmo chão de colmeia, chanfro e cantos da v2,
-mas **sem paredes**: só 4 pilares nos cantos, da altura toda. Os lados ficam
-abertos do chão ao topo, pra pinçar até a última carta.
+[`3mf/deckbox-02-basket.3mf`](./3mf/deckbox-02-basket.3mf), 97,0 × 72,0 ×
+49,6 mm, chão na mesa, sem suporte. Entra no compartimento de 98 × 73 mm da
+bandeja com **0,5 mm/lado** (deslize vertical de ~50 mm), chanfro de 1 mm a
+45° na borda de baixo (anula o pé de elefante e guia a entrada) e cantos
+r = 2 por fora. **Sem paredes**: só 4 pilares nos cantos, da altura toda, com
+os lados abertos do chão ao topo pra pinçar até a última carta.
 
 - **Pilares em L:** a perna tem 1,6 mm e não dá pra engrossar (o externo é
   limitado pela bandeja e o interno pelo deck). A rigidez vem da forma:
@@ -84,12 +78,17 @@ abertos do chão ao topo, pra pinçar até a última carta.
     sleeve têm ~3). Com uma sleeve de r = 2, que é conservador, sobram
     0,36 mm até o canto da carta;
   - **pé com concordância r = 4** por fora, sem canto vivo, e **chanfro de
-    entrada** de 0,8 × 2,5 mm na ponta, por dentro, pra guiar o deck. Por
-    dentro do chão não há nada que levante a borda da carta.
+    entrada** de 0,8 × 2,5 mm na ponta, por dentro, pra guiar o deck.
 - **Chão:** quadro perimetral sólido de 6 mm (sem hexágono), que segura os
   pilares entre si; colmeia de 8 mm no miolo.
 - **Vãos abertos** (base → topo): **57 → 77 mm** no lado comprido e
   **32 → 52 mm** no curto.
+- **Deck dentro, JUSTO:** cavidade de 93,8 × 68,8 mm, o deck de 93 × 68 fica
+  com **0,4 mm/lado** (escolha do usuário). Se não entrar, o ajuste é
+  `basket_wall_v2` (o externo fica fixo).
+- **No compartimento:** a borda de cima fica 2,6 mm abaixo da borda da
+  bandeja; empurrar o chão pelo furo de 16 mm, pegar pela borda e tirar com o
+  deck.
 
 Deflexão estimada com 5 N na ponta de um pilar (PLA E = 3 GPa, G = 1,1 GPa,
 engaste no chão):
@@ -101,88 +100,105 @@ engaste no chão):
 | uma perna isolada de 1,6 mm, mesma carga | ~10,4 mm |
 | torção, dedo empurrando a borda da perna (pior altura) | **~0,55 mm** (perna reta de 20 mm: ~1,5) |
 
-A conta não inclui a flexibilidade do chão de 1,6 mm na raiz, então a
-deflexão real é um pouco maior. Com o deck dentro, a perna empurrada pra dentro
-encosta no deck depois de 0,4 mm.
+A conta não inclui a flexibilidade do chão de 1,6 mm na raiz. Com o deck
+dentro, a perna empurrada pra dentro encosta no deck depois de 0,4 mm.
 
-**Qual usar:**
+Histórico curto: a v1 (= deckbox-01, 0,3 mm/lado, cantos vivos, hex 8 mm com
+~60% de furo, U de 40 mm) era ruim de entrar/sair e molenga. Em 2026-09-30
+vieram duas cestinhas com o mesmo externo e folga: a v2 de paredes (colmeia
+6 mm com faixas sólidas, U de 32 mm) e a de pilares. Em 2026-10-11 o usuário
+ficou com a de pilares e a v2 foi apagada da fonte.
 
-| | v2 (colmeia) | pilares |
+## Trava v3: ressalto maior, parede contínua, aba de clique e canal de alívio
+
+Dois ressaltos rampados, um de cada lado da bandeja, assentam em dois
+**pockets cegos** na face interna da capa. A parede da capa é contínua (sem
+rasgos) e flexiona inteira pro ressalto passar.
+
+| | v2 (aprovada 2026-09-30) | **v3** |
 |---|---|---|
-| Ver e pegar o deck | U de 32 mm só nas compridas | os 4 lados abertos do chão ao topo |
-| Rigidez | parede inteira com furos de 6 mm | concentrada nos 4 pilares e no chão |
-| Visual | colmeia (identidade do repo) | só pilares, colmeia no chão |
+| Saliência do ressalto | 1,0 mm | **1,5 mm** |
+| Pega no pocket (saliência − folga de 0,5) | 0,5 mm | **1,0 mm** |
+| Base do ressalto (X × Z) | 5 × 6 | **7 × 7** (patamar 1 × 4 igual) |
+| Rampa em X / chanfro em Z | 26,6° / 45° | 26,6° / 45° (mantidos) |
+| Fundo do pocket | 0,8 mm | **1,2 mm** (0,2 de folga no fundo) |
+| Pele atrás do pocket | 1,4 mm | **1,0 mm** (parede vertical em pé, 2 perímetros) |
+| Canal de alívio | 0,4 mm | **0,9 mm** (residual 0,1 igual; pele 1,3) |
+| Faixa Z do canal | 6,6 | 7,6 (segue a base do ressalto + folga) |
+| Flexão da parede no clique | 0,5 mm | **1,0 mm** |
 
-As duas encaixam igual no mesmo compartimento e têm o deck justo, a
-0,4 mm/lado. A v2 continua sendo a padrão e a que vai na chapa completa.
+O usuário pediu "uns 2 mm" de pega. Saliência 2,0 exigiria 1,5 mm de flexão da
+parede contínua: ~3× a força (abrir 40–70 N, inviável pelo furo) e tensão de
+~54 MPa, acima do PLA. Ficou 1,5: o dobro da pega da v2 com o dobro da força.
+A base 2 mm mais comprida é o "2 mm" do pedido e mantém a rampa de fechar;
+a base 1 mm mais alta mantém o chanfro em Z a 45° (com 6 mm ficava 34°,
+balanço na bandeja deitada).
 
-## Trava v2: parede contínua, aba de clique e canal de alívio
+- **Reforço externo** de **0,6 mm/lado** nos 36 mm junto da boca (parede 1,6
+  → 2,2 mm). 0,8 engrossa e multiplica a força; ficou em 0,6.
+- **Aba e canal:** logo depois do pocket, do lado da boca, uma **aba cheia de
+  1,8 mm** dá o clique com a flexão total de 1,0 mm. Depois dela, rampa de
+  1,6 mm e **canal de 0,9 mm** na faixa Z do ressalto (7,6 mm) até a boca,
+  onde sobram só **0,1 mm** de interferência por lado; na boca o ressalto
+  entra com 0,1 mm (canal 0,9 vs chanfro de 0,8).
+- **Fechada:** o ressalto fica solto no pocket, com 0,8 mm de jogo em X por
+  lado e 0,2 até o fundo. Interseção CGAL bandeja × capa na posição fechada:
+  vazia.
+- **Na impressão em pé:** pocket, canal e rampas ficam verticais ou fecham a
+  22° da vertical; sem balanço. A pele de 1,0 mm atrás do pocket é parede
+  vertical com 2 perímetros.
+- **Cavidade intacta:** o reforço é todo externo, e a rampa dele (4 mm) fica
+  17,6 mm antes do pocket.
 
-Dois ressaltos rampados, um de cada lado da bandeja (1,0 mm de saliência),
-assentam em dois **pockets cegos** de 0,8 mm na face interna da capa. Com
-folga de 0,5 mm/lado, a parede da capa precisa ceder **0,5 mm** pro ressalto
-passar.
+Flexão exigida da parede (mm/lado) × quanto a bandeja está pra fora,
+calculada pelo perfil exato e conferida por interseção CGAL com a parede
+deslocada `d` pra fora em cada posição:
 
-- **v1 (reprovada no teste físico: abria sozinha).** Cada parede tinha dois
-  rasgos de 1,2 × 32 mm que soltavam uma lingueta de 16 mm. A lingueta era
-  mole demais: uns ~4 N abriam a caixa.
-- **v2 (esta).**
-  - **Sem rasgos:** quem flexiona é a parede inteira. Ela tem reforço
-    **externo** de **0,6 mm/lado** nos 36 mm junto da boca, então vai de 1,6
-    para **2,2 mm** e deixa 1,4 mm de pele atrás do pocket.
-  - **Aba e canal:** logo depois do pocket, do lado da boca, fica uma **aba
-    cheia de 1,8 mm**, que dá o clique com a flexão total de 0,5 mm. Depois
-    dela vem uma rampa de 1,6 mm e um **canal raso de 0,4 mm** na faixa Z do
-    ressalto (6,6 mm), até a boca. No canal sobram só **0,1 mm** de
-    interferência por lado.
-  - **Na impressão em pé:** o canal fica vertical, sem balanço, e na boca ele
-    some dentro do chanfro de entrada.
-  - **Cavidade intacta:** o reforço é todo externo, e a rampa dele (4 mm) fica
-    18,6 mm antes do pocket.
+| bandeja pra fora (mm) | 0–0,5 | 1 | 1,5 | 2 | 2,5 | 3 | 3,5–6 | 6,5 | 7 | 8–11 | ≥11,5 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| v2 | 0 | 0 | 0,18 | 0,50 | 0,50 | 0,50 | 0,50→0,27 | 0,15 | 0,10 | 0,10→0 | 0 |
+| **v3** | 0 | 0,08 | 0,28 | 0,48 | 0,68 | 0,88 | **1,00** | 0,80 | 0,55 | **0,10** | 0 |
 
-Flexão exigida da parede (mm/lado) × quanto a bandeja está pra fora. É o perfil
-exato do ressalto contra a parede, conferido por interseção CGAL em cada
-posição:
-
-| bandeja pra fora (mm) | 0–1 | 1,5 | 2,3–5 | 5,5 | 6 | 6,5 | 7–9,5 | 10 | ≥10,5 |
-|---|---|---|---|---|---|---|---|---|---|
-| sem canal (antes) | 0 | 0,18 | 0,50 | 0,50 | 0,50 | 0,50 | 0,50→0,21 | 0,05 | 0 |
-| **com canal (atual)** | 0 | 0,18 | **0,50** | 0,40 | 0,27 | 0,15 | **0,10** | 0,05 | 0 |
-
-Estimativa de força, com a parede como placa (Ritz) e conferida pela viga
-apoiada do print-review (vão 54,8, largura efetiva ~38 mm). PLA E = 3 GPa,
-rigidez ~26–30 N/mm por lado:
+Estimativa de força (parede como viga/placa, rigidez k = 26–30 N/mm por
+lado, PLA E = 3 GPa; conta direta F = 2·k·1,0·(tan α + μ)/(1 − μ·tan α),
+conferida pelo print-review):
 
 | | atrito 0,3 | atrito 0,5 (ressalto raspa as camadas) |
 |---|---|---|
-| **abrir (pico do clique, bandeja a ~2 mm)** | **14–23 N** | 20–33 N |
-| aba (bandeja de 2,3 a 5 mm pra fora) | ~8–9 N | ~13–15 N |
-| canal até a boca | ~1,5 N | ~2,5–3 N |
-| fechar (pico na rampa da aba) | ~16 N | ~23–25 N |
+| **abrir (pico, bandeja a ~3,5 mm, rampa do pocket 21,8°)** | **41–48 N** | 58–67 N |
+| aba (bandeja de 3,5 a 6 mm pra fora) | ~16–18 N | ~26–30 N |
+| canal até a boca | ~1,6–1,8 N | ~2,6–3 N |
+| fechar (pico na rampa do ressalto, 26,6°, com a palma) | ~49–56 N | ~69–80 N |
 
-A faixa é honesta, não promessa:
+A faixa é honesta, não promessa: se a capa empenar pra dentro 0,3 mm/lado
+a força de abrir vai a ~58 N (até ~80 N no pior caso); pra fora, cai
+(~20 N). Referência: o indicador empurra ~30–45 N com conforto, o polegar
+~60–90 N — a v3 é **firme**, não leve. Tensão de pico 13–26 MPa (viga
+apoiada/engastada) a ~36 MPa (placa Ritz), abaixo dos ~50 MPa do PLA mas
+perto do limite de fadiga (20–25 MPa), só durante o clique. **Aguardando
+teste físico da v3** — o cupom é o jeito barato de sentir o clique. Se
+ficar duro (ou trincar no pocket com o uso), o fallback é
+`snap_projection = 1.3`, `snap_pocket_depth = 1.0`, `snap_channel_depth = 0.7`
+(flexão 0,8, abrir ~33–38 N, pele do pocket volta a 1,2).
 
-- Se a capa empenar pra dentro (barriga do tubo em pé), a interferência cresce
-  e a força sobe, até ~40 N no pior caso.
-- Se empenar pra fora, cai, e pode chegar perto de ~10 N.
-
-Com reforço de 0,8 mm a conta dava até 37–43 N com atrito alto, duro demais
-pra um dedo. Por isso ficou em 0,6 mm, entre a v1 (abria sozinha) e "dura
-demais". A tensão estimada é de 18 MPa ou menos (PLA ~50 MPa), com a peça
-parada sem carga: fechada, o ressalto fica solto no pocket, com 1,05 mm de jogo.
+A seta diz qual lado é o de cima, mas **não impede** fechar a bandeja de
+cabeça pra baixo: o ressalto fica no meio da altura, então a bandeja entra
+na capa dos dois jeitos. Fechar sempre com as cartas viradas pra seta.
 
 ## Como usar
 
-- **Fechar:** empurrar a traseira da bandeja com a palma. Nos últimos ~5 mm
+- **Fechar:** empurrar a traseira da bandeja com a palma. Nos últimos ~7 mm
   ela sobe a rampa da aba e dá o clique.
-- **Abrir:** segurar a capa e empurrar a bandeja pelo **furo de 22 mm** do
-  fundo por uns 5 mm (o dedo entra ~10 mm no furo). Isso vence o clique e a
-  aba; depois a própria parede empurra a bandeja pela rampa. Dali até a boca
-  sobra um **arrasto leve** (~1,5–3 N) com a traseira da bandeja ~5 mm pra
-  fora, que dá pra pegar com os dedos e puxar.
+- **Abrir:** **seta pra cima**, segurar a capa e empurrar a bandeja pelo
+  **furo de 22 mm** do fundo por uns 6 mm (o dedo entra ~10 mm no furo). Isso
+  vence o clique e a aba; depois a própria parede empurra a bandeja pela
+  rampa. Dali até a boca sobra um **arrasto leve** (~2–3 N) com a traseira da
+  bandeja ~5 mm pra fora, que dá pra pegar com os dedos e puxar.
 
-Se abrir sozinha de novo, ou ficar dura demais, o ajuste é só na capa:
+Se ficar dura demais, o ajuste é só no wrapper (e vale pra bandeja e capa):
 
+- `snap_projection`: a pega (1,5; a v2 era 1,0) — a força é proporcional a
+  `snap_projection − 0,5`
 - `sleeve_reinforce`: a força cresce com o cubo da espessura da parede
 - `snap_channel_depth`: o arrasto depois do clique
 - `snap_tab`: o comprimento do clique
@@ -194,19 +210,23 @@ o erro não contém "error". Os comandos canônicos estão no cabeçalho do
 [`deckbox-02.scad`](./deckbox-02.scad):
 
 ```sh
-# cestinha v2 (o que reimprimir agora)
-flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-basket.3mf -D 'part="basket"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
-# cestinha de pilares (variante)
-flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-basket-pillars.3mf -D 'part="basket"' -D 'basket_style="pillars"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
-# cupom de teste do clique (45mm da boca, de boca pra cima)
-flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-coupon.3mf -D 'part="sleeve"' -D 'sleeve_coupon=true' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+# conjunto completo (bandeja + cestinha + capa em pé)
+flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-plate.3mf -D 'part="plate"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
 # capa em pé
 flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-sleeve.3mf -D 'part="sleeve"' -D 'sleeve_print=true' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
-# conjunto completo
-flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-plate.3mf -D 'part="plate"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+# cestinha de pilares
+flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-basket.3mf -D 'part="basket"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
+# cupom de teste do clique (45mm da boca, de boca pra cima)
+flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/3mf/deckbox-02-coupon.3mf -D 'part="sleeve"' -D 'sleeve_coupon=true' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
 # STLs de referência (posição de uso): <part> = tray | sleeve | basket
 flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/stl/deckbox-02-<part>.stl -D 'part="<part>"' /home/afonsolelis/repos/3dmodels/deckboxes/deckbox-02/deckbox-02.scad
 ```
+
+Os parâmetros da trava (`snap_projection`, `snap_length`, `snap_height`,
+`snap_pocket_depth`) são reatribuídos no wrapper **depois** do `include`: no
+OpenSCAD a última atribuição vale pro arquivo inteiro e os derivados do
+deckbox-01 pegam o valor novo (conferido no `ECHO`:
+`required_deflection_mm = 1`).
 
 ## Histórico
 
@@ -220,7 +240,11 @@ flatpak run org.openscad.OpenSCAD -o /home/afonsolelis/repos/3dmodels/deckboxes/
   print-review entraram a aba de clique com canal de alívio e o furo de
   22 mm.
 - **2026-09-30:** no teste físico a capa v2 ficou perfeita e a trava encaixa
-  bem, mas a cestinha era ruim de entrar/sair e molenga. Veio a cestinha v2
-  (0,5 mm/lado, parede 1,6, chanfro, cantos arredondados, hex 6 mm com
-  faixas sólidas, U de 32 mm; deck justo, 0,4 mm/lado). Bandeja e capa não mudaram. **Teste físico da cestinha v2
-  pendente.**
+  bem, mas a cestinha era ruim de entrar/sair e molenga. Vieram a cestinha v2
+  de paredes e a variante de pilares (0,5 mm/lado, chanfro, cantos
+  arredondados; deck justo, 0,4 mm/lado).
+- **2026-10-11:** a cestinha v2 de paredes foi apagada; ficou só a de
+  pilares. Trava v3 a pedido do usuário ("pinguelo maior pra travar melhor"):
+  saliência 1,5, base 7 × 7, pocket 1,2, canal 0,9. Seta de orientação
+  rebaixada na face de cima da capa. **Bandeja e capa mudam juntas; teste
+  físico da trava v3 e da cestinha pendentes.**
