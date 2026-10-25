@@ -62,8 +62,12 @@
 // tampa levantada) e part="cut" (corte no meio do conjunto fechado, pra
 // conferir o encaixe e o vão de dedo) são SÓ pra preview — nunca exportar.
 //
-// Variantes por include: definir rows_override / slots_override antes do
-// include (padrão is_undef abaixo; é o que o ../psa-box-fit faz). Por CLI o
+// Variantes por include: definir rows_override / slots_override /
+// smooth_override / slab_{w,h,t}_override antes do include (padrão is_undef
+// abaixo; é o que o ../psa-box-fit faz — ele usa smooth_override = true: tudo
+// liso — e o ../psa-cgc-fit, que ainda troca a slab pela CGC). Os números
+// nos comentários (6.3, 7.1, 8.6, 2.3mm entre vizinhas, ~1.3 de inclinação)
+// são os da PSA; a geometria e os ECHO derivam dos parâmetros. Por CLI o
 // override NÃO pega (OpenSCAD 2021.01): use -D slots_per_row=N. Com
 // footprint <= 210 cabem até 23 vagas por fila (Y = 203.1; 24 daria 211.7,
 // justo).
@@ -72,13 +76,19 @@
 part = "both"; // "base" | "lid" | "test" (gabarito de 3 vagas) | "plate" (job: base, + tampa se couber) | "both" (preview lado a lado) | "demo" | "cut"
 
 /* [Slab - medida com paquímetro (2026-10-13); vale p/ GRADD, GBA, PSA, CAPY] */
-slab_w = 80.3;  // mm, largura da slab (vira X, atravessa a canaleta)
-slab_h = 135.3; // mm, altura da slab (vira Z, é o que fica em pé)
-slab_t = 6.3;   // mm, espessura da slab (vira Y, define a vaga): 6.2 medido + 0.1 da marca mais grossa
+// (override por include: o ../psa-cgc-fit troca pela slab CGC 80.0 x 135.3 x 7.8)
+slab_w = is_undef(slab_w_override) ? 80.3  : slab_w_override; // mm, largura da slab (vira X, atravessa a canaleta)
+slab_h = is_undef(slab_h_override) ? 135.3 : slab_h_override; // mm, altura da slab (vira Z, é o que fica em pé)
+slab_t = is_undef(slab_t_override) ? 6.3   : slab_t_override; // mm, espessura da slab (vira Y, define a vaga): 6.2 medido + 0.1 da marca mais grossa
 
 /* [Vagas e filas] */
 slots_per_row = is_undef(slots_override) ? 19 : slots_override; // vagas por fila
 rows          = is_undef(rows_override)  ? 2  : rows_override;  // nº de filas lado a lado
+// true = acabamento LISO: sem colmeia em relevo e sem fenda nenhuma (nem as
+// passantes das paredes internas). As paredes ficam inteiras na espessura
+// nominal, o teto da tampa encosta inteiro na cama e o fatiador não tem
+// ponte nem célula pra contornar. É o que o psa-box-fit usa.
+smooth        = is_undef(smooth_override) ? false : smooth_override;
 // Vaga: 0.4/lado (não 0.3) porque a slab desce 80mm entre nervuras finas e
 // altas — o pé de elefante estreita justo o fundo, onde ela tem que assentar,
 // e nervura de 1.5mm em pé tende a sair gorda/inclinada. Custa só 0.2mm de
@@ -216,6 +226,7 @@ echo(str("BARREIRA DE LUZ: parede da base ", wall, " - relevo ", relief,
          " | parede da tampa ", lid_wall, " - ", lid_relief, " = ", lid_wall - lid_relief,
          " | teto da tampa ", lid_top, " - ", lid_relief, " = ", lid_top - lid_relief,
          " | chao da base macico ", floor_t,
+         smooth ? " | LISO: sem relevo e sem fenda" :
          rows > 1 ? " | unico vazado: fendas das paredes internas (dao pro poco)" : " | nenhum vazado"));
 
 // ---------------------------------------------------------------------
@@ -398,12 +409,14 @@ module base() {
 
             // colmeia em BAIXO RELEVO nas duas paredes de ponta (±Y).
             // Gravada na face externa; sobra (wall - relief) de parede cheia.
-            hex_relief_y(corner_r + 1, 0, floor_t + 1,
-                         box_x - 2 * (corner_r + 1), shoulder - floor_t - 2,
-                         relief, hex_d, dir = 1);
-            hex_relief_y(corner_r + 1, box_y, floor_t + 1,
-                         box_x - 2 * (corner_r + 1), shoulder - floor_t - 2,
-                         relief, hex_d, dir = -1);
+            if (!smooth) {
+                hex_relief_y(corner_r + 1, 0, floor_t + 1,
+                             box_x - 2 * (corner_r + 1), shoulder - floor_t - 2,
+                             relief, hex_d, dir = 1);
+                hex_relief_y(corner_r + 1, box_y, floor_t + 1,
+                             box_x - 2 * (corner_r + 1), shoulder - floor_t - 2,
+                             relief, hex_d, dir = -1);
+            }
 
             // fendas hexagonais entre as nervuras. Nas paredes ±X entram como
             // BAIXO RELEVO na face externa (é casca da caixa: não pode vazar).
@@ -411,7 +424,7 @@ module base() {
             // meio, que é interno — ali o vazado só economiza material. Pula a
             // primeira e a última vaga de cada fila — furo colado no canto
             // vira lasca (regra "sem lascas" do repo).
-            for (i = [1 : slots_per_row - 2]) {
+            if (!smooth) for (i = [1 : slots_per_row - 2]) {
                 yc = wall + i * pitch + slot_t / 2;
                 zc = (louver_z0 + louver_z1) / 2;
                 hh = louver_z1 - louver_z0;
@@ -485,20 +498,20 @@ module lid() {
         // TEIA entre hexágonos + a borda lisa encostam na cama (as células
         // ficam no ar e fecham com uma ponte curta de 9mm sobre 0.6mm).
         // Aceito de propósito — ver README: área de contato medida na malha.
-        translate([lid_wall + 2, lid_wall + 2, -0.05])
+        if (!smooth) translate([lid_wall + 2, lid_wall + 2, -0.05])
             hex_cells(box_x - 2 * (lid_wall + 2), box_y - 2 * (lid_wall + 2),
                       lid_relief + 0.05, lid_hex_d);
 
         // colmeia em baixo relevo nas 4 paredes, na faixa grossa (abaixo da saia)
         band_z0 = lid_top + 1;
         band_b  = lid_h - skirt_h - (lid_wall - skirt_wall) - band_z0 - 1;
-        hex_relief_y(corner_r + 1, 0, band_z0,
+        if (!smooth) hex_relief_y(corner_r + 1, 0, band_z0,
                      box_x - 2 * (corner_r + 1), band_b, lid_relief, lid_hex_d, dir = 1);
-        hex_relief_y(corner_r + 1, box_y, band_z0,
+        if (!smooth) hex_relief_y(corner_r + 1, box_y, band_z0,
                      box_x - 2 * (corner_r + 1), band_b, lid_relief, lid_hex_d, dir = -1);
-        hex_relief_x(0, corner_r + 1, band_z0,
+        if (!smooth) hex_relief_x(0, corner_r + 1, band_z0,
                      box_y - 2 * (corner_r + 1), band_b, lid_relief, lid_hex_d, dir = 1);
-        hex_relief_x(box_x, corner_r + 1, band_z0,
+        if (!smooth) hex_relief_x(box_x, corner_r + 1, band_z0,
                      box_y - 2 * (corner_r + 1), band_b, lid_relief, lid_hex_d, dir = -1);
     }
 }

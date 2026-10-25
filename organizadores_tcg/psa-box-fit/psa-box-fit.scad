@@ -4,9 +4,13 @@
 // dimensionada pela marca mais grossa, 6.3). É o psa-box-01 com uma fila:
 // mesmo pente, mesmas folgas (vaga 0.4/lado, canaleta 0.5/lado, tampa
 // 0.1/lado com entrada em raio r1.0 — igual ao psa-box-02, contraria a regra
-// 6 do CLAUDE.md de propósito, NÃO corrigir de volta), mesma barreira de luz
-// (colmeia em baixo relevo, nada passante; sem vão entre filas, então não
-// sobra fenda nenhuma).
+// 6 do CLAUDE.md de propósito, NÃO corrigir de volta) e a mesma barreira de
+// luz. ACABAMENTO LISO (smooth_override = true, desde 2026-10-16): sem a
+// colmeia em relevo e sem fenda nenhuma. Motivo: a caixa com relevo levava
+// ~44min a mais no fatiador (pontes das células de 9mm no teto da tampa,
+// impresso com o teto na cama) e o relevo de 0.6 comia a parede da tampa de
+// 2.4 pra 1.8 — a tampa impressa ficou molenga. Lisa, a tampa tem os 2.4
+// inteiros e o teto encosta inteiro na cama.
 //
 // COMO SE MANUSEIA: as slabs entram em pé, de cima, e sobram 30mm pra fora
 // da base. Pra tirar uma, PINÇA pelas duas bordas X (as estreitas, de 6.3mm)
@@ -43,8 +47,9 @@
 // preview (ver psa-box-01).
 
 /* [Variante] */
-rows_override  = 1;  // filas lado a lado (o psa-box-01 tem 2)
-slots_override = 20; // vagas na fila (20 slabs)
+rows_override  = 1;    // filas lado a lado (o psa-box-01 tem 2)
+slots_override = 20;   // vagas na fila (20 slabs)
+smooth_override = true; // tudo liso: sem colmeia em relevo, sem fenda
 
 include <../psa-box-01/psa-box-01.scad>
 
