@@ -12,12 +12,15 @@
 render_mode = "print"; // "print", "holder", "lid", "assembled", or "section"
 
 // --- SLAB (PSA size) ---
-slab_w = 80.2;
-slab_t = 6.2;
-slab_h = 136.0;
+// Caliper-measured bare slab (2026-10-13): 80.3 x 135.3 x 6.2 mm, same for
+// GRADD, GBA, PSA and CAPY except thickness (~0.1 mm). slab_t = 6.4 on purpose
+// (thickest brand + margin): the first print at 80.2 x 6.2 jammed the slab.
+slab_w = 80.3;
+slab_t = 6.4;
+slab_h = 135.3;
 
 // --- SLOTS ---
-clearance_w = 0.6;        // 0.3/side
+clearance_w = 1.0;        // 0.5/side: 100 mm slide, elephant foot narrows the bottom
 clearance_t = 1.2;        // 0.6/side
 slot_t = slab_t + clearance_t;
 slot_depth = 100.0;
@@ -53,7 +56,7 @@ lid_h = (wall + section_slab_h + slab_top_gap) - lip_seat_z + wall; // = 49.25, 
 engrave_text = "GRADD V1";
 engrave_font = "Liberation Sans:style=Bold";
 engrave_size = 10;        // long walls, same as the ends on the 10-slot box
-engrave_end_size = 10;    // short walls (front/back), ~69 mm wide on an 86.8 mm face
+engrave_end_size = 10;    // short walls (front/back), ~69 mm wide on an 87.3 mm face
 engrave_depth = 0.8;      // leaves 2.2 mm of the 3 mm wall
 engrave_z = lip_start_z / 2;
 
