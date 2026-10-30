@@ -1,7 +1,7 @@
 // GRADD V1 graded card holder with removable lid - 10 slabs
 // 10-slot version of 20_gradd_v1_slab_box (half the length, less warping).
-// Same dimensions as 20_psa_slab_box (PSA-sized slab), with "GRADD V1"
-// engraved on all four outer walls.
+// Slab and slot fit re-measured on 2026-10-30 (the 20-slot boxes still use the
+// old 80.2 x 6.2 x 136 numbers). "GRADD V1" engraved on all four outer walls.
 //
 // The slabs stand on edge in 10 slots, guided by short side ribs. The lid
 // slides over the top 7 mm of the holder and rests on the external lip.
@@ -55,7 +55,7 @@ lid_h = (wall + section_slab_h + slab_top_gap) - lip_seat_z + wall; // = 49.25, 
 // --- ENGRAVE ---
 engrave_text = "GRADD V1";
 engrave_font = "Liberation Sans:style=Bold";
-engrave_size = 10;        // long walls, same as the ends on the 10-slot box
+engrave_size = 10;        // long walls (96.4 mm face)
 engrave_end_size = 10;    // short walls (front/back), ~69 mm wide on an 87.3 mm face
 engrave_depth = 0.8;      // leaves 2.2 mm of the 3 mm wall
 engrave_z = lip_start_z / 2;
