@@ -33,7 +33,7 @@ $fn = 48;           // segmentos; acabamento dos recortes hexagonais.
 
 /* [Caixas e capacidade] */
 case_count = is_undef(case_count_override) ? 12 : case_count_override; // unidades; caixas por organizador.
-case_slot_w = is_undef(case_slot_w_override) ? 11.25 : case_slot_w_override; // mm; vao real reconstruido da referencia.
+case_slot_w = is_undef(case_slot_w_override) ? 11.5 : case_slot_w_override; // mm; 11.25 na referencia; +0.25 porque as caixas engatavam nas guias.
 slot_pitch = is_undef(slot_pitch_override) ? 13.0 : slot_pitch_override; // mm; distancia entre centros na referencia.
 support_depth = is_undef(support_depth_override) ? 110.1 : support_depth_override; // mm; profundidade apoiada pela referencia.
 
@@ -48,6 +48,7 @@ hex_r = 7.0;          // mm; raio dos hexagonos ponta-pra-cima nas longarinas.
 hex_pitch = 19.0;     // mm; passo dos hexagonos ao longo da profundidade.
 tie_t = 1.2;          // mm; tres linhas de bico 0.4, espessura externa da cinta.
 tie_h = 4.0;          // mm; altura da viga de amarracao perto do topo das guias.
+lead_in = 0.5;        // mm a 45 graus; chanfro de entrada no topo e na ponta interna das guias.
 
 /* [Acoplamento modular] */
 modular_connectors = is_undef(modular_connectors_override) ? true : modular_connectors_override; // liga/desliga; macho direito e femea esquerda.
@@ -85,6 +86,7 @@ print_d = overall_d + 2*tie_t;
 
 assert(case_count >= 1, "case_count precisa ser >= 1");
 assert(divider_t >= 1.2, "divisorias finas demais para FDM");
+assert(divider_t - 2*lead_in >= 0.4, "chanfro de entrada come a divisoria toda");
 assert(center_access >= 35, "vao central pequeno demais para alcance dos dedos");
 assert(connector_head_w > connector_neck_w, "rabo-de-andorinha precisa de retencao positiva");
 assert(connector_bottom >= floor_t+1.2, "macho baixo demais: risco de pe de elefante");
@@ -188,6 +190,29 @@ module female_connector(yc) {
   }
 }
 
+// Guia (divisoria ou parede de ponta) sem quinas vivas do lado da caixa:
+// chanfro de 45 graus no topo e na aresta vertical voltada ao vao central,
+// so nas faces que tocam a caixa (cl = face -X, cr = face +X).
+// inner_max = true quando a ponta interna e o lado +Y da guia.
+module guide_block(x0, w, y0, z0, h, inner_max, cl, cr) {
+  c = lead_in;
+  intersection() {
+    // perfil XZ: topo chanfrado
+    translate([x0, y0 + guide_depth, z0]) rotate([90, 0, 0])
+      linear_extrude(guide_depth)
+        polygon([[0, 0], [w, 0], [w, h - (cr ? c : 0)], [w - (cr ? c : 0), h],
+                 [cl ? c : 0, h], [0, h - (cl ? c : 0)]]);
+    // perfil XY: ponta interna chanfrada
+    translate([x0, y0, z0]) linear_extrude(h)
+      let(e = guide_depth)
+        polygon(inner_max
+          ? [[0, 0], [w, 0], [w, e - (cr ? c : 0)], [w - (cr ? c : 0), e],
+             [cl ? c : 0, e], [0, e - (cl ? c : 0)]]
+          : [[cl ? c : 0, 0], [w - (cr ? c : 0), 0], [w, cr ? c : 0],
+             [w, guide_depth], [0, guide_depth], [0, cl ? c : 0]]);
+  }
+}
+
 module organizer_core() {
   difference() {
     union() {
@@ -204,11 +229,12 @@ module organizer_core() {
       for (y0=[0, overall_d-guide_depth]) {
         // Toda a interface com as caixas comeca depois da longarina esquerda.
         // As longarinas ficam integralmente FORA dos canais extremos.
-        translate([side_wall_t, y0, 0]) cube([end_wall_t, guide_depth, floor_t+guide_h]);
-        translate([side_wall_t+interface_w-end_wall_t, y0, 0]) cube([end_wall_t, guide_depth, floor_t+guide_h]);
+        inner_max = (y0 == 0);
+        guide_block(side_wall_t, end_wall_t, y0, 0, floor_t+guide_h, inner_max, false, true);
+        guide_block(side_wall_t+interface_w-end_wall_t, end_wall_t, y0, 0, floor_t+guide_h, inner_max, true, false);
         for (i=[1:case_count-1]) {
           x = side_wall_t + end_wall_t + i*case_slot_w + (i-1)*divider_t;
-          translate([x, y0, floor_t]) cube([divider_t, guide_depth, guide_h]);
+          guide_block(x, divider_t, y0, floor_t, guide_h, inner_max, true, true);
         }
       }
       guide_ties();

@@ -1,5 +1,5 @@
 // TERASTAL EEVEELUTIONS graded card holder with removable lid - 9 slabs
-// 9-slot version of 10_gradd_v1_slab_box (same GRADD/PSA slab fit), made for
+// 9-slot version of gradd_v1_slab_box/10pc (same GRADD/PSA slab fit), made for
 // the 9 Terastal Eeveelution slabs. "TERASTAL / EEVEELUTIONS" is engraved in
 // two lines on all four outer walls.
 //
